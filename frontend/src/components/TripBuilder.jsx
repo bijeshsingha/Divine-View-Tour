@@ -397,39 +397,44 @@ export default function TripBuilder({ initialData, onComplete }) {
                     {/* Private Car Selector */}
                     {data.transportType === 'private' && (
                       <div className="space-y-3 mt-2 pt-4 border-t border-slate-200">
-                        {config.cars.filter(c => c.id !== 'pool').map(car => {
-                          const count = (data.privateCars || {})[car.id] || 0;
-                          return (
-                            <div 
-                              key={car.id} 
-                              onClick={() => count === 0 && updateCarCount(car.id, 1)}
-                              className={`w-full p-3 rounded-xl border-2 transition-all flex items-center justify-between ${count === 0 ? 'cursor-pointer hover:border-brand/50' : ''} ${count > 0 ? 'border-brand bg-white shadow-sm' : 'border-slate-200 bg-white'}`}
-                            >
-                              <div>
-                                <h4 className={`font-bold text-sm ${count > 0 ? 'text-slate-900' : 'text-slate-700'}`}>{car.label}</h4>
-                                <p className="text-xs text-slate-500 mt-0.5">Capacity: {car.maxPax} pax</p>
-                              </div>
-                              <div className="flex items-center gap-3">
-                                <button type="button" onClick={() => updateCarCount(car.id, -1)} disabled={count === 0} className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 disabled:opacity-50 hover:bg-slate-200 transition-all">
-                                  <Minus className="w-3 h-3" />
-                                </button>
-                                <span className="font-bold text-slate-900 w-4 text-center">{count}</span>
-                                <button type="button" onClick={() => updateCarCount(car.id, 1)} className="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-brand-dark hover:bg-brand/40 transition-all">
-                                  <Plus className="w-3 h-3" />
-                                </button>
-                              </div>
-                            </div>
-                          );
-                        })}
                         {(() => {
                            const totalCap = Object.entries(data.privateCars || {}).reduce((acc, [cId, cCount]) => {
                              const c = config.cars.find(x => x.id === cId);
                              return acc + (c ? c.maxPax * cCount : 0);
                            }, 0);
-                           if (totalCap < data.travelerCount) {
-                             return <p className="text-red-500 text-sm mt-3 font-semibold bg-red-50 p-3 rounded-xl">⚠️ Need more capacity. Fits {totalCap} out of {data.travelerCount} travelers.</p>;
-                           }
-                           return null;
+                           const isCapacityMet = totalCap >= data.travelerCount;
+
+                           return (
+                             <>
+                               {config.cars.filter(c => c.id !== 'pool').map(car => {
+                                 const count = (data.privateCars || {})[car.id] || 0;
+                                 return (
+                                   <div 
+                                     key={car.id} 
+                                     onClick={() => count === 0 && !isCapacityMet && updateCarCount(car.id, 1)}
+                                     className={`w-full p-3 rounded-xl border-2 transition-all flex items-center justify-between ${count === 0 && !isCapacityMet ? 'cursor-pointer hover:border-brand/50' : ''} ${count > 0 ? 'border-brand bg-white shadow-sm' : 'border-slate-200 bg-white'}`}
+                                   >
+                                     <div>
+                                       <h4 className={`font-bold text-sm ${count > 0 ? 'text-slate-900' : 'text-slate-700'}`}>{car.label}</h4>
+                                       <p className="text-xs text-slate-500 mt-0.5">Capacity: {car.maxPax} pax</p>
+                                     </div>
+                                     <div className="flex items-center gap-3">
+                                       <button type="button" onClick={(e) => { e.stopPropagation(); updateCarCount(car.id, -1); }} disabled={count === 0} className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 disabled:opacity-50 hover:bg-slate-200 transition-all">
+                                         <Minus className="w-3 h-3" />
+                                       </button>
+                                       <span className="font-bold text-slate-900 w-4 text-center">{count}</span>
+                                       <button type="button" onClick={(e) => { e.stopPropagation(); updateCarCount(car.id, 1); }} disabled={isCapacityMet} className="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-brand-dark disabled:bg-slate-50 disabled:text-slate-300 disabled:cursor-not-allowed hover:bg-brand/40 transition-all">
+                                         <Plus className="w-3 h-3" />
+                                       </button>
+                                     </div>
+                                   </div>
+                                 );
+                               })}
+                               {totalCap < data.travelerCount && (
+                                 <p className="text-red-500 text-sm mt-3 font-semibold bg-red-50 p-3 rounded-xl">⚠️ Need more capacity. Fits {totalCap} out of {data.travelerCount} travelers.</p>
+                               )}
+                             </>
+                           );
                         })()}
                       </div>
                     )}
