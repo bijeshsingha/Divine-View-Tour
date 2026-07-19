@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ChevronRight, ChevronLeft, Plus, Minus, Calendar, Users, Map, Navigation, Bed, Utensils, CarFront, Car, Bus, Share2, Mountain, Building2, Check, RefreshCw } from 'lucide-react';
 import staticConfig from '../data.json';
 
+
+
 export default function TripBuilder({ initialData, onComplete }) {
   const [step, setStep] = useState(1);
   const [data, setData] = useState(initialData);
@@ -15,21 +17,25 @@ export default function TripBuilder({ initialData, onComplete }) {
     }
   }, [data.region, data.tripDays, data.transportType]);
 
-  // Ensure selected car remains valid when group size changes
-  useEffect(() => {
-    if (config && data.travelerCount && data.transportType === 'private') {
-      const selectedCar = config.cars.find(c => c.id === data.privateCarType);
-      if (selectedCar && selectedCar.maxPax < data.travelerCount) {
-        const validCar = config.cars.find(c => c.maxPax >= data.travelerCount);
-        if (validCar) {
-          updateData('privateCarType', validCar.id);
-        }
-      }
-    }
-  }, [data.travelerCount, config, data.privateCarType, data.transportType]);
-
   const updateData = (field, value) => {
     setData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const updateCarCount = (carId, delta) => {
+    setData(prev => {
+      const currentCars = prev.privateCars || {};
+      const currentCount = currentCars[carId] || 0;
+      const newCount = Math.max(0, currentCount + delta);
+      
+      const newCars = { ...currentCars, [carId]: newCount };
+      
+      // Clean up 0 counts
+      if (newCount === 0) {
+        delete newCars[carId];
+      }
+      
+      return { ...prev, privateCars: newCars };
+    });
   };
 
   const toggleArrayItem = (field, item, limit = null) => {
@@ -57,7 +63,22 @@ export default function TripBuilder({ initialData, onComplete }) {
     }
     message += `*Dates:* ${data.checkInDate} for ${data.tripDays} Days\n`;
     message += `*Headcount:* ${data.travelerCount} Travelers\n`;
-    message += `*Transport:* ${data.transportType === 'shuttle' ? 'Daily Shuttle' : 'Private Fleet'} (${data.privateCarType})\n`;
+    
+    let transportDetail = '';
+    if (data.transportType === 'shuttle') {
+      transportDetail = 'Daily Shuttle';
+    } else {
+      const privateCars = data.privateCars || {};
+      const carStrs = Object.entries(privateCars)
+        .filter(([_, count]) => count > 0)
+        .map(([carId, count]) => {
+          const car = config.cars.find(c => c.id === carId);
+          return `${count}x ${car ? car.label : carId}`;
+        });
+      transportDetail = `Private Fleet (${carStrs.join(', ') || 'None'})`;
+    }
+    message += `*Transport:* ${transportDetail}\n`;
+    
     message += `*Spots Selected:* ${data.spots.length > 0 ? data.spots.join(', ') : 'None'}\n`;
     message += `*Restaurants:* ${data.restaurants.length > 0 ? data.restaurants.join(', ') : 'None'}\n`;
 
@@ -95,8 +116,12 @@ export default function TripBuilder({ initialData, onComplete }) {
       // Fixed budget price for shuttle
       carCost = 800 * data.travelerCount * data.tripDays;
     } else {
-      const selectedCar = config.cars.find(c => c.id === data.privateCarType) || config.cars[2];
-      carCost = (1500 * (selectedCar.multiplier || 1) * data.tripDays);
+      const privateCars = data.privateCars || {};
+      carCost = Object.entries(privateCars).reduce((total, [carId, count]) => {
+        const car = config.cars.find(c => c.id === carId);
+        if (!car) return total;
+        return total + (1500 * (car.multiplier || 1) * count * data.tripDays);
+      }, 0);
     }
 
     const selectedStay = config.stays.find(s => s.id === data.stayType);
@@ -119,28 +144,30 @@ export default function TripBuilder({ initialData, onComplete }) {
     );
   }
 
-  const StepWrapper = ({ title, subtitle, icon: Icon, children }) => (
-    <div className="flex-1 flex flex-col pt-8 pb-12 px-6 h-full grow animate-in fade-in slide-in-from-right-4 duration-300">
-      <div className="mb-6 shrink-0">
-        <div className="w-12 h-12 bg-brand/10 text-brand-dark rounded-2xl flex items-center justify-center mb-4">
-          <Icon className="w-6 h-6" />
-        </div>
-        <h2 className="text-3xl font-bold text-slate-900 mb-2">{title}</h2>
-        <p className="text-slate-500 text-base">{subtitle}</p>
-      </div>
-      <div className="flex-1 flex flex-col justify-start overflow-y-auto pb-4">
-        {children}
-      </div>
-    </div>
-  );
-
   const currentRegion = config.regions[data.region] || config.regions['meghalaya'];
 
   const renderStep = () => {
+    const renderStepContent = (title, subtitle, Icon, content) => (
+      <div className="flex-1 flex flex-col pt-8 pb-12 px-6 h-full grow animate-in fade-in slide-in-from-right-4 duration-300">
+        <div className="mb-6 shrink-0">
+          <div className="w-12 h-12 bg-brand/10 text-brand-dark rounded-2xl flex items-center justify-center mb-4">
+            <Icon className="w-6 h-6" />
+          </div>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">{title}</h2>
+          <p className="text-slate-500 text-base">{subtitle}</p>
+        </div>
+        <div className="flex-1 flex flex-col justify-start overflow-y-auto pb-4">
+          {content}
+        </div>
+      </div>
+    );
+
     switch (step) {
       case 1:
-        return (
-          <StepWrapper title="Destination & Vibe" subtitle="Where are we heading?" icon={Map}>
+        return renderStepContent(
+          "Destination & Vibe",
+          "Where are we heading?",
+          Map,
             <div className="space-y-4">
               {Object.entries(config.regions).map(([regionId, region]) => (
                 <button
@@ -168,11 +195,12 @@ export default function TripBuilder({ initialData, onComplete }) {
                 </button>
               ))}
             </div>
-          </StepWrapper>
         );
       case 2:
-        return (
-          <StepWrapper title="Core Logistics" subtitle="When, how long, and who's coming?" icon={Calendar}>
+        return renderStepContent(
+          "Core Logistics",
+          "When, how long, and who's coming?",
+          Calendar,
             <div className="space-y-4">
               <div className="bg-white p-5 rounded-2xl shadow-sm border-2 border-slate-100">
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 text-center">Check-in Date</p>
@@ -187,7 +215,7 @@ export default function TripBuilder({ initialData, onComplete }) {
               <div className="bg-white p-5 rounded-2xl shadow-sm border-2 border-slate-100">
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 text-center">Duration</p>
                 <div className="flex items-center justify-between px-2">
-                  <button onClick={() => {
+                  <button type="button" onClick={() => {
                     if (data.tripDays > currentRegion.minDays) updateData('tripDays', data.tripDays - 1);
                   }} className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200 active:scale-95 transition-all">
                     <Minus className="w-4 h-4" />
@@ -196,7 +224,7 @@ export default function TripBuilder({ initialData, onComplete }) {
                     <span className="text-3xl font-extrabold text-slate-900">{data.tripDays}</span>
                     <span className="block text-slate-500 text-sm font-medium mt-1">Days</span>
                   </div>
-                  <button onClick={() => {
+                  <button type="button" onClick={() => {
                     if (data.tripDays < currentRegion.maxDays) updateData('tripDays', data.tripDays + 1);
                   }} className="w-10 h-10 rounded-full bg-brand-light/50 flex items-center justify-center text-brand-dark hover:bg-brand-light active:scale-95 transition-all">
                     <Plus className="w-4 h-4" />
@@ -207,27 +235,28 @@ export default function TripBuilder({ initialData, onComplete }) {
               <div className="bg-white p-5 rounded-2xl shadow-sm border-2 border-slate-100">
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 text-center">Group Size</p>
                 <div className="flex items-center justify-between px-2">
-                  <button onClick={() => data.travelerCount > 1 && updateData('travelerCount', data.travelerCount - 1)} className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200 active:scale-95 transition-all">
+                  <button type="button" onClick={() => data.travelerCount > 1 && updateData('travelerCount', data.travelerCount - 1)} className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200 active:scale-95 transition-all">
                     <Minus className="w-4 h-4" />
                   </button>
                   <div className="text-center">
                     <span className="text-3xl font-extrabold text-slate-900">{data.travelerCount}</span>
                     <span className="block text-slate-500 text-sm font-medium mt-1">Travelers</span>
                   </div>
-                  <button onClick={() => updateData('travelerCount', data.travelerCount + 1)} className="w-10 h-10 rounded-full bg-brand-light/50 flex items-center justify-center text-brand-dark hover:bg-brand-light active:scale-95 transition-all">
+                  <button type="button" onClick={() => updateData('travelerCount', data.travelerCount + 1)} className="w-10 h-10 rounded-full bg-brand-light/50 flex items-center justify-center text-brand-dark hover:bg-brand-light active:scale-95 transition-all">
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>
               </div>
             </div>
-          </StepWrapper>
         );
       case 3:
         const availableSpots = currentRegion?.spots || [];
         const restaurants = currentRegion?.restaurants || [];
 
-        return (
-          <StepWrapper title="Direct Customization" subtitle="Select must-see spots and local food to try." icon={Navigation}>
+        return renderStepContent(
+          "Direct Customization",
+          "Select must-see spots and local food to try.",
+          Navigation,
             <div className="space-y-6">
               <div>
                 <div className="flex items-center justify-between mb-3">
@@ -288,11 +317,12 @@ export default function TripBuilder({ initialData, onComplete }) {
                 </div>
               </div>
             </div>
-          </StepWrapper>
         );
       case 4:
-        return (
-          <StepWrapper title="Comfort & Transport" subtitle="Choose your ride and stay." icon={Bed}>
+        return renderStepContent(
+          "Comfort & Transport",
+          "Choose your ride and stay.",
+          Bed,
             <div className="space-y-6">
 
               {/* Accommodation section */}
@@ -366,27 +396,41 @@ export default function TripBuilder({ initialData, onComplete }) {
 
                     {/* Private Car Selector */}
                     {data.transportType === 'private' && (
-                      <div className="space-y-2 mt-2 pt-4 border-t border-slate-200">
+                      <div className="space-y-3 mt-2 pt-4 border-t border-slate-200">
                         {config.cars.filter(c => c.id !== 'pool').map(car => {
-                          const isValid = data.travelerCount <= car.maxPax;
+                          const count = (data.privateCars || {})[car.id] || 0;
                           return (
-                            <button
-                              key={car.id}
-                              onClick={() => isValid && updateData('privateCarType', car.id)}
-                              disabled={!isValid}
-                              className={`w-full text-left p-3 rounded-xl border-2 transition-all flex gap-3 items-center 
-                                ${!isValid ? 'opacity-50 bg-slate-100 border-slate-200 cursor-not-allowed' :
-                                  data.privateCarType === car.id ? 'border-brand bg-white shadow-sm' : 'border-slate-200 bg-white hover:border-brand/30'}`}
+                            <div 
+                              key={car.id} 
+                              onClick={() => count === 0 && updateCarCount(car.id, 1)}
+                              className={`w-full p-3 rounded-xl border-2 transition-all flex items-center justify-between ${count === 0 ? 'cursor-pointer hover:border-brand/50' : ''} ${count > 0 ? 'border-brand bg-white shadow-sm' : 'border-slate-200 bg-white'}`}
                             >
-                              <div className="flex-1">
-                                <h4 className={`font-bold text-sm ${!isValid ? 'text-slate-500' : data.privateCarType === car.id ? 'text-slate-900' : 'text-slate-700'}`}>{car.label}</h4>
-                                <p className="text-xs text-slate-500 mt-0.5">
-                                  {!isValid ? `Max ${car.maxPax} pax` : car.desc}
-                                </p>
+                              <div>
+                                <h4 className={`font-bold text-sm ${count > 0 ? 'text-slate-900' : 'text-slate-700'}`}>{car.label}</h4>
+                                <p className="text-xs text-slate-500 mt-0.5">Capacity: {car.maxPax} pax</p>
                               </div>
-                            </button>
+                              <div className="flex items-center gap-3">
+                                <button type="button" onClick={() => updateCarCount(car.id, -1)} disabled={count === 0} className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 disabled:opacity-50 hover:bg-slate-200 transition-all">
+                                  <Minus className="w-3 h-3" />
+                                </button>
+                                <span className="font-bold text-slate-900 w-4 text-center">{count}</span>
+                                <button type="button" onClick={() => updateCarCount(car.id, 1)} className="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-brand-dark hover:bg-brand/40 transition-all">
+                                  <Plus className="w-3 h-3" />
+                                </button>
+                              </div>
+                            </div>
                           );
                         })}
+                        {(() => {
+                           const totalCap = Object.entries(data.privateCars || {}).reduce((acc, [cId, cCount]) => {
+                             const c = config.cars.find(x => x.id === cId);
+                             return acc + (c ? c.maxPax * cCount : 0);
+                           }, 0);
+                           if (totalCap < data.travelerCount) {
+                             return <p className="text-red-500 text-sm mt-3 font-semibold bg-red-50 p-3 rounded-xl">⚠️ Need more capacity. Fits {totalCap} out of {data.travelerCount} travelers.</p>;
+                           }
+                           return null;
+                        })()}
                       </div>
                     )}
                   </div>
@@ -439,7 +483,6 @@ export default function TripBuilder({ initialData, onComplete }) {
               </div>
 
             </div>
-          </StepWrapper>
         );
       default:
         return null;
@@ -447,6 +490,18 @@ export default function TripBuilder({ initialData, onComplete }) {
   };
 
   const currentCostPerPerson = calculateLiveCost();
+  
+  const isStepValid = () => {
+    if (step === 2 && !data.checkInDate) return false;
+    if (step === 4 && data.transportType === 'private') {
+       const totalCap = Object.entries(data.privateCars || {}).reduce((acc, [cId, cCount]) => {
+         const c = config.cars.find(x => x.id === cId);
+         return acc + (c ? c.maxPax * cCount : 0);
+       }, 0);
+       if (totalCap < data.travelerCount) return false;
+    }
+    return true;
+  };
 
   return (
     <div className="flex flex-col h-full bg-slate-50 relative overflow-hidden">
@@ -484,7 +539,7 @@ export default function TripBuilder({ initialData, onComplete }) {
           )}
           <button
             onClick={nextStep}
-            disabled={step === 2 && !data.checkInDate}
+            disabled={!isStepValid()}
             className="flex-1 h-14 flex items-center justify-center gap-2 bg-brand text-black font-bold text-lg rounded-2xl shadow-lg shadow-brand/30 hover:bg-brand-dark hover:text-white transition-all active:scale-95 disabled:opacity-50 disabled:shadow-none"
           >
             {step === 4 ? 'Book via WhatsApp' : 'Continue'}
