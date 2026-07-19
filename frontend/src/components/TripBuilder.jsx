@@ -57,7 +57,7 @@ export default function TripBuilder({ initialData, onComplete }) {
     let message = `*New Booking Request: ${regionName}*\n\n`;
     message += `*Guest Name:* ${data.name || 'Not provided'}\n`;
     if (data.isDivineGuest) {
-      message += `*Pickup Location:* Divine View Hotel (Room: ${data.roomNumber || 'TBD'})\n`;
+      message += `*Pickup Location:* Hotel Divine View (Room: ${data.roomNumber || 'TBD'})\n`;
     } else {
       message += `*Pickup Location(s):* ${data.roomNumber || 'Not provided'}\n`;
     }
@@ -448,7 +448,7 @@ export default function TripBuilder({ initialData, onComplete }) {
                   <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors ${data.isDivineGuest ? 'bg-brand text-black' : 'border-2 border-slate-300 bg-slate-50'}`}>
                     {data.isDivineGuest && <Check className="w-4 h-4" />}
                   </div>
-                  <span className="font-bold text-slate-700 text-sm select-none">I am staying at Divine View Hotel</span>
+                  <span className="font-bold text-slate-700 text-sm select-none">I am staying at Hotel Divine View</span>
                 </div>
                 
                 <div>
