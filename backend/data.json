@@ -1,0 +1,58 @@
+{
+  "regions": {
+    "meghalaya": {
+      "title": "Meghalaya Expedition",
+      "desc": "3 to 7 days. Waterfalls, Root Bridges, Dawki.",
+      "basePrice": 2000,
+      "minDays": 3,
+      "maxDays": 7,
+      "spots": [
+        "Double Decker Root Bridge",
+        "Krang Suri Waterfalls",
+        "Dawki River (Umngot)",
+        "Mawryngkhang Trek (Bamboo Trek)",
+        "Shillong Peak & Elephant Falls",
+        "Wei Sawdong"
+      ],
+      "restaurants": [
+        "Dylan's Cafe (Shillong)",
+        "ML 05 Cafe (Shillong)",
+        "City Hut Family Dhaba",
+        "Jiva Veg (Nongpoh)"
+      ]
+    },
+    "guwahati": {
+      "title": "Guwahati Local",
+      "desc": "1 to 2 days. Temples, River Cruise, City Highlights.",
+      "basePrice": 1000,
+      "minDays": 1,
+      "maxDays": 2,
+      "spots": [
+        "Kamakhya Temple",
+        "Umananda Island (Peacock Island)",
+        "Brahmaputra River Cruise",
+        "Assam State Zoo",
+        "Srimanta Sankaradeva Kalakshetra"
+      ],
+      "restaurants": [
+        "Michaels",
+        "Confucius",
+        "Gam's Delicacy",
+        "Alfresco Grand (River Cruise Dining)",
+        "The Steaming Mug"
+      ]
+    }
+  },
+  "cars": [
+    { "id": "pool", "label": "Pool & Save", "desc": "Share a cab with others (Best Value)", "price": "Budget", "maxPax": 3, "icon": "Share2", "multiplier": 0.5 },
+    { "id": "hatchback", "label": "Hatchback", "desc": "Swift, Baleno (Good for 1-3 pax)", "price": "Private", "maxPax": 3, "icon": "CarFront", "multiplier": 0.8 },
+    { "id": "sedan", "label": "Sedan", "desc": "Dzire, Etios (Comfort for 2-4 pax)", "price": "Private", "maxPax": 4, "icon": "CarFront", "multiplier": 1 },
+    { "id": "suv", "label": "SUV", "desc": "Innova, Ertiga (Great for 4-6 pax)", "price": "Private", "maxPax": 7, "icon": "Car", "multiplier": 1.5 },
+    { "id": "traveller", "label": "Tempo Traveller", "desc": "For large groups (7+ pax)", "price": "Private", "maxPax": 99, "icon": "Bus", "multiplier": 2.5 }
+  ],
+  "stays": [
+    { "id": "bnb", "label": "Homestays & BnBs", "desc": "Local experience and cozy vibes.", "rate": 1000 },
+    { "id": "hotel", "label": "Standard Hotels", "desc": "Reliable, comfortable 3-star stays.", "rate": 1800 },
+    { "id": "resort", "label": "Premium Resorts", "desc": "Luxury stays with scenic views.", "rate": 4000 }
+  ]
+}
