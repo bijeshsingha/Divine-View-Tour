@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Users, Calendar } from 'lucide-react';
+import { User, Users, Calendar, Phone, Mail } from 'lucide-react';
 
 export default function StepFinalGuestDetails({ data, updateData }) {
   return (
@@ -26,6 +26,36 @@ export default function StepFinalGuestDetails({ data, updateData }) {
           />
         </div>
 
+        {/* Phone Number */}
+        <div className="bg-white p-5 rounded-2xl shadow-sm border-2 border-slate-100">
+          <div className="flex items-center gap-2 mb-3">
+            <Phone className="w-5 h-5 text-brand-dark" />
+            <h3 className="font-bold text-slate-800">Phone Number</h3>
+          </div>
+          <input
+            type="tel"
+            className="w-full p-3 rounded-xl border-2 border-slate-200 bg-white focus:border-brand focus:ring-4 focus:ring-brand/20 outline-none text-slate-700 text-base font-medium transition-all"
+            placeholder="Enter your phone number"
+            value={data.phone || ''}
+            onChange={(e) => updateData('phone', e.target.value)}
+          />
+        </div>
+
+        {/* Email Address */}
+        <div className="bg-white p-5 rounded-2xl shadow-sm border-2 border-slate-100">
+          <div className="flex items-center gap-2 mb-3">
+            <Mail className="w-5 h-5 text-brand-dark" />
+            <h3 className="font-bold text-slate-800">Email Address <span className="text-slate-400 font-normal text-sm">(Optional)</span></h3>
+          </div>
+          <input
+            type="email"
+            className="w-full p-3 rounded-xl border-2 border-slate-200 bg-white focus:border-brand focus:ring-4 focus:ring-brand/20 outline-none text-slate-700 text-base font-medium transition-all"
+            placeholder="Enter your email address"
+            value={data.email || ''}
+            onChange={(e) => updateData('email', e.target.value)}
+          />
+        </div>
+
         {/* Travelers */}
         <div className="bg-white p-5 rounded-2xl shadow-sm border-2 border-slate-100">
           <div className="flex items-center gap-2 mb-3">
@@ -39,8 +69,11 @@ export default function StepFinalGuestDetails({ data, updateData }) {
                 type="number"
                 min="1"
                 className="w-full p-3 rounded-xl border-2 border-slate-200 bg-white focus:border-brand focus:ring-4 focus:ring-brand/20 outline-none text-slate-700 text-center font-bold transition-all"
-                value={data.travelerCount || 1}
-                onChange={(e) => updateData('travelerCount', Math.max(1, parseInt(e.target.value) || 1))}
+                value={data.travelerCount !== undefined ? data.travelerCount : 2}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  updateData('travelerCount', val === '' ? '' : Math.max(1, parseInt(val, 10)));
+                }}
               />
             </div>
             <div className="flex-1">
@@ -49,8 +82,11 @@ export default function StepFinalGuestDetails({ data, updateData }) {
                 type="number"
                 min="0"
                 className="w-full p-3 rounded-xl border-2 border-slate-200 bg-white focus:border-brand focus:ring-4 focus:ring-brand/20 outline-none text-slate-700 text-center font-bold transition-all"
-                value={data.childrenCount || 0}
-                onChange={(e) => updateData('childrenCount', Math.max(0, parseInt(e.target.value) || 0))}
+                value={data.childrenCount !== undefined ? data.childrenCount : 0}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  updateData('childrenCount', val === '' ? '' : Math.max(0, parseInt(val, 10)));
+                }}
               />
             </div>
           </div>

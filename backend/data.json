@@ -94,7 +94,7 @@
       "subtitle": "Available in 3 Variants: Adrenaline, Luxury Cloud Retreat, & Untamed Frontier",
       "price": 18500,
       "duration": "7 Days / 6 Nights",
-      "image": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80",
+      "image": "/images/Meghalaya/6809d82be1f015b4b224ff5abe40c006.jpg",
       "itinerary": [
         { "route": "Guwahati to Shillong", "stops": ["Umiam Lake Viewpoint", "Don Bosco Museum", "Police Bazar"] },
         { "route": "Shillong Local & Laitlum", "stops": ["Shillong Peak", "Elephant Falls", "Laitlum Canyons"] },
@@ -125,7 +125,7 @@
       "subtitle": "High energy route covering all major cascades and river valleys",
       "price": 13200,
       "duration": "5 Days / 4 Nights",
-      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+      "image": "/images/Meghalaya/c5110caa53e59aadacccdf02fd580450.jpg",
       "itinerary": [
         { "route": "Guwahati to Shillong", "stops": ["Umiam Lake Viewpoint", "Ward's Lake"] },
         { "route": "Shillong to Cherrapunji", "stops": ["Elephant Falls", "Wei Sawdong", "Nohkalikai Falls"] },
@@ -153,7 +153,7 @@
       "subtitle": "Guwahati's most significant spiritual sites, moving efficiently from the western hills to the city center.",
       "price": 1500,
       "duration": "1 Day / 0 Nights",
-      "image": "https://images.unsplash.com/photo-1621213076118-28562d46e10f?auto=format&fit=crop&w=800&q=80",
+      "image": "/images/Guwahati/Temples/Kamakhya.jpg",
       "itinerary": [
         { "route": "08:00 AM - Pickup: Paltan Bazaar", "stops": ["Meet at designated spot"] },
         { "route": "08:30 AM - Kamakhya Temple", "stops": ["Special Entry passes recommended"] },
@@ -181,7 +181,7 @@
       "subtitle": "A balanced taste of Assam's spirituality, history, and natural beauty ending with a premium river cruise.",
       "price": 2500,
       "duration": "1 Day / 0 Nights",
-      "image": "https://images.unsplash.com/photo-1605335133615-5460594cc6f3?auto=format&fit=crop&w=800&q=80",
+      "image": "/images/Guwahati/Boat.jpg",
       "itinerary": [
         { "route": "08:30 AM - Pickup: Paltan Bazaar", "stops": ["Meet and greet"] },
         { "route": "09:00 AM - Kamakhya Temple", "stops": ["Special Entry passes mandatory"] },

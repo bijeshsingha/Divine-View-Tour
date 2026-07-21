@@ -123,12 +123,16 @@ export default function TripBuilder({ initialData, onComplete }) {
       message = `*New Package Booking Request*\n\n`;
       message += `*Package:* ${pkg?.title}\n`;
       message += `*Guest Name:* ${data.name || 'Not provided'}\n`;
+      message += `*Phone:* ${data.phone || 'Not provided'}\n`;
+      if (data.email) message += `*Email:* ${data.email}\n`;
       message += `*Dates:* ${data.checkInDate || 'TBD'}\n`;
       message += `*Headcount:* ${data.travelerCount} Adults, ${data.childrenCount || 0} Children\n`;
     } else {
       const regionName = config.regions[data.region]?.title || data.region;
       message = `*New Custom Booking Request: ${regionName}*\n\n`;
       message += `*Guest Name:* ${data.name || 'Not provided'}\n`;
+      message += `*Phone:* ${data.phone || 'Not provided'}\n`;
+      if (data.email) message += `*Email:* ${data.email}\n`;
       message += `*Dates:* ${data.checkInDate || 'TBD'} for ${data.tripDays} Days\n`;
       message += `*Headcount:* ${data.travelerCount} Adults, ${data.childrenCount || 0} Children\n`;
       
@@ -249,7 +253,7 @@ export default function TripBuilder({ initialData, onComplete }) {
   };
   
   const isStepValid = () => {
-    if (step === 'final') return !!data.name && !!data.checkInDate;
+    if (step === 'final') return !!data.name && !!data.phone && !!data.checkInDate && data.travelerCount > 0;
     if (step === 1 && !data.region) return false;
     if (step === 4 && data.transportType === 'private') {
        const totalCap = Object.entries(data.privateCars || {}).reduce((acc, [cId, cCount]) => {
