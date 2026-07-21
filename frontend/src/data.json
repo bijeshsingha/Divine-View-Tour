@@ -2,9 +2,9 @@
   "regions": {
     "meghalaya": {
       "title": "Meghalaya Expedition",
-      "desc": "3 to 7 days. Waterfalls, Root Bridges, Dawki.",
+      "desc": "2 to 7 days. Waterfalls, Root Bridges, Dawki.",
       "basePrice": 2000,
-      "minDays": 3,
+      "minDays": 2,
       "maxDays": 7,
       "spots": [
         "Double Decker Root Bridge",
@@ -41,6 +41,37 @@
         "Alfresco Grand (River Cruise Dining)",
         "The Steaming Mug"
       ]
+    },
+    "meghalaya_guwahati": {
+      "title": "Meghalaya & Guwahati Combo",
+      "desc": "5 to 10 days. The ultimate best of both worlds.",
+      "basePrice": 3000,
+      "minDays": 5,
+      "maxDays": 10,
+      "spots": [
+        "Kamakhya Temple",
+        "Brahmaputra River Cruise",
+        "Umananda Island (Peacock Island)",
+        "Assam State Zoo",
+        "Srimanta Sankaradeva Kalakshetra",
+        "Double Decker Root Bridge",
+        "Krang Suri Waterfalls",
+        "Dawki River (Umngot)",
+        "Mawryngkhang Trek (Bamboo Trek)",
+        "Shillong Peak & Elephant Falls",
+        "Wei Sawdong"
+      ],
+      "restaurants": [
+        "Dylan's Cafe (Shillong)",
+        "ML 05 Cafe (Shillong)",
+        "City Hut Family Dhaba",
+        "Jiva Veg (Nongpoh)",
+        "Michaels",
+        "Confucius",
+        "Gam's Delicacy",
+        "Alfresco Grand (River Cruise Dining)",
+        "The Steaming Mug"
+      ]
     }
   },
   "cars": [
@@ -54,5 +85,122 @@
     { "id": "bnb", "label": "Homestays & BnBs", "desc": "Local experience and cozy vibes.", "rate": 1000 },
     { "id": "hotel", "label": "Standard Hotels", "desc": "Reliable, comfortable 3-star stays.", "rate": 1800 },
     { "id": "resort", "label": "Premium Resorts", "desc": "Luxury stays with scenic views.", "rate": 4000 }
+  ],
+  "packages": [
+    {
+      "id": "pkg-7d",
+      "title": "7D/6N Ultimate Meghalaya Expedition",
+      "category": "Meghalaya",
+      "subtitle": "Available in 3 Variants: Adrenaline, Luxury Cloud Retreat, & Untamed Frontier",
+      "price": 18500,
+      "duration": "7 Days / 6 Nights",
+      "image": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80",
+      "itinerary": [
+        { "route": "Guwahati to Shillong", "stops": ["Umiam Lake Viewpoint", "Don Bosco Museum", "Police Bazar"] },
+        { "route": "Shillong Local & Laitlum", "stops": ["Shillong Peak", "Elephant Falls", "Laitlum Canyons"] },
+        { "route": "Shillong to Cherrapunji", "stops": ["Mawkdok Dympep Valley", "Wah Kaba Falls", "Nohkalikai Falls"] },
+        { "route": "Cherrapunji Adventure", "stops": ["Double Decker Root Bridge", "Mawsmai Cave", "Seven Sisters Falls"] },
+        { "route": "Cherrapunji to Dawki", "stops": ["Mawlynnong Village", "Living Root Bridge", "Umngot River Boating"] },
+        { "route": "Dawki to Krang Suri to Shillong", "stops": ["Krang Suri Waterfalls", "Phe Phe Falls", "Return to Shillong"] },
+        { "route": "Shillong to Guwahati", "stops": ["Kamakhya Temple", "Departure"] }
+      ],
+      "inclusions": [
+        "Private dedicated vehicle (Sedan/SUV) for 7 days",
+        "6 Nights Accommodation (3-star equivalent)",
+        "Breakfast at the hotel",
+        "Driver allowance, toll, and parking fees",
+        "24/7 Phone Support"
+      ],
+      "exclusions": [
+        "Entry fees to monuments and parks",
+        "Lunch and Dinner",
+        "Flight/Train tickets to Guwahati",
+        "Personal expenses and activities (Boating, Zip-lining)"
+      ]
+    },
+    {
+      "id": "pkg-5d",
+      "title": "5D/4N Waterfall Chaser",
+      "category": "Meghalaya",
+      "subtitle": "High energy route covering all major cascades and river valleys",
+      "price": 13200,
+      "duration": "5 Days / 4 Nights",
+      "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+      "itinerary": [
+        { "route": "Guwahati to Shillong", "stops": ["Umiam Lake Viewpoint", "Ward's Lake"] },
+        { "route": "Shillong to Cherrapunji", "stops": ["Elephant Falls", "Wei Sawdong", "Nohkalikai Falls"] },
+        { "route": "Cherrapunji to Dawki", "stops": ["Seven Sisters Falls", "Mawlynnong", "Umngot River"] },
+        { "route": "Dawki to Jowai to Shillong", "stops": ["Krang Suri Waterfalls", "Nartiang Monoliths", "Return to Shillong"] },
+        { "route": "Shillong to Guwahati", "stops": ["Kamakhya Temple", "Departure"] }
+      ],
+      "inclusions": [
+        "Private dedicated vehicle for 5 days",
+        "4 Nights Accommodation",
+        "Breakfast at the hotel",
+        "Driver allowance, toll, and parking fees"
+      ],
+      "exclusions": [
+        "Entry fees to monuments and parks",
+        "Lunch and Dinner",
+        "Flight/Train tickets",
+        "Boating or adventure sports"
+      ]
+    },
+    {
+      "id": "pkg-gwh-1",
+      "title": "The Sacred Circuit (Temple Focus)",
+      "category": "Guwahati",
+      "subtitle": "Guwahati's most significant spiritual sites, moving efficiently from the western hills to the city center.",
+      "price": 1500,
+      "duration": "1 Day / 0 Nights",
+      "image": "https://images.unsplash.com/photo-1621213076118-28562d46e10f?auto=format&fit=crop&w=800&q=80",
+      "itinerary": [
+        { "route": "08:00 AM - Pickup: Paltan Bazaar", "stops": ["Meet at designated spot"] },
+        { "route": "08:30 AM - Kamakhya Temple", "stops": ["Special Entry passes recommended"] },
+        { "route": "12:30 PM - Lunch Break", "stops": ["Pre-booked vegetarian thali"] },
+        { "route": "02:00 PM - Umananda Temple", "stops": ["Peacock Island via ferry"] },
+        { "route": "04:30 PM - Navagraha Temple", "stops": ["Temple dedicated to nine celestial bodies"] },
+        { "route": "06:15 PM - Purva Tirupati Balaji Temple", "stops": ["Beautifully lit evening visit"] },
+        { "route": "08:00 PM - Drop-off: Paltan Bazaar", "stops": ["Return to central hub"] }
+      ],
+      "inclusions": [
+        "Seat in AC Traveler/Bus (Pool & Save)",
+        "Professional Guide Services",
+        "Fuel, Parking, and Toll Taxes"
+      ],
+      "exclusions": [
+        "Kamakhya VIP Pass & Ferry Tickets",
+        "Lunch and Dinner",
+        "Camera / Video pass fees"
+      ]
+    },
+    {
+      "id": "pkg-gwh-2",
+      "title": "The Heritage & Sunset Cruise Mix",
+      "category": "Guwahati",
+      "subtitle": "A balanced taste of Assam's spirituality, history, and natural beauty ending with a premium river cruise.",
+      "price": 2500,
+      "duration": "1 Day / 0 Nights",
+      "image": "https://images.unsplash.com/photo-1605335133615-5460594cc6f3?auto=format&fit=crop&w=800&q=80",
+      "itinerary": [
+        { "route": "08:30 AM - Pickup: Paltan Bazaar", "stops": ["Meet and greet"] },
+        { "route": "09:00 AM - Kamakhya Temple", "stops": ["Special Entry passes mandatory"] },
+        { "route": "12:45 PM - Lunch Break", "stops": ["Authentic Assamese Thali"] },
+        { "route": "02:00 PM - Assam State Museum", "stops": ["Ahom dynasty artifacts and history"] },
+        { "route": "04:15 PM - Heritage Walk", "stops": ["Dighalipukhuri area & Ugra Tara Temple"] },
+        { "route": "06:00 PM - Brahmaputra Dinner Cruise", "stops": ["Sunset views, live music, dinner"] },
+        { "route": "08:15 PM - Drop-off: Paltan Bazaar", "stops": ["Return to central hub"] }
+      ],
+      "inclusions": [
+        "Seat in AC Traveler/Bus (Pool & Save)",
+        "Professional Guide Services",
+        "Fuel, Parking, and Toll Taxes"
+      ],
+      "exclusions": [
+        "Kamakhya VIP Pass, Museum Entry & Cruise Ticket",
+        "Lunch (Dinner is included in cruise)",
+        "Camera / Video pass fees"
+      ]
+    }
   ]
 }

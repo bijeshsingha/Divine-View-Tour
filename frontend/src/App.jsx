@@ -60,8 +60,8 @@ function AppContent() {
   return (
     <div className="min-h-screen w-full bg-black text-slate-900 font-sans selection:bg-brand-light flex flex-col items-center">
       <Routes>
-        <Route path="/" element={<Welcome onStart={() => navigate('/build')} />} />
-        <Route path="/explore" element={<MobileLayout><ExploreHub /></MobileLayout>} />
+        <Route path="/" element={<Welcome onStart={() => navigate('/build')} onExplore={() => navigate('/explore')} />} />
+        <Route path="/explore" element={<ExploreHub />} />
         <Route path="/build" element={<MobileLayout><TripBuilder initialData={tripData} onComplete={handleTripComplete} /></MobileLayout>} />
       </Routes>
     </div>

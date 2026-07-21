@@ -12,7 +12,7 @@ export default function Step3Customization({ data, toggleArrayItem, currentRegio
           <Navigation className="w-6 h-6" />
         </div>
         <h2 className="text-3xl font-bold text-slate-900 mb-2">Direct Customization</h2>
-        <p className="text-slate-500 text-base">Select must-see spots and local food to try.</p>
+        <p className="text-slate-500 text-base">Select your must-see spots. (Optional - skip this and we'll curate the best route for you!)</p>
       </div>
       <div className="flex-1 flex flex-col justify-start overflow-y-auto pb-4">
         <div className="space-y-6">
@@ -43,32 +43,6 @@ export default function Step3Customization({ data, toggleArrayItem, currentRegio
                       {isSelected && <Check className="w-4 h-4" />}
                     </div>
                     <span className={`font-semibold text-sm md:text-base leading-tight ${isSelected ? 'text-slate-900' : 'text-slate-600'}`}>{spot}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-slate-800 mb-1 flex items-center gap-2">
-              <Utensils className="w-5 h-5 text-brand-dark" /> Trending Food
-            </h3>
-            <p className="text-xs text-slate-500 italic mb-3">
-              * Note: Food and restaurant bills are expensed by the customer and are not included in the package.
-            </p>
-            <div className="space-y-2">
-              {restaurants.map(rest => {
-                const isSelected = data.restaurants.includes(rest);
-                return (
-                  <button
-                    key={rest}
-                    onClick={() => toggleArrayItem('restaurants', rest)}
-                    className={`w-full text-left rounded-xl border-2 transition-all flex items-center p-3 gap-3 outline-none ${isSelected ? 'border-brand bg-brand/10 shadow-sm' : 'border-slate-200 bg-white hover:border-brand/30'}`}
-                  >
-                    <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-brand text-black' : 'border-2 border-slate-200 bg-slate-50'}`}>
-                      {isSelected && <Check className="w-4 h-4" />}
-                    </div>
-                    <span className={`font-semibold text-sm md:text-base leading-tight ${isSelected ? 'text-slate-900' : 'text-slate-600'}`}>{rest}</span>
                   </button>
                 );
               })}

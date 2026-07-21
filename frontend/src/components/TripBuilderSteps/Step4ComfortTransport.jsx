@@ -131,51 +131,6 @@ export default function Step4ComfortTransport({ data, updateData, config, update
             </div>
           </div>
 
-          {/* Guest Details */}
-          <div className="pt-4 border-t border-slate-200 space-y-4">
-            <div className="flex items-center gap-3 p-3 bg-white border-2 border-slate-200 rounded-xl cursor-pointer hover:border-brand/30 transition-all" onClick={() => updateData('isDivineGuest', !data.isDivineGuest)}>
-              <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors ${data.isDivineGuest ? 'bg-brand text-black' : 'border-2 border-slate-300 bg-slate-50'}`}>
-                {data.isDivineGuest && <Check className="w-4 h-4" />}
-              </div>
-              <span className="font-bold text-slate-700 text-sm select-none">I am staying at Hotel Divine View</span>
-            </div>
-            
-            <div>
-              <h3 className="font-bold text-slate-800 mb-2">Guest Name</h3>
-              <input
-                type="text"
-                className="w-full p-4 rounded-xl border-2 border-slate-200 bg-white focus:border-brand focus:ring-4 focus:ring-brand/20 outline-none text-slate-700 text-sm transition-all"
-                placeholder="Enter your full name"
-                value={data.name || ''}
-                onChange={(e) => updateData('name', e.target.value)}
-              />
-            </div>
-            <div>
-              <h3 className="font-bold text-slate-800 mb-2">
-                {data.isDivineGuest ? 'Room Number' : 'Pickup Location(s)'}
-              </h3>
-              <input
-                type="text"
-                className="w-full p-4 rounded-xl border-2 border-slate-200 bg-white focus:border-brand focus:ring-4 focus:ring-brand/20 outline-none text-slate-700 text-sm transition-all"
-                placeholder={data.isDivineGuest ? 'Your room number' : 'Hotel name(s) or addresses'}
-                value={data.roomNumber || ''}
-                onChange={(e) => updateData('roomNumber', e.target.value)}
-              />
-            </div>
-          </div>
-
-          {/* Custom Request */}
-          <div className="pt-4 border-t border-slate-200">
-            <h3 className="font-bold text-slate-800 mb-2">Custom Requests?</h3>
-            <textarea
-              className="w-full p-4 rounded-xl border-2 border-slate-200 bg-white focus:border-brand focus:ring-4 focus:ring-brand/20 outline-none text-slate-700 text-sm resize-none transition-all"
-              rows="3"
-              placeholder="Any unlisted locations or special requirements?"
-              value={data.customRequest || ''}
-              onChange={(e) => updateData('customRequest', e.target.value)}
-            />
-          </div>
-
         </div>
       </div>
     </div>

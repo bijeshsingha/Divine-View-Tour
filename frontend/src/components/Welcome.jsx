@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sparkles, Map, Star, ChevronRight } from 'lucide-react';
 
-export default function Welcome({ onStart }) {
+export default function Welcome({ onStart, onExplore }) {
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black text-white selection:bg-brand selection:text-black">
       
@@ -44,7 +44,7 @@ export default function Welcome({ onStart }) {
             Curated journeys through the misty hills of Meghalaya and the vibrant heart of Guwahati. Build your perfect custom itinerary in under 60 seconds.
           </p>
 
-          <div className="w-full sm:w-auto animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
+          <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
              <button 
                 onClick={onStart}
                 className="group relative inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-brand hover:bg-brand-light text-black font-black text-xl py-5 px-10 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(234,179,8,0.4)] hover:shadow-[0_0_60px_rgba(234,179,8,0.6)]"
@@ -54,6 +54,15 @@ export default function Welcome({ onStart }) {
                 </span>
                 {/* Button shine effect */}
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
+              </button>
+              
+              <button 
+                onClick={onExplore}
+                className="group relative inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-bold text-lg py-5 px-8 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Explore Hub
+                </span>
               </button>
           </div>
 

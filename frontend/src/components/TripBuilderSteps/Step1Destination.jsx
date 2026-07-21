@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map } from 'lucide-react';
+import { Map, Minus, Plus, Calendar } from 'lucide-react';
 
 export default function Step1Destination({ data, updateData, config }) {
   return (
@@ -27,7 +27,7 @@ export default function Step1Destination({ data, updateData, config }) {
             >
               <div className={`w-16 h-16 rounded-xl overflow-hidden shrink-0 ${data.region === regionId ? 'ring-2 ring-brand ring-offset-2' : ''}`}>
                 <img 
-                  src={regionId === 'meghalaya' ? '/assets/dawki_river.webp' : '/assets/guwahati_hero.webp'} 
+                  src={regionId === 'meghalaya' ? '/assets/dawki_river.webp' : regionId === 'guwahati' ? '/assets/guwahati_hero.webp' : '/assets/dawki_river.webp'} 
                   alt={region.title} 
                   className="w-full h-full object-cover"
                 />
