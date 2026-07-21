@@ -114,7 +114,7 @@ export default function TripBuilder({ initialData, onComplete }) {
   };
 
   const submitToWhatsApp = () => {
-    const phone = "+917002449198";
+    const phone = "+916026504087";
     
     let message = '';
 
