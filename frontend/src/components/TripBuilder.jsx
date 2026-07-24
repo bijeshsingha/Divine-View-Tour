@@ -16,6 +16,7 @@ import PlaceDetail from './ExploreViews/PlaceDetail';
 import { EXPLORE_DATA } from '../exploreData';
 
 import { ItineraryPDF } from './ItineraryPDF';
+import { BookingRequestPDF } from './BookingRequestPDF';
 import { generateSchedule } from '../utils/itineraryEngine';
 
 export default function TripBuilder({ initialData, onComplete }) {
@@ -353,6 +354,29 @@ export default function TripBuilder({ initialData, onComplete }) {
           )}
 
           <div className="p-4 px-6 flex flex-col gap-3">
+            {step === 'final' && isStepValid() && (
+              <PDFDownloadLink
+                document={
+                  <BookingRequestPDF
+                    data={data}
+                    packageTitle={path === 'readymade' && data.packageId ? (config.packages.find(p => p.id === data.packageId)?.title || '') : `Custom Adventure: ${currentRegion.title}`}
+                    durationStr={path === 'readymade' && data.packageId ? (config.packages.find(p => p.id === data.packageId)?.duration || '') : `${data.tripDays} Days / ${data.tripDays - 1} Nights`}
+                    basePrice={displayPrice}
+                    totalPrice={displayPrice * data.travelerCount}
+                    bookingId={data.phone ? data.phone.slice(-4) + Math.floor(Math.random()*100) : Math.floor(Math.random()*10000)}
+                  />
+                }
+                fileName={`${(data.name || 'Guest').replace(/\s+/g, '_')}_Booking_Request.pdf`}
+                className="w-full h-12 flex items-center justify-center gap-2 bg-slate-800 text-white font-bold text-base rounded-xl shadow-md hover:bg-slate-900 transition-all active:scale-95"
+              >
+                {({ loading }) => (
+                  <>
+                    {loading ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
+                    {loading ? 'Generating Summary...' : 'Download Summary PDF'}
+                  </>
+                )}
+              </PDFDownloadLink>
+            )}
             <div className="flex gap-3">
               <button
                 onClick={prevStep}

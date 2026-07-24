@@ -1,6 +1,7 @@
 import React from 'react';
-import { Document, Page, Text, View, StyleSheet, Font, Image } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
 
+// Register fonts for standard, bold, and italic
 Font.register({
   family: 'Roboto',
   fonts: [
@@ -10,272 +11,256 @@ Font.register({
   ]
 });
 
+// Brand colors extracted from LaTeX
+const colors = {
+  brandblue: '#2980b9',
+  branddark: '#2c3e50',
+  brandgray: '#ecf0f1',
+  brandgreen: '#27ae60',
+  brandred: '#c0392b',
+  gray: '#7f8c8d'
+};
+
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: '#ffffff',
-    padding: 30,
+    paddingTop: 35,
+    paddingBottom: 65,
+    paddingHorizontal: 35,
     fontFamily: 'Roboto',
+    backgroundColor: '#ffffff'
   },
+  // --- Header ---
   header: {
-    marginBottom: 20,
-    borderBottomWidth: 2,
-    borderBottomColor: '#f1c40f',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000',
     paddingBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    marginBottom: 30
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-  },
-  subtitle: {
+  headerLeft: {
+    color: colors.brandblue,
     fontSize: 12,
-    color: '#7f8c8d',
-    marginTop: 5,
+    fontWeight: 'bold'
   },
-  heroImage: {
-    width: '100%',
-    height: 150,
-    objectFit: 'cover',
-    borderRadius: 5,
-    marginBottom: 20,
+  headerRight: {
+    color: colors.gray,
+    fontSize: 12
   },
-  packageTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-    marginBottom: 5,
-  },
-  packageSubtitle: {
-    fontSize: 12,
-    color: '#7f8c8d',
-    marginBottom: 20,
-    fontStyle: 'italic',
-  },
-  detailsBox: {
-    backgroundColor: '#f8f9fa',
-    padding: 15,
-    borderRadius: 5,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: '#e9ecef',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  detailItem: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  detailLabel: {
+  // --- Footer ---
+  footer: {
+    position: 'absolute',
+    bottom: 30,
+    left: 35,
+    right: 35,
+    textAlign: 'center',
+    color: colors.gray,
     fontSize: 10,
-    color: '#7f8c8d',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
+    borderTopWidth: 1,
+    borderTopColor: '#000000',
+    paddingTop: 10
   },
-  detailValue: {
-    fontSize: 14,
-    color: '#2c3e50',
+  // --- Center Title ---
+  centerTitleBlock: {
+    alignItems: 'center',
+    marginBottom: 20
+  },
+  mainTitle: {
+    fontSize: 18,
+    color: colors.branddark,
     fontWeight: 'bold',
-    marginTop: 3,
+    marginBottom: 8
+  },
+  subTitle: {
+    fontSize: 11,
+    color: colors.gray,
+    fontStyle: 'italic',
+    textAlign: 'center'
+  },
+  // --- Info Box (tcolorbox) ---
+  infoBox: {
+    backgroundColor: colors.brandgray,
+    borderRadius: 4,
+    padding: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20
+  },
+  infoColLeft: {
+    width: '60%'
+  },
+  infoColRight: {
+    width: '40%',
+    alignItems: 'flex-end',
+    justifyContent: 'center'
+  },
+  infoTextRow: {
+    flexDirection: 'row',
+    marginBottom: 6
+  },
+  infoLabel: {
+    color: colors.brandblue,
+    fontWeight: 'bold',
+    fontSize: 11,
+    marginRight: 4
+  },
+  infoValue: {
+    color: '#000000',
+    fontSize: 11
+  },
+  priceText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#000000'
+  },
+  // --- Sections ---
+  sectionTitleContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000',
+    paddingBottom: 4,
+    marginBottom: 10,
+    marginTop: 15
   },
   sectionTitle: {
     fontSize: 16,
+    color: colors.brandblue,
+    fontWeight: 'bold'
+  },
+  dayTitle: {
+    fontSize: 14,
+    color: colors.branddark,
     fontWeight: 'bold',
-    color: '#2c3e50',
-    marginTop: 15,
-    marginBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ecf0f1',
-    paddingBottom: 5,
-  },
-  dayBlock: {
-    marginBottom: 15,
-  },
-  dayHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 5,
-  },
-  dayLabel: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    color: '#ffffff',
-    backgroundColor: '#f39c12',
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: 3,
-    marginRight: 8,
-  },
-  dayRoute: {
-    fontSize: 13,
-    fontWeight: 'bold',
-    color: '#2c3e50',
-  },
-  stopList: {
-    marginLeft: 15,
-    marginTop: 5,
-  },
-  stopItem: {
-    flexDirection: 'row',
-    marginBottom: 3,
-  },
-  bulletPoint: {
-    fontSize: 10,
-    color: '#f39c12',
-    marginRight: 5,
-  },
-  stopText: {
-    fontSize: 11,
-    color: '#34495e',
-  },
-  inclusionSection: {
-    marginTop: 10,
-  },
-  incExcRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  incExcCol: {
-    width: '48%',
-  },
-  listContainer: {
-    backgroundColor: '#f8f9fa',
-    padding: 10,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#e9ecef',
+    marginBottom: 6,
+    marginTop: 10
   },
   listItem: {
     flexDirection: 'row',
     marginBottom: 4,
+    paddingLeft: 10
   },
-  listIconInc: {
-    fontSize: 10,
-    color: '#27ae60',
-    marginRight: 5,
-  },
-  listIconExc: {
-    fontSize: 10,
-    color: '#c0392b',
-    marginRight: 5,
+  bullet: {
+    width: 15,
+    fontSize: 11,
+    color: '#000000'
   },
   listText: {
-    fontSize: 10,
-    color: '#2c3e50',
-    width: '90%',
+    flex: 1,
+    fontSize: 11,
+    color: '#000000',
+    lineHeight: 1.4
   },
-  footer: {
-    position: 'absolute',
-    bottom: 30,
-    left: 30,
-    right: 30,
-    textAlign: 'center',
-    color: '#bdc3c7',
-    fontSize: 10,
-    borderTopWidth: 1,
-    borderTopColor: '#ecf0f1',
-    paddingTop: 10,
+  // --- Inclusions / Exclusions ---
+  incExcContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15
+  },
+  incExcCol: {
+    width: '48%'
+  },
+  incExcTitle: {
+    fontSize: 16,
+    color: colors.brandblue,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000',
+    paddingBottom: 4
+  },
+  incExcBulletPlus: {
+    width: 15,
+    fontSize: 11,
+    color: colors.brandgreen,
+    fontWeight: 'bold'
+  },
+  incExcBulletMinus: {
+    width: 15,
+    fontSize: 11,
+    color: colors.brandred,
+    fontWeight: 'bold'
   }
 });
-
-// Use a placeholder if image path is local since React-PDF needs absolute URLs for network or valid local paths.
-// In a real app we might pass full URL. We'll try passing the relative path directly; if it fails, we fallback to a remote image.
-const FALLBACK_IMG = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop";
 
 export const PackagePDF = ({ packageData }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         
-        {/* Header */}
-        <View style={styles.header}>
-          <View>
-            <Text style={styles.title}>Divine View Tours</Text>
-            <Text style={styles.subtitle}>Curated Readymade Package</Text>
+        {/* Universal Header */}
+        <View style={styles.header} fixed>
+          <Text style={styles.headerLeft}>Divine View Tours</Text>
+          <Text style={styles.headerRight}>Package Itinerary</Text>
+        </View>
+
+        {/* Center Title Block */}
+        <View style={styles.centerTitleBlock}>
+          <Text style={styles.mainTitle}>{packageData.title}</Text>
+          <Text style={styles.subTitle}>Best for: {packageData.subtitle}</Text>
+        </View>
+
+        {/* Info Box */}
+        <View style={styles.infoBox}>
+          <View style={styles.infoColLeft}>
+            <View style={styles.infoTextRow}>
+              <Text style={styles.infoLabel}>Duration:</Text>
+              <Text style={styles.infoValue}>{packageData.duration}</Text>
+            </View>
+            <View style={styles.infoTextRow}>
+              <Text style={styles.infoLabel}>Category:</Text>
+              <Text style={styles.infoValue}>{packageData.category}</Text>
+            </View>
+          </View>
+          <View style={styles.infoColRight}>
+            <Text style={styles.priceText}>Price: INR {packageData.price.toLocaleString()} / person</Text>
           </View>
         </View>
 
-        {/* Hero Image */}
-        <Image style={styles.heroImage} src={FALLBACK_IMG} />
-        
-        {/* Package Title & Overview */}
-        <Text style={styles.packageTitle}>{packageData.title}</Text>
-        <Text style={styles.packageSubtitle}>{packageData.subtitle}</Text>
-        
-        <View style={styles.detailsBox}>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Duration</Text>
-            <Text style={styles.detailValue}>{packageData.duration}</Text>
-          </View>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Estimated Price</Text>
-            <Text style={styles.detailValue}>₹{packageData.price.toLocaleString()} / person</Text>
-          </View>
-          <View style={styles.detailItem}>
-            <Text style={styles.detailLabel}>Category</Text>
-            <Text style={styles.detailValue}>{packageData.category}</Text>
-          </View>
+        {/* Detailed Itinerary */}
+        <View style={styles.sectionTitleContainer}>
+          <Text style={styles.sectionTitle}>Detailed Itinerary</Text>
         </View>
 
-        {/* Itinerary */}
-        <Text style={styles.sectionTitle}>Day-by-Day Itinerary</Text>
-        
         {packageData.itinerary && packageData.itinerary.map((day, idx) => (
-          <View style={styles.dayBlock} key={idx} wrap={false}>
-            <View style={styles.dayHeader}>
-              <Text style={styles.dayLabel}>DAY {idx + 1}</Text>
-              <Text style={styles.dayRoute}>{day.route || day.title}</Text>
-            </View>
-            <View style={styles.stopList}>
-              {(day.stops || day.activities).map((stop, sIdx) => (
-                <View style={styles.stopItem} key={sIdx}>
-                  <Text style={styles.bulletPoint}>•</Text>
-                  <Text style={styles.stopText}>{stop}</Text>
-                </View>
-              ))}
-            </View>
+          <View key={idx} wrap={false}>
+            <Text style={styles.dayTitle}>Day {idx + 1}: {day.route || day.title}</Text>
+            {(day.stops || day.activities).map((stop, sIdx) => (
+              <View style={styles.listItem} key={sIdx}>
+                <Text style={styles.bullet}>--</Text>
+                <Text style={styles.listText}>{stop}</Text>
+              </View>
+            ))}
           </View>
         ))}
 
         {/* Inclusions & Exclusions */}
-        {packageData.inclusions && packageData.exclusions && (
-          <View style={styles.inclusionSection} wrap={false}>
-            <Text style={styles.sectionTitle}>Inclusions & Exclusions</Text>
-            <View style={styles.incExcRow}>
-              
-              <View style={styles.incExcCol}>
-                <View style={styles.listContainer}>
-                  {packageData.inclusions.map((inc, idx) => (
-                    <View style={styles.listItem} key={idx}>
-                      <Text style={styles.listIconInc}>✓</Text>
-                      <Text style={styles.listText}>{inc}</Text>
-                    </View>
-                  ))}
-                </View>
+        <View style={styles.incExcContainer} wrap={false}>
+          
+          <View style={styles.incExcCol}>
+            <Text style={styles.incExcTitle}>Inclusions</Text>
+            {packageData.inclusions && packageData.inclusions.map((inc, idx) => (
+              <View style={styles.listItem} key={idx}>
+                <Text style={styles.incExcBulletPlus}>+</Text>
+                <Text style={styles.listText}>{inc}</Text>
               </View>
-
-              <View style={styles.incExcCol}>
-                <View style={styles.listContainer}>
-                  {packageData.exclusions.map((exc, idx) => (
-                    <View style={styles.listItem} key={idx}>
-                      <Text style={styles.listIconExc}>✗</Text>
-                      <Text style={styles.listText}>{exc}</Text>
-                    </View>
-                  ))}
-                </View>
-              </View>
-
-            </View>
+            ))}
           </View>
-        )}
 
-        {/* Footer */}
-        <Text style={styles.footer} fixed>
-          Thank you for choosing Divine View Tours. Prices are estimates and subject to change. 
-          Specific hotel names and vehicle numbers will be provided upon booking confirmation.
-        </Text>
+          <View style={styles.incExcCol}>
+            <Text style={styles.incExcTitle}>Exclusions</Text>
+            {packageData.exclusions && packageData.exclusions.map((exc, idx) => (
+              <View style={styles.listItem} key={idx}>
+                <Text style={styles.incExcBulletMinus}>-</Text>
+                <Text style={styles.listText}>{exc}</Text>
+              </View>
+            ))}
+          </View>
+
+        </View>
+
+        {/* Universal Footer */}
+        <Text style={styles.footer} render={({ pageNumber }) => (
+          `singhabijesh7@gmail.com    |    +91 6026504087    |    Page ${pageNumber}`
+        )} fixed />
 
       </Page>
     </Document>
