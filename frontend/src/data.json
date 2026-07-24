@@ -75,18 +75,264 @@
     }
   },
   "cars": [
-    { "id": "pool", "label": "Pool & Save", "desc": "Share a cab with others (Best Value)", "price": "Budget", "maxPax": 3, "icon": "Share2", "multiplier": 0.5 },
-    { "id": "hatchback", "label": "Hatchback", "desc": "Swift, Baleno (Good for 1-3 pax)", "price": "Private", "maxPax": 3, "icon": "CarFront", "multiplier": 0.8 },
-    { "id": "sedan", "label": "Sedan", "desc": "Dzire, Etios (Comfort for 2-4 pax)", "price": "Private", "maxPax": 4, "icon": "CarFront", "multiplier": 1 },
-    { "id": "suv", "label": "SUV", "desc": "Innova, Ertiga (Great for 4-6 pax)", "price": "Private", "maxPax": 7, "icon": "Car", "multiplier": 1.5 },
-    { "id": "traveller", "label": "Tempo Traveller", "desc": "For large groups (7+ pax)", "price": "Private", "maxPax": 99, "icon": "Bus", "multiplier": 2.5 }
+    {
+      "id": "pool",
+      "label": "Pool & Save",
+      "desc": "Share a cab with others (Best Value)",
+      "price": "Budget",
+      "maxPax": 3,
+      "icon": "Share2",
+      "multiplier": 0.5
+    },
+    {
+      "id": "hatchback",
+      "label": "Hatchback",
+      "desc": "Swift, Baleno (Good for 1-3 pax)",
+      "price": "Private",
+      "maxPax": 3,
+      "icon": "CarFront",
+      "multiplier": 0.8
+    },
+    {
+      "id": "sedan",
+      "label": "Sedan",
+      "desc": "Dzire, Etios (Comfort for 2-4 pax)",
+      "price": "Private",
+      "maxPax": 4,
+      "icon": "CarFront",
+      "multiplier": 1
+    },
+    {
+      "id": "suv",
+      "label": "SUV",
+      "desc": "Innova, Ertiga (Great for 4-6 pax)",
+      "price": "Private",
+      "maxPax": 7,
+      "icon": "Car",
+      "multiplier": 1.5
+    },
+    {
+      "id": "traveller",
+      "label": "Tempo Traveller",
+      "desc": "For large groups (7+ pax)",
+      "price": "Private",
+      "maxPax": 99,
+      "icon": "Bus",
+      "multiplier": 2.5
+    }
   ],
   "stays": [
-    { "id": "bnb", "label": "Homestays & BnBs", "desc": "Local experience and cozy vibes.", "rate": 1000 },
-    { "id": "hotel", "label": "Standard Hotels", "desc": "Reliable, comfortable 3-star stays.", "rate": 1800 },
-    { "id": "resort", "label": "Premium Resorts", "desc": "Luxury stays with scenic views.", "rate": 4000 }
+    {
+      "id": "bnb",
+      "label": "Homestays & BnBs",
+      "desc": "Local experience and cozy vibes.",
+      "rate": 1000
+    },
+    {
+      "id": "hotel",
+      "label": "Standard Hotels",
+      "desc": "Reliable, comfortable 3-star stays.",
+      "rate": 1800
+    },
+    {
+      "id": "resort",
+      "label": "Premium Resorts",
+      "desc": "Luxury stays with scenic views.",
+      "rate": 4000
+    }
   ],
   "packages": [
+    {
+      "id": "pkg-khasi-essential",
+      "title": "The Khasi Hills Essential Circuit",
+      "category": "Meghalaya",
+      "subtitle": "Best for: Budget travelers, families, and those looking for a fast-paced overview of the most famous sights.",
+      "price": 12500,
+      "duration": "4 Days / 3 Nights",
+      "image": "/images/Meghalaya/c5110caa53e59aadacccdf02fd580450.jpg",
+      "itinerary": [
+        {
+          "route": "Arrival & Lake Views",
+          "stops": [
+            "Drive from Guwahati to Shillong",
+            "Stop at Umiam Lake for photos",
+            "Evening exploring cafes and markets of Police Bazaar"
+          ]
+        },
+        {
+          "route": "Clouds & Cascades",
+          "stops": [
+            "Depart at 3:30 AM for Nongjrong sunrise",
+            "Drive directly to Cherrapunjee",
+            "Tackle the descent to Wei Sawdong waterfall"
+          ]
+        },
+        {
+          "route": "Clean Waters & Villages",
+          "stops": [
+            "Mawlynnong (Asia's cleanest village)",
+            "Dawki & Umngot River boating",
+            "Return to Shillong for the night"
+          ]
+        },
+        {
+          "route": "Return to Base",
+          "stops": [
+            "Relaxed morning in Shillong",
+            "Transit back to Guwahati for departure"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private vehicle for 4 days",
+        "3 Nights Stay (Options: Zostel, The Loft, Polo Towers)",
+        "Breakfast at hotel",
+        "Driver allowance, toll, and parking fees"
+      ],
+      "exclusions": [
+        "Entry fees to monuments and parks",
+        "Lunch and Dinner",
+        "Flight/Train tickets to Guwahati",
+        "Personal expenses and activities (Boating)"
+      ]
+    },
+    {
+      "id": "pkg-deep-khasi",
+      "title": "The Deep Khasi Adventure & Trails",
+      "category": "Meghalaya",
+      "subtitle": "Best for: Active travelers, trekkers, and water-sports enthusiasts wanting to stay off the main roads.",
+      "price": 15500,
+      "duration": "5 Days / 4 Nights",
+      "image": "/images/Meghalaya/39affdeb3cc07e912309c2348728d6f2.jpg",
+      "itinerary": [
+        {
+          "route": "The Historic Trek",
+          "stops": [
+            "Depart Guwahati",
+            "16km David Scott Trail hike through river crossings and lush valleys",
+            "End the day in Cherrapunjee"
+          ]
+        },
+        {
+          "route": "The Root Bridges",
+          "stops": [
+            "3,000-step descent into Nongriat",
+            "View the Double Decker Root Bridge",
+            "Swim at the pristine Rainbow Falls"
+          ]
+        },
+        {
+          "route": "Wei Sawdong to Riverside Camping",
+          "stops": [
+            "Morning visit to Wei Sawdong",
+            "Drive down to Shnongpdeng",
+            "Set up camp right by the riverside (Pioneer Adventure Tour's Camping)"
+          ]
+        },
+        {
+          "route": "Shnongpdeng River Thrills",
+          "stops": [
+            "Kayaking, snorkeling, and cliff jumping in clear waters of Shnongpdeng",
+            "Drive to Shillong for overnight stay"
+          ]
+        },
+        {
+          "route": "Departure",
+          "stops": [
+            "Morning drive back to Guwahati for departure"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private dedicated vehicle for 5 days",
+        "4 Nights Accommodation (including Riverside Camping at Shnongpdeng)",
+        "Breakfast at the hotel/camp",
+        "Driver allowance, toll, and parking fees"
+      ],
+      "exclusions": [
+        "Entry fees to monuments and parks",
+        "Lunch and Dinner",
+        "Flight/Train tickets",
+        "Water sports and adventure activity fees"
+      ]
+    },
+    {
+      "id": "pkg-master-tour",
+      "title": "The Ultimate Master Tour (Khasi & Garo Hills)",
+      "category": "Meghalaya",
+      "subtitle": "Best for: Premium travelers and hardcore explorers experiencing both the Khasi Hills and remote Garo Hills in one seamless trip.",
+      "price": 24500,
+      "duration": "7 Days / 6 Nights",
+      "image": "/images/Gemini_Generated_Image_8ylri98ylri98ylr.png",
+      "itinerary": [
+        {
+          "route": "Guwahati to Shillong",
+          "stops": [
+            "Arrive in Shillong",
+            "Settle in and prepare for early morning start"
+          ]
+        },
+        {
+          "route": "Sunrise & Sacred Groves",
+          "stops": [
+            "Depart at 3:30 AM for Nongjrong sunrise",
+            "Walk through ancient Mawphlang Sacred Grove",
+            "Drive to Cherrapunjee for the night"
+          ]
+        },
+        {
+          "route": "Wei Sawdong & Cherrapunjee Highlights",
+          "stops": [
+            "Morning at Wei Sawdong",
+            "View Nohkalikai Falls",
+            "Explore local limestone caves",
+            "Crucial: drive back to Shillong to sleep for next day's long journey"
+          ]
+        },
+        {
+          "route": "The Deep Transit to Garo Hills",
+          "stops": [
+            "8 to 9-hour overland journey from Shillong into deep wilderness of South Garo Hills",
+            "Check into rural homestay in Emangre or Siju (Chi Rikkam or Bugakol Homestay)"
+          ]
+        },
+        {
+          "route": "Wari Chora Expedition",
+          "stops": [
+            "Navigate a 4x4 off-road trail",
+            "Hike into the prehistoric-looking gorge",
+            "Kayaking through the towering, narrow waterways of Wari Chora"
+          ]
+        },
+        {
+          "route": "Siju Cave & Simsang River",
+          "stops": [
+            "Explore massive limestone Siju Cave",
+            "Relax by the Simsang River to recover from trekking"
+          ]
+        },
+        {
+          "route": "The Road Home",
+          "stops": [
+            "Depart South Garo Hills in the morning",
+            "6 to 7-hour drive directly back to Guwahati"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private vehicle (Sedan/SUV) for 7 days",
+        "6 Nights Accommodation (including remote Garo Hills Homestays)",
+        "Breakfast at hotels and homestays",
+        "4x4 vehicle rental for Wari Chora off-road trail",
+        "24/7 Phone Support"
+      ],
+      "exclusions": [
+        "Entry fees to caves and parks",
+        "Lunch and Dinner",
+        "Flight/Train tickets to Guwahati",
+        "Personal expenses and kayaking fees"
+      ]
+    },
     {
       "id": "pkg-7d",
       "title": "7D/6N Ultimate Meghalaya Expedition",
@@ -96,13 +342,61 @@
       "duration": "7 Days / 6 Nights",
       "image": "/images/Meghalaya/6809d82be1f015b4b224ff5abe40c006.jpg",
       "itinerary": [
-        { "route": "Guwahati to Shillong", "stops": ["Umiam Lake Viewpoint", "Don Bosco Museum", "Police Bazar"] },
-        { "route": "Shillong Local & Laitlum", "stops": ["Shillong Peak", "Elephant Falls", "Laitlum Canyons"] },
-        { "route": "Shillong to Cherrapunji", "stops": ["Mawkdok Dympep Valley", "Wah Kaba Falls", "Nohkalikai Falls"] },
-        { "route": "Cherrapunji Adventure", "stops": ["Double Decker Root Bridge", "Mawsmai Cave", "Seven Sisters Falls"] },
-        { "route": "Cherrapunji to Dawki", "stops": ["Mawlynnong Village", "Living Root Bridge", "Umngot River Boating"] },
-        { "route": "Dawki to Krang Suri to Shillong", "stops": ["Krang Suri Waterfalls", "Phe Phe Falls", "Return to Shillong"] },
-        { "route": "Shillong to Guwahati", "stops": ["Kamakhya Temple", "Departure"] }
+        {
+          "route": "Guwahati to Shillong",
+          "stops": [
+            "Umiam Lake Viewpoint",
+            "Don Bosco Museum",
+            "Police Bazar"
+          ]
+        },
+        {
+          "route": "Shillong Local & Laitlum",
+          "stops": [
+            "Shillong Peak",
+            "Elephant Falls",
+            "Laitlum Canyons"
+          ]
+        },
+        {
+          "route": "Shillong to Cherrapunji",
+          "stops": [
+            "Mawkdok Dympep Valley",
+            "Wah Kaba Falls",
+            "Nohkalikai Falls"
+          ]
+        },
+        {
+          "route": "Cherrapunji Adventure",
+          "stops": [
+            "Double Decker Root Bridge",
+            "Mawsmai Cave",
+            "Seven Sisters Falls"
+          ]
+        },
+        {
+          "route": "Cherrapunji to Dawki",
+          "stops": [
+            "Mawlynnong Village",
+            "Living Root Bridge",
+            "Umngot River Boating"
+          ]
+        },
+        {
+          "route": "Dawki to Krang Suri to Shillong",
+          "stops": [
+            "Krang Suri Waterfalls",
+            "Phe Phe Falls",
+            "Return to Shillong"
+          ]
+        },
+        {
+          "route": "Shillong to Guwahati",
+          "stops": [
+            "Kamakhya Temple",
+            "Departure"
+          ]
+        }
       ],
       "inclusions": [
         "Private dedicated vehicle (Sedan/SUV) for 7 days",
@@ -127,11 +421,44 @@
       "duration": "5 Days / 4 Nights",
       "image": "/images/Meghalaya/c5110caa53e59aadacccdf02fd580450.jpg",
       "itinerary": [
-        { "route": "Guwahati to Shillong", "stops": ["Umiam Lake Viewpoint", "Ward's Lake"] },
-        { "route": "Shillong to Cherrapunji", "stops": ["Elephant Falls", "Wei Sawdong", "Nohkalikai Falls"] },
-        { "route": "Cherrapunji to Dawki", "stops": ["Seven Sisters Falls", "Mawlynnong", "Umngot River"] },
-        { "route": "Dawki to Jowai to Shillong", "stops": ["Krang Suri Waterfalls", "Nartiang Monoliths", "Return to Shillong"] },
-        { "route": "Shillong to Guwahati", "stops": ["Kamakhya Temple", "Departure"] }
+        {
+          "route": "Guwahati to Shillong",
+          "stops": [
+            "Umiam Lake Viewpoint",
+            "Ward's Lake"
+          ]
+        },
+        {
+          "route": "Shillong to Cherrapunji",
+          "stops": [
+            "Elephant Falls",
+            "Wei Sawdong",
+            "Nohkalikai Falls"
+          ]
+        },
+        {
+          "route": "Cherrapunji to Dawki",
+          "stops": [
+            "Seven Sisters Falls",
+            "Mawlynnong",
+            "Umngot River"
+          ]
+        },
+        {
+          "route": "Dawki to Jowai to Shillong",
+          "stops": [
+            "Krang Suri Waterfalls",
+            "Nartiang Monoliths",
+            "Return to Shillong"
+          ]
+        },
+        {
+          "route": "Shillong to Guwahati",
+          "stops": [
+            "Kamakhya Temple",
+            "Departure"
+          ]
+        }
       ],
       "inclusions": [
         "Private dedicated vehicle for 5 days",
@@ -155,13 +482,48 @@
       "duration": "1 Day / 0 Nights",
       "image": "/images/Guwahati/Temples/Kamakhya.jpg",
       "itinerary": [
-        { "route": "08:00 AM - Pickup: Paltan Bazaar", "stops": ["Meet at designated spot"] },
-        { "route": "08:30 AM - Kamakhya Temple", "stops": ["Special Entry passes recommended"] },
-        { "route": "12:30 PM - Lunch Break", "stops": ["Pre-booked vegetarian thali"] },
-        { "route": "02:00 PM - Umananda Temple", "stops": ["Peacock Island via ferry"] },
-        { "route": "04:30 PM - Navagraha Temple", "stops": ["Temple dedicated to nine celestial bodies"] },
-        { "route": "06:15 PM - Purva Tirupati Balaji Temple", "stops": ["Beautifully lit evening visit"] },
-        { "route": "08:00 PM - Drop-off: Paltan Bazaar", "stops": ["Return to central hub"] }
+        {
+          "route": "08:00 AM - Pickup: Paltan Bazaar",
+          "stops": [
+            "Meet at designated spot"
+          ]
+        },
+        {
+          "route": "08:30 AM - Kamakhya Temple",
+          "stops": [
+            "Special Entry passes recommended"
+          ]
+        },
+        {
+          "route": "12:30 PM - Lunch Break",
+          "stops": [
+            "Pre-booked vegetarian thali"
+          ]
+        },
+        {
+          "route": "02:00 PM - Umananda Temple",
+          "stops": [
+            "Peacock Island via ferry"
+          ]
+        },
+        {
+          "route": "04:30 PM - Navagraha Temple",
+          "stops": [
+            "Temple dedicated to nine celestial bodies"
+          ]
+        },
+        {
+          "route": "06:15 PM - Purva Tirupati Balaji Temple",
+          "stops": [
+            "Beautifully lit evening visit"
+          ]
+        },
+        {
+          "route": "08:00 PM - Drop-off: Paltan Bazaar",
+          "stops": [
+            "Return to central hub"
+          ]
+        }
       ],
       "inclusions": [
         "Seat in AC Traveler/Bus (Pool & Save)",
@@ -183,13 +545,48 @@
       "duration": "1 Day / 0 Nights",
       "image": "/images/Guwahati/Boat.jpg",
       "itinerary": [
-        { "route": "08:30 AM - Pickup: Paltan Bazaar", "stops": ["Meet and greet"] },
-        { "route": "09:00 AM - Kamakhya Temple", "stops": ["Special Entry passes mandatory"] },
-        { "route": "12:45 PM - Lunch Break", "stops": ["Authentic Assamese Thali"] },
-        { "route": "02:00 PM - Assam State Museum", "stops": ["Ahom dynasty artifacts and history"] },
-        { "route": "04:15 PM - Heritage Walk", "stops": ["Dighalipukhuri area & Ugra Tara Temple"] },
-        { "route": "06:00 PM - Brahmaputra Dinner Cruise", "stops": ["Sunset views, live music, dinner"] },
-        { "route": "08:15 PM - Drop-off: Paltan Bazaar", "stops": ["Return to central hub"] }
+        {
+          "route": "08:30 AM - Pickup: Paltan Bazaar",
+          "stops": [
+            "Meet and greet"
+          ]
+        },
+        {
+          "route": "09:00 AM - Kamakhya Temple",
+          "stops": [
+            "Special Entry passes mandatory"
+          ]
+        },
+        {
+          "route": "12:45 PM - Lunch Break",
+          "stops": [
+            "Authentic Assamese Thali"
+          ]
+        },
+        {
+          "route": "02:00 PM - Assam State Museum",
+          "stops": [
+            "Ahom dynasty artifacts and history"
+          ]
+        },
+        {
+          "route": "04:15 PM - Heritage Walk",
+          "stops": [
+            "Dighalipukhuri area & Ugra Tara Temple"
+          ]
+        },
+        {
+          "route": "06:00 PM - Brahmaputra Dinner Cruise",
+          "stops": [
+            "Sunset views, live music, dinner"
+          ]
+        },
+        {
+          "route": "08:15 PM - Drop-off: Paltan Bazaar",
+          "stops": [
+            "Return to central hub"
+          ]
+        }
       ],
       "inclusions": [
         "Seat in AC Traveler/Bus (Pool & Save)",
@@ -200,6 +597,405 @@
         "Kamakhya VIP Pass, Museum Entry & Cruise Ticket",
         "Lunch (Dinner is included in cruise)",
         "Camera / Video pass fees"
+      ]
+    },
+    {
+      "id": "sp-monsoon",
+      "title": "Meghalaya: The Abode of Clouds",
+      "category": "Seasonal",
+      "subtitle": "Best For: Monsoon travel",
+      "price": 14500,
+      "duration": "5 Days / 4 Nights",
+      "image": "/images/Meghalaya/c5110caa53e59aadacccdf02fd580450.jpg",
+      "itinerary": [
+        {
+          "route": "Arrival in Guwahati to Shillong",
+          "stops": [
+            "Umiam Lake Viewpoint",
+            "Don Bosco Museum"
+          ]
+        },
+        {
+          "route": "Shillong to Cherrapunji",
+          "stops": [
+            "Nohkalikai Falls in full monsoon glory",
+            "Mawsmai Cave"
+          ]
+        },
+        {
+          "route": "Cherrapunji & Mawlynnong",
+          "stops": [
+            "Mawlynnong Village",
+            "Living Root Bridge"
+          ]
+        },
+        {
+          "route": "Cherrapunji to Dzukou (Virtual/Trek)",
+          "stops": [
+            "Travel towards Kohima / Dzukou Base"
+          ]
+        },
+        {
+          "route": "Return Journey",
+          "stops": [
+            "Departure from Guwahati"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private vehicle",
+        "4 Nights Stay",
+        "Breakfast",
+        "Guide services"
+      ],
+      "exclusions": [
+        "Entry fees",
+        "Lunch & Dinner",
+        "Flight tickets"
+      ]
+    },
+    {
+      "id": "sp-winter",
+      "title": "Snowfall & Safaris: Arunachal to Assam",
+      "category": "Seasonal",
+      "subtitle": "Best For: Winter travel",
+      "price": 22500,
+      "duration": "7 Days / 6 Nights",
+      "image": "/images/Kaziranga/photo-1605092676920-8ac5ae40c7c8.jpg",
+      "itinerary": [
+        {
+          "route": "Guwahati Arrival",
+          "stops": [
+            "Kamakhya Temple",
+            "Brahmaputra River Cruise"
+          ]
+        },
+        {
+          "route": "Guwahati to Kaziranga",
+          "stops": [
+            "Kaziranga National Park Evening Jeep Safari"
+          ]
+        },
+        {
+          "route": "Kaziranga to Majuli",
+          "stops": [
+            "Majuli Island ferry",
+            "Satras visit"
+          ]
+        },
+        {
+          "route": "Majuli to Dirang",
+          "stops": [
+            "Scenic winter drive towards Arunachal"
+          ]
+        },
+        {
+          "route": "Dirang to Tawang via Sela Pass",
+          "stops": [
+            "Sela Pass at 13,700 ft",
+            "Tawang Monastery"
+          ]
+        },
+        {
+          "route": "Tawang Local",
+          "stops": [
+            "Bumla Pass",
+            "Sangestar Tso (Madhuri Lake)"
+          ]
+        },
+        {
+          "route": "Tawang to Guwahati Departure",
+          "stops": [
+            "Return journey"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private SUV",
+        "6 Nights Stay",
+        "Breakfast",
+        "Kaziranga Safari",
+        "Ferry tickets"
+      ],
+      "exclusions": [
+        "ILP for Arunachal",
+        "Entry fees",
+        "Lunch & Dinner"
+      ]
+    },
+    {
+      "id": "sp-summer",
+      "title": "High Altitude Escape: Sikkim & Darjeeling",
+      "category": "Seasonal",
+      "subtitle": "Best For: Summer retreats",
+      "price": 18000,
+      "duration": "6 Days / 5 Nights",
+      "image": "/images/Gemini_Generated_Image_cnqi2wcnqi2wcnqi.png",
+      "itinerary": [
+        {
+          "route": "Arrival in Bagdogra to Darjeeling",
+          "stops": [
+            "Tea Estate viewpoints"
+          ]
+        },
+        {
+          "route": "Darjeeling Local",
+          "stops": [
+            "Tiger Hill sunrise",
+            "Ghoom Monastery",
+            "Batasia Loop"
+          ]
+        },
+        {
+          "route": "Darjeeling to Gangtok",
+          "stops": [
+            "Teesta River views"
+          ]
+        },
+        {
+          "route": "Gangtok to Tsomgo Lake",
+          "stops": [
+            "Tsomgo Lake",
+            "Baba Mandir"
+          ]
+        },
+        {
+          "route": "Gangtok to Kohima (Virtual route/Flight)",
+          "stops": [
+            "Khonoma Village"
+          ]
+        },
+        {
+          "route": "Dzukou Valley Base to Departure",
+          "stops": [
+            "Dzukou Valley trek initiation",
+            "Departure"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private vehicle",
+        "5 Nights Stay",
+        "Breakfast"
+      ],
+      "exclusions": [
+        "Entry fees",
+        "Lunch & Dinner",
+        "Nathu La permit"
+      ]
+    },
+    {
+      "id": "sp-autumn",
+      "title": "Post-Monsoon Clarity",
+      "category": "Seasonal",
+      "subtitle": "Best For: Autumn travel",
+      "price": 15500,
+      "duration": "5 Days / 4 Nights",
+      "image": "/images/Gemini_Generated_Image_8ylri98ylri98ylr.png",
+      "itinerary": [
+        {
+          "route": "Guwahati to Shillong",
+          "stops": [
+            "Umiam Lake"
+          ]
+        },
+        {
+          "route": "Mawlynnong & Surroundings",
+          "stops": [
+            "Asia's Cleanest Village",
+            "Living Root Bridge"
+          ]
+        },
+        {
+          "route": "South Garo Hills",
+          "stops": [
+            "Wari Chora Canyon exploration"
+          ]
+        },
+        {
+          "route": "Wahkhen",
+          "stops": [
+            "Mawryngkhang Bamboo Trek"
+          ]
+        },
+        {
+          "route": "Ziro Valley (Virtual Route / Fly out)",
+          "stops": [
+            "Ziro Valley viewpoints",
+            "Departure"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private vehicle",
+        "4 Nights Stay",
+        "Breakfast",
+        "Trek guides"
+      ],
+      "exclusions": [
+        "Wari Chora 4x4 hiring",
+        "Entry fees",
+        "Lunch & Dinner"
+      ]
+    },
+    {
+      "id": "sp-spring",
+      "title": "Valley of Flowers & Root Bridges",
+      "category": "Seasonal",
+      "subtitle": "Best For: Spring travel",
+      "price": 16800,
+      "duration": "6 Days / 5 Nights",
+      "image": "/images/Meghalaya/39affdeb3cc07e912309c2348728d6f2.jpg",
+      "itinerary": [
+        {
+          "route": "Arrival in Guwahati",
+          "stops": [
+            "Transfer to Shillong"
+          ]
+        },
+        {
+          "route": "Mawphlang",
+          "stops": [
+            "David Scott Trail"
+          ]
+        },
+        {
+          "route": "Cherrapunji (Sohra)",
+          "stops": [
+            "Nongriat Double Decker Root Bridge Trek"
+          ]
+        },
+        {
+          "route": "Cherrapunji Local",
+          "stops": [
+            "Seven Sisters Falls",
+            "Mawsmai Cave"
+          ]
+        },
+        {
+          "route": "Aizawl Transit",
+          "stops": [
+            "Reiek Tlang hike for panoramic views"
+          ]
+        },
+        {
+          "route": "Departure",
+          "stops": [
+            "Return to Airport"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private vehicle",
+        "5 Nights Stay",
+        "Breakfast",
+        "Local Guides"
+      ],
+      "exclusions": [
+        "Entry fees",
+        "Lunch & Dinner",
+        "Personal expenses"
+      ]
+    },
+    {
+      "id": "tp-wildlife",
+      "title": "The Rhino & Tiger Trail",
+      "category": "Theme",
+      "subtitle": "Theme focus: Wildlife & Safari",
+      "price": 11000,
+      "duration": "4 Days / 3 Nights",
+      "image": "/images/Kaziranga/premium_photo-1661828159832-19d8340f8e09.jpg",
+      "itinerary": [
+        {
+          "route": "Guwahati to Kaziranga",
+          "stops": [
+            "Check-in to Wildlife Resort"
+          ]
+        },
+        {
+          "route": "Kaziranga Safaris",
+          "stops": [
+            "Early Morning Elephant Safari",
+            "Afternoon Jeep Safari (Central Range)"
+          ]
+        },
+        {
+          "route": "Kaziranga Exploration",
+          "stops": [
+            "Jeep Safari (Western Range)",
+            "Orchid Park Visit"
+          ]
+        },
+        {
+          "route": "Kaziranga to Guwahati",
+          "stops": [
+            "Departure"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private vehicle",
+        "3 Nights Resort Stay",
+        "Breakfast",
+        "1 Jeep Safari"
+      ],
+      "exclusions": [
+        "Elephant Safari tickets",
+        "Camera fees",
+        "Lunch & Dinner"
+      ]
+    },
+    {
+      "id": "tp-adventure",
+      "title": "Extreme Adventure",
+      "category": "Theme",
+      "subtitle": "Theme focus: Trekking & Off-road exploring",
+      "price": 16500,
+      "duration": "5 Days / 4 Nights",
+      "image": "/images/Meghalaya/16965a616fd260417491af59d63cee27.jpg",
+      "itinerary": [
+        {
+          "route": "Arrival in Shillong",
+          "stops": [
+            "Mawphlang Sacred Grove"
+          ]
+        },
+        {
+          "route": "Wahkhen",
+          "stops": [
+            "Mawryngkhang Bamboo Trek (Scariest trek)"
+          ]
+        },
+        {
+          "route": "Mawphlang to Cherrapunji",
+          "stops": [
+            "David Scott Trail (16 km)"
+          ]
+        },
+        {
+          "route": "Cherrapunji Deep Forest",
+          "stops": [
+            "Nongriat Double Decker Root Bridge"
+          ]
+        },
+        {
+          "route": "South Garo Hills",
+          "stops": [
+            "Wari Chora Canyon exploration",
+            "Departure"
+          ]
+        }
+      ],
+      "inclusions": [
+        "Private vehicle",
+        "4 Nights Stay",
+        "Breakfast",
+        "Expert Trekking Guides"
+      ],
+      "exclusions": [
+        "Entry fees",
+        "Lunch & Dinner",
+        "Adventure activity fees"
       ]
     }
   ]

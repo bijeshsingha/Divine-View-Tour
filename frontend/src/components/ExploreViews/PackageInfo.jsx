@@ -1,12 +1,13 @@
 import React from 'react';
 import { ArrowLeft, Package, CheckCircle, XCircle } from 'lucide-react';
+import config from '../../data.json';
 
-export default function PackageInfo({ onBack, onBuildPath }) {
+export default function PackageInfo({ onBack, onBuildPath, onSelectPackage }) {
   return (
     <div className="flex-1 flex flex-col bg-slate-50 min-h-screen animate-in fade-in slide-in-from-right-4 duration-300 pb-28">
       
       {/* Header */}
-      <div className="bg-slate-900 pt-16 pb-12 px-6 text-center relative">
+      <div className="bg-slate-900 pt-16 pb-24 px-6 text-center relative">
         <button 
           onClick={onBack}
           className="absolute top-6 left-6 w-12 h-12 bg-white/10 hover:bg-white/20 transition-colors backdrop-blur-md rounded-2xl flex items-center justify-center text-white z-20"
@@ -23,7 +24,7 @@ export default function PackageInfo({ onBack, onBuildPath }) {
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto p-6 md:p-8 space-y-8 w-full -mt-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 space-y-10 w-full -mt-16 relative z-10">
         
         {/* How it works */}
         <section className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200">
@@ -33,6 +34,30 @@ export default function PackageInfo({ onBack, onBuildPath }) {
             They are designed for travelers who want a complete, uninterrupted experience without the stress of daily planning. 
             Simply pick a package that fits your vibe, and we handle the logistics.
           </p>
+        </section>
+
+        {/* Our Signature Packages */}
+        <section className="space-y-5">
+          <h2 className="text-2xl font-bold text-slate-900 px-2 md:px-4">Our Signature Packages</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {config.packages.map(pkg => (
+              <div 
+                key={pkg.id}
+                onClick={() => onSelectPackage(pkg)}
+                className="group relative rounded-3xl overflow-hidden h-72 shadow-sm border border-slate-200 cursor-pointer"
+              >
+                <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6">
+                  <span className="text-amber-400 font-bold text-xs uppercase tracking-wider mb-1">{pkg.duration}</span>
+                  <h3 className="text-xl font-bold text-white mb-2 leading-tight">{pkg.title}</h3>
+                  <div className="flex items-center justify-between mt-2">
+                    <span className="text-white font-bold">₹{pkg.price.toLocaleString()} <span className="text-xs font-normal text-slate-300">/ person</span></span>
+                    <span className="text-amber-400 text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">View Details &rarr;</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* Inclusions / Exclusions */}
@@ -118,7 +143,7 @@ export default function PackageInfo({ onBack, onBuildPath }) {
           onClick={onBuildPath}
           className="w-full max-w-sm bg-amber-500 text-slate-900 font-extrabold py-4 px-6 rounded-2xl shadow-lg shadow-amber-500/30 hover:bg-amber-400 transition-all text-center"
         >
-          View Signature Routes
+          Book a Package
         </button>
       </div>
     </div>

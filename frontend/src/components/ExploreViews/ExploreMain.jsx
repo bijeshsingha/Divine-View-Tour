@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Package, PencilRuler, ArrowRight } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import PlaceCard from './PlaceCard';
 
 export default function ExploreMain({ exploreData, onSelectPlace, onSelectPackageInfo, onSelectCustomInfo, onBackHome, onBuildCustom }) {
   const [activeTab, setActiveTab] = useState('All');
-  const categories = ['All', 'Waterfalls', 'Adventure', 'Food', 'Culture'];
+
+  // Dynamically generate unique categories/tags
+  const allTags = exploreData.flatMap(item => item.tags || []);
+  const uniqueTags = Array.from(new Set(allTags)).sort();
+  const categories = ['All', ...uniqueTags];
+
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
 
   const filteredData = activeTab === 'All' 
     ? exploreData 
-    : exploreData.filter(item => item.category === activeTab);
+    : exploreData.filter(item => item.tags?.includes(activeTab));
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
   return (
     <div className="flex-1 flex flex-col pb-28 animate-in fade-in duration-300">
       
       {/* 1. HERO SECTION */}
-      <section className="bg-slate-900 text-white py-12 px-4 text-center relative shrink-0">
-        <div className="max-w-4xl mx-auto space-y-4">
+      <section className="bg-slate-900 text-white py-24 px-4 sm:px-6 md:px-8 text-center relative shrink-0 overflow-hidden">
+        <motion.div style={{ y }} className="absolute inset-0 z-0">
+          <img src="/images/Meghalaya/6809d82be1f015b4b224ff5abe40c006.jpg" className="w-full h-full object-cover opacity-20" alt="Hero background" />
+        </motion.div>
+        <div className="max-w-4xl mx-auto space-y-4 relative z-10">
           <span className="text-amber-400 font-semibold tracking-wider uppercase text-sm">Divine View Tours</span>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">Explore the Magic</h1>
           <p className="text-slate-300 text-base md:text-lg max-w-2xl mx-auto">
@@ -24,7 +46,7 @@ export default function ExploreMain({ exploreData, onSelectPlace, onSelectPackag
       </section>
 
       {/* 2. HOW IT WORKS CARDS */}
-      <section className="max-w-7xl mx-auto px-4 mt-8 w-full shrink-0">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-8 w-full shrink-0">
         <h2 className="text-2xl font-bold mb-6 text-slate-800">How It Works</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
@@ -70,7 +92,7 @@ export default function ExploreMain({ exploreData, onSelectPlace, onSelectPackag
       </section>
 
       {/* 3. CATEGORY TABS */}
-      <div className="max-w-7xl mx-auto px-4 mt-12 w-full shrink-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-12 w-full shrink-0">
         <h2 className="text-2xl font-bold mb-4 text-slate-800">Places to Visit</h2>
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none md:justify-start">
           {categories.map(cat => (
@@ -90,36 +112,17 @@ export default function ExploreMain({ exploreData, onSelectPlace, onSelectPackag
       </div>
 
       {/* 4. PLACES GRID */}
-      <section className="max-w-7xl mx-auto px-4 mt-6 w-full flex-1">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-6 w-full flex-1 relative z-10">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {filteredData.map(item => (
-            <button 
-              key={item.id} 
-              onClick={() => onSelectPlace(item)}
-              className="text-left bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 flex flex-col hover:shadow-md hover:-translate-y-1 transition-all group"
-            >
-              <div className="relative h-48 w-full bg-slate-200 overflow-hidden">
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <span className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-medium">
-                  {item.region}
-                </span>
-                <span className="absolute top-3 right-3 bg-amber-500 text-slate-950 text-xs px-2.5 py-1 rounded-full font-bold">
-                  {item.category}
-                </span>
-              </div>
-
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900">{item.title}</h3>
-                  <p className="text-slate-500 text-sm mt-2 line-clamp-2">{item.description}</p>
-                </div>
-                <div className="mt-4 text-brand-dark font-bold text-sm flex items-center gap-1">
-                  View Details <ArrowRight className="w-4 h-4" />
-                </div>
-              </div>
-            </button>
+            <PlaceCard key={item.id} item={item} onSelectPlace={onSelectPlace} />
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* 5. MOBILE STICKY CTA */}

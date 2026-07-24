@@ -3,7 +3,7 @@ import { Package, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export default function StepPackageCatalog({ packages, onSelectPackage, onBack }) {
   const [filter, setFilter] = useState('All');
-  const categories = ['All', 'Meghalaya', 'Guwahati'];
+  const categories = ['All', 'Meghalaya', 'Guwahati', 'Seasonal', 'Theme'];
   
   const filteredPackages = packages.filter(pkg => {
     if (filter === 'All') return true;

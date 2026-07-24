@@ -6,7 +6,7 @@ export default function CustomInfo({ onBack, onBuildPath }) {
     <div className="flex-1 flex flex-col bg-slate-50 min-h-screen animate-in fade-in slide-in-from-right-4 duration-300 pb-28">
       
       {/* Header */}
-      <div className="bg-slate-900 pt-16 pb-12 px-6 text-center relative">
+      <div className="bg-slate-900 pt-16 pb-24 px-6 text-center relative">
         <button 
           onClick={onBack}
           className="absolute top-6 left-6 w-12 h-12 bg-white/10 hover:bg-white/20 transition-colors backdrop-blur-md rounded-2xl flex items-center justify-center text-white z-20"
@@ -23,7 +23,7 @@ export default function CustomInfo({ onBack, onBuildPath }) {
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto p-6 md:p-8 space-y-8 w-full -mt-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 space-y-10 w-full -mt-16 relative z-10">
         
         {/* How it works */}
         <section className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200">
