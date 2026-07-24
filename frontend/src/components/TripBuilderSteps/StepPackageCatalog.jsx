@@ -3,7 +3,7 @@ import { Package, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export default function StepPackageCatalog({ packages, onSelectPackage, onBack }) {
   const [filter, setFilter] = useState('All');
-  const categories = ['All', 'Meghalaya', 'Guwahati', 'Seasonal', 'Theme'];
+  const categories = ['All', 'Meghalaya', 'Guwahati', 'Theme'];
   
   const filteredPackages = packages.filter(pkg => {
     if (filter === 'All') return true;
@@ -46,12 +46,17 @@ export default function StepPackageCatalog({ packages, onSelectPackage, onBack }
         {filteredPackages.map(pkg => (
           <button 
             key={pkg.id}
-            onClick={() => onSelectPackage(pkg)}
-            className="w-full text-left bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all group"
+            onClick={() => { if (!pkg.isDisabled) onSelectPackage(pkg); }}
+            className={`w-full text-left bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-md transition-all group ${pkg.isDisabled ? 'opacity-60 cursor-not-allowed grayscale' : 'hover:shadow-xl'}`}
           >
             <div className="h-32 w-full relative">
               <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+              {pkg.isDisabled && (
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-[2px] z-10">
+                  <span className="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-xs shadow-lg border border-red-400">Closed for Monsoon</span>
+                </div>
+              )}
               <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end">
                 <span className="bg-amber-500 text-slate-950 font-bold px-2 py-0.5 rounded text-xs uppercase tracking-wider">
                   {pkg.duration}

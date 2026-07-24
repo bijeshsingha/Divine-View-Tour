@@ -1,7 +1,8 @@
 import React from 'react';
-import { Navigation, Utensils, Check } from 'lucide-react';
+import { Navigation, Utensils, Check, Info } from 'lucide-react';
+import { EXPLORE_DATA } from '../../exploreData';
 
-export default function Step3Customization({ data, toggleArrayItem, currentRegion }) {
+export default function Step3Customization({ data, toggleArrayItem, currentRegion, onOpenExplore }) {
   const availableSpots = currentRegion?.spots || [];
   const restaurants = currentRegion?.restaurants || [];
 
@@ -29,21 +30,35 @@ export default function Step3Customization({ data, toggleArrayItem, currentRegio
               {availableSpots.map(spot => {
                 const isSelected = data.spots.includes(spot);
                 const isAtLimit = !isSelected && data.spots.length >= (data.tripDays + 1);
+                
+                // Find matching rich info
+                const placeInfo = EXPLORE_DATA.find(p => p.title.toLowerCase().includes(spot.toLowerCase()) || spot.toLowerCase().includes(p.title.toLowerCase()));
+
                 return (
-                  <button
-                    key={spot}
-                    disabled={isAtLimit}
-                    onClick={() => toggleArrayItem('spots', spot, data.tripDays + 1)}
-                    className={`w-full text-left rounded-xl border-2 transition-all flex items-center p-3 gap-3 outline-none 
-                      ${isSelected ? 'border-brand bg-brand/10 shadow-sm' :
-                        isAtLimit ? 'border-slate-100 bg-slate-50 opacity-50 cursor-not-allowed' :
-                          'border-slate-200 bg-white hover:border-brand/30'}`}
-                  >
-                    <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-brand text-black' : 'border-2 border-slate-200 bg-slate-50'}`}>
-                      {isSelected && <Check className="w-4 h-4" />}
-                    </div>
-                    <span className={`font-semibold text-sm md:text-base leading-tight ${isSelected ? 'text-slate-900' : 'text-slate-600'}`}>{spot}</span>
-                  </button>
+                  <div key={spot} className="flex items-center gap-2">
+                    <button
+                      disabled={isAtLimit}
+                      onClick={() => toggleArrayItem('spots', spot, data.tripDays + 1)}
+                      className={`flex-1 text-left rounded-xl border-2 transition-all flex items-center p-3 gap-3 outline-none 
+                        ${isSelected ? 'border-brand bg-brand/10 shadow-sm' :
+                          isAtLimit ? 'border-slate-100 bg-slate-50 opacity-50 cursor-not-allowed' :
+                            'border-slate-200 bg-white hover:border-brand/30'}`}
+                    >
+                      <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-brand text-black' : 'border-2 border-slate-200 bg-slate-50'}`}>
+                        {isSelected && <Check className="w-4 h-4" />}
+                      </div>
+                      <span className={`font-semibold text-sm md:text-base leading-tight ${isSelected ? 'text-slate-900' : 'text-slate-600'}`}>{spot}</span>
+                    </button>
+                    {placeInfo && (
+                      <button 
+                        onClick={() => onOpenExplore(placeInfo)}
+                        className="w-12 h-12 flex items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 hover:text-brand-dark hover:border-brand-dark transition-colors shrink-0"
+                        title="View Details"
+                      >
+                        <Info className="w-5 h-5" />
+                      </button>
+                    )}
+                  </div>
                 );
               })}
             </div>

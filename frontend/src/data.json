@@ -194,7 +194,8 @@
         "Lunch and Dinner",
         "Flight/Train tickets to Guwahati",
         "Personal expenses and activities (Boating)"
-      ]
+      ],
+      "isDisabled": true
     },
     {
       "id": "pkg-deep-khasi",
@@ -534,7 +535,8 @@
         "Kamakhya VIP Pass & Ferry Tickets",
         "Lunch and Dinner",
         "Camera / Video pass fees"
-      ]
+      ],
+      "isDisabled": true
     },
     {
       "id": "pkg-gwh-2",
@@ -597,305 +599,8 @@
         "Kamakhya VIP Pass, Museum Entry & Cruise Ticket",
         "Lunch (Dinner is included in cruise)",
         "Camera / Video pass fees"
-      ]
-    },
-    {
-      "id": "sp-monsoon",
-      "title": "Meghalaya: The Abode of Clouds",
-      "category": "Seasonal",
-      "subtitle": "Best For: Monsoon travel",
-      "price": 14500,
-      "duration": "5 Days / 4 Nights",
-      "image": "/images/Meghalaya/c5110caa53e59aadacccdf02fd580450.jpg",
-      "itinerary": [
-        {
-          "route": "Arrival in Guwahati to Shillong",
-          "stops": [
-            "Umiam Lake Viewpoint",
-            "Don Bosco Museum"
-          ]
-        },
-        {
-          "route": "Shillong to Cherrapunji",
-          "stops": [
-            "Nohkalikai Falls in full monsoon glory",
-            "Mawsmai Cave"
-          ]
-        },
-        {
-          "route": "Cherrapunji & Mawlynnong",
-          "stops": [
-            "Mawlynnong Village",
-            "Living Root Bridge"
-          ]
-        },
-        {
-          "route": "Cherrapunji to Dzukou (Virtual/Trek)",
-          "stops": [
-            "Travel towards Kohima / Dzukou Base"
-          ]
-        },
-        {
-          "route": "Return Journey",
-          "stops": [
-            "Departure from Guwahati"
-          ]
-        }
       ],
-      "inclusions": [
-        "Private vehicle",
-        "4 Nights Stay",
-        "Breakfast",
-        "Guide services"
-      ],
-      "exclusions": [
-        "Entry fees",
-        "Lunch & Dinner",
-        "Flight tickets"
-      ]
-    },
-    {
-      "id": "sp-winter",
-      "title": "Snowfall & Safaris: Arunachal to Assam",
-      "category": "Seasonal",
-      "subtitle": "Best For: Winter travel",
-      "price": 22500,
-      "duration": "7 Days / 6 Nights",
-      "image": "/images/Kaziranga/photo-1605092676920-8ac5ae40c7c8.jpg",
-      "itinerary": [
-        {
-          "route": "Guwahati Arrival",
-          "stops": [
-            "Kamakhya Temple",
-            "Brahmaputra River Cruise"
-          ]
-        },
-        {
-          "route": "Guwahati to Kaziranga",
-          "stops": [
-            "Kaziranga National Park Evening Jeep Safari"
-          ]
-        },
-        {
-          "route": "Kaziranga to Majuli",
-          "stops": [
-            "Majuli Island ferry",
-            "Satras visit"
-          ]
-        },
-        {
-          "route": "Majuli to Dirang",
-          "stops": [
-            "Scenic winter drive towards Arunachal"
-          ]
-        },
-        {
-          "route": "Dirang to Tawang via Sela Pass",
-          "stops": [
-            "Sela Pass at 13,700 ft",
-            "Tawang Monastery"
-          ]
-        },
-        {
-          "route": "Tawang Local",
-          "stops": [
-            "Bumla Pass",
-            "Sangestar Tso (Madhuri Lake)"
-          ]
-        },
-        {
-          "route": "Tawang to Guwahati Departure",
-          "stops": [
-            "Return journey"
-          ]
-        }
-      ],
-      "inclusions": [
-        "Private SUV",
-        "6 Nights Stay",
-        "Breakfast",
-        "Kaziranga Safari",
-        "Ferry tickets"
-      ],
-      "exclusions": [
-        "ILP for Arunachal",
-        "Entry fees",
-        "Lunch & Dinner"
-      ]
-    },
-    {
-      "id": "sp-summer",
-      "title": "High Altitude Escape: Sikkim & Darjeeling",
-      "category": "Seasonal",
-      "subtitle": "Best For: Summer retreats",
-      "price": 18000,
-      "duration": "6 Days / 5 Nights",
-      "image": "/images/Gemini_Generated_Image_cnqi2wcnqi2wcnqi.png",
-      "itinerary": [
-        {
-          "route": "Arrival in Bagdogra to Darjeeling",
-          "stops": [
-            "Tea Estate viewpoints"
-          ]
-        },
-        {
-          "route": "Darjeeling Local",
-          "stops": [
-            "Tiger Hill sunrise",
-            "Ghoom Monastery",
-            "Batasia Loop"
-          ]
-        },
-        {
-          "route": "Darjeeling to Gangtok",
-          "stops": [
-            "Teesta River views"
-          ]
-        },
-        {
-          "route": "Gangtok to Tsomgo Lake",
-          "stops": [
-            "Tsomgo Lake",
-            "Baba Mandir"
-          ]
-        },
-        {
-          "route": "Gangtok to Kohima (Virtual route/Flight)",
-          "stops": [
-            "Khonoma Village"
-          ]
-        },
-        {
-          "route": "Dzukou Valley Base to Departure",
-          "stops": [
-            "Dzukou Valley trek initiation",
-            "Departure"
-          ]
-        }
-      ],
-      "inclusions": [
-        "Private vehicle",
-        "5 Nights Stay",
-        "Breakfast"
-      ],
-      "exclusions": [
-        "Entry fees",
-        "Lunch & Dinner",
-        "Nathu La permit"
-      ]
-    },
-    {
-      "id": "sp-autumn",
-      "title": "Post-Monsoon Clarity",
-      "category": "Seasonal",
-      "subtitle": "Best For: Autumn travel",
-      "price": 15500,
-      "duration": "5 Days / 4 Nights",
-      "image": "/images/Gemini_Generated_Image_8ylri98ylri98ylr.png",
-      "itinerary": [
-        {
-          "route": "Guwahati to Shillong",
-          "stops": [
-            "Umiam Lake"
-          ]
-        },
-        {
-          "route": "Mawlynnong & Surroundings",
-          "stops": [
-            "Asia's Cleanest Village",
-            "Living Root Bridge"
-          ]
-        },
-        {
-          "route": "South Garo Hills",
-          "stops": [
-            "Wari Chora Canyon exploration"
-          ]
-        },
-        {
-          "route": "Wahkhen",
-          "stops": [
-            "Mawryngkhang Bamboo Trek"
-          ]
-        },
-        {
-          "route": "Ziro Valley (Virtual Route / Fly out)",
-          "stops": [
-            "Ziro Valley viewpoints",
-            "Departure"
-          ]
-        }
-      ],
-      "inclusions": [
-        "Private vehicle",
-        "4 Nights Stay",
-        "Breakfast",
-        "Trek guides"
-      ],
-      "exclusions": [
-        "Wari Chora 4x4 hiring",
-        "Entry fees",
-        "Lunch & Dinner"
-      ]
-    },
-    {
-      "id": "sp-spring",
-      "title": "Valley of Flowers & Root Bridges",
-      "category": "Seasonal",
-      "subtitle": "Best For: Spring travel",
-      "price": 16800,
-      "duration": "6 Days / 5 Nights",
-      "image": "/images/Meghalaya/39affdeb3cc07e912309c2348728d6f2.jpg",
-      "itinerary": [
-        {
-          "route": "Arrival in Guwahati",
-          "stops": [
-            "Transfer to Shillong"
-          ]
-        },
-        {
-          "route": "Mawphlang",
-          "stops": [
-            "David Scott Trail"
-          ]
-        },
-        {
-          "route": "Cherrapunji (Sohra)",
-          "stops": [
-            "Nongriat Double Decker Root Bridge Trek"
-          ]
-        },
-        {
-          "route": "Cherrapunji Local",
-          "stops": [
-            "Seven Sisters Falls",
-            "Mawsmai Cave"
-          ]
-        },
-        {
-          "route": "Aizawl Transit",
-          "stops": [
-            "Reiek Tlang hike for panoramic views"
-          ]
-        },
-        {
-          "route": "Departure",
-          "stops": [
-            "Return to Airport"
-          ]
-        }
-      ],
-      "inclusions": [
-        "Private vehicle",
-        "5 Nights Stay",
-        "Breakfast",
-        "Local Guides"
-      ],
-      "exclusions": [
-        "Entry fees",
-        "Lunch & Dinner",
-        "Personal expenses"
-      ]
+      "isDisabled": true
     },
     {
       "id": "tp-wildlife",
@@ -943,7 +648,8 @@
         "Elephant Safari tickets",
         "Camera fees",
         "Lunch & Dinner"
-      ]
+      ],
+      "isDisabled": true
     },
     {
       "id": "tp-adventure",
@@ -997,6 +703,37 @@
         "Lunch & Dinner",
         "Adventure activity fees"
       ]
+    },
+    {
+      "id": "tp-pobitora-mayong",
+      "title": "The One-Horned Rhino & Mystical Mayong Circuit",
+      "subtitle": "Best for: Wildlife enthusiasts, families, and short-stay tourists wanting a compact safari and cultural experience.",
+      "duration": "1 Day",
+      "category": "Guwahati",
+      "price": 3500,
+      "image": "/images/Assam/Kaziranga/photo-1589882485484-c073e3742e60.jpg",
+      "highlights": [
+        "Pobitora Wildlife Safari",
+        "Mayong Central Museum",
+        "Traditional Assamese thali",
+        "Chandrapur River Route sunset"
+      ],
+      "itinerary": [
+        {
+          "day": "Day 1",
+          "title": "Wildlife Safari & Cultural Mysticism",
+          "activities": [
+            "7:00 AM – Scenic Departure: Pick up from the hotel in Guwahati to drive through beautiful Assamese countryside.",
+            "9:00 AM – Pobitora Wildlife Safari: Arrive at the sanctuary and embark on a thrilling Jeep Safari. Pobitora boasts the highest density of the Indian One-Horned Rhinoceros in the world.",
+            "11:30 AM – The Magic of Mayong: Take a short drive to the adjacent village of Mayong, historically renowned as the 'Land of Black Magic.' Visit the Mayong Central Museum.",
+            "1:30 PM – Riverside Lunch: Stop for a traditional Assamese thali at a local eco-resort near the sanctuary.",
+            "3:00 PM – The Chandrapur River Route: Begin the journey back to Guwahati taking the highly scenic Chandrapur route hugging the Brahmaputra River.",
+            "4:30 PM – Sunset River Viewpoint: Quick pitstop along the Chandrapur road to capture stunning golden-hour photographs.",
+            "6:00 PM – Return to Base: Final drop-off at the hotel in Guwahati, concluding the day trip."
+          ]
+        }
+      ],
+      "isDisabled": false
     }
   ]
 }

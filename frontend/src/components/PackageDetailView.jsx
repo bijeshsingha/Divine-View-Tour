@@ -21,6 +21,7 @@ export default function PackageDetailView({ packageData, onBack, onBook }) {
           <ArrowLeft className="w-6 h-6" />
         </button>
 
+
         <div className="absolute bottom-4 left-6 right-6">
           <span className="bg-amber-500 text-slate-950 font-bold px-2 py-1 rounded text-xs uppercase tracking-wider mb-2 inline-block">
             {packageData.duration}

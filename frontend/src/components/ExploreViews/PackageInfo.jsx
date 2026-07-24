@@ -43,11 +43,16 @@ export default function PackageInfo({ onBack, onBuildPath, onSelectPackage }) {
             {config.packages.map(pkg => (
               <div 
                 key={pkg.id}
-                onClick={() => onSelectPackage(pkg)}
-                className="group relative rounded-3xl overflow-hidden h-72 shadow-sm border border-slate-200 cursor-pointer"
+                onClick={() => { if (!pkg.isDisabled) onSelectPackage(pkg); }}
+                className={`group relative rounded-3xl overflow-hidden h-72 shadow-sm border border-slate-200 ${pkg.isDisabled ? 'opacity-60 cursor-not-allowed grayscale' : 'cursor-pointer'}`}
               >
                 <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6">
+                  {pkg.isDisabled && (
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-[2px] z-10">
+                      <span className="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow-lg border border-red-400">Closed for Monsoon</span>
+                    </div>
+                  )}
                   <span className="text-amber-400 font-bold text-xs uppercase tracking-wider mb-1">{pkg.duration}</span>
                   <h3 className="text-xl font-bold text-white mb-2 leading-tight">{pkg.title}</h3>
                   <div className="flex items-center justify-between mt-2">

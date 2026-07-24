@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ChevronRight, ChevronLeft, RefreshCw, Download } from 'lucide-react';
 import staticConfig from '../data.json';
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -11,17 +12,66 @@ import Step2Logistics from './TripBuilderSteps/Step2Logistics';
 import Step3Customization from './TripBuilderSteps/Step3Customization';
 import Step4ComfortTransport from './TripBuilderSteps/Step4ComfortTransport';
 import StepFinalGuestDetails from './TripBuilderSteps/StepFinalGuestDetails';
+import PlaceDetail from './ExploreViews/PlaceDetail';
+import { EXPLORE_DATA } from '../exploreData';
 
 import { ItineraryPDF } from './ItineraryPDF';
 import { generateSchedule } from '../utils/itineraryEngine';
 
 export default function TripBuilder({ initialData, onComplete }) {
-  const [step, setStep] = useState('fork');
-  const [path, setPath] = useState(null); // 'readymade' or 'custom'
-  const [data, setData] = useState({ ...initialData, travelerCount: 2, childrenCount: 0 });
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  const pkgParam = searchParams.get('package');
+  const pathParam = searchParams.get('path');
+
+  const [step, setStep] = useState(() => {
+    if (pkgParam) return 'final';
+    if (pathParam === 'readymade') return 'catalog';
+    return 'fork';
+  });
+  
+  const [path, setPath] = useState(() => {
+    if (pkgParam || pathParam === 'readymade') return 'readymade';
+    return null;
+  });
+  
+  const [data, setData] = useState(() => {
+    return {
+      ...initialData,
+      travelerCount: 2,
+      childrenCount: 0,
+      ...(pkgParam ? { packageId: pkgParam } : {})
+    };
+  });
+  
   const config = staticConfig;
   const [loading, setLoading] = useState(false);
   const [schedule, setSchedule] = useState(null);
+  const [explorePlace, setExplorePlaceInternal] = useState(() => {
+    const placeId = searchParams.get('place');
+    if (placeId) {
+      return EXPLORE_DATA.find(p => p.id === placeId) || null;
+    }
+    return null;
+  });
+
+  const setExplorePlace = (place) => {
+    setExplorePlaceInternal(place);
+    if (place) {
+      setSearchParams({ place: place.id }, { replace: true });
+    } else {
+      setSearchParams({}, { replace: true });
+    }
+  };
+
+  useEffect(() => {
+    const placeId = searchParams.get('place');
+    if (placeId && (!explorePlace || explorePlace.id !== placeId)) {
+      setExplorePlaceInternal(EXPLORE_DATA.find(p => p.id === placeId) || null);
+    } else if (!placeId && explorePlace) {
+      setExplorePlaceInternal(null);
+    }
+  }, [searchParams, explorePlace]);
 
   // Ensure shuttle is only available for 1-day guwahati tours
   useEffect(() => {
@@ -242,7 +292,7 @@ export default function TripBuilder({ initialData, onComplete }) {
       case 2:
         return <Step2Logistics data={data} updateData={updateData} currentRegion={currentRegion} />;
       case 3:
-        return <Step3Customization data={data} toggleArrayItem={toggleArrayItem} currentRegion={currentRegion} />;
+        return <Step3Customization data={data} toggleArrayItem={toggleArrayItem} currentRegion={currentRegion} onOpenExplore={setExplorePlace} />;
       case 4:
         return <Step4ComfortTransport data={data} updateData={updateData} config={config} updateCarCount={updateCarCount} />;
       case 'final':
@@ -321,6 +371,20 @@ export default function TripBuilder({ initialData, onComplete }) {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Explore Place Modal */}
+      {explorePlace && (
+        <div className="absolute inset-0 z-50 bg-white overflow-hidden animate-in slide-in-from-bottom-full duration-300">
+          <PlaceDetail 
+            place={explorePlace} 
+            onBack={() => setExplorePlace(null)} 
+            onSelectPackageInfo={() => {
+               setExplorePlace(null);
+               setStep('catalog');
+            }} 
+          />
         </div>
       )}
     </div>
