@@ -150,7 +150,7 @@ export default function PackageDetailView({ packageData, onBack, onBook }) {
           <Button 
             variant="primary" 
             size="lg" 
-            className="w-full text-black hover:text-white flex items-center justify-center gap-2"
+            className="w-full text-white flex items-center justify-center gap-2"
             onClick={onBook}
           >
             Continue to Booking <ArrowRight className="w-5 h-5" />

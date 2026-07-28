@@ -140,7 +140,7 @@ export default function ExploreMain({ exploreData, onSelectPlace, onSelectPackag
         <Button 
           variant="primary"
           onClick={onBuildCustom}
-          className="flex-1 max-w-sm text-black hover:text-white flex items-center justify-center gap-2"
+          className="flex-1 max-w-sm text-white flex items-center justify-center gap-2"
         >
           Start Planning 
           <ArrowRight className="w-5 h-5" />

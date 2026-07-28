@@ -44,7 +44,7 @@ export default function Step3Customization({ data, toggleArrayItem, currentRegio
                           isAtLimit ? 'border-stone-100 bg-background opacity-50 cursor-not-allowed' :
                             'border-stone-200 bg-white hover:border-primary/30'}`}
                     >
-                      <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-primary text-black' : 'border-2 border-stone-200 bg-background'}`}>
+                      <div className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 transition-colors ${isSelected ? 'bg-primary text-white' : 'border-2 border-stone-200 bg-background'}`}>
                         {isSelected && <Check className="w-4 h-4" />}
                       </div>
                       <span className={`font-semibold text-sm md:text-base leading-tight ${isSelected ? 'text-foreground' : 'text-stone-600'}`}>{spot}</span>

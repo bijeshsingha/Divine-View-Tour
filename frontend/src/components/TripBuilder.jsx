@@ -385,7 +385,7 @@ export default function TripBuilder({ initialData, onComplete }) {
               <button
                 onClick={nextStep}
                 disabled={!isStepValid()}
-                className="flex-1 h-14 flex items-center justify-center gap-2 bg-primary text-black font-bold text-lg rounded-2xl shadow-lg shadow-primary/30 hover:bg-primary-dark hover:text-white transition-all active:scale-95 disabled:opacity-50 disabled:shadow-none"
+                className="flex-1 h-14 flex items-center justify-center gap-2 bg-primary text-white font-bold text-lg rounded-2xl shadow-lg shadow-primary/30 hover:bg-primary-dark transition-all active:scale-95 disabled:opacity-50 disabled:shadow-none"
               >
                 {step === 'final' ? 'Book on WhatsApp' : 'Continue'}
                 {step !== 'final' && <ChevronRight className="w-5 h-5" />}

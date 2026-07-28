@@ -60,7 +60,7 @@ export default function Step4ComfortTransport({ data, updateData, config, update
                   className={`w-full text-left p-4 rounded-2xl border-2 transition-all ${data.transportType === 'shuttle' ? 'border-primary bg-primary/5 shadow-md' : 'border-stone-200 bg-white hover:border-primary/30'}`}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <div className={`p-2 rounded-xl ${data.transportType === 'shuttle' ? 'bg-primary text-black' : 'bg-stone-50 text-background0'}`}>
+                    <div className={`p-2 rounded-xl ${data.transportType === 'shuttle' ? 'bg-primary text-white' : 'bg-stone-50 text-background0'}`}>
                       <Bus className="w-5 h-5" />
                     </div>
                     <h3 className={`font-bold text-lg ${data.transportType === 'shuttle' ? 'text-foreground' : 'text-stone-700'}`}>Divine View Daily Shuttle</h3>
