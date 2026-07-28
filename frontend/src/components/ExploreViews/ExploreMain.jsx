@@ -41,7 +41,7 @@ export default function ExploreMain({ exploreData, onSelectPlace, onSelectPackag
         </motion.div>
         <div className="max-w-4xl mx-auto space-y-4 relative z-10">
           <span className="text-secondary font-semibold tracking-wider uppercase text-sm">Divine View Tours</span>
-          <Heading level={1} className="tracking-tight">Explore the Magic</Heading>
+          <Heading level={1} className="tracking-tight text-white">Explore the Magic</Heading>
           <p className="text-slate-300 text-base md:text-lg max-w-2xl mx-auto">
             Learn about our beautifully crafted tour packages or discover the hidden gems you can add to your custom itinerary.
           </p>

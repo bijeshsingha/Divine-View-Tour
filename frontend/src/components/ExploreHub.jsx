@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route, useNavigate, useSearchParams, useParams } from 'react-router-dom';
 import config from '../data.json';
 
 import ExploreMain from './ExploreViews/ExploreMain';
@@ -11,73 +11,35 @@ import PackageDetailView from './PackageDetailView';
 // Sample Data with Dummy Images, Map/Insta Links, and Package Mapping
 import { EXPLORE_DATA } from '../exploreData';
 
+function PlaceDetailWrapper({ onBack, onSelectPackageInfo }) {
+  const { placeId } = useParams();
+  const place = EXPLORE_DATA.find(p => p.id === placeId);
+  if (!place) return null;
+  return <PlaceDetail place={place} onBack={onBack} onSelectPackageInfo={onSelectPackageInfo} />;
+}
+
 export default function ExploreHub() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const packageId = searchParams.get('packageId');
 
-  const [view, setView] = useState('main'); // 'main', 'place_detail', 'package_info', 'custom_info'
-  const [selectedPlace, setSelectedPlace] = useState(null);
-
-  const handleSelectPlace = (place) => {
-    setSelectedPlace(place);
-    setView('place_detail');
-  };
-
-  const handleSelectPackageInfo = () => {
-    setView('package_info');
-  };
+  const handleSelectPackageInfo = () => navigate('/explore/packages');
+  const handleSelectCustomInfo = () => navigate('/explore/custom');
+  const handleBackToMain = () => navigate('/explore');
+  const handleBackHome = () => navigate('/');
+  const handleBuildCustom = () => navigate('/build');
+  const handleSelectPlace = (place) => navigate(`/explore/place/${place.id}`);
 
   const handleSelectPackage = (pkg) => {
     setSearchParams(prev => { prev.set('packageId', pkg.id); return prev; });
   };
 
-  const handleSelectCustomInfo = () => {
-    setView('custom_info');
-  };
+  const pkgToView = packageId ? config.packages.find(p => p.id === packageId) : null;
 
-  const handleBackToMain = () => {
-    setView('main');
-    setSelectedPlace(null);
-  };
-
-  const handleBackHome = () => {
-    navigate('/');
-  };
-
-  const handleBuildCustom = () => {
-    navigate('/build');
-  };
-
-  // Render the current view
-  const renderView = () => {
-    switch (view) {
-      case 'place_detail':
-        return (
-          <PlaceDetail 
-            place={selectedPlace} 
-            onBack={handleBackToMain} 
-            onSelectPackageInfo={handleSelectPackageInfo}
-          />
-        );
-      case 'package_info':
-        return (
-          <PackageInfo 
-            onBack={handleBackToMain} 
-            onBuildPath={() => navigate('/build?path=readymade')} 
-            onSelectPackage={handleSelectPackage}
-          />
-        );
-      case 'custom_info':
-        return (
-          <CustomInfo 
-            onBack={handleBackToMain} 
-            onBuildPath={() => navigate('/build')} 
-          />
-        );
-      case 'main':
-      default:
-        return (
+  return (
+    <div className="min-h-screen bg-background text-foreground relative w-full overflow-hidden flex flex-col">
+      <Routes>
+        <Route path="/" element={
           <ExploreMain 
             exploreData={EXPLORE_DATA} 
             onSelectPlace={handleSelectPlace}
@@ -86,15 +48,27 @@ export default function ExploreHub() {
             onBackHome={handleBackHome}
             onBuildCustom={handleBuildCustom}
           />
-        );
-    }
-  };
-
-  const pkgToView = packageId ? config.packages.find(p => p.id === packageId) : null;
-
-  return (
-    <div className="min-h-screen bg-background text-foreground relative w-full overflow-hidden flex flex-col">
-      {renderView()}
+        } />
+        <Route path="packages" element={
+          <PackageInfo 
+            onBack={handleBackToMain} 
+            onBuildPath={() => navigate('/build?path=readymade')} 
+            onSelectPackage={handleSelectPackage}
+          />
+        } />
+        <Route path="custom" element={
+          <CustomInfo 
+            onBack={handleBackToMain} 
+            onBuildPath={() => navigate('/build')} 
+          />
+        } />
+        <Route path="place/:placeId" element={
+          <PlaceDetailWrapper 
+            onBack={handleBackToMain} 
+            onSelectPackageInfo={handleSelectPackageInfo}
+          />
+        } />
+      </Routes>
       
       {pkgToView && (
         <div className="fixed inset-0 z-50 bg-white">

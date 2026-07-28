@@ -27,16 +27,25 @@ export default function TripBuilder({ initialData, onComplete }) {
   const packageIdParam = searchParams.get('packageId');
   const pathParam = searchParams.get('path');
 
-  const [step, setStep] = useState(() => {
-    if (pkgParam) return 'final';
-    if (pathParam === 'readymade') return 'catalog';
-    return 'fork';
-  });
+  const stepParam = searchParams.get('step');
   
-  const [path, setPath] = useState(() => {
-    if (pkgParam || pathParam === 'readymade') return 'readymade';
-    return null;
-  });
+  let step = 'fork';
+  if (stepParam) {
+    step = isNaN(parseInt(stepParam)) ? stepParam : parseInt(stepParam);
+  } else if (pkgParam) {
+    step = 'final';
+  } else if (pathParam === 'readymade') {
+    step = 'catalog';
+  }
+
+  const path = pathParam || (pkgParam ? 'readymade' : null);
+
+  const setStep = (newStep) => {
+    setSearchParams(prev => {
+      prev.set('step', newStep);
+      return prev;
+    });
+  };
   
   const [data, setData] = useState(() => {
     return {
@@ -216,12 +225,11 @@ export default function TripBuilder({ initialData, onComplete }) {
 
   // State Machine Navigation
   const handleSelectPath = (selectedPath) => {
-    setPath(selectedPath);
-    if (selectedPath === 'readymade') {
-      setStep('catalog');
-    } else {
-      setStep(1);
-    }
+    setSearchParams(prev => {
+      prev.set('path', selectedPath);
+      prev.set('step', selectedPath === 'readymade' ? 'catalog' : '1');
+      return prev;
+    });
   };
 
   const nextStep = () => {
