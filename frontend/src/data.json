@@ -195,7 +195,8 @@
         "Flight/Train tickets to Guwahati",
         "Personal expenses and activities (Boating)"
       ],
-      "isDisabled": true
+      "isDisabled": true,
+      "disabledReason": "Currently not bookable due to the monsoon season (floods & muddy conditions)."
     },
     {
       "id": "pkg-deep-khasi",
@@ -255,7 +256,8 @@
         "Lunch and Dinner",
         "Flight/Train tickets",
         "Water sports and adventure activity fees"
-      ]
+      ],
+      "isDisabled": false
     },
     {
       "id": "pkg-master-tour",
@@ -332,7 +334,8 @@
         "Lunch and Dinner",
         "Flight/Train tickets to Guwahati",
         "Personal expenses and kayaking fees"
-      ]
+      ],
+      "isDisabled": false
     },
     {
       "id": "pkg-7d",
@@ -411,7 +414,8 @@
         "Lunch and Dinner",
         "Flight/Train tickets to Guwahati",
         "Personal expenses and activities (Boating, Zip-lining)"
-      ]
+      ],
+      "isDisabled": false
     },
     {
       "id": "pkg-5d",
@@ -472,7 +476,8 @@
         "Lunch and Dinner",
         "Flight/Train tickets",
         "Boating or adventure sports"
-      ]
+      ],
+      "isDisabled": false
     },
     {
       "id": "pkg-gwh-1",
@@ -536,7 +541,8 @@
         "Lunch and Dinner",
         "Camera / Video pass fees"
       ],
-      "isDisabled": true
+      "isDisabled": true,
+      "disabledReason": "Currently not bookable due to the monsoon season (floods & muddy conditions)."
     },
     {
       "id": "pkg-gwh-2",
@@ -600,7 +606,8 @@
         "Lunch (Dinner is included in cruise)",
         "Camera / Video pass fees"
       ],
-      "isDisabled": true
+      "isDisabled": true,
+      "disabledReason": "Currently not bookable due to the monsoon season (floods & muddy conditions)."
     },
     {
       "id": "tp-wildlife",
@@ -649,7 +656,8 @@
         "Camera fees",
         "Lunch & Dinner"
       ],
-      "isDisabled": true
+      "isDisabled": true,
+      "disabledReason": "Currently not bookable due to the monsoon season (floods & muddy conditions)."
     },
     {
       "id": "tp-adventure",
@@ -702,7 +710,8 @@
         "Entry fees",
         "Lunch & Dinner",
         "Adventure activity fees"
-      ]
+      ],
+      "isDisabled": false
     },
     {
       "id": "tp-pobitora-mayong",

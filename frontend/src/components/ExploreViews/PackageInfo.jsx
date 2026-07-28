@@ -1,23 +1,26 @@
 import React from 'react';
 import { ArrowLeft, Package, CheckCircle, XCircle } from 'lucide-react';
 import config from '../../data.json';
+import { Button } from '../ui/Button';
+import { Card } from '../ui/Card';
+import { Badge } from '../ui/Badge';
+import { Heading } from '../ui/Typography';
 
 export default function PackageInfo({ onBack, onBuildPath, onSelectPackage }) {
   return (
-    <div className="flex-1 flex flex-col bg-slate-50 min-h-screen animate-in fade-in slide-in-from-right-4 duration-300 pb-28">
+    <div className="flex-1 flex flex-col bg-background min-h-screen animate-in fade-in slide-in-from-right-4 duration-300 pb-28">
       
       {/* Header */}
-      <div className="bg-slate-900 pt-16 pb-24 px-6 text-center relative">
-        <button 
-          onClick={onBack}
-          className="absolute top-6 left-6 w-12 h-12 bg-white/10 hover:bg-white/20 transition-colors backdrop-blur-md rounded-2xl flex items-center justify-center text-white z-20"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </button>
-        <div className="w-16 h-16 bg-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center mx-auto mb-6">
+      <div className="bg-foreground pt-16 pb-24 px-6 text-center relative">
+        <div className="absolute top-6 left-6 z-20">
+          <Button variant="icon" onClick={onBack}>
+            <ArrowLeft className="w-6 h-6" />
+          </Button>
+        </div>
+        <div className="w-16 h-16 bg-secondary/20 text-secondary rounded-2xl flex items-center justify-center mx-auto mb-6">
           <Package className="w-8 h-8" />
         </div>
-        <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4">Readymade Tour Packages</h1>
+        <Heading level={1} className="text-white mb-4">Readymade Tour Packages</Heading>
         <p className="text-slate-300 max-w-2xl mx-auto">
           The ultimate hassle-free experience. We've done the research and packed the best spots into perfectly paced itineraries.
         </p>
@@ -27,9 +30,9 @@ export default function PackageInfo({ onBack, onBuildPath, onSelectPackage }) {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 space-y-10 w-full -mt-16 relative z-10">
         
         {/* How it works */}
-        <section className="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200">
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">How it works</h2>
-          <p className="text-slate-600 leading-relaxed">
+        <section className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-stone-200">
+          <Heading level={2} className="mb-4">How it works</Heading>
+          <p className="text-stone-600 leading-relaxed">
             Our Readymade Packages, known as "Signature Routes", are highly curated fixed-itinerary tours. 
             They are designed for travelers who want a complete, uninterrupted experience without the stress of daily planning. 
             Simply pick a package that fits your vibe, and we handle the logistics.
@@ -38,36 +41,39 @@ export default function PackageInfo({ onBack, onBuildPath, onSelectPackage }) {
 
         {/* Our Signature Packages */}
         <section className="space-y-5">
-          <h2 className="text-2xl font-bold text-slate-900 px-2 md:px-4">Our Signature Packages</h2>
+          <Heading level={2} className="px-2 md:px-4">Our Signature Packages</Heading>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {config.packages.map(pkg => (
-              <div 
+              <Card 
+                interactive
                 key={pkg.id}
-                onClick={() => { if (!pkg.isDisabled) onSelectPackage(pkg); }}
-                className={`group relative rounded-3xl overflow-hidden h-72 shadow-sm border border-slate-200 ${pkg.isDisabled ? 'opacity-60 cursor-not-allowed grayscale' : 'cursor-pointer'}`}
+                onClick={() => onSelectPackage(pkg)}
+                className="group relative h-72 p-0 border-none bg-transparent"
               >
-                <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="w-full h-full rounded-2xl overflow-hidden border border-stone-200">
+                  <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6">
                   {pkg.isDisabled && (
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center backdrop-blur-[2px] z-10">
-                      <span className="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow-lg border border-red-400">Closed for Monsoon</span>
+                    <div className="absolute inset-0 bg-foreground/30 flex flex-col items-center justify-center backdrop-blur-[1px] z-10 transition-colors group-hover:bg-foreground/10">
+                      <Badge variant="warning" className="shadow-lg group-hover:opacity-80 transition-opacity">Closed for Monsoon</Badge>
                     </div>
                   )}
-                  <span className="text-amber-400 font-bold text-xs uppercase tracking-wider mb-1">{pkg.duration}</span>
+                  <Badge variant="secondary" className="mb-1 w-fit">{pkg.duration}</Badge>
                   <h3 className="text-xl font-bold text-white mb-2 leading-tight">{pkg.title}</h3>
                   <div className="flex items-center justify-between mt-2">
                     <span className="text-white font-bold">₹{pkg.price.toLocaleString()} <span className="text-xs font-normal text-slate-300">/ person</span></span>
-                    <span className="text-amber-400 text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">View Details &rarr;</span>
+                    <span className="text-secondary text-sm font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">View Details &rarr;</span>
                   </div>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         </section>
 
         {/* Inclusions / Exclusions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <section className="bg-emerald-50 border border-emerald-200 rounded-3xl p-6 md:p-8">
+          <section className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 md:p-8">
             <h3 className="text-xl font-bold text-emerald-900 mb-6 flex items-center gap-2">
               <CheckCircle className="w-6 h-6 text-emerald-600" /> What's Included
             </h3>
@@ -103,7 +109,7 @@ export default function PackageInfo({ onBack, onBuildPath, onSelectPackage }) {
             </ul>
           </section>
 
-          <section className="bg-rose-50 border border-rose-200 rounded-3xl p-6 md:p-8">
+          <section className="bg-rose-50 border border-rose-200 rounded-2xl p-6 md:p-8">
             <h3 className="text-xl font-bold text-rose-900 mb-6 flex items-center gap-2">
               <XCircle className="w-6 h-6 text-rose-600" /> What's Not Included
             </h3>
@@ -143,13 +149,15 @@ export default function PackageInfo({ onBack, onBuildPath, onSelectPackage }) {
       </div>
 
       {/* Action Footer */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-40 flex justify-center">
-        <button 
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-stone-200 p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-40 flex justify-center">
+        <Button 
+          variant="secondary"
+          size="lg"
           onClick={onBuildPath}
-          className="w-full max-w-sm bg-amber-500 text-slate-900 font-extrabold py-4 px-6 rounded-2xl shadow-lg shadow-amber-500/30 hover:bg-amber-400 transition-all text-center"
+          className="w-full max-w-sm"
         >
           Book a Package
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { Sparkles, Map, Star, ChevronRight } from 'lucide-react';
 
 export default function Welcome({ onStart, onExplore }) {
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black text-white selection:bg-brand selection:text-black">
+    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black text-white selection:bg-primary selection:text-black">
       
       {/* Background Image with slow scale effect for dynamism */}
       <div 
@@ -31,13 +31,13 @@ export default function Welcome({ onStart, onExplore }) {
           </div>
 
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4 md:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Sparkles className="w-4 h-4 text-brand" />
+            <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-xs sm:text-sm font-semibold tracking-wide uppercase text-slate-200">The Ultimate Northeast Experience</span>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-4 md:mb-6 leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-4 md:mb-6 leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
             Discover the <br className="hidden sm:block" />
-            <span className="text-brand inline-block drop-shadow-[0_0_30px_rgba(234,179,8,0.4)]">Divine View</span>
+            <span className="text-emerald-400 inline-block drop-shadow-[0_0_30px_rgba(52,211,153,0.4)]">Divine View</span>
           </h1>
           
           <p className="text-base sm:text-lg md:text-xl text-slate-300 mb-6 md:mb-10 max-w-xl leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
@@ -47,7 +47,7 @@ export default function Welcome({ onStart, onExplore }) {
           <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
              <button 
                 onClick={onStart}
-                className="group relative inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-brand hover:bg-brand-light text-black font-black text-xl py-5 px-10 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(234,179,8,0.4)] hover:shadow-[0_0_60px_rgba(234,179,8,0.6)]"
+                className="group relative inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-primary hover:bg-primary-dark text-white font-black text-xl py-5 px-10 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-primary/40 hover:shadow-xl hover:shadow-primary/60"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   Start Planning <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
@@ -68,7 +68,7 @@ export default function Welcome({ onStart, onExplore }) {
 
           <div className="mt-6 md:mt-10 flex items-center justify-center md:justify-start gap-8 animate-in fade-in duration-700 delay-500">
             <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-brand fill-brand" />
+              <Star className="w-5 h-5 text-secondary fill-secondary" />
               <div className="text-left">
                 <p className="font-bold text-white text-sm">4.9/5</p>
                 <p className="text-xs text-slate-400">Guest Ratings</p>
@@ -76,7 +76,7 @@ export default function Welcome({ onStart, onExplore }) {
             </div>
             <div className="w-px h-8 bg-white/20"></div>
             <div className="flex items-center gap-2">
-              <Map className="w-5 h-5 text-brand" />
+              <Map className="w-5 h-5 text-secondary" />
               <div className="text-left">
                 <p className="font-bold text-white text-sm">100%</p>
                 <p className="text-xs text-slate-400">Local Experts</p>
@@ -89,7 +89,7 @@ export default function Welcome({ onStart, onExplore }) {
         <div className="hidden lg:flex flex-1 justify-center items-center animate-in fade-in zoom-in duration-1000 delay-300">
           <div className="w-80 h-80 xl:w-[28rem] xl:h-[28rem] flex items-center justify-center relative group shrink-0">
             {/* Ambient glow behind logo */}
-            <div className="absolute inset-0 bg-brand/20 rounded-full blur-3xl group-hover:bg-brand/30 transition-colors duration-500 opacity-50"></div>
+            <div className="absolute inset-0 bg-white/20 rounded-full blur-3xl group-hover:bg-white/30 transition-colors duration-500 opacity-50"></div>
             <img src="/logo.svg" alt="Divine View" className="w-full h-full scale-110 object-contain drop-shadow-2xl relative z-10 group-hover:scale-110 transition-transform duration-500" />
           </div>
         </div>

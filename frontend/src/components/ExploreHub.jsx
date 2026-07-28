@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import config from '../data.json';
 
 import ExploreMain from './ExploreViews/ExploreMain';
 import PlaceDetail from './ExploreViews/PlaceDetail';
@@ -10,13 +11,13 @@ import PackageDetailView from './PackageDetailView';
 // Sample Data with Dummy Images, Map/Insta Links, and Package Mapping
 import { EXPLORE_DATA } from '../exploreData';
 
-
-
 export default function ExploreHub() {
   const navigate = useNavigate();
-  const [view, setView] = useState('main'); // 'main', 'place_detail', 'package_info', 'custom_info', 'package_detail'
+  const [searchParams, setSearchParams] = useSearchParams();
+  const packageId = searchParams.get('packageId');
+
+  const [view, setView] = useState('main'); // 'main', 'place_detail', 'package_info', 'custom_info'
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [selectedPackage, setSelectedPackage] = useState(null);
 
   const handleSelectPlace = (place) => {
     setSelectedPlace(place);
@@ -28,8 +29,7 @@ export default function ExploreHub() {
   };
 
   const handleSelectPackage = (pkg) => {
-    setSelectedPackage(pkg);
-    setView('package_detail');
+    setSearchParams(prev => { prev.set('packageId', pkg.id); return prev; });
   };
 
   const handleSelectCustomInfo = () => {
@@ -39,7 +39,6 @@ export default function ExploreHub() {
   const handleBackToMain = () => {
     setView('main');
     setSelectedPlace(null);
-    setSelectedPackage(null);
   };
 
   const handleBackHome = () => {
@@ -69,14 +68,6 @@ export default function ExploreHub() {
             onSelectPackage={handleSelectPackage}
           />
         );
-      case 'package_detail':
-        return (
-          <PackageDetailView 
-            packageData={selectedPackage}
-            onBack={() => setView('package_info')}
-            onBook={() => navigate(`/build?package=${selectedPackage.id}`)}
-          />
-        );
       case 'custom_info':
         return (
           <CustomInfo 
@@ -99,9 +90,21 @@ export default function ExploreHub() {
     }
   };
 
+  const pkgToView = packageId ? config.packages.find(p => p.id === packageId) : null;
+
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 relative w-full overflow-hidden flex flex-col">
+    <div className="min-h-screen bg-background text-foreground relative w-full overflow-hidden flex flex-col">
       {renderView()}
+      
+      {pkgToView && (
+        <div className="fixed inset-0 z-50 bg-white">
+          <PackageDetailView 
+            packageData={pkgToView}
+            onBack={() => navigate(-1)}
+            onBook={() => navigate(`/build?package=${pkgToView.id}`)}
+          />
+        </div>
+      )}
     </div>
   );
 }

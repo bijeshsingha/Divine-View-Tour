@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ChevronRight, ChevronLeft, RefreshCw, Download } from 'lucide-react';
 import staticConfig from '../data.json';
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -21,8 +21,10 @@ import { generateSchedule } from '../utils/itineraryEngine';
 
 export default function TripBuilder({ initialData, onComplete }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   
   const pkgParam = searchParams.get('package');
+  const packageIdParam = searchParams.get('packageId');
   const pathParam = searchParams.get('path');
 
   const [step, setStep] = useState(() => {
@@ -237,7 +239,7 @@ export default function TripBuilder({ initialData, onComplete }) {
     else if (step === 3) setStep(2);
     else if (step === 4) setStep(3);
     else if (step === 'final') {
-      if (path === 'readymade') setStep('package_detail');
+      if (path === 'readymade') setStep('catalog');
       else setStep(4);
     }
   };
@@ -246,9 +248,9 @@ export default function TripBuilder({ initialData, onComplete }) {
 
   if (loading || !config) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center p-6 bg-slate-50 h-full">
-        <RefreshCw className="w-12 h-12 text-brand animate-spin mb-6" />
-        <h2 className="text-2xl font-bold text-slate-800 mb-2">Loading Options...</h2>
+      <div className="flex-1 flex flex-col items-center justify-center p-6 bg-background h-full">
+        <RefreshCw className="w-12 h-12 text-primary animate-spin mb-6" />
+        <h2 className="font-serif text-2xl font-bold text-foreground mb-2">Loading Options...</h2>
       </div>
     );
   }
@@ -261,18 +263,6 @@ export default function TripBuilder({ initialData, onComplete }) {
   if (step === 4) progress = 90;
   if (step === 'final') progress = 100;
 
-  // Render Full Screen Package Detail View independently
-  if (step === 'package_detail') {
-    const pkg = config.packages.find(p => p.id === data.packageId);
-    return (
-      <PackageDetailView 
-        packageData={pkg}
-        onBack={() => setStep('catalog')}
-        onBook={() => setStep('final')}
-      />
-    );
-  }
-
   const renderStep = () => {
     switch (step) {
       case 'fork':
@@ -282,8 +272,7 @@ export default function TripBuilder({ initialData, onComplete }) {
           <StepPackageCatalog 
             packages={config.packages} 
             onSelectPackage={(pkg) => {
-              updateData('packageId', pkg.id);
-              setStep('package_detail');
+              setSearchParams(prev => { prev.set('packageId', pkg.id); return prev; });
             }} 
             onBack={prevStep}
           />
@@ -326,11 +315,11 @@ export default function TripBuilder({ initialData, onComplete }) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-slate-50 relative overflow-hidden">
+    <div className="flex flex-col h-full bg-background relative overflow-hidden">
       {/* Progress Bar */}
-      <div className="h-2 bg-slate-200 w-full shrink-0">
+      <div className="h-2 bg-stone-100 w-full shrink-0">
         <div
-          className="h-full bg-brand transition-all duration-500 ease-out"
+          className="h-full bg-primary transition-all duration-500 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -341,14 +330,14 @@ export default function TripBuilder({ initialData, onComplete }) {
 
       {/* Footer Navigation */}
       {step !== 'fork' && step !== 'catalog' && (
-        <div className="bg-white border-t border-slate-100 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-20 mt-auto shrink-0 flex flex-col">
+        <div className="bg-white border-t border-stone-100 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-20 mt-auto shrink-0 flex flex-col">
           {/* Live Ticker */}
           {step !== 1 && (
-            <div className="flex items-center justify-between px-6 py-3 bg-slate-50/80 border-b border-slate-100">
-              <span className="text-sm font-semibold text-slate-500">Estimated Cost</span>
+            <div className="flex items-center justify-between px-6 py-3 bg-background/80 border-b border-stone-100">
+              <span className="text-sm font-semibold text-background0">Estimated Cost</span>
               <div className="flex items-baseline gap-1">
-                <span className="text-lg font-bold text-slate-900">₹{displayPrice.toLocaleString()}</span>
-                <span className="text-xs font-medium text-slate-500">/person</span>
+                <span className="text-lg font-bold text-foreground">₹{displayPrice.toLocaleString()}</span>
+                <span className="text-xs font-medium text-background0">/person</span>
               </div>
             </div>
           )}
@@ -367,7 +356,7 @@ export default function TripBuilder({ initialData, onComplete }) {
                   />
                 }
                 fileName={`${(data.name || 'Guest').replace(/\s+/g, '_')}_Booking_Request.pdf`}
-                className="w-full h-12 flex items-center justify-center gap-2 bg-slate-800 text-white font-bold text-base rounded-xl shadow-md hover:bg-slate-900 transition-all active:scale-95"
+                className="w-full h-12 flex items-center justify-center gap-2 bg-foreground text-white font-bold text-base rounded-xl shadow-md hover:bg-foreground transition-all active:scale-95"
               >
                 {({ loading }) => (
                   <>
@@ -380,7 +369,7 @@ export default function TripBuilder({ initialData, onComplete }) {
             <div className="flex gap-3">
               <button
                 onClick={prevStep}
-                className="w-14 h-14 flex items-center justify-center border-2 border-slate-200 text-slate-600 rounded-2xl hover:bg-slate-50 transition-all active:scale-95 shrink-0"
+                className="w-14 h-14 flex items-center justify-center border-2 border-stone-200 text-stone-600 rounded-2xl hover:bg-background transition-all active:scale-95 shrink-0"
               >
                 <ChevronLeft className="w-6 h-6" />
               </button>
@@ -388,7 +377,7 @@ export default function TripBuilder({ initialData, onComplete }) {
               <button
                 onClick={nextStep}
                 disabled={!isStepValid()}
-                className="flex-1 h-14 flex items-center justify-center gap-2 bg-brand text-black font-bold text-lg rounded-2xl shadow-lg shadow-brand/30 hover:bg-brand-dark hover:text-white transition-all active:scale-95 disabled:opacity-50 disabled:shadow-none"
+                className="flex-1 h-14 flex items-center justify-center gap-2 bg-primary text-black font-bold text-lg rounded-2xl shadow-lg shadow-primary/30 hover:bg-primary-dark hover:text-white transition-all active:scale-95 disabled:opacity-50 disabled:shadow-none"
               >
                 {step === 'final' ? 'Book on WhatsApp' : 'Continue'}
                 {step !== 'final' && <ChevronRight className="w-5 h-5" />}
@@ -408,6 +397,21 @@ export default function TripBuilder({ initialData, onComplete }) {
                setExplorePlace(null);
                setStep('catalog');
             }} 
+          />
+        </div>
+      )}
+
+      {/* Package Detail Overlay */}
+      {packageIdParam && (
+        <div className="absolute inset-0 z-50 bg-white overflow-hidden">
+          <PackageDetailView 
+            packageData={config.packages.find(p => p.id === packageIdParam)}
+            onBack={() => navigate(-1)}
+            onBook={() => {
+              updateData('packageId', packageIdParam);
+              setStep('final');
+              setSearchParams(prev => { prev.delete('packageId'); return prev; }, { replace: true });
+            }}
           />
         </div>
       )}

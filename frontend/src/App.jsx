@@ -10,7 +10,7 @@ const defaultDate = tomorrow.toISOString().split('T')[0];
 
 function MobileLayout({ children }) {
   return (
-    <div className="max-w-md w-full min-h-screen shadow-2xl bg-white flex flex-col relative overflow-hidden">
+    <div className="max-w-md w-full h-[100dvh] shadow-2xl bg-white flex flex-col relative overflow-hidden">
       {children}
     </div>
   );
@@ -58,7 +58,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-black text-slate-900 font-sans selection:bg-brand-light flex flex-col items-center">
+    <div className="min-h-screen w-full bg-black text-foreground font-sans selection:bg-primary-light flex flex-col items-center">
       <Routes>
         <Route path="/" element={<Welcome onStart={() => navigate('/build')} onExplore={() => navigate('/explore')} />} />
         <Route path="/explore" element={<ExploreHub />} />
