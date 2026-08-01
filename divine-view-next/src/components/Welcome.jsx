@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Sparkles, Map, Star, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Welcome() {
   const router = useRouter();
@@ -9,12 +10,17 @@ export default function Welcome() {
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-black text-white selection:bg-primary selection:text-black">
       
       {/* Background Image with slow scale effect for dynamism */}
-      <div 
-        className="absolute inset-0 bg-cover bg-right-bottom bg-no-repeat transition-transform duration-[20s] ease-linear scale-110"
-        style={{ 
-          backgroundImage: 'url("/images/homescreen.jpg")',
-        }}
-      />
+      <div className="absolute inset-0 transition-transform duration-[20s] ease-linear scale-110">
+        <Image
+          src="/images/homescreen.jpg"
+          alt="Divine View Tours Background"
+          fill
+          priority
+          quality={85}
+          className="object-cover object-right-bottom"
+          sizes="100vw"
+        />
+      </div>
       
       {/* Dark Overlay Gradient (Darker on the left for text readability) */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent sm:bg-gradient-to-r sm:from-black/90 sm:via-black/50 sm:to-transparent"></div>
