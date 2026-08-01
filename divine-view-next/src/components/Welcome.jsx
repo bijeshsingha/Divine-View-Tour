@@ -10,9 +10,9 @@ export default function Welcome() {
       
       {/* Background Image with slow scale effect for dynamism */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[20s] ease-linear scale-110"
+        className="absolute inset-0 bg-cover bg-right-bottom bg-no-repeat transition-transform duration-[20s] ease-linear scale-110"
         style={{ 
-          backgroundImage: 'url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop")',
+          backgroundImage: 'url("/images/homescreen.jpg")',
         }}
       />
       
