@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
 
@@ -345,7 +345,7 @@ export const BookingRequestPDF = ({
 
         {/* Universal Footer */}
         <Text style={styles.footer} render={({ pageNumber }) => (
-          `singhabijesh7@gmail.com    |    +91 6026504087    |    Page ${pageNumber}`
+          `info@divineviewtours.com    |    +91 6026504087    |    Page ${pageNumber}`
         )} fixed />
 
       </Page>

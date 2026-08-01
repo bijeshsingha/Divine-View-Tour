@@ -1,7 +1,6 @@
 'use client';
-import React from 'react';
-import { Sparkles, Map, Star, ChevronRight, Mail } from 'lucide-react';
-
+import React, { useState } from 'react';
+import { Sparkles, Map, Star, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function Welcome() {
@@ -84,14 +83,6 @@ export default function Welcome() {
               <div className="text-left">
                 <p className="font-bold text-white text-sm">100%</p>
                 <p className="text-xs text-slate-400">Local Experts</p>
-              </div>
-            </div>
-            <div className="hidden sm:block w-px h-8 bg-white/20"></div>
-            <div className="hidden sm:flex items-center gap-2">
-              <Mail className="w-5 h-5 text-secondary" />
-              <div className="text-left">
-                <a href="mailto:hello@divineviewtours.com" className="font-bold text-white text-sm hover:text-secondary transition-colors">hello@divineviewtours.com</a>
-                <p className="text-xs text-slate-400">Email Us</p>
               </div>
             </div>
           </div>
