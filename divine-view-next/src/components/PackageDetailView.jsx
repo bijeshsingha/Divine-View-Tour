@@ -1,8 +1,7 @@
-﻿'use client';
+'use client';
 import React, { useState } from 'react';
 import { ArrowLeft, CheckCircle2, XCircle, MapPin, Clock, ArrowRight, Download, RefreshCw } from 'lucide-react';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import { PackagePDF } from './PackagePDF';
+
 import { Button } from './ui/Button';
 import { Badge } from './ui/Badge';
 import { Heading } from './ui/Typography';
@@ -25,18 +24,7 @@ export default function PackageDetailView({ packageData, onBack, onBook }) {
             <ArrowLeft className="w-6 h-6" />
           </Button>
         </div>
-        <div className="absolute top-4 right-4 z-10">
-          <PDFDownloadLink 
-            document={<PackagePDF packageData={packageData} />} 
-            fileName={`${packageData.id}-itinerary.pdf`}
-          >
-            {({ loading }) => (
-              <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-white/40 transition-colors cursor-pointer" title="Download PDF Itinerary">
-                {loading ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
-              </div>
-            )}
-          </PDFDownloadLink>
-        </div>
+
 
 
         <div className="absolute bottom-4 left-6 right-6">

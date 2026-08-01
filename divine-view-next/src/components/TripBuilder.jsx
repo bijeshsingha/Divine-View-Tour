@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ChevronRight, ChevronLeft, RefreshCw, Download } from 'lucide-react';
 import staticConfig from '@/data/data.json';
-import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import Step0Fork from './TripBuilderSteps/Step0Fork';
 import StepPackageCatalog from './TripBuilderSteps/StepPackageCatalog';
@@ -16,8 +15,6 @@ import StepFinalGuestDetails from './TripBuilderSteps/StepFinalGuestDetails';
 import PlaceDetail from './ExploreViews/PlaceDetail';
 import { EXPLORE_DATA } from '@/data/exploreData';
 
-import { ItineraryPDF } from './ItineraryPDF';
-import { BookingRequestPDF } from './BookingRequestPDF';
 import { generateSchedule } from '../utils/itineraryEngine';
 
 export default function TripBuilder({ initialData, onComplete }) {
@@ -359,27 +356,10 @@ export default function TripBuilder({ initialData, onComplete }) {
 
           <div className="p-4 px-6 flex flex-col gap-3">
             {step === 'final' && isStepValid() && (
-              <PDFDownloadLink
-                document={
-                  <BookingRequestPDF
-                    data={data}
-                    packageTitle={path === 'readymade' && data.packageId ? (config.packages.find(p => p.id === data.packageId)?.title || '') : `Custom Adventure: ${currentRegion.title}`}
-                    durationStr={path === 'readymade' && data.packageId ? (config.packages.find(p => p.id === data.packageId)?.duration || '') : `${data.tripDays} Days / ${data.tripDays - 1} Nights`}
-                    basePrice={displayPrice}
-                    totalPrice={displayPrice * data.travelerCount}
-                    bookingId={data.phone ? data.phone.slice(-4) + Math.floor(Math.random()*100) : Math.floor(Math.random()*10000)}
-                  />
-                }
-                fileName={`${(data.name || 'Guest').replace(/\s+/g, '_')}_Booking_Request.pdf`}
-                className="w-full h-12 flex items-center justify-center gap-2 bg-foreground text-white font-bold text-base rounded-xl shadow-md hover:bg-foreground transition-all active:scale-95"
-              >
-                {({ loading }) => (
-                  <>
-                    {loading ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
-                    {loading ? 'Generating Summary...' : 'Download Summary PDF'}
-                  </>
-                )}
-              </PDFDownloadLink>
+              <div className="text-center p-4 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-100">
+                <p className="font-bold mb-1">Your Booking Request is Ready!</p>
+                <p className="text-sm">We will connect with you on WhatsApp shortly to provide your PDF itinerary and discuss the next steps.</p>
+              </div>
             )}
             <div className="flex gap-3">
               <button
