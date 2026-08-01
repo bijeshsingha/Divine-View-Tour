@@ -34,8 +34,8 @@ export default function Welcome() {
           
           {/* Mobile Logo (Shown only on small screens) */}
           <div className="flex justify-center lg:hidden z-20 mb-4 md:mb-8 animate-in fade-in zoom-in duration-700">
-              <div className="w-32 h-32 sm:w-48 sm:h-48 flex items-center justify-center">
-                <img src="/logo.svg" alt="Divine View Tours Logo" className="w-full h-full scale-110 object-contain drop-shadow-2xl" />
+              <div className="w-32 h-32 sm:w-48 sm:h-48 flex items-center justify-center relative">
+                <Image src="/logo.svg" alt="Divine View Tours Logo" fill priority className="scale-110 object-contain drop-shadow-2xl" />
               </div>
           </div>
 
@@ -99,7 +99,7 @@ export default function Welcome() {
           <div className="w-80 h-80 xl:w-[28rem] xl:h-[28rem] flex items-center justify-center relative group shrink-0">
             {/* Ambient glow behind logo */}
             <div className="absolute inset-0 bg-white/20 rounded-full blur-3xl group-hover:bg-white/30 transition-colors duration-500 opacity-50"></div>
-            <img src="/logo.svg" alt="Divine View" className="w-full h-full scale-110 object-contain drop-shadow-2xl relative z-10 group-hover:scale-110 transition-transform duration-500" />
+            <Image src="/logo.svg" alt="Divine View" fill priority className="scale-110 object-contain drop-shadow-2xl relative z-10 group-hover:scale-110 transition-transform duration-500" />
           </div>
         </div>
         
