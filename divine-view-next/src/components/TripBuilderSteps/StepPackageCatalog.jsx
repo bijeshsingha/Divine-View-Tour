@@ -1,6 +1,7 @@
-﻿'use client';
+'use client';
 import React, { useState } from 'react';
 import { Package, ArrowRight, ArrowLeft } from 'lucide-react';
+import Image from 'next/image';
 import { Button } from '../ui/Button';
 import { Heading } from '../ui/Typography';
 import { Badge } from '../ui/Badge';
@@ -51,8 +52,14 @@ export default function StepPackageCatalog({ packages, onSelectPackage, onBack }
             onClick={() => onSelectPackage(pkg)}
             className="w-full shrink-0 text-left bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-md transition-all group hover:shadow-xl relative"
           >
-            <div className="h-32 w-full relative">
-              <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="h-32 w-full relative overflow-hidden">
+              <Image 
+                src={pkg.image} 
+                alt={pkg.title} 
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-500" 
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               {pkg.isDisabled && (
                 <div className="absolute inset-0 bg-foreground/30 flex flex-col items-center justify-center backdrop-blur-[1px] z-10 transition-colors group-hover:bg-foreground/10">
