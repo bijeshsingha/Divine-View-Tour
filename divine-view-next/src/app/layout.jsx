@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
 
 export const metadata = {
-  title: 'Divine View Tours | Premium Northeast India Travel',
+  title: 'Divine View Tours',
   description: 'Expertly curated, high-margin travel packages and DMCs for Meghalaya, Assam, Arunachal Pradesh, and the wider Northeast.',
   alternates: {
     canonical: 'https://divineviewtours.com',
