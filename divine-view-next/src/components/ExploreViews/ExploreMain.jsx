@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useRef } from 'react';
-import { Package, PencilRuler, ArrowRight } from 'lucide-react';
+import { Package, PencilRuler, ArrowRight, Search } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PlaceCard from './PlaceCard';
 import { Button } from '../ui/Button';
@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 export default function ExploreMain({ exploreData }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Dynamically generate unique categories/tags
   const allTags = exploreData.flatMap(item => item.tags || []);
@@ -21,9 +22,13 @@ export default function ExploreMain({ exploreData }) {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
 
-  const filteredData = activeTab === 'All' 
-    ? exploreData 
-    : exploreData.filter(item => item.tags?.includes(activeTab));
+  const filteredData = exploreData.filter(item => {
+    const matchesTab = activeTab === 'All' || item.tags?.includes(activeTab);
+    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          item.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesTab && matchesSearch;
+  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -41,7 +46,17 @@ export default function ExploreMain({ exploreData }) {
       {/* 1. HERO SECTION */}
       <section className="bg-foreground text-white py-24 px-4 sm:px-6 md:px-8 text-center relative shrink-0 overflow-hidden">
         <motion.div style={{ y }} className="absolute inset-0 z-0">
-          <img src="/images/Meghalaya/6809d82be1f015b4b224ff5abe40c006.jpg" className="w-full h-full object-cover opacity-20" alt="Hero background" />
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline 
+            poster="/images/Meghalaya/6809d82be1f015b4b224ff5abe40c006.jpg"
+            className="w-full h-full object-cover opacity-90"
+          >
+            <source src="/videos/explore-bg.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/20" />
         </motion.div>
         <div className="max-w-4xl mx-auto space-y-4 relative z-10">
           <span className="text-secondary font-semibold tracking-wider uppercase text-sm">Divine View Tours</span>
@@ -103,6 +118,21 @@ export default function ExploreMain({ exploreData }) {
       {/* 3. CATEGORY TABS */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-12 w-full shrink-0">
         <Heading level={2} className="mb-4">Places to Visit</Heading>
+        
+        {/* Search Bar */}
+        <div className="relative mb-6 max-w-md">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Search className="h-5 w-5 text-stone-400" />
+          </div>
+          <input
+            type="text"
+            placeholder="Search destinations, waterfalls, caves..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="block w-full pl-10 pr-3 py-3 border border-stone-200 rounded-2xl leading-5 bg-white placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-secondary/50 focus:border-secondary/50 sm:text-sm transition-all shadow-sm hover:shadow-md"
+          />
+        </div>
+
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none md:justify-start">
           {categories.map(cat => (
             <Button
