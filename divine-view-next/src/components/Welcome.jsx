@@ -112,7 +112,7 @@ export default function Welcome() {
                   Explore Hub
                 </span>
               </button>
-          </div>
+          </motion.div>
 
           <div className="mt-6 md:mt-10 flex items-center justify-center md:justify-start gap-8 animate-in fade-in duration-700 delay-500">
             <div className="flex items-center gap-2">
