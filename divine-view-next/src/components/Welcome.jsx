@@ -1,30 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Sparkles, Map, Star, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-
-const titleVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const wordVariants = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    filter: 'blur(0px)',
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
-  }
-};
 
 export default function Welcome() {
   const router = useRouter();
@@ -66,33 +44,16 @@ export default function Welcome() {
             <span className="text-xs sm:text-sm font-semibold tracking-wide uppercase text-slate-200">The Ultimate Northeast Experience</span>
           </div>
           
-          <motion.h1 
-            variants={titleVariants}
-            initial="hidden"
-            animate="visible"
-            className="font-serif text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-4 md:mb-6 leading-[1.1]"
-          >
-            <motion.span variants={wordVariants} className="inline-block">Discover</motion.span>{" "}
-            <motion.span variants={wordVariants} className="inline-block">the</motion.span> <br className="hidden sm:block" />
-            <motion.span variants={wordVariants} className="text-emerald-400 inline-block drop-shadow-[0_0_30px_rgba(52,211,153,0.4)]">Divine</motion.span>{" "}
-            <motion.span variants={wordVariants} className="text-emerald-400 inline-block drop-shadow-[0_0_30px_rgba(52,211,153,0.4)]">View</motion.span>
-          </motion.h1>
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-4 md:mb-6 leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+            Discover the <br className="hidden sm:block" />
+            <span className="text-emerald-400 inline-block drop-shadow-[0_0_30px_rgba(52,211,153,0.4)]">Divine View</span>
+          </h1>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-base sm:text-lg md:text-xl text-slate-300 mb-6 md:mb-10 max-w-xl leading-relaxed"
-          >
+          <p className="text-base sm:text-lg md:text-xl text-slate-300 mb-6 md:mb-10 max-w-xl leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
             Curated journeys through the misty hills of Meghalaya and the vibrant heart of Guwahati. Build your perfect custom itinerary in under 60 seconds.
-          </motion.p>
+          </p>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="w-full sm:w-auto flex flex-col sm:flex-row gap-4"
-          >
+          <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
              <button 
                 onClick={() => router.push('/build')}
                 className="group relative inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-primary hover:bg-primary-dark text-white font-black text-xl py-5 px-10 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-primary/40 hover:shadow-xl hover:shadow-primary/60"
@@ -112,7 +73,7 @@ export default function Welcome() {
                   Explore Hub
                 </span>
               </button>
-          </motion.div>
+          </div>
 
           <div className="mt-6 md:mt-10 flex items-center justify-center md:justify-start gap-8 animate-in fade-in duration-700 delay-500">
             <div className="flex items-center gap-2">

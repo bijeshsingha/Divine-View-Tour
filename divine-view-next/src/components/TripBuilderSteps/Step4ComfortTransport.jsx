@@ -13,7 +13,7 @@ export default function Step4ComfortTransport({ data, updateData, config, update
         <h2 className="font-serif text-3xl font-bold text-foreground mb-2">Comfort & Transport</h2>
         <p className="text-background0 text-base">Choose your ride and stay.</p>
       </div>
-      <div className="flex-1 flex flex-col justify-start overflow-y-auto pb-4">
+      <div className="flex-1 flex flex-col justify-start overflow-y-auto pb-12 px-1">
         <div className="space-y-6">
 
           {/* Accommodation section */}
@@ -66,9 +66,12 @@ export default function Step4ComfortTransport({ data, updateData, config, update
 
           {/* Transport section */}
           <div>
-            <h3 className="font-bold text-foreground mb-3 flex items-center gap-2">
-              <CarFront className="w-5 h-5 text-primary-dark" /> Transport Model
-            </h3>
+            <div className="mb-4">
+              <h3 className="font-bold text-foreground mb-1 flex items-center gap-2">
+                <CarFront className="w-5 h-5 text-primary-dark" /> Choose your ride.
+              </h3>
+              <p className="text-sm text-stone-500">For the rugged roads of Arunachal, we highly recommend our 4x4 SUV options.</p>
+            </div>
 
             <div className="space-y-4">
               {/* Shuttle Option */}
@@ -112,18 +115,19 @@ export default function Step4ComfortTransport({ data, updateData, config, update
                        const isCapacityMet = totalCap >= data.travelerCount;
 
                        return (
-                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                           {config.cars.filter(c => c.id !== 'pool').map((car, idx) => {
-                             const count = (data.privateCars || {})[car.id] || 0;
-                             const carImages = ['/images/placeholder.jpg', '/images/placeholder.jpg', '/images/placeholder.jpg'];
-                             return (
+                         <>
+                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                             {config.cars.filter(c => c.id !== 'pool').map((car) => {
+                               const count = (data.privateCars || {})[car.id] || 0;
+                               const carImage = `/images/cars/${car.id}.png`;
+                               return (
                                <div 
                                  key={car.id} 
                                  onClick={() => count === 0 && !isCapacityMet && updateCarCount(car.id, 1)}
                                  className={`relative overflow-hidden rounded-2xl border-2 transition-all flex flex-col ${count === 0 && !isCapacityMet ? 'cursor-pointer hover:border-primary/50 shadow-sm hover:shadow-md' : ''} ${count > 0 ? 'border-primary ring-2 ring-primary/20 bg-white shadow-lg scale-[1.02]' : 'border-stone-200 bg-white'}`}
                                >
-                                 <div className="relative h-24 w-full bg-foreground overflow-hidden">
-                                    <Image src={carImages[idx % carImages.length]} alt={car.label} fill className={`object-cover transition-transform duration-700 ${count > 0 ? 'scale-105 opacity-90' : 'opacity-70 group-hover:scale-105 group-hover:opacity-100'}`} />
+                                 <div className="relative h-32 sm:h-40 w-full bg-stone-900 overflow-hidden">
+                                    <Image src={carImage} alt={car.label} fill className={`object-cover transition-transform duration-700 ${count > 0 ? 'scale-105 opacity-90' : 'opacity-70 group-hover:scale-105 group-hover:opacity-100'}`} />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
                                  </div>
                                  
@@ -134,11 +138,11 @@ export default function Step4ComfortTransport({ data, updateData, config, update
                                    </div>
                                    <div className="flex items-center gap-3">
                                      <button type="button" onClick={(e) => { e.stopPropagation(); updateCarCount(car.id, -1); }} disabled={count === 0} className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-600 disabled:opacity-30 hover:bg-stone-200 transition-all shadow-sm">
-                                       <Minus className="w-3 h-3" />
+                                       <Minus className="w-4 h-4" />
                                      </button>
                                      <span className="font-bold text-foreground w-4 text-center">{count}</span>
-                                     <button type="button" onClick={(e) => { e.stopPropagation(); updateCarCount(car.id, 1); }} disabled={isCapacityMet} className="w-8 h-8 rounded-full bg-primary text-white disabled:bg-stone-200 disabled:text-stone-400 disabled:cursor-not-allowed hover:bg-primary-dark transition-all shadow-sm">
-                                       <Plus className="w-3 h-3" />
+                                     <button type="button" onClick={(e) => { e.stopPropagation(); updateCarCount(car.id, 1); }} disabled={isCapacityMet} className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center disabled:bg-stone-200 disabled:text-stone-400 disabled:cursor-not-allowed hover:bg-primary-dark transition-all shadow-sm">
+                                       <Plus className="w-4 h-4" />
                                      </button>
                                    </div>
                                  </div>

@@ -154,14 +154,14 @@ export default function ExploreMain({ exploreData }) {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[300px]"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[200px] grid-flow-row-dense"
         >
           {filteredData.map(item => {
             const isFeatured = item.id === 'p4' || item.id === 'p14';
             return (
               <div 
                 key={item.id} 
-                className={`${isFeatured ? 'md:col-span-2 md:row-span-2' : 'col-span-1 row-span-1'} h-full`}
+                className={`${isFeatured ? 'md:col-span-2 md:row-span-3 row-span-2' : 'col-span-1 row-span-2'} h-full`}
               >
                 <PlaceCard item={item} onSelectPlace={() => router.push(`/explore/place/${item.id}`)} isFeatured={isFeatured} />
               </div>

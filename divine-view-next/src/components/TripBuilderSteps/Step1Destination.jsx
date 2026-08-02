@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import React from 'react';
 import { Map, Minus, Plus, Calendar } from 'lucide-react';
 
@@ -21,8 +21,8 @@ export default function Step1Destination({ data, updateData, config }) {
                 updateData('region', regionId);
                 updateData('spots', []);
                 updateData('restaurants', []);
-                if (data.tripDays < region.minDays) updateData('tripDays', region.minDays);
-                if (data.tripDays > region.maxDays) updateData('tripDays', region.maxDays);
+                if (!data.tripDays || data.tripDays < region.minDays) updateData('tripDays', region.minDays);
+                else if (data.tripDays > region.maxDays) updateData('tripDays', region.maxDays);
               }}
               className={`w-full text-left p-4 rounded-2xl border-2 transition-all flex gap-4 items-center ${data.region === regionId ? 'border-primary bg-primary/5 shadow-md' : 'border-stone-200 bg-white hover:border-primary/30'}`}
             >

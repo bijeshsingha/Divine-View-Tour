@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { ChevronRight, ChevronLeft, RefreshCw, Download } from 'lucide-react';
+import { ChevronRight, ChevronLeft, RefreshCw, Download, MessageCircle, X } from 'lucide-react';
 import staticConfig from '@/data/data.json';
 
 import Step0Fork from './TripBuilderSteps/Step0Fork';
@@ -60,6 +60,48 @@ export default function TripBuilder({ initialData, onComplete }) {
       ...(pkgParam ? { packageId: pkgParam } : {})
     };
   });
+  
+  const [showRestorePrompt, setShowRestorePrompt] = useState(false);
+  const [savedState, setSavedState] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('divineViewTripState');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && Object.keys(parsed).length > 2 && parsed.region) {
+            setSavedState(parsed);
+            setShowRestorePrompt(true);
+          }
+        } catch (e) {}
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && data.region) {
+      localStorage.setItem('divineViewTripState', JSON.stringify(data));
+    }
+  }, [data]);
+
+  const handleRestoreState = () => {
+    if (savedState) {
+      setData(savedState);
+      // Try to determine the step based on restored data
+      if (savedState.name && savedState.phone) setStep('final');
+      else if (savedState.transportType) setStep(4);
+      else if (savedState.spots && savedState.spots.length > 0) setStep(3);
+      else if (savedState.tripDays) setStep(2);
+      else setStep(1);
+    }
+    setShowRestorePrompt(false);
+  };
+
+  const handleDiscardState = () => {
+    localStorage.removeItem('divineViewTripState');
+    setShowRestorePrompt(false);
+  };
   
   const config = staticConfig;
   const [loading, setLoading] = useState(false);
@@ -298,7 +340,7 @@ export default function TripBuilder({ initialData, onComplete }) {
       case 4:
         return <Step4ComfortTransport data={data} updateData={updateData} config={config} updateCarCount={updateCarCount} />;
       case 'final':
-        return <StepFinalGuestDetails data={data} updateData={updateData} displayPrice={displayPrice} config={config} />;
+        return <StepFinalGuestDetails data={data} updateData={updateData} displayPrice={displayPrice} config={config} path={path} />;
       default:
         return null;
     }
@@ -336,8 +378,43 @@ export default function TripBuilder({ initialData, onComplete }) {
         />
       </div>
 
-      <div className="flex-1 flex flex-col overflow-y-auto relative">
-        {renderStep()}
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden relative">
+        <div className="flex-1 overflow-y-auto flex flex-col relative">
+          {renderStep()}
+        </div>
+
+        {/* Sticky Sidebar (Desktop 30%) */}
+        {step !== 'fork' && step !== 'catalog' && step !== 'final' && (
+          <div className="hidden md:flex w-80 lg:w-96 bg-stone-50 border-l border-stone-200 p-8 flex-col overflow-y-auto shrink-0 animate-in fade-in slide-in-from-right-4">
+             <h3 className="font-serif text-2xl font-bold text-foreground mb-6">Trip Summary</h3>
+             <div className="space-y-4 flex-1">
+               <div className="pb-4 border-b border-stone-200">
+                 <p className="text-xs text-stone-500 font-bold uppercase tracking-wider mb-1">Destination</p>
+                 <p className="font-medium text-foreground">{config.regions[data.region]?.title || 'Not Selected'}</p>
+               </div>
+               <div className="pb-4 border-b border-stone-200">
+                 <p className="text-xs text-stone-500 font-bold uppercase tracking-wider mb-1">Key Spots</p>
+                 <p className="font-medium text-foreground text-sm">{data.spots?.length > 0 ? `${data.spots.length} Selected` : 'None'}</p>
+               </div>
+               <div className="pb-4 border-b border-stone-200">
+                 <p className="text-xs text-stone-500 font-bold uppercase tracking-wider mb-1">Duration</p>
+                 <p className="font-medium text-foreground">{data.tripDays ? `${data.tripDays} Days, ${data.tripDays - 1} Nights` : 'Not Selected'}</p>
+               </div>
+               <div className="pb-4 border-b border-stone-200">
+                 <p className="text-xs text-stone-500 font-bold uppercase tracking-wider mb-1">Accommodation</p>
+                 <p className="font-medium text-foreground capitalize">{data.stayType === 'none' ? 'Self-arranged' : (typeof data.stayType === 'string' ? data.stayType.replace('_', ' ') : 'Standard')}</p>
+               </div>
+               <div className="pb-4 border-b border-stone-200">
+                 <p className="text-xs text-stone-500 font-bold uppercase tracking-wider mb-1">Transport</p>
+                 <p className="font-medium text-foreground">{data.transportType === 'shuttle' ? 'Daily Shuttle' : 'Private Fleet'}</p>
+               </div>
+             </div>
+             <div className="pt-6 mt-auto">
+               <p className="text-xs text-stone-500 font-bold uppercase tracking-wider mb-1">Live Estimated Total</p>
+               <h4 className="font-serif text-3xl font-extrabold text-primary">₹{displayPrice.toLocaleString()} <span className="text-sm font-medium text-stone-500">/person</span></h4>
+             </div>
+          </div>
+        )}
       </div>
 
       {/* Footer Navigation */}
@@ -355,30 +432,45 @@ export default function TripBuilder({ initialData, onComplete }) {
           )}
 
           <div className="p-4 px-6 flex flex-col gap-3">
-            {step === 'final' && isStepValid() && (
-              <div className="text-center p-4 bg-emerald-50 text-emerald-800 rounded-xl border border-emerald-100">
-                <p className="font-bold mb-1">Your Booking Request is Ready!</p>
-                <p className="text-sm">We will connect with you on WhatsApp shortly to provide your PDF itinerary and discuss the next steps.</p>
+            {step === 'final' && isStepValid() ? (
+              <div className="flex gap-3">
+                 <button onClick={prevStep} className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center border-2 border-stone-200 text-stone-600 rounded-2xl hover:bg-background transition-all active:scale-95 shrink-0">
+                   <ChevronLeft className="w-6 h-6" />
+                 </button>
+                 <button onClick={submitToWhatsApp} className="flex-1 h-14 md:h-16 flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1DA851] text-white font-bold text-lg md:text-xl rounded-2xl shadow-lg shadow-[#25D366]/30 transition-all active:scale-95">
+                   <MessageCircle className="w-6 h-6 md:w-7 md:h-7" />
+                   Chat with our Concierge to Finalize
+                 </button>
+              </div>
+            ) : (
+              <div className="flex gap-3">
+                <button
+                  onClick={prevStep}
+                  className="w-14 h-14 flex items-center justify-center border-2 border-stone-200 text-stone-600 rounded-2xl hover:bg-background transition-all active:scale-95 shrink-0"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                
+                <button
+                  onClick={nextStep}
+                  disabled={!isStepValid()}
+                  className="flex-1 h-14 flex items-center justify-center gap-2 bg-primary text-white font-bold text-lg rounded-2xl shadow-lg shadow-primary/30 hover:bg-primary-dark transition-all active:scale-95 disabled:opacity-50 disabled:shadow-none"
+                >
+                  {step === 'final' ? 'Book on WhatsApp' : 'Continue'}
+                  {step !== 'final' && <ChevronRight className="w-5 h-5" />}
+                </button>
               </div>
             )}
-            <div className="flex gap-3">
-              <button
-                onClick={prevStep}
-                className="w-14 h-14 flex items-center justify-center border-2 border-stone-200 text-stone-600 rounded-2xl hover:bg-background transition-all active:scale-95 shrink-0"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              
-              <button
-                onClick={nextStep}
-                disabled={!isStepValid()}
-                className="flex-1 h-14 flex items-center justify-center gap-2 bg-primary text-white font-bold text-lg rounded-2xl shadow-lg shadow-primary/30 hover:bg-primary-dark transition-all active:scale-95 disabled:opacity-50 disabled:shadow-none"
-              >
-                {step === 'final' ? 'Book on WhatsApp' : 'Continue'}
-                {step !== 'final' && <ChevronRight className="w-5 h-5" />}
-              </button>
-            </div>
           </div>
+          
+          {/* Escape Hatch */}
+          {(step === 1 || step === 2) && (
+            <div className="pb-4 text-center">
+              <a href="https://wa.me/+916026504087?text=Hi,%20I'm%20a%20bit%20overwhelmed%20trying%20to%20build%20a%20custom%20trip.%20Can%20your%20experts%20help%20me?" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm text-stone-400 hover:text-primary transition-colors font-medium">
+                Overwhelmed? Let our local experts build an itinerary for you. <MessageCircle className="w-4 h-4" />
+              </a>
+            </div>
+          )}
         </div>
       )}
 
@@ -410,6 +502,27 @@ export default function TripBuilder({ initialData, onComplete }) {
               router.replace('?' + params.toString());
             }}
           />
+        </div>
+      )}
+
+      {/* Restore State Prompt */}
+      {showRestorePrompt && (
+        <div className="absolute inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in">
+          <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center">
+             <div className="w-16 h-16 bg-primary/10 text-primary-dark rounded-full flex items-center justify-center mx-auto mb-4">
+               <RefreshCw className="w-8 h-8" />
+             </div>
+             <h3 className="font-serif text-2xl font-bold text-foreground mb-2">Welcome Back!</h3>
+             <p className="text-stone-500 mb-8">We found a custom itinerary you were working on earlier. Would you like to continue building it?</p>
+             <div className="flex flex-col gap-3">
+               <button onClick={handleRestoreState} className="w-full py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-2xl shadow-md transition-all active:scale-95">
+                 Yes, Resume Itinerary
+               </button>
+               <button onClick={handleDiscardState} className="w-full py-4 text-stone-500 hover:text-stone-800 font-bold transition-all">
+                 No, Start Fresh
+               </button>
+             </div>
+          </div>
         </div>
       )}
     </div>

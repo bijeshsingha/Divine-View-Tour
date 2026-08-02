@@ -2,8 +2,8 @@
 import React from 'react';
 import { User, Users, Calendar, Phone, Mail, FileText, BadgeCheck } from 'lucide-react';
 
-export default function StepFinalGuestDetails({ data, updateData, displayPrice, config }) {
-  const isCustom = !!data.region;
+export default function StepFinalGuestDetails({ data, updateData, displayPrice, config, path }) {
+  const isCustom = path === 'custom' || (!path && !!data.region);
   let title = '';
   let duration = '';
   if (!isCustom && data.packageId && config) {
@@ -11,7 +11,8 @@ export default function StepFinalGuestDetails({ data, updateData, displayPrice, 
     title = pkg?.title || 'Readymade Package';
     duration = pkg?.duration || '';
   } else {
-    title = `Custom ${data.region?.charAt(0).toUpperCase()}${data.region?.slice(1)} Tour`;
+    const regionTitle = config?.regions?.[data.region]?.title || data.region;
+    title = `Custom ${regionTitle} Tour`;
     duration = `${data.tripDays} Days`;
   }
 
@@ -43,7 +44,7 @@ export default function StepFinalGuestDetails({ data, updateData, displayPrice, 
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-stone-500">Accommodation</span>
-                <span className="text-sm font-bold text-foreground text-right">{data.stayType === 'none' ? 'Self-arranged' : data.stayType?.replace('_', ' ').toUpperCase() || 'Standard'}</span>
+                <span className="text-sm font-bold text-foreground text-right">{data.stayType === 'none' ? 'Self-arranged' : (typeof data.stayType === 'string' ? data.stayType.replace('_', ' ').toUpperCase() : 'Standard')}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-stone-500">Transport</span>
@@ -127,7 +128,7 @@ export default function StepFinalGuestDetails({ data, updateData, displayPrice, 
             </div>
 
             {/* Travelers & Dates Row */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-6">
               <div>
                 <label className="flex items-center gap-2 mb-2 font-bold text-sm text-foreground">
                   <Users className="w-4 h-4 text-primary-dark" /> Travelers
@@ -153,13 +154,29 @@ export default function StepFinalGuestDetails({ data, updateData, displayPrice, 
               </div>
 
               <div>
-                <label className="flex items-center gap-2 mb-2 font-bold text-sm text-foreground">
-                  <Calendar className="w-4 h-4 text-primary-dark" /> Travel Date
-                </label>
+                <div className="flex flex-col gap-1.5 mb-2">
+                  <label className="flex items-center gap-2 font-bold text-sm text-foreground">
+                    <Calendar className="w-4 h-4 text-primary-dark" /> When are you planning to escape?
+                  </label>
+                  <label className="flex items-center gap-2 text-sm text-stone-500 cursor-pointer w-max">
+                    <input 
+                      type="checkbox" 
+                      className="accent-primary w-4 h-4 rounded" 
+                      checked={data.flexibleDates || false} 
+                      onChange={(e) => {
+                         updateData('flexibleDates', e.target.checked);
+                         if (e.target.checked) updateData('checkInDate', 'Flexible');
+                         else updateData('checkInDate', '');
+                      }} 
+                    />
+                    I'm flexible on dates
+                  </label>
+                </div>
                 <input
                   type="date"
-                  className="w-full p-3.5 border border-stone-200 rounded-xl bg-stone-50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none text-stone-700 font-semibold transition-all"
-                  value={data.checkInDate || ''}
+                  disabled={data.flexibleDates}
+                  className={`w-full p-3.5 border border-stone-200 rounded-xl bg-stone-50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none text-stone-700 font-semibold transition-all ${data.flexibleDates ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  value={data.checkInDate !== 'Flexible' ? data.checkInDate : ''}
                   onChange={(e) => updateData('checkInDate', e.target.value)}
                 />
               </div>

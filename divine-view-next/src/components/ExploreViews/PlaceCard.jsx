@@ -50,7 +50,7 @@ export default function PlaceCard({ item, onSelectPlace, isFeatured }) {
   };
 
   return (
-    <div style={{ perspective: "1000px" }}>
+    <div style={{ perspective: "1000px" }} className="h-full">
       <motion.div
         variants={cardVariants}
         style={{ rotateX, rotateY }}
@@ -60,7 +60,7 @@ export default function PlaceCard({ item, onSelectPlace, isFeatured }) {
         className="text-left bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-200 flex flex-col hover:shadow-2xl transition-shadow group cursor-pointer h-full"
         onClick={() => onSelectPlace(item)}
       >
-        <div className={`relative w-full bg-foreground overflow-hidden ${isFeatured ? 'h-64 md:h-[400px] shrink-0' : 'h-56 shrink-0'}`}>
+        <div className="relative w-full bg-foreground overflow-hidden flex-1 min-h-[160px]">
           {item.videoPlaceholder ? (
             <div className="relative w-full h-full group">
               {item.gallery && item.gallery[0] ? (
@@ -125,13 +125,13 @@ export default function PlaceCard({ item, onSelectPlace, isFeatured }) {
           
           {/* Editorial Hover State Overlay */}
           <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none flex flex-col justify-end p-6">
-            <p className="text-white font-serif italic text-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-              "{item.description.substring(0, 80)}..."
+            <p className="text-white font-serif italic text-base md:text-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100 line-clamp-3">
+              "{item.description}"
             </p>
           </div>
         </div>
 
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="p-5 flex flex-col justify-between shrink-0">
         <div>
           <h3 className={`font-bold text-foreground line-clamp-1 ${isFeatured ? 'text-2xl font-serif' : 'text-xl'}`}>{item.title}</h3>
           <div className="flex items-center gap-1 text-stone-500 text-sm mt-1 mb-3">
