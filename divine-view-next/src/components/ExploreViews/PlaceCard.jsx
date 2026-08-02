@@ -9,11 +9,11 @@ const cardVariants = {
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { type: 'spring', stiffness: 300, damping: 24 }
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } 
   }
 };
 
-export default function PlaceCard({ item, onSelectPlace }) {
+export default function PlaceCard({ item, onSelectPlace, isFeatured }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef(null);
 
@@ -57,10 +57,10 @@ export default function PlaceCard({ item, onSelectPlace }) {
         whileHover={{ y: -6 }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="text-left bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-200 flex flex-col hover:shadow-2xl transition-shadow group cursor-pointer"
+        className="text-left bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-200 flex flex-col hover:shadow-2xl transition-shadow group cursor-pointer h-full"
         onClick={() => onSelectPlace(item)}
       >
-        <div className="relative h-56 w-full bg-foreground overflow-hidden">
+        <div className={`relative w-full bg-foreground overflow-hidden ${isFeatured ? 'h-64 md:h-[400px] shrink-0' : 'h-56 shrink-0'}`}>
           {item.videoPlaceholder ? (
             <div className="relative w-full h-full group">
               {item.gallery && item.gallery[0] ? (
@@ -122,12 +122,19 @@ export default function PlaceCard({ item, onSelectPlace }) {
               </span>
             ))}
           </div>
+          
+          {/* Editorial Hover State Overlay */}
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none flex flex-col justify-end p-6">
+            <p className="text-white font-serif italic text-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+              "{item.description.substring(0, 80)}..."
+            </p>
+          </div>
         </div>
 
       <div className="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <h3 className="text-xl font-bold text-foreground line-clamp-1">{item.title}</h3>
-          <div className="flex items-center gap-1 text-background0 text-sm mt-1 mb-3">
+          <h3 className={`font-bold text-foreground line-clamp-1 ${isFeatured ? 'text-2xl font-serif' : 'text-xl'}`}>{item.title}</h3>
+          <div className="flex items-center gap-1 text-stone-500 text-sm mt-1 mb-3">
             <MapPin className="w-3.5 h-3.5 shrink-0" />
             <span className="truncate">{item.location}</span>
           </div>

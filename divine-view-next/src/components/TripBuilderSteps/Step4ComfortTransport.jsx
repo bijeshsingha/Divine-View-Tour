@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { Bed, CarFront, Bus, Car, Minus, Plus, Check } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Step4ComfortTransport({ data, updateData, config, updateCarCount }) {
   return (
@@ -21,26 +22,42 @@ export default function Step4ComfortTransport({ data, updateData, config, update
               <h3 className="font-bold text-foreground mb-3 flex items-center gap-2">
                 <Bed className="w-5 h-5 text-primary-dark" /> Accommodation
               </h3>
-              <div className="space-y-3">
-                {config.stays.map(stay => (
-                  <button
-                    key={stay.id}
-                    onClick={() => updateData('stayType', stay.id)}
-                    className={`w-full text-left p-4 rounded-2xl border-2 transition-all flex items-center ${data.stayType === stay.id ? 'border-primary bg-primary/5 shadow-md' : 'border-stone-200 bg-white hover:border-primary/30'}`}
-                  >
-                    <div className="flex-1">
-                      <h3 className={`font-bold text-base ${data.stayType === stay.id ? 'text-foreground' : 'text-stone-700'}`}>{stay.label}</h3>
-                      <p className="text-xs text-background0 mt-1">{stay.desc}</p>
-                    </div>
-                  </button>
-                ))}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {config.stays.map((stay, idx) => {
+                  const isSelected = data.stayType === stay.id;
+                  const images = ['/images/placeholder.jpg', '/images/Meghalaya/6809d82be1f015b4b224ff5abe40c006.jpg', '/images/homescreen.jpg'];
+                  return (
+                    <button
+                      key={stay.id}
+                      onClick={() => updateData('stayType', stay.id)}
+                      className={`relative text-left rounded-2xl overflow-hidden border-2 transition-all group flex flex-col ${isSelected ? 'border-primary ring-2 ring-primary/20 shadow-lg scale-[1.02]' : 'border-stone-200 bg-white hover:border-primary/50 shadow-sm hover:shadow-md'}`}
+                    >
+                      <div className="relative h-32 w-full bg-foreground overflow-hidden">
+                        <Image src={images[idx % images.length]} alt={stay.label} fill className={`object-cover transition-transform duration-700 ${isSelected ? 'scale-105 opacity-90' : 'opacity-70 group-hover:scale-105 group-hover:opacity-100'}`} />
+                        {isSelected && (
+                          <div className="absolute top-3 right-3 bg-white text-primary p-1 rounded-full shadow-md z-10">
+                            <Check className="w-4 h-4" />
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                        <h3 className="absolute bottom-3 left-4 font-serif text-white font-bold text-lg z-10">{stay.label}</h3>
+                      </div>
+                      <div className="p-4 bg-white flex-1">
+                        <p className="text-xs text-stone-600 leading-relaxed">{stay.desc}</p>
+                      </div>
+                    </button>
+                  );
+                })}
                 <button
                     onClick={() => updateData('stayType', 'none')}
-                    className={`w-full text-left p-4 rounded-2xl border-2 transition-all flex items-center ${data.stayType === 'none' ? 'border-primary bg-primary/5 shadow-md' : 'border-stone-200 bg-white hover:border-primary/30'}`}
+                    className={`relative text-left rounded-2xl overflow-hidden border-2 transition-all flex flex-col items-center justify-center p-6 ${data.stayType === 'none' ? 'border-primary ring-2 ring-primary/20 shadow-lg scale-[1.02]' : 'border-stone-200 bg-stone-50 hover:border-primary/50 shadow-sm hover:shadow-md'}`}
                   >
-                    <div className="flex-1">
-                      <h3 className={`font-bold text-base ${data.stayType === 'none' ? 'text-foreground' : 'text-stone-700'}`}>No Accommodation Needed</h3>
-                      <p className="text-xs text-background0 mt-1">I already have my stay sorted.</p>
+                    <div className="flex flex-col items-center justify-center text-center space-y-2">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${data.stayType === 'none' ? 'bg-primary text-white' : 'bg-stone-200 text-stone-500'}`}>
+                        {data.stayType === 'none' ? <Check className="w-5 h-5" /> : <Bed className="w-5 h-5" />}
+                      </div>
+                      <h3 className={`font-serif font-bold text-lg ${data.stayType === 'none' ? 'text-primary' : 'text-stone-700'}`}>No Stay Needed</h3>
+                      <p className="text-xs text-stone-500">I already have my stay sorted.</p>
                     </div>
                 </button>
               </div>
@@ -95,36 +112,45 @@ export default function Step4ComfortTransport({ data, updateData, config, update
                        const isCapacityMet = totalCap >= data.travelerCount;
 
                        return (
-                         <>
-                           {config.cars.filter(c => c.id !== 'pool').map(car => {
+                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                           {config.cars.filter(c => c.id !== 'pool').map((car, idx) => {
                              const count = (data.privateCars || {})[car.id] || 0;
+                             const carImages = ['/images/placeholder.jpg', '/images/placeholder.jpg', '/images/placeholder.jpg'];
                              return (
                                <div 
                                  key={car.id} 
                                  onClick={() => count === 0 && !isCapacityMet && updateCarCount(car.id, 1)}
-                                 className={`w-full p-3 rounded-xl border-2 transition-all flex items-center justify-between ${count === 0 && !isCapacityMet ? 'cursor-pointer hover:border-primary/50' : ''} ${count > 0 ? 'border-primary bg-white shadow-sm' : 'border-stone-200 bg-white'}`}
+                                 className={`relative overflow-hidden rounded-2xl border-2 transition-all flex flex-col ${count === 0 && !isCapacityMet ? 'cursor-pointer hover:border-primary/50 shadow-sm hover:shadow-md' : ''} ${count > 0 ? 'border-primary ring-2 ring-primary/20 bg-white shadow-lg scale-[1.02]' : 'border-stone-200 bg-white'}`}
                                >
-                                 <div>
-                                   <h4 className={`font-bold text-sm ${count > 0 ? 'text-foreground' : 'text-stone-700'}`}>{car.label}</h4>
-                                   <p className="text-xs text-background0 mt-0.5">Capacity: {car.maxPax} pax</p>
+                                 <div className="relative h-24 w-full bg-foreground overflow-hidden">
+                                    <Image src={carImages[idx % carImages.length]} alt={car.label} fill className={`object-cover transition-transform duration-700 ${count > 0 ? 'scale-105 opacity-90' : 'opacity-70 group-hover:scale-105 group-hover:opacity-100'}`} />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
                                  </div>
-                                 <div className="flex items-center gap-3">
-                                   <button type="button" onClick={(e) => { e.stopPropagation(); updateCarCount(car.id, -1); }} disabled={count === 0} className="w-8 h-8 rounded-full bg-stone-50 flex items-center justify-center text-stone-600 disabled:opacity-50 hover:bg-stone-100 transition-all">
-                                     <Minus className="w-3 h-3" />
-                                   </button>
-                                   <span className="font-bold text-foreground w-4 text-center">{count}</span>
-                                   <button type="button" onClick={(e) => { e.stopPropagation(); updateCarCount(car.id, 1); }} disabled={isCapacityMet} className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary-dark disabled:bg-background disabled:text-slate-300 disabled:cursor-not-allowed hover:bg-primary/40 transition-all">
-                                     <Plus className="w-3 h-3" />
-                                   </button>
+                                 
+                                 <div className="p-4 flex items-center justify-between flex-1 bg-white">
+                                   <div>
+                                     <h4 className={`font-serif font-bold text-base ${count > 0 ? 'text-primary' : 'text-stone-700'}`}>{car.label}</h4>
+                                     <p className="text-xs text-stone-500 mt-0.5">Capacity: {car.maxPax} pax</p>
+                                   </div>
+                                   <div className="flex items-center gap-3">
+                                     <button type="button" onClick={(e) => { e.stopPropagation(); updateCarCount(car.id, -1); }} disabled={count === 0} className="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-600 disabled:opacity-30 hover:bg-stone-200 transition-all shadow-sm">
+                                       <Minus className="w-3 h-3" />
+                                     </button>
+                                     <span className="font-bold text-foreground w-4 text-center">{count}</span>
+                                     <button type="button" onClick={(e) => { e.stopPropagation(); updateCarCount(car.id, 1); }} disabled={isCapacityMet} className="w-8 h-8 rounded-full bg-primary text-white disabled:bg-stone-200 disabled:text-stone-400 disabled:cursor-not-allowed hover:bg-primary-dark transition-all shadow-sm">
+                                       <Plus className="w-3 h-3" />
+                                     </button>
+                                   </div>
                                  </div>
                                </div>
                              );
                            })}
-                           {totalCap < data.travelerCount && (
-                             <p className="text-red-500 text-sm mt-3 font-semibold bg-red-50 p-3 rounded-xl">⚠️ Need more capacity. Fits {totalCap} out of {data.travelerCount} travelers.</p>
-                           )}
-                         </>
-                       );
+                         </div>
+                         {totalCap < data.travelerCount && (
+                           <p className="text-red-500 text-sm mt-3 font-semibold bg-red-50 p-3 rounded-xl">⚠️ Need more capacity. Fits {totalCap} out of {data.travelerCount} travelers.</p>
+                         )}
+                       </>
+                     );
                     })()}
                   </div>
                 )}

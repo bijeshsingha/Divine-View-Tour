@@ -8,11 +8,11 @@ export async function generateMetadata({ params }) {
   const pkg = staticConfig.packages.find((p) => p.id === packageId);
   
   if (!pkg) {
-    return { title: 'Package Not Found | Divine View Tours' };
+    return { title: 'Package Not Found' };
   }
 
   return {
-    title: `${pkg.title} | Divine View Tours`,
+    title: pkg.title,
     description: pkg.desc,
   };
 }

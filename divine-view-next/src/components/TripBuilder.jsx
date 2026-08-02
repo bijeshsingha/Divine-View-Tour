@@ -298,7 +298,7 @@ export default function TripBuilder({ initialData, onComplete }) {
       case 4:
         return <Step4ComfortTransport data={data} updateData={updateData} config={config} updateCarCount={updateCarCount} />;
       case 'final':
-        return <StepFinalGuestDetails data={data} updateData={updateData} />;
+        return <StepFinalGuestDetails data={data} updateData={updateData} displayPrice={displayPrice} config={config} />;
       default:
         return null;
     }
@@ -328,10 +328,10 @@ export default function TripBuilder({ initialData, onComplete }) {
 
   return (
     <div className="flex flex-col h-full bg-background relative overflow-hidden">
-      {/* Progress Bar */}
-      <div className="h-2 bg-stone-100 w-full shrink-0">
+      {/* Minimalist Progress Line */}
+      <div className="h-[1px] bg-stone-200 w-full shrink-0">
         <div
-          className="h-full bg-primary transition-all duration-500 ease-out"
+          className="h-full bg-primary transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -344,7 +344,7 @@ export default function TripBuilder({ initialData, onComplete }) {
       {step !== 'fork' && step !== 'catalog' && (
         <div className="bg-white border-t border-stone-100 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] z-20 mt-auto shrink-0 flex flex-col">
           {/* Live Ticker */}
-          {step !== 1 && (
+          {step !== 1 && step !== 'final' && (
             <div className="flex items-center justify-between px-6 py-3 bg-background/80 border-b border-stone-100">
               <span className="text-sm font-semibold text-background0">Estimated Cost</span>
               <div className="flex items-baseline gap-1">
