@@ -902,14 +902,15 @@
 
 /* Explore Band (Full Viewport Fill) */
 .dzukou-root .explore-band {
-  min-height: 85vh;
-  height: 90vh;
+  min-height: 100vh;
+  height: 100vh;
   position: relative;
   color: #ffffff;
 }
 
 .dzukou-root .explore-band > img {
   object-fit: cover;
+  object-position: center 25%;
 }
 
 .dzukou-root .explore-shade {
