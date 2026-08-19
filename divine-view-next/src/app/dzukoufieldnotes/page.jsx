@@ -30,8 +30,16 @@ export const metadata = {
 
 export default function DzukouPage() {
   return (
-    <div className={`${dmMono.variable} ${oswald.variable} ${manrope.variable}`}>
-      <TrekGuide />
-    </div>
+    <>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap"
+      />
+      <div className={`${dmMono.variable} ${oswald.variable} ${manrope.variable}`}>
+        <TrekGuide />
+      </div>
+    </>
   );
 }

@@ -10,13 +10,13 @@
   --dz-line: rgba(29, 33, 31, 0.16);
   --dz-line-light: rgba(255, 255, 255, 0.25);
 
-  --dz-font-body: var(--font-manrope), 'Manrope', -apple-system, sans-serif;
-  --dz-font-heading: var(--font-oswald), 'Oswald', sans-serif;
-  --dz-font-mono: var(--font-dm-mono), 'DM Mono', monospace;
+  --dz-font-body: var(--font-manrope), 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --dz-font-heading: var(--font-oswald), 'Oswald', -apple-system, BlinkMacSystemFont, sans-serif;
+  --dz-font-mono: var(--font-dm-mono), 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   background: var(--dz-paper);
   color: var(--dz-charcoal);
-  font-family: var(--dz-font-body);
+  font-family: var(--dz-font-body) !important;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   position: relative;
@@ -28,7 +28,8 @@
 
 .dzukou-root button, 
 .dzukou-root a {
-  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
   color: inherit;
   background: none;
   border: none;
@@ -52,7 +53,7 @@
 
 .dzukou-root .eyebrow {
   margin: 0 0 18px;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-size: 11px;
   font-weight: 500;
   line-height: 1.2;
@@ -83,7 +84,7 @@
 
 .dzukou-root h2 {
   margin-bottom: 0;
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: clamp(42px, 5.5vw, 80px);
   line-height: 1.05;
@@ -102,7 +103,7 @@
   padding: 10px 20px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 10000;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.08em;
@@ -164,7 +165,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-size: 11px;
   font-weight: 600;
   line-height: 1.1;
@@ -189,6 +190,7 @@
 .dzukou-root .nav-links {
   display: flex;
   gap: 34px;
+  font-family: var(--dz-font-body) !important;
   font-size: 13px;
   font-weight: 500;
   transition: gap 0.3s ease, font-size 0.3s ease;
@@ -212,7 +214,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-size: 12px;
   font-weight: 600;
   line-height: 1;
@@ -278,7 +280,7 @@
 
 .dzukou-root .hero h1 {
   margin: 10px 0 20px;
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-size: clamp(72px, 11.5vw, 156px);
   font-weight: 600;
   line-height: 1.0;
@@ -308,6 +310,7 @@
 }
 
 .dzukou-root .hero-bottom p {
+  font-family: var(--dz-font-body) !important;
   font-size: 15px;
   line-height: 1.7;
   max-width: 480px;
@@ -362,7 +365,7 @@
 }
 
 .dzukou-root .quick-stats span {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.15em;
@@ -371,7 +374,7 @@
 }
 
 .dzukou-root .quick-stats strong {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 22px;
   color: var(--dz-charcoal);
@@ -379,6 +382,7 @@
 }
 
 .dzukou-root .quick-stats small {
+  font-family: var(--dz-font-body) !important;
   font-size: 10px;
   color: #68706a;
 }
@@ -392,6 +396,7 @@
 }
 
 .dzukou-root .intro-copy > p {
+  font-family: var(--dz-font-body) !important;
   font-size: 17px;
   line-height: 1.75;
   margin: 0 0 36px;
@@ -407,13 +412,14 @@
 }
 
 .dzukou-root .mini-rule span {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 11px;
   color: var(--dz-terracotta);
 }
 
 .dzukou-root .mini-rule p {
+  font-family: var(--dz-font-body) !important;
   font-size: 13px;
   margin: 0;
   color: #4a524c;
@@ -434,6 +440,7 @@
 }
 
 .dzukou-root .section-head > p {
+  font-family: var(--dz-font-body) !important;
   max-width: 390px;
   margin: 0;
   line-height: 1.7;
@@ -472,7 +479,7 @@
 }
 
 .dzukou-root .tab-header span {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 24px;
   color: var(--dz-forest);
@@ -482,7 +489,7 @@
 .dzukou-root .tab-header b {
   background: var(--dz-ochre);
   color: var(--dz-deep);
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 700;
   font-size: 8px;
   padding: 2px 6px;
@@ -490,6 +497,7 @@
 }
 
 .dzukou-root .plan-tab-item small {
+  font-family: var(--dz-font-body) !important;
   color: #656c67;
   font-size: 11px;
   font-weight: 500;
@@ -518,7 +526,7 @@
 }
 
 .dzukou-root .plan-title h3 {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 38px;
   margin: 0 0 12px;
@@ -527,6 +535,7 @@
 }
 
 .dzukou-root .plan-title > p:last-child {
+  font-family: var(--dz-font-body) !important;
   font-size: 14px;
   line-height: 1.7;
   max-width: 520px;
@@ -548,7 +557,7 @@
 
 .dzukou-root .plan-data span {
   display: block;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-size: 8px;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -558,7 +567,7 @@
 }
 
 .dzukou-root .plan-data strong {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 16px;
   color: var(--dz-forest);
@@ -567,7 +576,7 @@
 
 .dzukou-root .calc-link {
   display: inline-block;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-size: 10px;
   font-weight: 500;
   color: var(--dz-terracotta);
@@ -612,7 +621,7 @@
 }
 
 .dzukou-root .day-num {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 11px;
   line-height: 1.4;
@@ -625,7 +634,7 @@
 }
 
 .dzukou-root .day-text strong {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
@@ -635,7 +644,7 @@
 }
 
 .dzukou-root .day-text small {
-  font-family: var(--dz-font-body);
+  font-family: var(--dz-font-body) !important;
   font-size: 12px;
   color: #6c746e;
   margin-top: 2px;
@@ -677,7 +686,7 @@
   display: flex;
   gap: 22px;
   margin-bottom: 6px;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 500;
   font-size: 11px;
   line-height: 1.4;
@@ -686,7 +695,7 @@
 }
 
 .dzukou-root .drawer-desc {
-  font-family: var(--dz-font-body);
+  font-family: var(--dz-font-body) !important;
   font-size: 13.5px;
   line-height: 1.65;
   color: #4a524c;
@@ -695,7 +704,7 @@
 
 .dzukou-root .drawer-note {
   margin: 0;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 400;
   font-size: 11.5px;
   line-height: 1.6;
@@ -720,7 +729,7 @@
 }
 
 .dzukou-root .day-detail > span {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.15em;
@@ -728,7 +737,7 @@
 }
 
 .dzukou-root .day-detail h3 {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 36px;
   text-transform: uppercase;
@@ -737,7 +746,7 @@
 }
 
 .dzukou-root .day-detail h4 {
-  font-family: var(--dz-font-body);
+  font-family: var(--dz-font-body) !important;
   font-size: 13px;
   color: var(--dz-sage);
   margin: 0 0 22px;
@@ -745,7 +754,7 @@
 }
 
 .dzukou-root .day-detail p {
-  font-family: var(--dz-font-body);
+  font-family: var(--dz-font-body) !important;
   font-size: 14px;
   line-height: 1.8;
   color: #d5ddd7;
@@ -756,7 +765,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 18px;
   margin-top: 24px;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-size: 11px;
   line-height: 1.6;
   color: var(--dz-sage);
@@ -814,7 +823,7 @@
 
 .dzukou-root .route-stop span {
   display: block;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 9px;
   color: var(--dz-ochre);
@@ -823,7 +832,7 @@
 
 .dzukou-root .route-stop strong {
   display: block;
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 17px;
   text-transform: uppercase;
@@ -832,7 +841,7 @@
 
 .dzukou-root .route-stop small {
   display: block;
-  font-family: var(--dz-font-body);
+  font-family: var(--dz-font-body) !important;
   font-size: 11px;
   color: var(--dz-sage);
   margin-top: 2px;
@@ -861,7 +870,7 @@
 }
 
 .dzukou-root .route-detail-head span {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 10px;
   color: var(--dz-terracotta);
@@ -869,7 +878,7 @@
 }
 
 .dzukou-root .route-detail-head h3 {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 26px;
   text-transform: uppercase;
@@ -883,20 +892,20 @@
 
 .dzukou-root .route-detail-meta strong {
   display: block;
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 14px;
   color: var(--dz-forest);
 }
 
 .dzukou-root .route-detail-meta small {
-  font-family: var(--dz-font-body);
+  font-family: var(--dz-font-body) !important;
   font-size: 11px;
   color: #69706b;
 }
 
 .dzukou-root .route-detail p {
-  font-family: var(--dz-font-body);
+  font-family: var(--dz-font-body) !important;
   font-size: 14px;
   line-height: 1.7;
   color: #4a524c;
@@ -926,13 +935,14 @@
   left: 18px;
   background: var(--dz-paper);
   padding: 8px 12px;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 8px;
   letter-spacing: 0.12em;
 }
 
 .dzukou-root .signature-copy > p {
+  font-family: var(--dz-font-body) !important;
   font-size: 16px;
   line-height: 1.8;
   color: #59615b;
@@ -940,7 +950,7 @@
 }
 
 .dzukou-root .quote {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 500;
   font-size: 24px;
   line-height: 1.4;
@@ -954,7 +964,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -1001,7 +1011,7 @@
 }
 
 .dzukou-root .explore-copy .index {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 500;
   font-size: 12px;
   border: 1px solid rgba(255, 255, 255, 0.6);
@@ -1018,6 +1028,7 @@
 }
 
 .dzukou-root .explore-copy p:last-child {
+  font-family: var(--dz-font-body) !important;
   max-width: 500px;
   line-height: 1.8;
   font-size: 14px;
@@ -1068,13 +1079,14 @@
 }
 
 .dzukou-root .season-copy span {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 10px;
   color: var(--dz-ochre);
 }
 
 .dzukou-root .season-copy strong {
+  font-family: var(--dz-font-body) !important;
   font-size: 12px;
 }
 
@@ -1099,7 +1111,7 @@
 }
 
 .dzukou-root .check-content h3 {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 26px;
   text-transform: uppercase;
@@ -1130,7 +1142,7 @@
   width: 18px;
   height: 18px;
   border: 1px solid #8c928e;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 11px;
   font-style: normal;
@@ -1155,14 +1167,14 @@
 }
 
 .dzukou-root .check-footer small {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 9px;
   color: #6d746f;
 }
 
 .dzukou-root .print-link {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 500;
   font-size: 9px;
   border-bottom: 1px solid;
@@ -1190,7 +1202,7 @@
 }
 
 .dzukou-root .advice-grid span {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -1198,7 +1210,7 @@
 }
 
 .dzukou-root .advice-grid h3 {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 24px;
   text-transform: uppercase;
@@ -1207,6 +1219,7 @@
 }
 
 .dzukou-root .advice-grid p {
+  font-family: var(--dz-font-body) !important;
   font-size: 13px;
   line-height: 1.7;
   color: #626964;
@@ -1237,6 +1250,7 @@
 }
 
 .dzukou-root .night-copy p:last-child {
+  font-family: var(--dz-font-body) !important;
   max-width: 440px;
   font-size: 14px;
   line-height: 1.8;
@@ -1255,6 +1269,7 @@
 }
 
 .dzukou-root .footer p {
+  font-family: var(--dz-font-body) !important;
   margin: 0;
   font-size: 11px;
   line-height: 1.7;
@@ -1263,7 +1278,7 @@
 }
 
 .dzukou-root .footer > a {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 9px;
   letter-spacing: 0.12em;
@@ -1303,7 +1318,7 @@
 }
 
 .dzukou-root .modal-head h2 {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 30px;
   margin: 4px 0 0;
@@ -1343,7 +1358,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 10px;
   color: #6d746f;
@@ -1351,7 +1366,7 @@
 }
 
 .dzukou-root .control-label strong {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 14px;
   color: var(--dz-forest);
@@ -1397,7 +1412,7 @@
   padding: 8px 4px;
   border: 1px solid var(--dz-line);
   background: var(--dz-cream);
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 12px;
   text-align: center;
@@ -1426,7 +1441,7 @@
 }
 
 .dzukou-root .option-row button strong {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
@@ -1434,6 +1449,7 @@
 }
 
 .dzukou-root .option-row button small {
+  font-family: var(--dz-font-body) !important;
   font-size: 11px;
   color: #69706b;
 }
@@ -1464,7 +1480,7 @@
 }
 
 .dzukou-root .control-checkbox strong {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
@@ -1472,6 +1488,7 @@
 }
 
 .dzukou-root .control-checkbox small {
+  font-family: var(--dz-font-body) !important;
   font-size: 11px;
   color: #69706b;
 }
@@ -1492,14 +1509,14 @@
 }
 
 .dzukou-root .total-display strong {
-  font-family: var(--dz-font-heading);
+  font-family: var(--dz-font-heading) !important;
   font-weight: 600;
   font-size: 38px;
   line-height: 1;
 }
 
 .dzukou-root .total-display small {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 500;
   font-size: 11px;
   color: var(--dz-sage);
@@ -1508,6 +1525,7 @@
 .dzukou-root .group-total {
   display: flex;
   justify-content: space-between;
+  font-family: var(--dz-font-body) !important;
   font-size: 11px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   padding-bottom: 10px;
@@ -1521,6 +1539,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  font-family: var(--dz-font-body) !important;
   font-size: 12px;
 }
 
@@ -1531,7 +1550,7 @@
 }
 
 .dzukou-root .breakdown strong {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   color: #ffffff;
 }
 
@@ -1545,7 +1564,7 @@
 }
 
 .dzukou-root .btn-modal-action {
-  font-family: var(--dz-font-mono);
+  font-family: var(--dz-font-mono) !important;
   font-weight: 600;
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -1666,7 +1685,7 @@
     margin: 0 0 24px;
   }
 
-  .dzukou-root .section-head {
+  .section-head {
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
