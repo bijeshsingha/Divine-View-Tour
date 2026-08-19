@@ -5,7 +5,7 @@ import { useMemo, useState, useEffect } from "react";
 
 const PHONE_NUMBER = "+916026504087";
 const PHONE_DISPLAY = "+91 60265 04087";
-const WHATSAPP_URL = "https://wa.me/916026504087?text=Hi%20Divine%20View%20Tours,%20I%20would%20like%20to%20plan%20and%20book%20a%20trek%20to%20Dzukou%20Valley.";
+const WHATSAPP_URL = "https://wa.me/916026504087?text=Hi%20Divine%20View%20Tours,%20I%20would%20like%20to%20plan%20a%20trek%20to%20Dzukou%20Valley.";
 
 const plans = [
   {
@@ -361,22 +361,6 @@ function ArrowIcon() {
   );
 }
 
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" width="15" height="15">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-    </svg>
-  );
-}
-
-function WhatsAppIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="15" height="15">
-      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.23.9 2.43 1.02 2.6.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.59.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.17-.48-.3z"/>
-    </svg>
-  );
-}
-
 function MountainMark() {
   return (
     <svg viewBox="0 0 48 34" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7">
@@ -404,7 +388,6 @@ export default function TrekGuide() {
 
   const plan = useMemo(() => plans.find((item) => item.id === selected) || plans[2], [selected]);
 
-  // Smooth scroll listener for navbar morph
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 70) {
@@ -486,16 +469,11 @@ Accommodation: ${calcStay === "dorm" ? "Rest House Dormitory" : "Tented Pitch"}
 Transit: ${calcTransport === "shared" ? "Shared Sumo & Train" : "Private 4x4 Bolero"}
 Guide: ${calcGuide ? "Local Angami Guide" : "Self-Guided"}
 Estimated Total: ₹${calculatedCost.perPerson.toLocaleString()} per person (Group: ₹${calculatedCost.totalGroup.toLocaleString()})
-Contact & Booking: ${PHONE_DISPLAY}`;
+Route: Guwahati → Dimapur → Kohima → Viswema → Dzukou Valley → Jakhama → Guwahati`;
 
     navigator.clipboard.writeText(text).then(() => {
       showToast("Copied trip summary to clipboard");
     });
-  };
-
-  const getWhatsAppPlanLink = () => {
-    const text = `Hi Divine View Tours, I would like to plan a ${calcDays}-Day Dzukou Valley Trek for ${calcTrekkers} person(s). Stay: ${calcStay === 'dorm' ? 'Rest House' : 'Tents'}. Transport: ${calcTransport}. Estimated: ₹${calculatedCost.perPerson.toLocaleString()} per person.`;
-    return `https://wa.me/916026504087?text=${encodeURIComponent(text)}`;
   };
 
   return (
@@ -508,7 +486,7 @@ Contact & Booking: ${PHONE_DISPLAY}`;
           </div>
         )}
 
-        {/* Smooth Morphing Minimalist Header */}
+        {/* Pure Morphing Minimalist Header */}
         <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
           <div className="nav-container">
             <a
@@ -543,10 +521,6 @@ Contact & Booking: ${PHONE_DISPLAY}`;
                 }}
               >
                 Calculator
-              </a>
-              <a href={`tel:${PHONE_NUMBER}`} className="nav-phone-link">
-                <PhoneIcon />
-                <span>{PHONE_DISPLAY}</span>
               </a>
             </div>
 
@@ -587,25 +561,14 @@ Contact & Booking: ${PHONE_DISPLAY}`;
                 A practical, visual trek planner from Guwahati—built for clear choices, lighter packs and slower mornings
                 above the clouds.
               </p>
-              <div className="hero-actions">
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hero-contact-pill"
-                >
-                  <WhatsAppIcon />
-                  <span>Book via WhatsApp</span>
-                </a>
-                <a
-                  href="#choose"
-                  onClick={(e) => scrollToSection(e, "choose")}
-                  className="round-link"
-                  aria-label="Explore itinerary options"
-                >
-                  <ArrowIcon />
-                </a>
-              </div>
+              <a
+                href="#choose"
+                onClick={(e) => scrollToSection(e, "choose")}
+                className="round-link"
+                aria-label="Explore itinerary options"
+              >
+                <ArrowIcon />
+              </a>
             </div>
           </div>
 
@@ -723,7 +686,7 @@ Contact & Booking: ${PHONE_DISPLAY}`;
               </div>
             </div>
 
-            {/* Day Grid with Minimalist Field Note Typography */}
+            {/* Day Grid with Pure Minimalist Field Note Typography */}
             <div className="day-grid">
               <div className="days-list">
                 {plan.days.map((day, index) => {
@@ -846,27 +809,15 @@ Contact & Booking: ${PHONE_DISPLAY}`;
               between rounded hills without needing to race for the exit.
             </p>
             <div className="quote">“Arrive with enough time to notice the landscape changing.”</div>
-            <div className="signature-actions">
-              <a
-                href="#choose"
-                onClick={(e) => {
-                  scrollToSection(e, "choose");
-                  choosePlan("five");
-                }}
-                className="signature-link"
-              >
-                Open the 5-day plan <ArrowIcon />
-              </a>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whatsapp-action-link"
-              >
-                <WhatsAppIcon />
-                <span>Book 5D Trek</span>
-              </a>
-            </div>
+            <a
+              href="#choose"
+              onClick={(e) => {
+                scrollToSection(e, "choose");
+                choosePlan("five");
+              }}
+            >
+              Open the 5-day plan <ArrowIcon />
+            </a>
           </div>
         </section>
 
@@ -1016,39 +967,7 @@ Contact & Booking: ${PHONE_DISPLAY}`;
           </div>
         </section>
 
-        {/* Direct Booking & Trip Planning Callout */}
-        <section className="booking-callout shell section-pad">
-          <div className="booking-box">
-            <div className="booking-text">
-              <p className="eyebrow">DIRECT PLANNING & RESERVATIONS</p>
-              <h2>Plan Your Dzukou Journey</h2>
-              <p>
-                Need private cabs, SAYO Rest House permits, camping gear, or an experienced local Angami guide?
-                Connect directly with our route team.
-              </p>
-            </div>
-            <div className="booking-buttons">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-booking whatsapp"
-              >
-                <WhatsAppIcon />
-                <span>WhatsApp Us ({PHONE_DISPLAY})</span>
-              </a>
-              <a
-                href={`tel:${PHONE_NUMBER}`}
-                className="btn-booking call"
-              >
-                <PhoneIcon />
-                <span>Call {PHONE_DISPLAY}</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* Footer */}
+        {/* Footer with Tasteful, Minimalist Bottom Nudge */}
         <footer className="footer shell">
           <div className="brand">
             <MountainMark />
@@ -1058,11 +977,11 @@ Contact & Booking: ${PHONE_DISPLAY}`;
               FIELD NOTES
             </span>
           </div>
-          <div className="footer-contact">
+          <div className="footer-nudge">
             <p>
-              Plan lightly. Walk responsibly.
+              For local driver connects, rest house bookings or custom trek planning:
               <br />
-              Trip Bookings & Support: <a href={`tel:${PHONE_NUMBER}`}><strong>{PHONE_DISPLAY}</strong></a> · <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              <a href={`tel:${PHONE_NUMBER}`}><strong>{PHONE_DISPLAY}</strong></a> · <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a>
             </p>
           </div>
           <a href="#top" onClick={(e) => scrollToSection(e, "top")}>
@@ -1208,7 +1127,7 @@ Contact & Booking: ${PHONE_DISPLAY}`;
                   </div>
                 </div>
 
-                {/* Estimate Summary with Direct WhatsApp & Call Booking */}
+                {/* Estimate Summary */}
                 <div className="modal-summary">
                   <span className="eyebrow light">ESTIMATE</span>
                   <div className="total-display">
@@ -1244,24 +1163,11 @@ Contact & Booking: ${PHONE_DISPLAY}`;
                   </div>
 
                   <div className="modal-actions">
-                    <a
-                      href={getWhatsAppPlanLink()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-modal-action whatsapp"
-                    >
-                      <WhatsAppIcon />
-                      <span>Book Plan on WhatsApp</span>
-                    </a>
-                    <a
-                      href={`tel:${PHONE_NUMBER}`}
-                      className="btn-modal-action call"
-                    >
-                      <PhoneIcon />
-                      <span>Call {PHONE_DISPLAY}</span>
-                    </a>
-                    <button className="btn-modal-action secondary" onClick={copyTripSummary}>
+                    <button className="btn-modal-action" onClick={copyTripSummary}>
                       Copy summary
+                    </button>
+                    <button className="btn-modal-action secondary" onClick={() => window.print()}>
+                      Print plan
                     </button>
                   </div>
                 </div>
