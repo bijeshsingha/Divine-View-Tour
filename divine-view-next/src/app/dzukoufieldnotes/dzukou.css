@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&display=swap');
-
 .dzukou-root {
   --dz-forest: #173b2e;
   --dz-deep: #0d241c;
@@ -12,9 +10,13 @@
   --dz-line: rgba(29, 33, 31, 0.16);
   --dz-line-light: rgba(255, 255, 255, 0.25);
 
+  --dz-font-body: var(--font-manrope), 'Manrope', -apple-system, sans-serif;
+  --dz-font-heading: var(--font-oswald), 'Oswald', sans-serif;
+  --dz-font-mono: var(--font-dm-mono), 'DM Mono', monospace;
+
   background: var(--dz-paper);
   color: var(--dz-charcoal);
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--dz-font-body);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   position: relative;
@@ -50,7 +52,10 @@
 
 .dzukou-root .eyebrow {
   margin: 0 0 18px;
-  font: 500 11px/1.2 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -78,8 +83,11 @@
 
 .dzukou-root h2 {
   margin-bottom: 0;
-  font: 700 clamp(38px, 5vw, 72px) / 1.1 'Manrope', -apple-system, sans-serif;
-  letter-spacing: -0.01em;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: clamp(42px, 5.5vw, 80px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
   text-transform: uppercase;
 }
 
@@ -94,7 +102,9 @@
   padding: 10px 20px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 10000;
-  font: 500 11px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-size: 11px;
+  font-weight: 500;
   letter-spacing: 0.08em;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   animation: dzToastFade 0.2s ease;
@@ -154,7 +164,10 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font: 600 11px/1.1 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.1;
   letter-spacing: 0.12em;
   color: #ffffff;
 }
@@ -199,7 +212,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font: 600 12px/1 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #ffffff;
@@ -224,9 +240,9 @@
   stroke-width: 1.6;
 }
 
-/* Hero (Full Viewport Fill) */
+/* Hero */
 .dzukou-root .hero {
-  min-height: 100vh;
+  min-height: 720px;
   height: 100vh;
   position: relative;
   color: #ffffff;
@@ -262,8 +278,11 @@
 
 .dzukou-root .hero h1 {
   margin: 10px 0 20px;
-  font: 800 clamp(64px, 10vw, 140px) / 1.0 'Manrope', -apple-system, sans-serif;
-  letter-spacing: -0.02em;
+  font-family: var(--dz-font-heading);
+  font-size: clamp(72px, 11.5vw, 156px);
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
   text-transform: uppercase;
 }
 
@@ -343,14 +362,18 @@
 }
 
 .dzukou-root .quick-stats span {
-  font: 500 9px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-size: 9px;
+  font-weight: 500;
   letter-spacing: 0.15em;
   color: #68706a;
   margin-bottom: 4px;
 }
 
 .dzukou-root .quick-stats strong {
-  font: 600 22px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 22px;
   color: var(--dz-charcoal);
   line-height: 1.1;
 }
@@ -384,7 +407,9 @@
 }
 
 .dzukou-root .mini-rule span {
-  font: 600 11px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 11px;
   color: var(--dz-terracotta);
 }
 
@@ -447,7 +472,9 @@
 }
 
 .dzukou-root .tab-header span {
-  font: 600 24px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 24px;
   color: var(--dz-forest);
   line-height: 1;
 }
@@ -455,7 +482,9 @@
 .dzukou-root .tab-header b {
   background: var(--dz-ochre);
   color: var(--dz-deep);
-  font: 700 8px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 700;
+  font-size: 8px;
   padding: 2px 6px;
   border-radius: 2px;
 }
@@ -489,7 +518,9 @@
 }
 
 .dzukou-root .plan-title h3 {
-  font: 600 38px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 38px;
   margin: 0 0 12px;
   text-transform: uppercase;
   color: var(--dz-forest);
@@ -517,7 +548,9 @@
 
 .dzukou-root .plan-data span {
   display: block;
-  font: 500 8px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-size: 8px;
+  font-weight: 500;
   letter-spacing: 0.12em;
   color: #6e756f;
   margin-bottom: 6px;
@@ -525,14 +558,18 @@
 }
 
 .dzukou-root .plan-data strong {
-  font: 600 16px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 16px;
   color: var(--dz-forest);
   display: block;
 }
 
 .dzukou-root .calc-link {
   display: inline-block;
-  font: 500 10px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-size: 10px;
+  font-weight: 500;
   color: var(--dz-terracotta);
   margin-top: 4px;
   border-bottom: 1px solid;
@@ -575,7 +612,10 @@
 }
 
 .dzukou-root .day-num {
-  font: 600 11px/1.4 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1.4;
   color: #6c746e;
   letter-spacing: 0.04em;
 }
@@ -585,7 +625,9 @@
 }
 
 .dzukou-root .day-text strong {
-  font: 600 16px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 16px;
   text-transform: uppercase;
   color: var(--dz-forest);
   line-height: 1.2;
@@ -593,6 +635,7 @@
 }
 
 .dzukou-root .day-text small {
+  font-family: var(--dz-font-body);
   font-size: 12px;
   color: #6c746e;
   margin-top: 2px;
@@ -613,7 +656,7 @@
   background: rgba(23, 59, 46, 0.04);
 }
 
-/* Pure Minimalist Drawer */
+/* Pure Minimalist Drawer Matching Reference */
 .dzukou-root .day-drawer {
   padding: 8px 20px 18px 92px;
   animation: dzDrawerReveal 0.2s ease-out;
@@ -634,13 +677,16 @@
   display: flex;
   gap: 22px;
   margin-bottom: 6px;
-  font: 500 11px/1.4 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 1.4;
   color: var(--dz-forest);
   letter-spacing: 0.02em;
 }
 
 .dzukou-root .drawer-desc {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--dz-font-body);
   font-size: 13.5px;
   line-height: 1.65;
   color: #4a524c;
@@ -649,7 +695,10 @@
 
 .dzukou-root .drawer-note {
   margin: 0;
-  font: 400 11.5px/1.6 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 400;
+  font-size: 11.5px;
+  line-height: 1.6;
   color: #4a524c;
 }
 
@@ -671,19 +720,24 @@
 }
 
 .dzukou-root .day-detail > span {
-  font: 500 9px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-size: 9px;
+  font-weight: 500;
   letter-spacing: 0.15em;
   color: var(--dz-ochre);
 }
 
 .dzukou-root .day-detail h3 {
-  font: 600 36px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 36px;
   text-transform: uppercase;
   margin: 18px 0 4px;
   line-height: 1.1;
 }
 
 .dzukou-root .day-detail h4 {
+  font-family: var(--dz-font-body);
   font-size: 13px;
   color: var(--dz-sage);
   margin: 0 0 22px;
@@ -691,6 +745,7 @@
 }
 
 .dzukou-root .day-detail p {
+  font-family: var(--dz-font-body);
   font-size: 14px;
   line-height: 1.8;
   color: #d5ddd7;
@@ -701,15 +756,15 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 18px;
   margin-top: 24px;
+  font-family: var(--dz-font-mono);
   font-size: 11px;
   line-height: 1.6;
   color: var(--dz-sage);
 }
 
-/* Route Section (Cinematic Viewport Fill) */
+/* Route Section */
 .dzukou-root .route-image {
-  min-height: 80vh;
-  height: 85vh;
+  height: 560px;
   position: relative;
   color: #ffffff;
 }
@@ -727,7 +782,7 @@
 .dzukou-root .route-copy {
   position: relative;
   z-index: 2;
-  padding-top: clamp(100px, 14vh, 180px);
+  padding-top: 120px;
 }
 
 .dzukou-root .route-track {
@@ -759,20 +814,25 @@
 
 .dzukou-root .route-stop span {
   display: block;
-  font: 600 9px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 9px;
   color: var(--dz-ochre);
   margin-bottom: 6px;
 }
 
 .dzukou-root .route-stop strong {
   display: block;
-  font: 600 17px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 17px;
   text-transform: uppercase;
   line-height: 1.1;
 }
 
 .dzukou-root .route-stop small {
   display: block;
+  font-family: var(--dz-font-body);
   font-size: 11px;
   color: var(--dz-sage);
   margin-top: 2px;
@@ -801,13 +861,17 @@
 }
 
 .dzukou-root .route-detail-head span {
-  font: 600 10px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 10px;
   color: var(--dz-terracotta);
   letter-spacing: 0.1em;
 }
 
 .dzukou-root .route-detail-head h3 {
-  font: 600 26px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 26px;
   text-transform: uppercase;
   margin: 2px 0 0;
   color: var(--dz-forest);
@@ -819,16 +883,20 @@
 
 .dzukou-root .route-detail-meta strong {
   display: block;
-  font: 600 14px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 14px;
   color: var(--dz-forest);
 }
 
 .dzukou-root .route-detail-meta small {
+  font-family: var(--dz-font-body);
   font-size: 11px;
   color: #69706b;
 }
 
 .dzukou-root .route-detail p {
+  font-family: var(--dz-font-body);
   font-size: 14px;
   line-height: 1.7;
   color: #4a524c;
@@ -841,14 +909,11 @@
   grid-template-columns: 0.9fr 1.1fr;
   gap: 8vw;
   align-items: center;
-  padding-block: 0;
-  min-height: 100vh;
 }
 
 .dzukou-root .portrait-card {
   position: relative;
-  min-height: 100vh;
-  height: 100vh;
+  height: 640px;
 }
 
 .dzukou-root .portrait-card img {
@@ -861,7 +926,9 @@
   left: 18px;
   background: var(--dz-paper);
   padding: 8px 12px;
-  font: 600 8px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 8px;
   letter-spacing: 0.12em;
 }
 
@@ -873,7 +940,10 @@
 }
 
 .dzukou-root .quote {
-  font: 500 24px/1.4 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.4;
   border-left: 3px solid var(--dz-ochre);
   padding-left: 20px;
   margin: 32px 0;
@@ -884,7 +954,9 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font: 600 11px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border-bottom: 1px solid;
@@ -902,17 +974,15 @@
   stroke: currentColor;
 }
 
-/* Explore Band (Full Viewport Fill) */
+/* Explore Band */
 .dzukou-root .explore-band {
-  min-height: 100vh;
-  height: 100vh;
+  height: 680px;
   position: relative;
   color: #ffffff;
 }
 
 .dzukou-root .explore-band > img {
   object-fit: cover;
-  object-position: center 25%;
 }
 
 .dzukou-root .explore-shade {
@@ -931,7 +1001,9 @@
 }
 
 .dzukou-root .explore-copy .index {
-  font: 500 12px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 500;
+  font-size: 12px;
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 50%;
   width: 54px;
@@ -962,8 +1034,7 @@
 
 .dzukou-root .season-card, 
 .dzukou-root .check-card {
-  min-height: 660px;
-  height: 75vh;
+  height: 620px;
   position: relative;
   overflow: hidden;
 }
@@ -997,7 +1068,9 @@
 }
 
 .dzukou-root .season-copy span {
-  font: 600 10px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 10px;
   color: var(--dz-ochre);
 }
 
@@ -1026,7 +1099,9 @@
 }
 
 .dzukou-root .check-content h3 {
-  font: 600 26px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 26px;
   text-transform: uppercase;
   margin: 0 0 16px;
   color: var(--dz-forest);
@@ -1055,7 +1130,9 @@
   width: 18px;
   height: 18px;
   border: 1px solid #8c928e;
-  font: 600 11px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 11px;
   font-style: normal;
   color: #ffffff;
 }
@@ -1078,12 +1155,16 @@
 }
 
 .dzukou-root .check-footer small {
-  font: 600 9px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 9px;
   color: #6d746f;
 }
 
 .dzukou-root .print-link {
-  font: 500 9px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 500;
+  font-size: 9px;
   border-bottom: 1px solid;
   color: var(--dz-charcoal);
 }
@@ -1109,13 +1190,17 @@
 }
 
 .dzukou-root .advice-grid span {
-  font: 600 10px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 10px;
   letter-spacing: 0.14em;
   color: var(--dz-terracotta);
 }
 
 .dzukou-root .advice-grid h3 {
-  font: 600 24px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 24px;
   text-transform: uppercase;
   margin: 12px 0 10px;
   color: var(--dz-forest);
@@ -1128,10 +1213,9 @@
   margin: 0;
 }
 
-/* Night Band (Full Viewport Fill) */
+/* Night Band */
 .dzukou-root .night-band {
-  min-height: 80vh;
-  height: 85vh;
+  height: 600px;
   position: relative;
   color: #ffffff;
 }
@@ -1149,7 +1233,7 @@
 .dzukou-root .night-copy {
   position: relative;
   z-index: 2;
-  padding-top: clamp(100px, 14vh, 180px);
+  padding-top: 120px;
 }
 
 .dzukou-root .night-copy p:last-child {
@@ -1160,7 +1244,7 @@
   color: #d5ded8;
 }
 
-/* Footer with Minimalist Bottom Nudge */
+/* Footer */
 .dzukou-root .footer {
   min-height: 160px;
   display: flex;
@@ -1170,26 +1254,18 @@
   border-top: 1px solid var(--dz-line);
 }
 
-.dzukou-root .footer-nudge p {
+.dzukou-root .footer p {
   margin: 0;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.7;
   color: #69706b;
   text-align: center;
 }
 
-.dzukou-root .footer-nudge a {
-  color: var(--dz-forest);
-  border-bottom: 1px solid var(--dz-line);
-  transition: color 0.2s ease;
-}
-
-.dzukou-root .footer-nudge a:hover {
-  color: var(--dz-terracotta);
-}
-
 .dzukou-root .footer > a {
-  font: 600 9px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 9px;
   letter-spacing: 0.12em;
   border-bottom: 1px solid;
   padding-bottom: 6px;
@@ -1227,7 +1303,9 @@
 }
 
 .dzukou-root .modal-head h2 {
-  font: 600 30px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 30px;
   margin: 4px 0 0;
   color: var(--dz-forest);
 }
@@ -1255,7 +1333,7 @@
   gap: 18px;
 }
 
-.control-group {
+.dzukou-root .control-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1265,13 +1343,17 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font: 600 10px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 10px;
   color: #6d746f;
   letter-spacing: 0.1em;
 }
 
 .dzukou-root .control-label strong {
-  font: 600 14px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 14px;
   color: var(--dz-forest);
 }
 
@@ -1315,7 +1397,9 @@
   padding: 8px 4px;
   border: 1px solid var(--dz-line);
   background: var(--dz-cream);
-  font: 600 12px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 12px;
   text-align: center;
 }
 
@@ -1342,7 +1426,9 @@
 }
 
 .dzukou-root .option-row button strong {
-  font: 600 13px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 13px;
   text-transform: uppercase;
   color: var(--dz-forest);
 }
@@ -1378,7 +1464,9 @@
 }
 
 .dzukou-root .control-checkbox strong {
-  font: 600 13px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 13px;
   text-transform: uppercase;
   color: var(--dz-forest);
 }
@@ -1404,12 +1492,16 @@
 }
 
 .dzukou-root .total-display strong {
-  font: 600 38px 'Manrope', sans-serif;
+  font-family: var(--dz-font-heading);
+  font-weight: 600;
+  font-size: 38px;
   line-height: 1;
 }
 
 .dzukou-root .total-display small {
-  font: 500 11px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 500;
+  font-size: 11px;
   color: var(--dz-sage);
 }
 
@@ -1439,7 +1531,7 @@
 }
 
 .dzukou-root .breakdown strong {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
   color: #ffffff;
 }
 
@@ -1453,7 +1545,9 @@
 }
 
 .dzukou-root .btn-modal-action {
-  font: 600 11px 'DM Mono', monospace;
+  font-family: var(--dz-font-mono);
+  font-weight: 600;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -1533,14 +1627,14 @@
     font-size: clamp(56px, 18vw, 96px);
   }
 
-  .dzukou-root .hero-bottom {
+  .hero-bottom {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
     padding-bottom: 16px;
   }
 
-  .dzukou-root .hero-bottom p {
+  .hero-bottom p {
     font-size: 13px;
     max-width: 100%;
   }
@@ -1628,8 +1722,7 @@
   }
 
   .dzukou-root .route-image {
-    min-height: 520px;
-    height: 65vh;
+    height: 480px;
   }
 
   .dzukou-root .route-copy {
@@ -1652,13 +1745,11 @@
   }
 
   .dzukou-root .portrait-card {
-    min-height: 480px;
-    height: 60vh;
+    height: 440px;
   }
 
   .dzukou-root .explore-band {
-    min-height: 540px;
-    height: 65vh;
+    height: 540px;
   }
 
   .dzukou-root .explore-copy {
@@ -1676,8 +1767,7 @@
 
   .dzukou-root .season-card, 
   .dzukou-root .check-card {
-    min-height: 520px;
-    height: 65vh;
+    height: 520px;
   }
 
   .dzukou-root .advice-grid {
@@ -1696,8 +1786,7 @@
   }
 
   .dzukou-root .night-band {
-    min-height: 500px;
-    height: 65vh;
+    height: 480px;
   }
 
   .dzukou-root .night-copy {
