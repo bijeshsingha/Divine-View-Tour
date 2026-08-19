@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap');
 
 .dzukou-root {
   --dz-forest: #173b2e;
@@ -542,7 +542,7 @@
   opacity: 0.8;
 }
 
-/* Day List & Drawer */
+/* Day List & Pure Minimalist Drawer */
 .dzukou-root .day-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -567,21 +567,17 @@
   text-align: left;
   padding: 16px 20px;
   display: grid;
-  grid-template-columns: 64px 1fr 24px;
-  align-items: center;
+  grid-template-columns: 56px 1fr 24px;
+  align-items: baseline;
   cursor: pointer;
   gap: 16px;
   transition: background 0.2s ease;
 }
 
-.dzukou-root .day-badge {
-  font: 600 10px 'DM Mono', monospace;
-  color: var(--dz-terracotta);
-  background: rgba(185, 95, 63, 0.08);
-  padding: 4px 6px;
-  border-radius: 2px;
-  text-align: center;
-  display: inline-block;
+.dzukou-root .day-num {
+  font: 600 11px/1.4 'DM Mono', monospace;
+  color: #6c746e;
+  letter-spacing: 0.04em;
 }
 
 .dzukou-root .day-text {
@@ -597,8 +593,8 @@
 }
 
 .dzukou-root .day-text small {
-  font-size: 11px;
-  color: #69706b;
+  font-size: 12px;
+  color: #6c746e;
   margin-top: 2px;
   display: block;
   line-height: 1.4;
@@ -606,28 +602,27 @@
 
 .dzukou-root .day-toggle-icon {
   font-style: normal;
-  font-size: 20px;
+  font-size: 18px;
   color: var(--dz-forest);
   text-align: center;
-  font-weight: 600;
+  font-weight: 500;
   display: block;
 }
 
 .dzukou-root .day-btn.open {
-  background: rgba(23, 59, 46, 0.05);
+  background: rgba(23, 59, 46, 0.04);
 }
 
+/* Pure Minimalist Drawer Matching Reference */
 .dzukou-root .day-drawer {
-  padding: 16px 20px 20px 20px;
-  border-top: 1px dashed var(--dz-line);
-  background: #fdfbf7;
-  animation: dzDrawerSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 8px 20px 18px 92px;
+  animation: dzDrawerReveal 0.2s ease-out;
 }
 
-@keyframes dzDrawerSlideDown {
+@keyframes dzDrawerReveal {
   from {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(-4px);
   }
   to {
     opacity: 1;
@@ -635,50 +630,32 @@
   }
 }
 
-.dzukou-root .drawer-stats {
+.dzukou-root .drawer-meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  margin-bottom: 12px;
-}
-
-.dzukou-root .stat-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--dz-cream);
-  border: 1px solid var(--dz-line);
-  padding: 4px 10px;
-  border-radius: 3px;
-  font: 500 11px 'DM Mono', monospace;
+  gap: 22px;
+  margin-bottom: 6px;
+  font: 500 11px/1.4 'DM Mono', monospace;
   color: var(--dz-forest);
-}
-
-.dzukou-root .stat-pill svg {
-  stroke: var(--dz-terracotta);
+  letter-spacing: 0.02em;
 }
 
 .dzukou-root .drawer-desc {
+  font-family: 'Manrope', sans-serif;
   font-size: 13.5px;
-  line-height: 1.75;
-  color: #3d4540;
-  margin: 0 0 12px;
+  line-height: 1.65;
+  color: #4a524c;
+  margin: 0 0 10px;
 }
 
 .dzukou-root .drawer-note {
-  font-size: 12px;
-  line-height: 1.6;
-  color: #5c432d;
-  background: rgba(217, 154, 78, 0.1);
-  border-left: 3px solid var(--dz-ochre);
-  padding: 8px 12px;
-  border-radius: 0 2px 2px 0;
+  margin: 0;
+  font: 400 11.5px/1.6 'DM Mono', monospace;
+  color: #4a524c;
 }
 
-.dzukou-root .drawer-note strong {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--dz-charcoal);
+.dzukou-root .drawer-note .note-label {
+  color: var(--dz-terracotta);
+  font-weight: 500;
   margin-right: 4px;
 }
 
@@ -1414,7 +1391,7 @@
 }
 
 .dzukou-root .total-display small {
-  font: 500 11px 'DM Mono', monospace;
+  font-500 11px 'DM Mono', monospace;
   color: var(--dz-sage);
 }
 
@@ -1629,7 +1606,7 @@
   }
 
   .dzukou-root .day-drawer {
-    padding: 14px 16px 18px 16px;
+    padding: 6px 16px 16px 16px;
   }
 
   .dzukou-root .route-image {

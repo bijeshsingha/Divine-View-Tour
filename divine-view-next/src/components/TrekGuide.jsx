@@ -683,7 +683,7 @@ Route: Guwahati → Dimapur → Kohima → Viswema → Dzukou Valley → Jakhama
               </div>
             </div>
 
-            {/* Day Grid with Interactive Accordion & Detail View */}
+            {/* Day Grid with Minimalist Field Note Typography */}
             <div className="day-grid">
               <div className="days-list">
                 {plan.days.map((day, index) => {
@@ -695,7 +695,7 @@ Route: Guwahati → Dimapur → Kohima → Viswema → Dzukou Valley → Jakhama
                         onClick={() => setOpenDay(index)}
                         aria-expanded={isOpen}
                       >
-                        <span className="day-badge">DAY {day.num}</span>
+                        <span className="day-num">DAY {day.num}</span>
                         <div className="day-text">
                           <strong>{day.title}</strong>
                           <small>{day.route}</small>
@@ -703,23 +703,17 @@ Route: Guwahati → Dimapur → Kohima → Viswema → Dzukou Valley → Jakhama
                         <i className="day-toggle-icon">{isOpen ? "−" : "+"}</i>
                       </button>
 
-                      {/* Inline Expandable Accordion Drawer with Clean Alignment & Spacing */}
+                      {/* Pure Minimalist Field Notes Drawer */}
                       {isOpen && (
                         <div className="day-drawer">
-                          <div className="drawer-stats">
-                            <span className="stat-pill">
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 31 17 7l7 11 6-9 16 22H2Z" /></svg>
-                              Alt: {day.alt}
-                            </span>
-                            <span className="stat-pill">
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                              Time: {day.time}
-                            </span>
+                          <div className="drawer-meta">
+                            <span>Alt: {day.alt}</span>
+                            <span>Time: {day.time}</span>
                           </div>
                           <p className="drawer-desc">{day.desc}</p>
-                          <div className="drawer-note">
-                            <strong>Note:</strong> {day.tip}
-                          </div>
+                          <p className="drawer-note">
+                            <span className="note-label">Note:</span> {day.tip}
+                          </p>
                         </div>
                       )}
                     </div>
