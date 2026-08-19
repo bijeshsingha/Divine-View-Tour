@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 .dzukou-root {
   --dz-forest: #173b2e;
@@ -78,8 +78,8 @@
 
 .dzukou-root h2 {
   margin-bottom: 0;
-  font: 600 clamp(42px, 5.5vw, 80px) / 1.05 'Oswald', sans-serif;
-  letter-spacing: -0.025em;
+  font: 700 clamp(38px, 5vw, 72px) / 1.1 'Manrope', -apple-system, sans-serif;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
 }
 
@@ -262,8 +262,8 @@
 
 .dzukou-root .hero h1 {
   margin: 10px 0 20px;
-  font: 600 clamp(72px, 11.5vw, 156px) / 1.0 'Oswald', sans-serif;
-  letter-spacing: -0.04em;
+  font: 800 clamp(64px, 10vw, 140px) / 1.0 'Manrope', -apple-system, sans-serif;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
 }
 
@@ -350,7 +350,7 @@
 }
 
 .dzukou-root .quick-stats strong {
-  font: 600 22px 'Oswald', sans-serif;
+  font: 600 22px 'Manrope', sans-serif;
   color: var(--dz-charcoal);
   line-height: 1.1;
 }
@@ -447,7 +447,7 @@
 }
 
 .dzukou-root .tab-header span {
-  font: 600 24px 'Oswald', sans-serif;
+  font: 600 24px 'Manrope', sans-serif;
   color: var(--dz-forest);
   line-height: 1;
 }
@@ -489,7 +489,7 @@
 }
 
 .dzukou-root .plan-title h3 {
-  font: 600 38px 'Oswald', sans-serif;
+  font: 600 38px 'Manrope', sans-serif;
   margin: 0 0 12px;
   text-transform: uppercase;
   color: var(--dz-forest);
@@ -525,7 +525,7 @@
 }
 
 .dzukou-root .plan-data strong {
-  font: 600 16px 'Oswald', sans-serif;
+  font: 600 16px 'Manrope', sans-serif;
   color: var(--dz-forest);
   display: block;
 }
@@ -585,7 +585,7 @@
 }
 
 .dzukou-root .day-text strong {
-  font: 600 16px 'Oswald', sans-serif;
+  font: 600 16px 'Manrope', sans-serif;
   text-transform: uppercase;
   color: var(--dz-forest);
   line-height: 1.2;
@@ -640,7 +640,7 @@
 }
 
 .dzukou-root .drawer-desc {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 13.5px;
   line-height: 1.65;
   color: #4a524c;
@@ -677,7 +677,7 @@
 }
 
 .dzukou-root .day-detail h3 {
-  font: 600 36px 'Oswald', sans-serif;
+  font: 600 36px 'Manrope', sans-serif;
   text-transform: uppercase;
   margin: 18px 0 4px;
   line-height: 1.1;
@@ -766,7 +766,7 @@
 
 .dzukou-root .route-stop strong {
   display: block;
-  font: 600 17px 'Oswald', sans-serif;
+  font: 600 17px 'Manrope', sans-serif;
   text-transform: uppercase;
   line-height: 1.1;
 }
@@ -807,7 +807,7 @@
 }
 
 .dzukou-root .route-detail-head h3 {
-  font: 600 26px 'Oswald', sans-serif;
+  font: 600 26px 'Manrope', sans-serif;
   text-transform: uppercase;
   margin: 2px 0 0;
   color: var(--dz-forest);
@@ -819,7 +819,7 @@
 
 .dzukou-root .route-detail-meta strong {
   display: block;
-  font: 600 14px 'Oswald', sans-serif;
+  font: 600 14px 'Manrope', sans-serif;
   color: var(--dz-forest);
 }
 
@@ -873,7 +873,7 @@
 }
 
 .dzukou-root .quote {
-  font: 500 24px/1.4 'Oswald', sans-serif;
+  font: 500 24px/1.4 'Manrope', sans-serif;
   border-left: 3px solid var(--dz-ochre);
   padding-left: 20px;
   margin: 32px 0;
@@ -1026,7 +1026,7 @@
 }
 
 .dzukou-root .check-content h3 {
-  font: 600 26px 'Oswald', sans-serif;
+  font: 600 26px 'Manrope', sans-serif;
   text-transform: uppercase;
   margin: 0 0 16px;
   color: var(--dz-forest);
@@ -1115,7 +1115,7 @@
 }
 
 .dzukou-root .advice-grid h3 {
-  font: 600 24px 'Oswald', sans-serif;
+  font: 600 24px 'Manrope', sans-serif;
   text-transform: uppercase;
   margin: 12px 0 10px;
   color: var(--dz-forest);
@@ -1227,7 +1227,7 @@
 }
 
 .dzukou-root .modal-head h2 {
-  font: 600 30px 'Oswald', sans-serif;
+  font: 600 30px 'Manrope', sans-serif;
   margin: 4px 0 0;
   color: var(--dz-forest);
 }
@@ -1271,7 +1271,7 @@
 }
 
 .dzukou-root .control-label strong {
-  font: 600 14px 'Oswald', sans-serif;
+  font: 600 14px 'Manrope', sans-serif;
   color: var(--dz-forest);
 }
 
@@ -1342,7 +1342,7 @@
 }
 
 .dzukou-root .option-row button strong {
-  font: 600 13px 'Oswald', sans-serif;
+  font: 600 13px 'Manrope', sans-serif;
   text-transform: uppercase;
   color: var(--dz-forest);
 }
@@ -1378,7 +1378,7 @@
 }
 
 .dzukou-root .control-checkbox strong {
-  font: 600 13px 'Oswald', sans-serif;
+  font: 600 13px 'Manrope', sans-serif;
   text-transform: uppercase;
   color: var(--dz-forest);
 }
@@ -1404,7 +1404,7 @@
 }
 
 .dzukou-root .total-display strong {
-  font: 600 38px 'Oswald', sans-serif;
+  font: 600 38px 'Manrope', sans-serif;
   line-height: 1;
 }
 
