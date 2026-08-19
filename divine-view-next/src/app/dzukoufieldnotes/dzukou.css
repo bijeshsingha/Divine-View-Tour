@@ -1391,7 +1391,7 @@
 }
 
 .dzukou-root .total-display small {
-  font-500 11px 'DM Mono', monospace;
+  font: 500 11px 'DM Mono', monospace;
   color: var(--dz-sage);
 }
 
