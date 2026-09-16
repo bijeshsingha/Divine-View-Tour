@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import nodemailer from "nodemailer";
 import siteConfig from "@/data/siteConfig.json";
+import { appendBookingToGoogleSheet } from "@/lib/googleSheets";
 
 // Allowlist of supported enquiry types
 const ALLOWED_TYPES = ["package", "custom_trip", "vehicle_hire", "contact_message"];
@@ -387,7 +388,11 @@ export async function POST(request) {
     const emailResult = await sendBookingNotificationEmail(newEnquiry);
     newEnquiry.emailNotification = emailResult;
 
-    // 11. Persist enquiry safely with bounded array size (max 500 records)
+    // 11. Record in live Google Spreadsheet via webhook
+    const sheetResult = await appendBookingToGoogleSheet(newEnquiry);
+    newEnquiry.googleSheets = sheetResult;
+
+    // 12. Persist enquiry safely with bounded array size (max 500 records)
     enquiriesList.unshift(newEnquiry);
     if (enquiriesList.length > 500) {
       enquiriesList = enquiriesList.slice(0, 500);
