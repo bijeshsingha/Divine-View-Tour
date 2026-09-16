@@ -9,13 +9,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
           {/* Col 1: Brand & Bio */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-[#082D27] border border-[#D9A441]/40 flex items-center justify-center">
-                <Compass className="w-5 h-5 text-[#D9A441]" />
-              </div>
-              <span className="font-serif text-2xl font-bold tracking-wide text-[#F7F3E9]">
-                Divine View Tours
-              </span>
+            <Link href="/" className="inline-block group mb-1">
+              <img
+                src="/logo.png"
+                alt="Divine View Tours"
+                width={200}
+                height={58}
+                className="h-11 sm:h-13 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+              />
             </Link>
             <p className="text-sm text-[#F7F3E9]/80 leading-relaxed max-w-sm">
               Authentic journeys across Assam, Meghalaya, Arunachal Pradesh, and Dzukou Valley. Handcrafted private itineraries, verified mountain drivers, and transparent pricing from Guwahati.
@@ -28,7 +29,7 @@ export default function Footer() {
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#D9A441] shrink-0" />
                 <a href={`tel:${siteConfig.phoneRaw}`} className="hover:text-[#D9A441] transition-colors">
-                  {siteConfig.phone}
+                  {siteConfig.phone} / {siteConfig.phoneSecondary}
                 </a>
               </div>
               <div className="flex items-center gap-2">
@@ -41,6 +42,25 @@ export default function Footer() {
                 >
                   WhatsApp: +91 60265 04087
                 </a>
+              </div>
+              <div className="flex items-start gap-2 pt-1 border-t border-[#082D27]/80">
+                <Mail className="w-4 h-4 text-[#D9A441] shrink-0 mt-0.5" />
+                <div className="flex flex-col gap-1">
+                  <a
+                    href={`mailto:${siteConfig.bookingEmail || "bookings@divineviewtours.com"}?subject=Tour%20Booking%20Inquiry%20%7C%20Divine%20View%20Tours`}
+                    className="hover:text-[#D9A441] transition-colors flex items-center gap-1.5"
+                  >
+                    <span className="text-[#D9A441] font-semibold">Bookings:</span>
+                    <span className="font-mono">{siteConfig.bookingEmail || "bookings@divineviewtours.com"}</span>
+                  </a>
+                  <a
+                    href={`mailto:${siteConfig.infoEmail || "info@divineviewtours.com"}?subject=General%20Query%20%7C%20Divine%20View%20Tours`}
+                    className="hover:text-[#D9A441] transition-colors flex items-center gap-1.5"
+                  >
+                    <span className="text-[#D9A441] font-semibold">Queries:</span>
+                    <span className="font-mono">{siteConfig.infoEmail || "info@divineviewtours.com"}</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -168,8 +188,8 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} Divine View Tours. All rights reserved. Registered travel DMC Guwahati, Assam.</p>
           <div className="flex items-center gap-6">
             <span>Website: {siteConfig.domain}</span>
-            <Link href="/admin/pricing" className="text-[#D9A441]/80 hover:text-[#D9A441] transition-colors underline">
-              Admin Pricing Portal
+            <Link href="/admin/enquiries" className="text-[#D9A441]/80 hover:text-[#D9A441] transition-colors underline">
+              Admin Inbox & Pricing
             </Link>
           </div>
         </div>

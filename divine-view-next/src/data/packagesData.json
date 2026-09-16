@@ -13,7 +13,7 @@
     "summary": "Explore misty pine hills in Shillong, deep plunge waterfalls in Cherrapunji, crystalline waters of Umngot River in Dawki, and ancient Living Root Bridges.",
     "featured": true,
     "badge": "Bestseller",
-    "heroImage": "/images/Meghalaya/Cherrapunjee/Nohkalikai Falls/Nohkalikai Falls1.jpg",
+    "heroImage": "/images/dawki-hero.jpg",
     "gallery": [
       "/images/Meghalaya/Cherrapunjee/Nohkalikai Falls/Nohkalikai Falls1.jpg",
       "/images/Meghalaya/Dawki/Dawki River.jpg",
@@ -110,7 +110,7 @@
     "summary": "Ascend from subtropical Assam into the snow-crowned Eastern Himalayas, crossing 13,700-ft Sela Pass to reach Asia's second-oldest Buddhist monastery in Tawang.",
     "featured": true,
     "badge": "Iconic Route",
-    "heroImage": "/images/Tawang/Tawang Monastry/Tawang Monastry1.jpg",
+    "heroImage": "/images/Tawang/Tawang1.jpg",
     "gallery": [
       "/images/Tawang/Tawang Monastry/Tawang Monastry1.jpg",
       "/images/Tawang/Sela Pass/Sela Pass1.jpg",
@@ -220,9 +220,9 @@
     "summary": "Spot the rare Great Indian One-horned Rhinoceros in the floodplains of Kaziranga, cruise the sacred Brahmaputra River, and visit sacred Kamakhya Temple.",
     "featured": true,
     "badge": "UNESCO Heritage",
-    "heroImage": "/images/Kaziranga/kaziranga.jpg",
+    "heroImage": "/images/homescreen.jpg",
     "gallery": [
-      "/images/Kaziranga/kaziranga.jpg",
+      "/images/homescreen.jpg",
       "/images/Guwahati/Temples/Kamakhya.jpg",
       "/images/Guwahati/Temples/Umananda.jpg",
       "/images/Guwahati/Temples/Balaji Temple.jpg"
@@ -309,7 +309,7 @@
     "summary": "Trek through bamboo forests and mountain passes into the mystical, rolling emerald ridges of Dzukou Valley, nestled at 8,000 feet on the Nagaland-Manipur frontier.",
     "featured": true,
     "badge": "Adventure Favorite",
-    "heroImage": "/images/dzukou-ridge.jpg",
+    "heroImage": "/images/dzukou-trail.jpg",
     "gallery": [
       "/images/dzukou-ridge.jpg",
       "/images/dzukou-trail.jpg",

@@ -108,11 +108,11 @@ export default function CustomTripPlanner() {
       });
 
       const data = await res.json();
-      const ref = data.reference || `DVT-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      const ref = data.reference || "DVT-2026-0000";
       router.push(`/enquiry/received?ref=${ref}&type=custom`);
     } catch (err) {
       console.error(err);
-      const ref = `DVT-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      const ref = "DVT-2026-0000";
       router.push(`/enquiry/received?ref=${ref}&type=custom`);
     } finally {
       setIsSubmitting(false);

@@ -1,124 +1,394 @@
 {
-  "title": "Approved Public Vehicle Daily Rates",
+  "title": "Private Vehicle Hire Tariffs from Guwahati",
   "currency": "INR",
   "effectiveFrom": "2026-09-01",
-  "effectiveLabel": "Effective from September 2026 (until revised)",
-  "serviceNote": "Vehicle fare only. Excludes hotel accommodation, meals, permits, and entry/safari fees. Complete holiday packages are priced separately.",
-  "inclusions": [
-    "Dedicated commercial vehicle with experienced mountain driver",
-    "Fuel, road tolls, interstate passenger taxes, and parking fees",
-    "Driver daily allowance, lodging, and meals"
+  "effectiveLabel": "Official Rates Effective from September 2026",
+  "bookingPhones": [
+    { "display": "+91 60265 04087", "raw": "+916026504087" },
+    { "display": "+91 9282 041211", "raw": "+919282041211" }
   ],
-  "exclusions": [
-    "Hotel accommodation and traveller meals",
-    "Park entry tickets, boat rides, guide charges, and safari permits",
-    "Arunachal Inner Line Permits (ILP) or special entry permissions",
-    "Personal expenses and porterage"
-  ],
-  "routes": [
-    {
-      "id": "meghalaya-5d",
-      "route": "Meghalaya Circuit (Shillong, Cherrapunji, Dawki)",
-      "minimumDays": 5,
-      "sedan": 5300,
-      "ertiga": 6100,
-      "crysta": 7300,
-      "status": "published",
-      "notes": "Covers Shillong, Sohra waterfalls, living root bridges, and Umngot River."
-    },
-    {
-      "id": "meghalaya-kaziranga-7d",
-      "route": "Meghalaya + Kaziranga National Park",
-      "minimumDays": 7,
-      "sedan": 5300,
-      "ertiga": 6100,
-      "crysta": 7300,
-      "status": "published",
-      "notes": "Includes highland Meghalaya and Assam rhino plains. Jeep safari vehicle in Kaziranga booked separately."
-    },
-    {
-      "id": "tawang-6d",
-      "route": "Tawang Highway (Bhalukpong, Dirang, Sela, Tawang)",
-      "minimumDays": 6,
-      "sedan": 6000,
-      "ertiga": 6700,
-      "crysta": 7900,
-      "status": "published",
-      "notes": "High-altitude mountain circuit. Requires ILP permit clearance before departure."
-    },
-    {
-      "id": "tawang-kaziranga-8d",
-      "route": "Tawang + Kaziranga National Park",
-      "minimumDays": 8,
-      "sedan": 6000,
-      "ertiga": 6700,
-      "crysta": 7900,
-      "status": "published",
-      "notes": "Classic wildlife and Himalayan monastic route from Guwahati."
-    },
-    {
-      "id": "meghalaya-kaziranga-tawang-11d",
-      "route": "Grand Northeast (Meghalaya + Kaziranga + Tawang)",
-      "minimumDays": 11,
-      "sedan": 6000,
-      "ertiga": 6700,
-      "crysta": 7900,
-      "status": "published",
-      "notes": "Comprehensive 3-state overland expedition."
-    },
-    {
-      "id": "meghalaya-offbeat-9d",
-      "route": "Meghalaya Offbeat (Garo Hills, Mawlyngbna, Jaintia)",
-      "minimumDays": 9,
-      "sedan": 6000,
-      "ertiga": 6700,
-      "crysta": 7900,
-      "status": "published",
-      "notes": "Remote Meghalaya routes with rugged terrain and village homestays."
-    },
-    {
-      "id": "east-arunachal-7d",
-      "route": "East Arunachal — Mechuka / Anini / Roing",
-      "minimumDays": 7,
-      "sedan": null,
-      "ertiga": 6900,
-      "crysta": 8100,
-      "status": "published",
-      "notes": "Sedan not offered due to rugged Eastern Himalayan terrain. High-clearance SUV required."
-    }
-  ],
+  "posterFares": {
+    "title": "Divine View Direct Fares — Starting from Guwahati",
+    "notes": "Vehicle fare only. Final quote depends on route and dates. Tolls, parking, permits, entry fees, safaris, stays, and meals extra unless included in writing.",
+    "localAndTransfers": [
+      {
+        "id": "ghy-local",
+        "service": "Guwahati Local Sightseeing",
+        "coverage": "Kamakhya Temple, Umananda, Brahmaputra Ghat, Balaji Temple, City",
+        "dzire": 3000,
+        "ertiga": 4000,
+        "innova": 4500,
+        "duration": "Full Day (8 Hours / 80 KM)"
+      },
+      {
+        "id": "airport-transfer",
+        "service": "Guwahati Airport Transfer",
+        "coverage": "Lokpriya Gopinath Bordoloi Airport (GAU) to Guwahati City Hotel / Station",
+        "dzire": 1000,
+        "ertiga": 1500,
+        "innova": 2000,
+        "duration": "One-Way Drop / Pickup",
+        "footnote": "Confirm pickup/drop coverage within standard city limits"
+      }
+    ],
+    "sameDayReturns": [
+      {
+        "id": "sameday-shillong",
+        "destination": "Shillong (Meghalaya)",
+        "distance": "100 km each way (approx 3-3.5 hrs drive)",
+        "coverage": "Umiam Lake, Police Bazar, Ward's Lake, Cathedral, Shillong Peak",
+        "dzire": 5000,
+        "ertiga": 6000,
+        "innova": 7500
+      },
+      {
+        "id": "sameday-kaziranga",
+        "destination": "Kaziranga National Park (Assam)",
+        "distance": "220 km each way (approx 4.5-5 hrs drive)",
+        "coverage": "Central / Western Range Jeep Safari transfers, Orchid Park",
+        "dzire": 6500,
+        "ertiga": 8000,
+        "innova": 10000
+      },
+      {
+        "id": "sameday-manas",
+        "destination": "Manas National Park (Assam)",
+        "distance": "140 km each way (approx 3.5 hrs drive)",
+        "coverage": "Bansbari range forest borders, river viewpoint, tea plantations",
+        "dzire": 6000,
+        "ertiga": 7500,
+        "innova": 9000
+      }
+    ],
+    "multiDayPerDay": [
+      {
+        "id": "multiday-meghalaya",
+        "region": "Meghalaya Circuit",
+        "coverage": "Shillong, Cherrapunji (Sohra), Dawki Umngot River, Mawlynnong, Jowai",
+        "dzire": 4000,
+        "ertiga": 5000,
+        "innova": 6000,
+        "minDays": 3,
+        "rateUnit": "per vehicle / day"
+      },
+      {
+        "id": "multiday-kaziranga-manas",
+        "region": "Kaziranga / Manas Wildlife",
+        "coverage": "National parks, Brahmaputra riverfront, Majuli island ferry points",
+        "dzire": 4500,
+        "ertiga": 5500,
+        "innova": 6500,
+        "minDays": 3,
+        "rateUnit": "per vehicle / day"
+      },
+      {
+        "id": "multiday-arunachal",
+        "region": "Arunachal Pradesh",
+        "coverage": "Bhalukpong, Bomdila, Dirang, Sela Pass, Tawang, Sangti Valley",
+        "dzire": 5000,
+        "ertiga": 6000,
+        "innova": 7000,
+        "minDays": 5,
+        "rateUnit": "per vehicle / day",
+        "footnote": "Proposed Arunachal rates. High-clearance vehicle recommended for snow/passes"
+      }
+    ]
+  },
+  "circuitRatesWithMarkup": {
+    "title": "Extended Multi-Day Circuits & Group Fleet Tariffs",
+    "description": "Based on Tourist Transporter Association of Assam (TTAA Ref: TTAA/AT/2026-27/190) standards with transparent agency coordination markup. Includes dedicated verified driver, vehicle sanitization, hill toll clearances, and 24/7 route dispatch support.",
+    "sectors": [
+      {
+        "id": "meghalaya-5d",
+        "sector": "Meghalaya Circuit",
+        "minDays": 5,
+        "coverage": "Shillong, Sohra (Cherrapunji), Dawki, Mawlynnong, Krang Suri",
+        "sedan": 5300,
+        "ertiga": 6100,
+        "crysta": 7300,
+        "tt13": 9200,
+        "tt17": 9600,
+        "tt26": 12100,
+        "urbania": 15000,
+        "bus24": 16200,
+        "coach22": 18500,
+        "baseSedan": 4600,
+        "baseErtiga": 5300,
+        "baseCrysta": 6300,
+        "baseTT13": 8000,
+        "baseTT17": 8300,
+        "baseTT26": 10500,
+        "baseUrbania": 13000
+      },
+      {
+        "id": "meghalaya-kaziranga-7d",
+        "sector": "Meghalaya + Kaziranga",
+        "minDays": 7,
+        "coverage": "Highland waterfalls, root bridges, and Kaziranga rhino plains",
+        "sedan": 5300,
+        "ertiga": 6100,
+        "crysta": 7300,
+        "tt13": 9200,
+        "tt17": 9600,
+        "tt26": 12100,
+        "urbania": 15000,
+        "bus24": 16200,
+        "coach22": 18500,
+        "baseSedan": 4600,
+        "baseErtiga": 5300,
+        "baseCrysta": 6300,
+        "baseTT13": 8000,
+        "baseTT17": 8300,
+        "baseTT26": 10500,
+        "baseUrbania": 13000
+      },
+      {
+        "id": "tawang-6d",
+        "sector": "Tawang Himalayan Circuit",
+        "minDays": 6,
+        "coverage": "Bhalukpong, Dirang, Sela Pass (13,700 ft), Tawang, Jaswant Garh",
+        "sedan": 6000,
+        "ertiga": 6700,
+        "crysta": 7900,
+        "tt13": 9900,
+        "tt17": 10400,
+        "tt26": 12700,
+        "urbania": 16100,
+        "bus24": 16200,
+        "coach22": 18500,
+        "baseSedan": 5200,
+        "baseErtiga": 5800,
+        "baseCrysta": 6800,
+        "baseTT13": 8600,
+        "baseTT17": 9000,
+        "baseTT26": 11000,
+        "baseUrbania": 14000
+      },
+      {
+        "id": "tawang-kaziranga-8d",
+        "sector": "Tawang + Kaziranga",
+        "minDays": 8,
+        "coverage": "Monasteries, high mountain passes, and UNESCO wildlife sanctuary",
+        "sedan": 6000,
+        "ertiga": 6700,
+        "crysta": 7900,
+        "tt13": 9900,
+        "tt17": 10400,
+        "tt26": 12700,
+        "urbania": 16100,
+        "bus24": 16200,
+        "coach22": 18500,
+        "baseSedan": 5200,
+        "baseErtiga": 5800,
+        "baseCrysta": 6800,
+        "baseTT13": 8600,
+        "baseTT17": 9000,
+        "baseTT26": 11000,
+        "baseUrbania": 14000
+      },
+      {
+        "id": "meghalaya-kaziranga-tawang-11d",
+        "sector": "Grand Northeast Expedition",
+        "minDays": 11,
+        "coverage": "Complete 3-state overland tour (Meghalaya, Kaziranga & Tawang)",
+        "sedan": 6000,
+        "ertiga": 6700,
+        "crysta": 7900,
+        "tt13": 9900,
+        "tt17": 10400,
+        "tt26": 12700,
+        "urbania": 16100,
+        "bus24": 16200,
+        "coach22": 18500,
+        "baseSedan": 5200,
+        "baseErtiga": 5800,
+        "baseCrysta": 6800,
+        "baseTT13": 8600,
+        "baseTT17": 9000,
+        "baseTT26": 11000,
+        "baseUrbania": 14000
+      },
+      {
+        "id": "meghalaya-offbeat-9d",
+        "sector": "Meghalaya Offbeat Exploration",
+        "minDays": 9,
+        "coverage": "South Garo Hills, Wari Chora, Siju Cave, Mawlyngbna, Jaintia canyons",
+        "sedan": 6000,
+        "ertiga": 6700,
+        "crysta": 7900,
+        "tt13": 9900,
+        "tt17": 10400,
+        "tt26": 12700,
+        "urbania": 16100,
+        "bus24": 16200,
+        "coach22": 18500,
+        "baseSedan": 5200,
+        "baseErtiga": 5800,
+        "baseCrysta": 6800,
+        "baseTT13": 8600,
+        "baseTT17": 9000,
+        "baseTT26": 11000,
+        "baseUrbania": 14000
+      },
+      {
+        "id": "east-arunachal-7d",
+        "sector": "East Arunachal (Mechuka / Anini / Roing)",
+        "minDays": 7,
+        "coverage": "Pristine remote river valleys and frontier peaks of Eastern Arunachal",
+        "sedan": null,
+        "ertiga": 6900,
+        "crysta": 8100,
+        "tt13": null,
+        "tt17": null,
+        "tt26": null,
+        "urbania": null,
+        "bus24": null,
+        "coach22": null,
+        "baseSedan": null,
+        "baseErtiga": 6000,
+        "baseCrysta": 7000,
+        "notes": "Sedan and large buses not permitted due to rugged high-altitude frontier roads. 4x4 or high-clearance SUV required."
+      }
+    ]
+  },
+  "associationSOP": {
+    "authority": "Tourist Transporter Association of Assam (TTAA)",
+    "rules": [
+      {
+        "title": "Duty Hours & Night Driving",
+        "detail": "Driver duty is predefined by the itinerary. No regular duty after 8:00 PM; late-night driving beyond itinerary attracts overtime of ₹500/hour. Night driving on hill sectors is discouraged for passenger safety."
+      },
+      {
+        "title": "Commercial Yellow Plates Mandatory",
+        "detail": "Only verified commercial tourist vehicles with yellow registration plates and active fitness, insurance, and road tax are operated. White private plates are strictly prohibited."
+      },
+      {
+        "title": "Fixed Route & Itinerary Adherence",
+        "detail": "Vehicles are provided strictly on the agreed route declaration and not on unlimited free disposal."
+      },
+      {
+        "title": "Air Conditioning (AC) Policy",
+        "detail": "AC operates on flat plains and national highways. As per transporter union standards, AC is switched off on steep hill climbs to preserve engine torque, and on stationary/parked vehicles."
+      },
+      {
+        "title": "Payment Schedule",
+        "detail": "30% advance deposit at the time of booking reservation, and the remaining 70% payable upon vehicle arrival and pickup in Guwahati."
+      },
+      {
+        "title": "Sunrise & Off-Road Excursions",
+        "detail": "Midnight departures for sunrise viewpoints (e.g., Nongjrong, Mandala Top) or extreme terrain (Chakzam Bridge, Mago, Zemithang) require prior mutual agreement and separate union supplements."
+      },
+      {
+        "title": "Spot Guides for Sensitive Locations",
+        "detail": "Remote areas including Wari Chora, Siju Cave, Double Decker root bridge, and Mawphlang Sacred Forest require hiring registered local spot guides to safeguard heritage and local integrity."
+      },
+      {
+        "title": "Cleanliness & Environment Code",
+        "detail": "Strict zero-littering policy inside vehicles and across sensitive tribal regions. Government fines up to ₹5,000 apply for littering in tourist belts."
+      }
+    ]
+  },
   "vehicles": [
     {
       "id": "sedan",
       "name": "Compact Sedan",
-      "models": "Swift Dzire / Toyota Etios",
-      "capacity": "Up to 3-4 passengers + standard boot luggage",
-      "image": "/images/cars/sedan.png",
-      "features": ["Air conditioning", "Luggage boot", "Paved & moderate hill roads", "Experienced local driver"]
+      "models": "Maruti Swift Dzire / Toyota Etios",
+      "capacity": "1–4 Passengers",
+      "luggage": "2 Medium Suitcases + Hand Baggage",
+      "bestFor": "Couples, small families, highway and paved hill circuits (Shillong, Kaziranga, Cherrapunji)",
+      "badge": "Budget Friendly"
     },
     {
       "id": "ertiga",
       "name": "Mid-size MUV",
       "models": "Maruti Suzuki Ertiga",
-      "capacity": "Up to 5-6 passengers + luggage carrier",
-      "image": "/images/cars/suv.png",
-      "features": ["High ground clearance", "Roof carrier for luggage", "Spacious family seating", "Hill-assist"]
+      "capacity": "4–6 Passengers",
+      "luggage": "3–4 Bags + Carrier",
+      "bestFor": "Families, small groups seeking balanced comfort, excellent fuel efficiency, and hill agility",
+      "badge": "Most Popular"
     },
     {
       "id": "crysta",
       "name": "Premium Mountain SUV",
       "models": "Toyota Innova Crysta",
-      "capacity": "Up to 6-7 passengers + luggage rack",
-      "image": "/images/cars/suv.png",
-      "features": ["Superior ride comfort", "Heavy hill suspension", "Captain seating available", "Ideal for Tawang & rugged terrain"]
+      "capacity": "5–7 Passengers",
+      "luggage": "4–6 Large Bags",
+      "bestFor": "Tawang mountain pass, rough terrain, luxury family road trips with superior suspension",
+      "badge": "Top Comfort"
     },
     {
-      "id": "traveller",
-      "name": "Force Tempo Traveller",
-      "models": "Force Traveller (12 / 17 / 26 seater)",
-      "capacity": "Small & large groups (8 to 20+ travellers)",
-      "image": "/images/cars/traveller.png",
-      "features": ["Reclining seats", "Dedicated large rear luggage space", "Custom quote upon request", "Perfect for corporate/group tours"]
+      "id": "tt13",
+      "name": "Tempo Traveller 13-Seater",
+      "models": "Force Traveller Executive",
+      "capacity": "8–12 Passengers",
+      "luggage": "Dedicated Rear Boot",
+      "bestFor": "Extended family holidays, photography groups, corporate retreats",
+      "badge": "Group Travel"
+    },
+    {
+      "id": "tt17",
+      "name": "Tempo Traveller 17-Seater",
+      "models": "Force Traveller Deluxe",
+      "capacity": "12–16 Passengers",
+      "luggage": "Full Rear Luggage Chamber",
+      "bestFor": "Large group tours across Meghalaya and Assam circuits",
+      "badge": "Group Tour"
+    },
+    {
+      "id": "tt26",
+      "name": "Tempo Traveller 26-Seater",
+      "models": "Force Traveller Super Deluxe",
+      "capacity": "18–24 Passengers",
+      "luggage": "Spacious Rear Boot & Roof Carrier",
+      "bestFor": "Student tours, pilgrimage groups, large family weddings",
+      "badge": "Large Group"
+    },
+    {
+      "id": "urbania",
+      "name": "Force Urbania Luxury Van",
+      "models": "Force Urbania (10–14 Seater)",
+      "capacity": "9–13 Passengers",
+      "luggage": "Executive Luggage Space",
+      "bestFor": "VIP corporate delegations, luxury experiential travelers, ultra-quiet suspension",
+      "badge": "Ultra Luxury"
+    },
+    {
+      "id": "bus24",
+      "name": "Deluxe Bus & Luxury Coach",
+      "models": "22–24 Seater Deluxe Coaches",
+      "capacity": "20–24 Passengers",
+      "luggage": "Under-bay Luggage Compartment",
+      "bestFor": "Corporate conferences, institutional group travel from Guwahati",
+      "badge": "Delegations"
+    }
+  ],
+  "routes": [
+    {
+      "id": "meghalaya",
+      "route": "Meghalaya Circuit (Shillong, Sohra, Dawki)",
+      "minimumDays": 3,
+      "sedan": 4000,
+      "ertiga": 5000,
+      "crysta": 6000,
+      "notes": "Waterfall treks, crystal rivers, living root bridges"
+    },
+    {
+      "id": "kaziranga-manas",
+      "route": "Kaziranga / Manas Wildlife Circuit",
+      "minimumDays": 3,
+      "sedan": 4500,
+      "ertiga": 5500,
+      "crysta": 6500,
+      "notes": "Rhino safaris, Brahmaputra river views, tea gardens"
+    },
+    {
+      "id": "arunachal",
+      "route": "Arunachal Pradesh (Bomdila, Dirang, Tawang)",
+      "minimumDays": 5,
+      "sedan": 5000,
+      "ertiga": 6000,
+      "crysta": 7000,
+      "notes": "High mountain passes (Sela Pass 13,700 ft), monasteries"
     }
   ]
 }

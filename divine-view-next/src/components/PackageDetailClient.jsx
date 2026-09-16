@@ -20,7 +20,8 @@ import {
   MessageCircle,
   Phone,
   Send,
-  X
+  X,
+  Mail
 } from "lucide-react";
 import siteConfig from "@/data/siteConfig.json";
 
@@ -83,7 +84,7 @@ export default function PackageDetailClient({ pkg }) {
     } catch (err) {
       console.error("Enquiry submission error:", err);
       // Fallback redirect with generated reference
-      const ref = `DVT-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      const ref = "DVT-2026-0000";
       router.push(`/enquiry/received?ref=${ref}&pkg=${pkg.slug}`);
     } finally {
       setIsSubmitting(false);
@@ -611,6 +612,19 @@ export default function PackageDetailClient({ pkg }) {
               <p className="text-[11px] text-[#59665E] text-center">
                 🔒 We do not take payments online before availability is checked and quote is accepted.
               </p>
+
+              <div className="pt-2 text-center text-xs text-[#59665E] border-t border-[#DEDCCD]/60 flex items-center justify-center gap-1.5">
+                <Mail className="w-3.5 h-3.5 text-[#D9A441]" />
+                <span>Prefer direct email? </span>
+                <a
+                  href={`mailto:${siteConfig.bookingEmail || "bookings@divineviewtours.com"}?subject=${encodeURIComponent(
+                    `Booking Enquiry: ${pkg.title}`
+                  )}`}
+                  className="font-semibold text-[#103F36] hover:text-[#D9A441] underline underline-offset-2"
+                >
+                  bookings@divineviewtours.com
+                </a>
+              </div>
             </form>
           </div>
         </div>

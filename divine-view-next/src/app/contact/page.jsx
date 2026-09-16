@@ -31,11 +31,11 @@ export default function ContactPage() {
       });
 
       const data = await res.json();
-      const ref = data.reference || `DVT-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      const ref = data.reference || "DVT-2026-0000";
       router.push(`/enquiry/received?ref=${ref}&type=contact`);
     } catch (err) {
       console.error(err);
-      const ref = `DVT-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+      const ref = "DVT-2026-0000";
       router.push(`/enquiry/received?ref=${ref}&type=contact`);
     } finally {
       setIsSubmitting(false);
@@ -92,15 +92,31 @@ export default function ContactPage() {
             </div>
 
             <div className="bg-[#FFFDF7] p-6 rounded-2xl border border-[#DEDCCD] shadow-sm space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#E9F0EA] flex items-center justify-center text-[#103F36]">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#E9F0EA] flex items-center justify-center text-[#103F36] shrink-0">
                   <Mail className="w-5 h-5 text-[#D9A441]" />
                 </div>
-                <div>
-                  <h3 className="font-serif text-lg font-bold text-[#103F36]">Email Us</h3>
-                  <a href={`mailto:${siteConfig.email}`} className="text-sm text-[#59665E] hover:text-[#D9A441]">
-                    {siteConfig.email}
-                  </a>
+                <div className="space-y-3 text-xs">
+                  <div>
+                    <h3 className="font-serif text-base font-bold text-[#103F36]">Tour & Cab Bookings</h3>
+                    <a
+                      href={`mailto:${siteConfig.bookingEmail || "bookings@divineviewtours.com"}?subject=Tour%20Booking%20Inquiry%20%7C%20Divine%20View%20Tours`}
+                      className="font-mono text-sm text-[#103F36] font-semibold hover:text-[#D9A441] block"
+                    >
+                      {siteConfig.bookingEmail || "bookings@divineviewtours.com"}
+                    </a>
+                    <span className="text-[#59665E]">For holiday packages, vehicle hire, and custom itineraries.</span>
+                  </div>
+                  <div className="pt-2 border-t border-[#DEDCCD]/80">
+                    <h3 className="font-serif text-base font-bold text-[#103F36]">General Queries & Info</h3>
+                    <a
+                      href={`mailto:${siteConfig.infoEmail || "info@divineviewtours.com"}?subject=General%20Query%20%7C%20Divine%20View%20Tours`}
+                      className="font-mono text-sm text-[#103F36] font-semibold hover:text-[#D9A441] block"
+                    >
+                      {siteConfig.infoEmail || "info@divineviewtours.com"}
+                    </a>
+                    <span className="text-[#59665E]">For corporate partnerships, travel trade, and general queries.</span>
+                  </div>
                 </div>
               </div>
             </div>

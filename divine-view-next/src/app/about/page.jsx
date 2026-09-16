@@ -63,7 +63,7 @@ export default function AboutPage() {
               className="bg-[#FFFDF7] p-6 rounded-2xl border border-[#DEDCCD] shadow-sm space-y-2"
             >
               <div className="w-8 h-8 rounded-full bg-[#E9F0EA] text-[#103F36] flex items-center justify-center font-bold text-xs">
-                0{i + 1}
+                0{i}
               </div>
               <h3 className="font-serif text-lg font-bold text-[#103F36]">
                 {tp.title}

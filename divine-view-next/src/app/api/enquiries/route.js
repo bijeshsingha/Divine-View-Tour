@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import nodemailer from "nodemailer";
+import siteConfig from "@/data/siteConfig.json";
 
 // Allowlist of supported enquiry types
 const ALLOWED_TYPES = ["package", "custom_trip", "vehicle_hire", "contact_message"];
@@ -28,6 +30,204 @@ function isValidEmail(email) {
   if (!email) return true; // optional
   if (typeof email !== "string" || email.length > 100) return false;
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Format and dispatch booking notification email
+async function sendBookingNotificationEmail(enquiry) {
+  const recipients =
+    process.env.BOOKING_NOTIFICATION_EMAIL ||
+    siteConfig.bookingEmail ||
+    "bookings@divineviewtours.com";
+
+  const cleanPhone = (enquiry.phone || "").replace(/[^0-9]/g, "");
+  const subject = `[New Booking #${enquiry.serialNumber}] ${enquiry.reference} - ${enquiry.customerName} (${(enquiry.type || "Tour").toUpperCase()})`;
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #172C26; max-width: 600px; margin: 0 auto; border: 1px solid #DEDCCD; border-radius: 12px; overflow: hidden; background-color: #FFFDF7;">
+      <div style="background-color: #082D27; color: #F7F3E9; padding: 24px; text-align: center;">
+        <h2 style="margin: 0; font-size: 22px; color: #D9A441; letter-spacing: 1px;">DIVINE VIEW TOURS</h2>
+        <p style="margin: 4px 0 0; font-size: 13px; opacity: 0.9;">New Online Booking Request Logged</p>
+      </div>
+
+      <div style="padding: 24px;">
+        <div style="background-color: #E9F0EA; border-left: 4px solid #103F36; padding: 12px 16px; margin-bottom: 20px; border-radius: 4px;">
+          <strong style="color: #103F36; font-size: 14px;">Serial Number:</strong> #${enquiry.serialNumber}<br>
+          <strong style="color: #103F36; font-size: 14px;">Enquiry Reference:</strong> <span style="font-family: monospace; font-size: 16px; font-weight: bold; color: #103F36;">${enquiry.reference}</span><br>
+          <strong style="color: #103F36; font-size: 14px;">Booking Type:</strong> ${(enquiry.type || "").toUpperCase()}
+        </div>
+
+        <h3 style="color: #103F36; border-bottom: 1px solid #DEDCCD; padding-bottom: 6px; margin-top: 0;">Guest Contact Details</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+          <tr>
+            <td style="padding: 6px 0; color: #59665E; width: 140px;"><strong>Full Name:</strong></td>
+            <td style="padding: 6px 0; color: #172C26;"><strong>${enquiry.customerName}</strong></td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #59665E;"><strong>Phone / WhatsApp:</strong></td>
+            <td style="padding: 6px 0;"><a href="tel:${enquiry.phone}" style="color: #103F36; font-weight: bold;">${enquiry.phone}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #59665E;"><strong>Email:</strong></td>
+            <td style="padding: 6px 0;">${enquiry.email ? `<a href="mailto:${enquiry.email}" style="color: #103F36;">${enquiry.email}</a>` : '<em style="color: #888;">Not provided</em>'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #59665E;"><strong>Preferred Contact:</strong></td>
+            <td style="padding: 6px 0; text-transform: capitalize;">${enquiry.preferredContact}</td>
+          </tr>
+        </table>
+
+        <h3 style="color: #103F36; border-bottom: 1px solid #DEDCCD; padding-bottom: 6px;">Trip / Itinerary Details</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+          ${enquiry.packageTitle ? `<tr><td style="padding: 6px 0; color: #59665E; width: 140px;"><strong>Package:</strong></td><td style="padding: 6px 0; font-weight: bold; color: #103F36;">${enquiry.packageTitle}</td></tr>` : ""}
+          ${enquiry.routeName ? `<tr><td style="padding: 6px 0; color: #59665E; width: 140px;"><strong>Vehicle Route:</strong></td><td style="padding: 6px 0; font-weight: bold; color: #103F36;">${enquiry.routeName}</td></tr>` : ""}
+          ${enquiry.vehicleType ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Vehicle Selected:</strong></td><td style="padding: 6px 0; font-weight: bold;">${enquiry.vehicleType}</td></tr>` : ""}
+          ${enquiry.startDate ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Start Date:</strong></td><td style="padding: 6px 0; font-weight: bold;">${enquiry.startDate}</td></tr>` : ""}
+          ${enquiry.travelMonth ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Travel Month:</strong></td><td style="padding: 6px 0; font-weight: bold;">${enquiry.travelMonth}</td></tr>` : ""}
+          ${enquiry.tripDuration ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Trip Duration:</strong></td><td style="padding: 6px 0;">${enquiry.tripDuration}</td></tr>` : ""}
+          ${enquiry.days ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Total Days:</strong></td><td style="padding: 6px 0;">${enquiry.days} Days</td></tr>` : ""}
+          ${enquiry.travellers ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Travellers:</strong></td><td style="padding: 6px 0;">${enquiry.travellers}</td></tr>` : ""}
+          ${enquiry.adults ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Group:</strong></td><td style="padding: 6px 0;">${enquiry.adults} Adults, ${enquiry.childrenCount || 0} Children, ${enquiry.seniorCount || 0} Seniors</td></tr>` : ""}
+          ${enquiry.destinations?.length ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Destinations:</strong></td><td style="padding: 6px 0;">${enquiry.destinations.join(" · ")}</td></tr>` : ""}
+          ${enquiry.startingCity ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Starting City:</strong></td><td style="padding: 6px 0;">${enquiry.startingCity}</td></tr>` : ""}
+          ${enquiry.pickup ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Pickup Location:</strong></td><td style="padding: 6px 0;">${enquiry.pickup}</td></tr>` : ""}
+          ${enquiry.stayPreference ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Stay Category:</strong></td><td style="padding: 6px 0; text-transform: capitalize;">${enquiry.stayPreference}</td></tr>` : ""}
+          ${enquiry.budgetRange ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Budget Range:</strong></td><td style="padding: 6px 0;">${enquiry.budgetRange}</td></tr>` : ""}
+          ${enquiry.interests?.length ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Interests:</strong></td><td style="padding: 6px 0;">${enquiry.interests.join(", ")}</td></tr>` : ""}
+          ${enquiry.subject ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Subject:</strong></td><td style="padding: 6px 0;">${enquiry.subject}</td></tr>` : ""}
+        </table>
+
+        ${
+          enquiry.notes || enquiry.specialRequests || enquiry.specialWishes || enquiry.message
+            ? `
+          <div style="background-color: #F7F3E9; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px;">
+            <strong style="color: #103F36; font-size: 13px; text-transform: uppercase;">Special Requests & Notes:</strong>
+            <p style="margin: 6px 0 0; font-size: 14px; color: #172C26;">${
+              enquiry.notes || enquiry.specialRequests || enquiry.specialWishes || enquiry.message
+            }</p>
+          </div>
+        `
+            : ""
+        }
+
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #DEDCCD;">
+          <a href="https://wa.me/${cleanPhone}" style="display: inline-block; background-color: #237A50; color: #ffffff; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; margin-right: 10px;">
+            Chat on WhatsApp
+          </a>
+          <a href="tel:${enquiry.phone}" style="display: inline-block; background-color: #103F36; color: #ffffff; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px;">
+            Call Traveler
+          </a>
+        </div>
+      </div>
+
+      <div style="background-color: #F7F3E9; padding: 12px 24px; text-align: center; font-size: 11px; color: #59665E;">
+        Divine View Tours Operations Desk · Guwahati, Assam · Phone: ${siteConfig.phone}
+      </div>
+    </div>
+  `;
+
+  const text = `
+NEW BOOKING ENQUIRY - DIVINE VIEW TOURS
+---------------------------------------
+Serial Number: #${enquiry.serialNumber}
+Reference: ${enquiry.reference}
+Type: ${(enquiry.type || "").toUpperCase()}
+Date Logged: ${enquiry.createdAt}
+
+CUSTOMER DETAILS:
+- Name: ${enquiry.customerName}
+- Phone: ${enquiry.phone}
+- Email: ${enquiry.email || "Not provided"}
+- Preferred Contact: ${enquiry.preferredContact}
+
+TRIP DETAILS:
+${enquiry.packageTitle ? `- Package: ${enquiry.packageTitle}\n` : ""}${enquiry.routeName ? `- Vehicle Route: ${enquiry.routeName}\n` : ""}${enquiry.vehicleType ? `- Vehicle: ${enquiry.vehicleType}\n` : ""}${enquiry.startDate ? `- Start Date: ${enquiry.startDate}\n` : ""}${enquiry.travelMonth ? `- Travel Month: ${enquiry.travelMonth}\n` : ""}${enquiry.tripDuration ? `- Duration: ${enquiry.tripDuration}\n` : ""}${enquiry.days ? `- Days: ${enquiry.days}\n` : ""}${enquiry.travellers ? `- Travellers: ${enquiry.travellers}\n` : ""}${enquiry.adults ? `- Group: ${enquiry.adults} Adults, ${enquiry.childrenCount || 0} Children, ${enquiry.seniorCount || 0} Seniors\n` : ""}${enquiry.destinations?.length ? `- Destinations: ${enquiry.destinations.join(", ")}\n` : ""}${enquiry.pickup ? `- Pickup: ${enquiry.pickup}\n` : ""}${enquiry.notes || enquiry.specialRequests || enquiry.specialWishes || enquiry.message ? `- Notes: ${enquiry.notes || enquiry.specialRequests || enquiry.specialWishes || enquiry.message}\n` : ""}
+CONNECT:
+- WhatsApp: https://wa.me/${cleanPhone}
+- Call: tel:${enquiry.phone}
+`;
+
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpPort = Number(process.env.SMTP_PORT) || 587;
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = (process.env.SMTP_PASS || "").replace(/\s+/g, "");
+  const smtpSecure = process.env.SMTP_SECURE === "true";
+  const smtpFrom =
+    process.env.SMTP_FROM ||
+    `"Divine View Tours Desk" <${smtpUser || "info@divineviewtours.com"}>`;
+
+  let smtpResult = null;
+  if (smtpHost && smtpUser && smtpPass) {
+    try {
+      const transporter = nodemailer.createTransport({
+        host: smtpHost,
+        port: smtpPort,
+        secure: smtpSecure,
+        auth: { user: smtpUser, pass: smtpPass },
+      });
+
+      await transporter.sendMail({
+        from: smtpFrom,
+        to: recipients,
+        replyTo: enquiry.email || undefined,
+        subject,
+        text,
+        html,
+      });
+
+      console.log(`[Email Dispatched via SMTP] Booking #${enquiry.serialNumber} sent to ${recipients}`);
+      smtpResult = { sent: true, provider: "smtp", recipient: recipients };
+    } catch (mailErr) {
+      console.error("[SMTP Error] Failed to dispatch email:", mailErr.message);
+      smtpResult = { sent: false, provider: "smtp", error: mailErr.message };
+    }
+  }
+
+  // FormSubmit relay (completely disabled unless explicitly enabled via ENABLE_FORMSUBMIT=true)
+  let relayResult = null;
+  if (process.env.ENABLE_FORMSUBMIT === "true") {
+    const primaryEmail = (recipients.split(",")[0] || "info@divineviewtours.com").trim();
+    try {
+      const relayRes = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(primaryEmail)}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Referer": "https://www.divineviewtours.com",
+          "Origin": "https://www.divineviewtours.com",
+        },
+        body: JSON.stringify({
+          _subject: subject,
+          Reference_Code: enquiry.reference,
+          Serial: `#${enquiry.serialNumber}`,
+          Customer_Name: enquiry.customerName,
+          Phone: enquiry.phone,
+          Email: enquiry.email || "Not provided",
+          Preferred_Contact: enquiry.preferredContact,
+          Booking_Type: (enquiry.type || "").toUpperCase(),
+          Package_or_Route: enquiry.packageTitle || enquiry.routeName || enquiry.type,
+          Vehicle_Type: enquiry.vehicleType || "Private Transport",
+          Start_Date: enquiry.startDate || enquiry.travelMonth || "Flexible",
+          Duration: enquiry.days ? `${enquiry.days} Days` : (enquiry.tripDuration || "Standard"),
+          Travellers: enquiry.travellers || `${enquiry.adults || 2} Adults`,
+          Notes: enquiry.notes || enquiry.specialRequests || enquiry.specialWishes || enquiry.message || "None",
+        }),
+      });
+
+      const relayJson = await relayRes.json();
+      console.log(`[Live Email Relay to ${primaryEmail}]:`, relayJson);
+      relayResult = { sent: true, provider: "formsubmit", response: relayJson };
+    } catch (relayErr) {
+      console.warn("[Live Email Relay Notice]:", relayErr.message);
+      relayResult = { sent: false, provider: "formsubmit", error: relayErr.message };
+    }
+  }
+
+  return {
+    sent: Boolean(smtpResult?.sent || relayResult?.sent),
+    recipient: recipients,
+    smtp: smtpResult,
+    relay: relayResult,
+  };
 }
 
 export async function POST(request) {
@@ -138,20 +338,7 @@ export async function POST(request) {
       sanitizedData.message = sanitizeString(body.message, 2000);
     }
 
-    // 8. Generate traceable reference code: DVT-2026-XXXX
-    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-    const reference = `DVT-2026-${randomSuffix}`;
-
-    const newEnquiry = {
-      id: `enq-${Date.now()}`,
-      reference,
-      type: enquiryType,
-      status: "new",
-      createdAt: new Date().toISOString(),
-      ...sanitizedData,
-    };
-
-    // 9. Persist enquiry safely with bounded array size (max 500 records)
+    // 8. Read existing enquiries to generate sequential zero-indexed serial number
     const enquiriesFilePath = path.join(process.cwd(), "src", "data", "enquiries.json");
     let enquiriesList = [];
 
@@ -166,7 +353,41 @@ export async function POST(request) {
       enquiriesList = [];
     }
 
-    // Prepend new enquiry and keep only the latest 500 records
+    // 9. Generate strictly incrementing serial number and reference code: DVT-2026-0000, DVT-2026-0001, etc.
+    let maxSerial = -1;
+    for (const item of enquiriesList) {
+      if (typeof item.serialNumber === "number" && item.serialNumber > maxSerial) {
+        maxSerial = item.serialNumber;
+      } else if (typeof item.reference === "string") {
+        const match = item.reference.match(/DVT-\d{4}-(\d+)/);
+        if (match) {
+          const parsed = parseInt(match[1], 10);
+          // Only count sequential 4-digit counters (< 1000) so old random 4-digit IDs don't offset the counter
+          if (!isNaN(parsed) && parsed < 1000 && parsed > maxSerial) {
+            maxSerial = parsed;
+          }
+        }
+      }
+    }
+    const serialNumber = maxSerial >= 0 ? maxSerial + 1 : enquiriesList.length;
+    const serialPadded = String(serialNumber).padStart(4, "0");
+    const reference = `DVT-2026-${serialPadded}`;
+
+    const newEnquiry = {
+      id: `enq-${Date.now()}`,
+      serialNumber,
+      reference,
+      type: enquiryType,
+      status: "new",
+      createdAt: new Date().toISOString(),
+      ...sanitizedData,
+    };
+
+    // 10. Dispatch notification email to business inbox
+    const emailResult = await sendBookingNotificationEmail(newEnquiry);
+    newEnquiry.emailNotification = emailResult;
+
+    // 11. Persist enquiry safely with bounded array size (max 500 records)
     enquiriesList.unshift(newEnquiry);
     if (enquiriesList.length > 500) {
       enquiriesList = enquiriesList.slice(0, 500);
@@ -180,14 +401,58 @@ export async function POST(request) {
 
     return NextResponse.json({
       success: true,
+      serialNumber,
       reference,
-      message: "Enquiry validated and recorded successfully",
+      message: "Enquiry validated, logged, and routed to business email successfully",
     });
   } catch (error) {
     // Sanitize server-side error logging: never log sensitive request payloads
     console.error("Enquiry API internal processing error:", error.message);
     return NextResponse.json(
       { success: false, error: "An unexpected error occurred. Please try again or contact us via WhatsApp." },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const ref = searchParams.get("ref");
+
+    const enquiriesFilePath = path.join(process.cwd(), "src", "data", "enquiries.json");
+    let enquiriesList = [];
+
+    if (fs.existsSync(enquiriesFilePath)) {
+      const fileContent = fs.readFileSync(enquiriesFilePath, "utf-8");
+      enquiriesList = JSON.parse(fileContent);
+      if (!Array.isArray(enquiriesList)) enquiriesList = [];
+    }
+
+    if (ref) {
+      const cleanRef = ref.trim().toLowerCase();
+      const found = enquiriesList.find(
+        (e) => (e.reference && e.reference.toLowerCase() === cleanRef) || (e.id && e.id.toLowerCase() === cleanRef)
+      );
+
+      if (!found) {
+        return NextResponse.json(
+          { success: false, error: `Enquiry with reference ${ref} not found.` },
+          { status: 404 }
+        );
+      }
+      return NextResponse.json({ success: true, enquiry: found });
+    }
+
+    return NextResponse.json({
+      success: true,
+      total: enquiriesList.length,
+      enquiries: enquiriesList,
+    });
+  } catch (error) {
+    console.error("GET enquiries error:", error.message);
+    return NextResponse.json(
+      { success: false, error: "Failed to retrieve enquiries data." },
       { status: 500 }
     );
   }

@@ -767,7 +767,7 @@ Route: Guwahati → Dimapur → Kohima → Viswema → Dzukou Valley → Jakhama
                 role="tab"
                 aria-selected={selectedStop === index}
               >
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{String(index).padStart(2, "0")}</span>
                 <strong>{stop.name}</strong>
                 <small>{stop.alt}</small>
               </button>
@@ -778,7 +778,7 @@ Route: Guwahati → Dimapur → Kohima → Viswema → Dzukou Valley → Jakhama
           <div className="route-detail shell" aria-live="polite">
             <div className="route-detail-head">
               <div>
-                <span>MILEPOST 0{selectedStop + 1}</span>
+                <span>MILEPOST 0{selectedStop}</span>
                 <h3>{routeStops[selectedStop].name} ({routeStops[selectedStop].alt})</h3>
               </div>
               <div className="route-detail-meta">

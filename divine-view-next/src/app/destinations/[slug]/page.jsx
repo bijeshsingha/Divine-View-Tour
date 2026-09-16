@@ -26,9 +26,33 @@ export async function generateMetadata({ params }) {
   const dest = destinationsData.find((d) => d.slug === slug);
   if (!dest) return { title: "Destination Not Found" };
 
+  const url = `https://www.divineviewtours.com/destinations/${dest.slug}`;
+
   return {
-    title: `${dest.name} Tour Packages & Travel Guide`,
+    title: `${dest.name} Tour Packages & Travel Guide | Divine View Tours`,
     description: `${dest.summary} Find routes from Guwahati, permits, best travel seasons, and private tours.`,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: `${dest.name} Tour Packages & Travel Guide`,
+      description: dest.summary,
+      url,
+      images: [
+        {
+          url: dest.heroImage,
+          width: 1200,
+          height: 630,
+          alt: `${dest.name} landscape with Divine View Tours`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${dest.name} Tours from Guwahati`,
+      description: dest.summary,
+      images: [dest.heroImage],
+    },
   };
 }
 
@@ -42,8 +66,54 @@ export default async function DestinationDetailPage({ params }) {
     (pkg) => pkg.destination === dest.slug || pkg.destination === "all"
   );
 
+  const destUrl = `https://www.divineviewtours.com/destinations/${dest.slug}`;
+
+  const destinationSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TouristDestination",
+        "@id": `${destUrl}#destination`,
+        name: dest.name,
+        description: dest.summary,
+        image: `https://www.divineviewtours.com${dest.heroImage}`,
+        touristType: ["Nature enthusiasts", "Adventure seekers", "Cultural travelers"],
+        hasMap: `https://maps.google.com/?q=${encodeURIComponent(dest.name)}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${destUrl}#breadcrumbs`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.divineviewtours.com",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Destinations",
+            item: "https://www.divineviewtours.com/destinations",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: dest.name,
+            item: destUrl,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
-    <main className="min-h-screen bg-[#F7F3E9] text-[#172C26]">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(destinationSchema) }}
+      />
+      <main className="min-h-screen bg-[#F7F3E9] text-[#172C26]">
       {/* 1. SCENIC HERO */}
       <section className="relative min-h-[500px] lg:min-h-[580px] flex items-center pt-28 pb-16 bg-[#082D27] overflow-hidden">
         <img
@@ -106,7 +176,7 @@ export default async function DestinationDetailPage({ params }) {
                     className="bg-[#FFFDF7] p-5 rounded-2xl border border-[#DEDCCD] shadow-sm"
                   >
                     <div className="w-7 h-7 rounded-full bg-[#E9F0EA] text-[#103F36] flex items-center justify-center text-xs font-bold mb-2">
-                      0{idx + 1}
+                      0{idx}
                     </div>
                     <h4 className="font-serif text-lg font-bold text-[#103F36]">
                       {h.title}
@@ -269,5 +339,6 @@ export default async function DestinationDetailPage({ params }) {
         </div>
       </section>
     </main>
+    </>
   );
 }

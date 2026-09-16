@@ -11,7 +11,8 @@ import {
   Settings,
   Car,
   Package,
-  ArrowLeft
+  ArrowLeft,
+  Inbox
 } from "lucide-react";
 import initialVehicleRates from "@/data/vehicleRates.json";
 import initialPackagesData from "@/data/packagesData.json";
@@ -27,7 +28,7 @@ export default function AdminPricingPage() {
     const numericVal = value === "" ? null : Number(value);
     setVehicleRates({
       ...vehicleRates,
-      routes: vehicleRates.routes.map((r) =>
+      routes: (vehicleRates?.routes || []).map((r) =>
         r.id === routeId ? { ...r, [field]: numericVal } : r
       ),
     });
@@ -126,6 +127,24 @@ export default function AdminPricingPage() {
           </div>
         </div>
 
+        {/* Tab switcher */}
+        <div className="flex items-center gap-2 border-b border-[#DEDCCD] pb-1 mb-8">
+          <Link
+            href="/admin/enquiries"
+            className="px-4 py-2 text-sm font-medium text-[#59665E] hover:text-[#103F36] border-b-2 border-transparent flex items-center gap-2 transition-colors"
+          >
+            <Inbox className="w-4 h-4" />
+            <span>Enquiries Inbox</span>
+          </Link>
+          <Link
+            href="/admin/pricing"
+            className="px-4 py-2 text-sm font-bold border-b-2 border-[#103F36] text-[#103F36] flex items-center gap-2"
+          >
+            <Settings className="w-4 h-4" />
+            <span>Pricing & Tariffs</span>
+          </Link>
+        </div>
+
         {/* Status Notification */}
         {statusMsg && (
           <div className="mb-6 p-4 rounded-xl bg-[#E9F0EA] border border-[#237A50]/30 text-[#103F36] text-sm flex items-center gap-2 shadow-sm animate-in fade-in">
@@ -164,7 +183,7 @@ export default function AdminPricingPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#DEDCCD]">
-                {vehicleRates.routes.map((r) => (
+                {(vehicleRates?.routes || []).map((r) => (
                   <tr key={r.id} className="hover:bg-[#F7F3E9]/50">
                     <td className="p-3 font-semibold text-[#103F36]">
                       {r.route}
