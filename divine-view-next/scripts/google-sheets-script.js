@@ -2,8 +2,8 @@
  * Google Apps Script Webhook & Live Database for Divine View Tours
  * 
  * FEATURES:
- * 1. Automatically pre-populates previous archived bookings (#0 to #6) on first run.
- * 2. Strictly guarantees incrementing serial numbers (#7, #8, #9...) even on serverless Vercel.
+ * 1. Zero dummy data: only real customer bookings are recorded.
+ * 2. Strictly guarantees incrementing serial numbers (#10, #11, #12...) even on serverless Vercel.
  * 3. Serves GET requests so the /admin/enquiries dashboard displays live Google Sheet data.
  * 4. Generates direct 1-tap WhatsApp links for each customer.
  * 
@@ -11,10 +11,10 @@
  * 1. Open your Google Sheet: "Divine View Tours - Live Bookings 2026"
  * 2. In the top menu, click: Extensions > Apps Script
  * 3. Select all existing text (Ctrl+A / Cmd+A), DELETE it, and PASTE this entire code below.
- * 4. Click the blue "Deploy" button (top-right) > "New deployment".
+ * 4. Click the blue "Deploy" button (top-right) > "Manage deployments" or "New deployment".
  * 5. Click the gear icon ⚙️ next to "Select type" > select "Web app".
  * 6. Set:
- *    - Description: Divine View Tours Live Bookings Webhook
+ *    - Description: Divine View Tours Live Bookings Webhook v2
  *    - Execute as: "Me" (your Google account)
  *    - Who has access: "Anyone"  <-- CRITICAL!
  * 7. Click "Deploy".
@@ -29,6 +29,7 @@
 function doPost(e) {
   var lock = LockService.getScriptLock();
   try {
+    // Wait up to 10 seconds for other concurrent executions to finish
     lock.waitLock(10000);
 
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -41,15 +42,26 @@ function doPost(e) {
         .setMimeType(ContentService.MimeType.JSON);
     }
 
-    // Initialize headers & archive records if sheet is completely fresh
-    ensureHeadersAndArchive(sheet);
+    // Initialize headers if sheet is completely fresh
+    ensureHeaders(sheet);
 
-    // Compute strictly incrementing sequential serial number based on row count
-    var rowCount = sheet.getLastRow();
-    // Headers is Row 1. If 7 archived items exist (Rows 2-8), next row is Row 9 -> Serial #7
-    var serialNumber = Math.max(7, rowCount - 1);
+    // Compute strictly incrementing sequential serial number based on row count and existing data
+    var lastRow = sheet.getLastRow();
+    var nextSerial = 10;
+    if (lastRow > 1) {
+      var lastVal = String(sheet.getRange(lastRow, 3).getValue() || "").replace(/[^0-9]/g, "");
+      var parsedLast = parseInt(lastVal, 10);
+      if (!isNaN(parsedLast) && parsedLast >= 0) {
+        nextSerial = parsedLast + 1;
+      } else {
+        nextSerial = lastRow;
+      }
+    }
+
+    var incomingSerial = data.serialNumber ? parseInt(String(data.serialNumber).replace(/[^0-9]/g, ""), 10) : NaN;
+    var serialNumber = (!isNaN(incomingSerial) && incomingSerial >= nextSerial) ? incomingSerial : nextSerial;
     var serialPadded = ("0000" + serialNumber).slice(-4);
-    var reference = "DVT-2026-" + serialPadded;
+    var reference = (data.reference && data.reference.indexOf("DVT-2026-") === 0) ? data.reference : ("DVT-2026-" + serialPadded);
 
     var row = [
       data.timestamp || new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
@@ -96,7 +108,7 @@ function doPost(e) {
 function doGet(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    ensureHeadersAndArchive(sheet);
+    ensureHeaders(sheet);
 
     var data = sheet.getDataRange().getValues();
     if (data.length <= 1) {
@@ -109,7 +121,7 @@ function doGet(e) {
       var row = data[i];
       var rawSerial = String(row[2] || "").replace("#", "");
       var serialNum = parseInt(rawSerial, 10);
-      if (isNaN(serialNum)) serialNum = i - 1;
+      if (isNaN(serialNum)) serialNum = i;
 
       enquiries.push({
         id: "sheet-" + i,
@@ -152,7 +164,7 @@ function doGet(e) {
   }
 }
 
-function ensureHeadersAndArchive(sheet) {
+function ensureHeaders(sheet) {
   if (sheet.getLastRow() === 0) {
     var headers = [
       "Date & Time (IST)",
@@ -173,31 +185,16 @@ function ensureHeadersAndArchive(sheet) {
       "Status",
       "Assigned Driver",
       "Vehicle Allocated",
-      "Operations / Payment Notes"
+      "Payment / Ops Notes"
     ];
     sheet.appendRow(headers);
 
     // Brand forest green header styling
-    var headerRange = sheet.getRange(1, 1, 1, headers.length);
-    headerRange.setBackground("#103F36");
-    headerRange.setFontColor("#F7F3E9");
-    headerRange.setFontWeight("bold");
-    headerRange.setFontFamily("Arial");
+    var hr = sheet.getRange(1, 1, 1, headers.length);
+    hr.setBackground("#103F36");
+    hr.setFontColor("#F7F3E9");
+    hr.setFontWeight("bold");
+    hr.setFontFamily("Arial");
     sheet.setFrozenRows(1);
-
-    // Pre-populate initial records #0 through #6
-    var initialArchive = [
-      ["16 Sept 2026, 03:11 PM", "DVT-2026-0000", "#0", "Archive Lead 0", "+916026504087", "https://wa.me/916026504087", "info@divineviewtours.com", "WHATSAPP", "PACKAGE", "Meghalaya Scenic", "2026-09-17", "5 Days", "2 Adults", "Guwahati", "Initial seed", "Archived", "", "", ""],
-      ["16 Sept 2026, 03:12 PM", "DVT-2026-0001", "#1", "Archive Lead 1", "+916026504087", "https://wa.me/916026504087", "info@divineviewtours.com", "WHATSAPP", "PACKAGE", "Meghalaya Scenic", "2026-09-17", "5 Days", "2 Adults", "Guwahati", "Initial seed", "Archived", "", "", ""],
-      ["16 Sept 2026, 03:13 PM", "DVT-2026-0002", "#2", "Archive Lead 2", "+916026504087", "https://wa.me/916026504087", "info@divineviewtours.com", "WHATSAPP", "PACKAGE", "Meghalaya Scenic", "2026-09-17", "5 Days", "2 Adults", "Guwahati", "Initial seed", "Archived", "", "", ""],
-      ["16 Sept 2026, 05:50 PM", "DVT-2026-0003", "#3", "Bijesh Singha", "+917002449198", "https://wa.me/917002449198", "singhabijesh7@gmail.com", "WHATSAPP", "VEHICLE_HIRE", "Same-Day Shillong Roundtrip", "2026-09-17", "1 Day", "Ertiga", "Guwahati Airport", "", "Archived", "", "", ""],
-      ["16 Sept 2026, 07:52 PM", "DVT-2026-0004", "#4", "jamuna singha", "+917002369611", "https://wa.me/917002369611", "singhabijesh7@gmail.com", "WHATSAPP", "PACKAGE", "Meghalaya Escape: Waterfalls & Living Roots", "2026-09-17", "5 Days", "2 Adults", "Guwahati Airport", "", "Archived", "", "", ""],
-      ["16 Sept 2026, 08:09 PM", "DVT-2026-0005", "#5", "Bijesh Singha", "+917002449198", "https://wa.me/917002449198", "singhabijesh7@gmail.com", "WHATSAPP", "PACKAGE", "Meghalaya Escape: Waterfalls & Living Roots", "2026-09-17", "5 Days", "2 Adults", "Guwahati Airport", "", "Archived", "", "", ""],
-      ["16 Sept 2026, 09:15 PM", "DVT-2026-0006", "#6", "jamuna singha", "+917002369611", "https://wa.me/917002369611", "singhabijesh7@gmail.com", "WHATSAPP", "CUSTOM_TRIP", "Custom Northeast Holiday Itinerary", "October 2026", "5 Days", "2 Adults", "Guwahati Airport", "Customizing based on package: meghalaya-5-day-tour-from-guwahati", "Archived", "", "", ""]
-    ];
-
-    for (var j = 0; j < initialArchive.length; j++) {
-      sheet.appendRow(initialArchive[j]);
-    }
   }
 }

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import VehicleHireClient from "@/components/VehicleHireClient";
 
 export const metadata = {
@@ -295,7 +296,9 @@ export default function VehicleHirePage() {
             </p>
           </div>
 
-          <VehicleHireClient />
+          <Suspense fallback={<div className="text-center py-20 text-[#59665E]">Loading vehicle rental desk...</div>}>
+            <VehicleHireClient />
+          </Suspense>
         </div>
       </main>
     </>

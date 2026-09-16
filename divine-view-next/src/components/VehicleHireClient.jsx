@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Car,
   ShieldCheck,
@@ -25,6 +25,9 @@ import VehicleRateTable from "@/components/VehicleRateTable";
 
 export default function VehicleHireClient() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const paramDest = searchParams.get("dest") || "";
+  const paramTravellers = searchParams.get("travellers") || "";
 
   // Combine circuits and poster routes for booking selector
   const availableCircuits = [
@@ -110,15 +113,44 @@ export default function VehicleHireClient() {
     }
   ];
 
-  const [selectedRouteId, setSelectedRouteId] = useState(availableCircuits[0].id);
-  const [selectedVehicle, setSelectedVehicle] = useState("ertiga");
-  const [daysCount, setDaysCount] = useState(availableCircuits[0].minDays);
+  // Match destination from search params if present
+  let initialRouteId = availableCircuits[0].id;
+  if (paramDest === "arunachal-pradesh") initialRouteId = "poster-arunachal";
+  else if (paramDest === "assam") initialRouteId = "poster-kaziranga";
+  else if (paramDest === "meghalaya") initialRouteId = "poster-meghalaya";
+
+  // Match vehicle from travellers param if present
+  let initialVehicle = "ertiga";
+  if (paramTravellers === "1" || paramTravellers === "2") initialVehicle = "sedan";
+  else if (paramTravellers === "4") initialVehicle = "ertiga";
+  else if (paramTravellers === "6") initialVehicle = "crysta";
+  else if (paramTravellers === "8") initialVehicle = "tt13";
+
+  const initialRoute = availableCircuits.find((c) => c.id === initialRouteId) || availableCircuits[0];
+
+  const [selectedRouteId, setSelectedRouteId] = useState(initialRouteId);
+  const [selectedVehicle, setSelectedVehicle] = useState(initialVehicle);
+  const [daysCount, setDaysCount] = useState(initialRoute.minDays);
   const [startDate, setStartDate] = useState("");
   const [customerName, setCustomerName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [specialRequests, setSpecialRequests] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (paramDest) {
+      if (paramDest === "arunachal-pradesh") setSelectedRouteId("poster-arunachal");
+      else if (paramDest === "assam") setSelectedRouteId("poster-kaziranga");
+      else if (paramDest === "meghalaya") setSelectedRouteId("poster-meghalaya");
+    }
+    if (paramTravellers) {
+      if (paramTravellers === "1" || paramTravellers === "2") setSelectedVehicle("sedan");
+      else if (paramTravellers === "4") setSelectedVehicle("ertiga");
+      else if (paramTravellers === "6") setSelectedVehicle("crysta");
+      else if (paramTravellers === "8") setSelectedVehicle("tt13");
+    }
+  }, [paramDest, paramTravellers]);
 
   const activeRoute = availableCircuits.find((c) => c.id === selectedRouteId) || availableCircuits[0];
   const dailyRate = activeRoute[selectedVehicle];

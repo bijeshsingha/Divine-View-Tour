@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import packagesData from "@/data/packagesData.json";
 import PackageDetailClient from "@/components/PackageDetailClient";
@@ -121,7 +122,9 @@ export default async function PackageDetailPage({ params }) {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
-      <PackageDetailClient pkg={pkg} />
+      <Suspense fallback={<div className="min-h-screen bg-[#082D27]" />}>
+        <PackageDetailClient pkg={pkg} />
+      </Suspense>
     </main>
   );
 }

@@ -26,6 +26,22 @@ export default function CustomTripPlanner() {
   const prefillPkg = searchParams.get("package") || "";
   const prefillDest = searchParams.get("dest") || "";
   const prefillDuration = searchParams.get("duration") || "";
+  const prefillMonth = searchParams.get("month") || "";
+  const prefillTravellers = searchParams.get("travellers") || "";
+
+  // Convert raw month query to label
+  let initialMonth = "October 2026";
+  if (prefillMonth && prefillMonth !== "flexible") {
+    const capitalized = prefillMonth.charAt(0).toUpperCase() + prefillMonth.slice(1);
+    initialMonth = `${capitalized} 2026`;
+  }
+
+  // Parse adult count and recommended vehicle from travellers param
+  const parsedAdults = prefillTravellers ? parseInt(prefillTravellers, 10) || 2 : 2;
+  let initialVehicle = "Comfortable MUV / Ertiga";
+  if (parsedAdults <= 2) initialVehicle = "Dedicated AC Sedan (Swift Dzire / Etios)";
+  else if (parsedAdults >= 5 && parsedAdults <= 6) initialVehicle = "Toyota Innova Crysta";
+  else if (parsedAdults >= 7) initialVehicle = "Tempo Traveller (Group 8+)";
 
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,15 +49,15 @@ export default function CustomTripPlanner() {
   // Form State
   const [formData, setFormData] = useState({
     // Step 1: Where and when
-    destinations: prefillDest ? [prefillDest] : ["meghalaya"],
+    destinations: prefillDest && prefillDest !== "all" ? [prefillDest] : ["meghalaya"],
     timingType: "month", // "dates" or "month"
     exactDates: "",
-    travelMonth: "October 2026",
+    travelMonth: initialMonth,
     tripDuration: prefillDuration ? `${prefillDuration} days` : "5 to 7 days",
     startingCity: "Guwahati (Airport / Station)",
 
     // Step 2: Group
-    adults: 2,
+    adults: parsedAdults,
     childrenCount: 0,
     seniorCount: 0,
     accessibilityNotes: "",
@@ -50,7 +66,7 @@ export default function CustomTripPlanner() {
     interests: ["Waterfalls & Living Roots", "Scenic Viewpoints"],
     pace: "Balanced (Comfortable driving & sightseeing)",
     stayPreference: "Boutique & 3-Star Resorts",
-    vehiclePreference: "Comfortable MUV / Ertiga",
+    vehiclePreference: initialVehicle,
     budgetRange: "₹20,000 to ₹35,000 per person",
     includesFlights: "Land arrangements only (We book our own flights)",
     specialWishes: prefillPkg ? `Customizing based on package: ${prefillPkg}` : "",

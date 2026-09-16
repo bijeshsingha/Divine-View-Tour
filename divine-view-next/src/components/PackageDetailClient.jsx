@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Clock,
   MapPin,
@@ -27,23 +27,41 @@ import siteConfig from "@/data/siteConfig.json";
 
 export default function PackageDetailClient({ pkg }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const queryTravellers = searchParams.get("travellers") || "2";
+  const queryMonth = searchParams.get("month") || "";
+
   const [activeImage, setActiveImage] = useState(pkg.heroImage);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
-  // Enquiry modal state
+  // Enquiry modal state pre-filled from search
   const [formData, setFormData] = useState({
     startDate: "",
-    flexibleMonth: "Flexible",
-    travellers: "2",
+    flexibleMonth: queryMonth ? queryMonth : "Flexible",
+    travellers: queryTravellers,
     pickup: "Guwahati Airport",
     customerName: "",
     phone: "",
     email: "",
     preferredContact: "whatsapp",
-    notes: "",
+    notes: queryMonth ? `Preferred Travel Month: ${queryMonth}` : "",
   });
+
+  // Sync state if query params change
+  useEffect(() => {
+    if (queryTravellers) {
+      setFormData((prev) => ({ ...prev, travellers: queryTravellers }));
+    }
+    if (queryMonth) {
+      setFormData((prev) => ({
+        ...prev,
+        flexibleMonth: queryMonth,
+        notes: prev.notes ? prev.notes : `Preferred Travel Month: ${queryMonth}`,
+      }));
+    }
+  }, [queryTravellers, queryMonth]);
 
   // Accessible Escape key listener to close modal
   useEffect(() => {
@@ -524,9 +542,9 @@ export default function PackageDetailClient({ pkg }) {
                   >
                     <option value="1">1 person</option>
                     <option value="2">2 persons</option>
-                    <option value="4">4 persons (standard)</option>
-                    <option value="6">6 persons</option>
-                    <option value="8+">8+ group</option>
+                    <option value="4">3 to 4 persons</option>
+                    <option value="6">5 to 6 persons</option>
+                    <option value="8">7+ persons group</option>
                   </select>
                 </div>
               </div>

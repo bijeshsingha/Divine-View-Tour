@@ -1,10 +1,16 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Users, Calendar } from "lucide-react";
 
-export default function PackageCard({ pkg }) {
+export default function PackageCard({ pkg, travellers, month }) {
   // Extract clean short title matching website-b-scenic (e.g. "Meghalaya Escape")
   const shortTitle = pkg.title.split(":")[0];
   const durationText = pkg.durationDays ? `${pkg.durationDays} days` : "Custom duration";
+
+  // Build link with search params if provided
+  const queryParams = new URLSearchParams();
+  if (travellers && travellers !== "2") queryParams.append("travellers", travellers);
+  if (month && month !== "flexible") queryParams.append("month", month);
+  const detailUrl = `/packages/${pkg.slug}${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
 
   return (
     <div className="bg-[#FFFDF7] rounded-2xl overflow-hidden border border-[#DEDCCD] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
@@ -44,6 +50,9 @@ export default function PackageCard({ pkg }) {
               <span className="font-serif text-lg font-bold text-[#103F36]">
                 ₹{pkg.priceAmount.toLocaleString("en-IN")}
               </span>
+              <span className="text-[11px] text-[#59665E] block">
+                / person
+              </span>
             </div>
           ) : (
             <span className="text-xs font-semibold text-[#59665E]">
@@ -52,7 +61,7 @@ export default function PackageCard({ pkg }) {
           )}
 
           <Link
-            href={`/packages/${pkg.slug}`}
+            href={detailUrl}
             className="inline-flex items-center gap-1.5 border border-[#103F36]/30 hover:border-[#D9A441] hover:bg-[#D9A441] text-[#103F36] hover:text-[#172C26] px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all"
           >
             <span>Request price</span>
