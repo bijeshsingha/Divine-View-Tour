@@ -28,11 +28,15 @@ export default function TripFinder() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 items-center">
           {/* Destination */}
           <div className="space-y-1.5">
-            <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#59665E]">
+            <label
+              htmlFor="finder-destination"
+              className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#59665E]"
+            >
               <MapPin className="w-3.5 h-3.5 text-[#D9A441]" />
               Destination
             </label>
             <select
+              id="finder-destination"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               className="w-full bg-[#F7F3E9] text-[#172C26] font-medium text-sm rounded-lg px-3.5 py-2.5 border border-[#DEDCCD] focus:outline-none focus:ring-2 focus:ring-[#103F36] cursor-pointer"
@@ -47,11 +51,15 @@ export default function TripFinder() {
 
           {/* Travel Month */}
           <div className="space-y-1.5">
-            <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#59665E]">
+            <label
+              htmlFor="finder-month"
+              className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#59665E]"
+            >
               <Calendar className="w-3.5 h-3.5 text-[#D9A441]" />
               Travel Month
             </label>
             <select
+              id="finder-month"
               value={month}
               onChange={(e) => setMonth(e.target.value)}
               className="w-full bg-[#F7F3E9] text-[#172C26] font-medium text-sm rounded-lg px-3.5 py-2.5 border border-[#DEDCCD] focus:outline-none focus:ring-2 focus:ring-[#103F36] cursor-pointer"
@@ -70,11 +78,15 @@ export default function TripFinder() {
 
           {/* Travellers */}
           <div className="space-y-1.5">
-            <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#59665E]">
+            <label
+              htmlFor="finder-travellers"
+              className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#59665E]"
+            >
               <Users className="w-3.5 h-3.5 text-[#D9A441]" />
               Travellers
             </label>
             <select
+              id="finder-travellers"
               value={travellers}
               onChange={(e) => setTravellers(e.target.value)}
               className="w-full bg-[#F7F3E9] text-[#172C26] font-medium text-sm rounded-lg px-3.5 py-2.5 border border-[#DEDCCD] focus:outline-none focus:ring-2 focus:ring-[#103F36] cursor-pointer"
@@ -89,12 +101,16 @@ export default function TripFinder() {
 
           {/* Duration & Search CTA */}
           <div className="space-y-1.5">
-            <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#59665E]">
+            <label
+              htmlFor="finder-duration"
+              className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#59665E]"
+            >
               <Clock className="w-3.5 h-3.5 text-[#D9A441]" />
               Trip Duration
             </label>
             <div className="flex gap-2">
               <select
+                id="finder-duration"
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
                 className="w-full bg-[#F7F3E9] text-[#172C26] font-medium text-sm rounded-lg px-3.5 py-2.5 border border-[#DEDCCD] focus:outline-none focus:ring-2 focus:ring-[#103F36] cursor-pointer"
@@ -108,8 +124,8 @@ export default function TripFinder() {
 
               <button
                 type="submit"
+                aria-label="Find journeys"
                 className="btn-gold !min-h-[42px] !py-2 !px-4 shrink-0 shadow-md flex items-center justify-center gap-1.5"
-                title="Search Packages"
               >
                 <Search className="w-4 h-4" />
                 <span className="hidden sm:inline">Find</span>

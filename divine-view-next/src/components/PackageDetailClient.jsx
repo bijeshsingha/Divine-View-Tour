@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -29,6 +29,7 @@ export default function PackageDetailClient({ pkg }) {
   const [activeImage, setActiveImage] = useState(pkg.heroImage);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   // Enquiry modal state
   const [formData, setFormData] = useState({
@@ -43,9 +44,21 @@ export default function PackageDetailClient({ pkg }) {
     notes: "",
   });
 
+  // Accessible Escape key listener to close modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape" && isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isModalOpen]);
+
   const handleEnquirySubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setFormErrors({});
 
     try {
       const res = await fetch("/api/enquiries", {
@@ -62,12 +75,13 @@ export default function PackageDetailClient({ pkg }) {
       const data = await res.json();
       if (res.ok && data.reference) {
         router.push(`/enquiry/received?ref=${data.reference}&pkg=${pkg.slug}`);
+      } else if (data.errors) {
+        setFormErrors(data.errors);
       } else {
-        alert("Enquiry received! Our team will reach out via WhatsApp shortly.");
-        setIsModalOpen(false);
+        alert(data.error || "Please check your inputs and try again.");
       }
     } catch (err) {
-      console.error(err);
+      console.error("Enquiry submission error:", err);
       // Fallback redirect with generated reference
       const ref = `DVT-2026-${Math.floor(1000 + Math.random() * 9000)}`;
       router.push(`/enquiry/received?ref=${ref}&pkg=${pkg.slug}`);
@@ -82,7 +96,7 @@ export default function PackageDetailClient({ pkg }) {
       <section className="bg-[#082D27] text-[#F7F3E9] pt-28 pb-12">
         <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
-          <nav className="text-xs text-[#F7F3E9]/70 mb-4 flex items-center gap-2">
+          <nav aria-label="Breadcrumb" className="text-xs text-[#F7F3E9]/70 mb-4 flex items-center gap-2">
             <Link href="/" className="hover:text-[#D9A441]">Home</Link>
             <span>/</span>
             <Link href="/packages" className="hover:text-[#D9A441]">Packages</Link>
@@ -142,6 +156,8 @@ export default function PackageDetailClient({ pkg }) {
                   {pkg.gallery.map((imgUrl, i) => (
                     <button
                       key={i}
+                      type="button"
+                      aria-label={`View photo ${i + 1} of ${pkg.title}`}
                       onClick={() => setActiveImage(imgUrl)}
                       className={`relative w-20 sm:w-24 h-14 sm:h-16 rounded-xl overflow-hidden border-2 shrink-0 transition-all ${
                         activeImage === imgUrl ? "border-[#D9A441] scale-105" : "border-transparent opacity-70 hover:opacity-100"
@@ -386,6 +402,7 @@ export default function PackageDetailClient({ pkg }) {
               {/* Action Buttons */}
               <div className="space-y-3">
                 <button
+                  type="button"
                   onClick={() => setIsModalOpen(true)}
                   className="btn-gold w-full text-center justify-center font-semibold text-sm shadow-md"
                 >
@@ -442,6 +459,7 @@ export default function PackageDetailClient({ pkg }) {
             Customise
           </Link>
           <button
+            type="button"
             onClick={() => setIsModalOpen(true)}
             className="btn-gold !py-2 !px-4 !text-xs !min-h-[38px]"
           >
@@ -450,20 +468,27 @@ export default function PackageDetailClient({ pkg }) {
         </div>
       </div>
 
-      {/* MODAL: CHECK AVAILABILITY & ENQUIRY */}
+      {/* MODAL: CHECK AVAILABILITY & ENQUIRY (Accessible Dialog) */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#FFFDF7] rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-[#DEDCCD] shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="availability-modal-title"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+        >
+          <div className="bg-[#FFFDF7] rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-[#DEDCCD] shadow-2xl relative animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto">
             <button
+              type="button"
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-5 right-5 text-[#59665E] hover:text-[#172C26] p-1.5 rounded-full hover:bg-[#F7F3E9]"
+              aria-label="Close availability modal"
+              className="absolute top-5 right-5 text-[#59665E] hover:text-[#172C26] p-1.5 rounded-full hover:bg-[#F7F3E9] focus:outline-none focus:ring-2 focus:ring-[#103F36]"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="space-y-1 mb-6">
               <span className="badge-forest text-xs">Availability Request</span>
-              <h3 className="font-serif text-2xl font-bold text-[#103F36]">
+              <h3 id="availability-modal-title" className="font-serif text-2xl font-bold text-[#103F36]">
                 Check Dates: {pkg.title}
               </h3>
               <p className="text-xs text-[#59665E]">
@@ -474,21 +499,27 @@ export default function PackageDetailClient({ pkg }) {
             <form onSubmit={handleEnquirySubmit} className="space-y-4 text-xs sm:text-sm">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-[#59665E] block mb-1">Travel Date</label>
+                  <label htmlFor="avail-date" className="font-bold text-[#59665E] block mb-1">
+                    Travel Date *
+                  </label>
                   <input
+                    id="avail-date"
                     type="date"
                     required
                     value={formData.startDate}
                     onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                    className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26]"
+                    className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="font-bold text-[#59665E] block mb-1">Travellers</label>
+                  <label htmlFor="avail-travellers" className="font-bold text-[#59665E] block mb-1">
+                    Travellers
+                  </label>
                   <select
+                    id="avail-travellers"
                     value={formData.travellers}
                     onChange={(e) => setFormData({ ...formData, travellers: e.target.value })}
-                    className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26]"
+                    className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
                   >
                     <option value="1">1 person</option>
                     <option value="2">2 persons</option>
@@ -500,49 +531,70 @@ export default function PackageDetailClient({ pkg }) {
               </div>
 
               <div>
-                <label className="font-bold text-[#59665E] block mb-1">Full Name</label>
+                <label htmlFor="avail-name" className="font-bold text-[#59665E] block mb-1">
+                  Full Name *
+                </label>
                 <input
+                  id="avail-name"
                   type="text"
                   required
                   placeholder="e.g. Rahul Sharma"
                   value={formData.customerName}
                   onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
-                  className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26]"
+                  className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
                 />
+                {formErrors.name && (
+                  <p className="text-xs text-red-600 mt-1">{formErrors.name}</p>
+                )}
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-[#59665E] block mb-1">WhatsApp / Phone</label>
+                  <label htmlFor="avail-phone" className="font-bold text-[#59665E] block mb-1">
+                    WhatsApp / Phone *
+                  </label>
                   <input
+                    id="avail-phone"
                     type="tel"
                     required
                     placeholder="+91 98765 43210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26]"
+                    className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
                   />
+                  {formErrors.phone && (
+                    <p className="text-xs text-red-600 mt-1">{formErrors.phone}</p>
+                  )}
                 </div>
                 <div>
-                  <label className="font-bold text-[#59665E] block mb-1">Email (Optional)</label>
+                  <label htmlFor="avail-email" className="font-bold text-[#59665E] block mb-1">
+                    Email (Optional)
+                  </label>
                   <input
+                    id="avail-email"
                     type="email"
                     placeholder="name@email.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26]"
+                    className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
                   />
+                  {formErrors.email && (
+                    <p className="text-xs text-red-600 mt-1">{formErrors.email}</p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label className="font-bold text-[#59665E] block mb-1">Specific Requests (Optional)</label>
+                <label htmlFor="avail-notes" className="font-bold text-[#59665E] block mb-1">
+                  Specific Requests (Optional)
+                </label>
                 <textarea
+                  id="avail-notes"
                   rows="2"
                   placeholder="e.g. Need baby car seat, prefer ground-floor rooms, need flight advice."
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26]"
+                  className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
                 />
               </div>
 
@@ -550,7 +602,7 @@ export default function PackageDetailClient({ pkg }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn-gold w-full text-center justify-center font-semibold text-sm"
+                  className="btn-gold w-full text-center justify-center font-semibold text-sm focus:ring-2 focus:ring-[#103F36] focus:outline-none"
                 >
                   {isSubmitting ? "Submitting Request..." : "Request Availability Quote"}
                 </button>
