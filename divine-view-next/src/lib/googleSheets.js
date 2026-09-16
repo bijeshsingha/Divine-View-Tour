@@ -75,6 +75,8 @@ export async function appendBookingToGoogleSheet(enquiry) {
     return {
       sent: true,
       provider: "google_sheets",
+      serialNumber: resultJson?.serialNumber,
+      reference: resultJson?.reference,
       response: resultJson,
     };
   } catch (err) {
@@ -86,3 +88,36 @@ export async function appendBookingToGoogleSheet(enquiry) {
     };
   }
 }
+
+/**
+ * Fetch live enquiries directly from Google Sheet for the Admin Portal
+ */
+export async function fetchBookingsFromGoogleSheet() {
+  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  if (!webhookUrl || typeof webhookUrl !== "string" || !webhookUrl.startsWith("http")) {
+    return null;
+  }
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+    const res = await fetch(webhookUrl, {
+      method: "GET",
+      headers: { "Accept": "application/json" },
+      signal: controller.signal,
+      cache: "no-store",
+    });
+    clearTimeout(timeoutId);
+
+    const data = await res.json();
+    if (data && Array.isArray(data.enquiries)) {
+      return data.enquiries;
+    }
+    return null;
+  } catch (err) {
+    console.warn("[Google Sheets GET warning]:", err.message);
+    return null;
+  }
+}
+

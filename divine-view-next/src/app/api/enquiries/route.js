@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 import nodemailer from "nodemailer";
 import siteConfig from "@/data/siteConfig.json";
-import { appendBookingToGoogleSheet } from "@/lib/googleSheets";
+import { appendBookingToGoogleSheet, fetchBookingsFromGoogleSheet } from "@/lib/googleSheets";
 
 // Allowlist of supported enquiry types
 const ALLOWED_TYPES = ["package", "custom_trip", "vehicle_hire", "contact_message"];
@@ -384,13 +384,23 @@ export async function POST(request) {
       ...sanitizedData,
     };
 
-    // 10. Dispatch notification email to business inbox
-    const emailResult = await sendBookingNotificationEmail(newEnquiry);
-    newEnquiry.emailNotification = emailResult;
-
-    // 11. Record in live Google Spreadsheet via webhook
+    // 10. Record in live Google Spreadsheet via webhook
     const sheetResult = await appendBookingToGoogleSheet(newEnquiry);
     newEnquiry.googleSheets = sheetResult;
+
+    // If Google Sheets assigned a sequential ID, adopt it
+    let assignedSerial = serialNumber;
+    let assignedRef = reference;
+    if (sheetResult && sheetResult.sent && sheetResult.serialNumber != null) {
+      assignedSerial = sheetResult.serialNumber;
+      assignedRef = sheetResult.reference || `DVT-2026-${String(assignedSerial).padStart(4, "0")}`;
+      newEnquiry.serialNumber = assignedSerial;
+      newEnquiry.reference = assignedRef;
+    }
+
+    // 11. Dispatch notification email to business inbox with confirmed reference & serial
+    const emailResult = await sendBookingNotificationEmail(newEnquiry);
+    newEnquiry.emailNotification = emailResult;
 
     // 12. Persist enquiry safely with bounded array size (max 500 records)
     enquiriesList.unshift(newEnquiry);
@@ -406,8 +416,8 @@ export async function POST(request) {
 
     return NextResponse.json({
       success: true,
-      serialNumber,
-      reference,
+      serialNumber: assignedSerial,
+      reference: assignedRef,
       message: "Enquiry validated, logged, and routed to business email successfully",
     });
   } catch (error) {
@@ -425,14 +435,24 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const ref = searchParams.get("ref");
 
+    // Try fetching live bookings from Google Sheet first
+    const sheetsList = await fetchBookingsFromGoogleSheet();
+
     const enquiriesFilePath = path.join(process.cwd(), "src", "data", "enquiries.json");
-    let enquiriesList = [];
+    let localList = [];
 
     if (fs.existsSync(enquiriesFilePath)) {
-      const fileContent = fs.readFileSync(enquiriesFilePath, "utf-8");
-      enquiriesList = JSON.parse(fileContent);
-      if (!Array.isArray(enquiriesList)) enquiriesList = [];
+      try {
+        const fileContent = fs.readFileSync(enquiriesFilePath, "utf-8");
+        localList = JSON.parse(fileContent);
+        if (!Array.isArray(localList)) localList = [];
+      } catch {
+        localList = [];
+      }
     }
+
+    // Prioritize Google Sheets if connected and non-empty, otherwise use local archive
+    const enquiriesList = Array.isArray(sheetsList) && sheetsList.length > 0 ? sheetsList : localList;
 
     if (ref) {
       const cleanRef = ref.trim().toLowerCase();
@@ -441,6 +461,14 @@ export async function GET(request) {
       );
 
       if (!found) {
+        // Also check localList as fallback if sheetsList didn't have it
+        const fallbackFound = localList.find(
+          (e) => (e.reference && e.reference.toLowerCase() === cleanRef) || (e.id && e.id.toLowerCase() === cleanRef)
+        );
+        if (fallbackFound) {
+          return NextResponse.json({ success: true, enquiry: fallbackFound });
+        }
+
         return NextResponse.json(
           { success: false, error: `Enquiry with reference ${ref} not found.` },
           { status: 404 }
@@ -453,6 +481,7 @@ export async function GET(request) {
       success: true,
       total: enquiriesList.length,
       enquiries: enquiriesList,
+      source: Array.isArray(sheetsList) && sheetsList.length > 0 ? "google_sheets" : "local_file"
     });
   } catch (error) {
     console.error("GET enquiries error:", error.message);
