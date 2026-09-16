@@ -183,14 +183,11 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar with Admin Link */}
+        {/* Bottom Bar */}
         <div className="pt-8 border-t border-[#082D27] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F7F3E9]/60">
           <p>© {new Date().getFullYear()} Divine View Tours. All rights reserved. Registered travel DMC Guwahati, Assam.</p>
           <div className="flex items-center gap-6">
             <span>Website: {siteConfig.domain}</span>
-            <Link href="/admin/enquiries" className="text-[#D9A441]/80 hover:text-[#D9A441] transition-colors underline">
-              Admin Inbox & Pricing
-            </Link>
           </div>
         </div>
       </div>

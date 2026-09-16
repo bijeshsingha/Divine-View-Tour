@@ -4,6 +4,7 @@ import path from "path";
 import nodemailer from "nodemailer";
 import siteConfig from "@/data/siteConfig.json";
 import { appendBookingToGoogleSheet, fetchBookingsFromGoogleSheet } from "@/lib/googleSheets";
+import { verifyAdminRequest } from "@/lib/adminAuth";
 
 // Allowlist of supported enquiry types
 const ALLOWED_TYPES = ["package", "custom_trip", "vehicle_hire", "contact_message"];
@@ -434,6 +435,17 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const ref = searchParams.get("ref");
+
+    // When fetching all enquiries (dashboard view), require valid admin authentication
+    if (!ref) {
+      const isAuthorized = await verifyAdminRequest(request);
+      if (!isAuthorized) {
+        return NextResponse.json(
+          { success: false, error: "Unauthorized access. Admin authentication required." },
+          { status: 401 }
+        );
+      }
+    }
 
     // Try fetching live bookings from Google Sheet first
     const sheetsList = await fetchBookingsFromGoogleSheet();

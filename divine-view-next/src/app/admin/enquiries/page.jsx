@@ -23,7 +23,8 @@ import {
   Settings,
   RefreshCw,
   FileText,
-  AlertCircle
+  AlertCircle,
+  LogOut
 } from "lucide-react";
 
 export default function AdminEnquiriesPage() {
@@ -33,6 +34,13 @@ export default function AdminEnquiriesPage() {
   const [typeFilter, setTypeFilter] = useState("all");
   const [copiedRef, setCopiedRef] = useState(null);
   const [lastRefreshed, setLastRefreshed] = useState("");
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+    } catch {}
+    window.location.href = "/admin/login";
+  };
 
   const loadEnquiries = async () => {
     setLoading(true);
@@ -125,6 +133,14 @@ export default function AdminEnquiriesPage() {
               <Settings className="w-3.5 h-3.5" />
               <span>Pricing Admin</span>
             </Link>
+
+            <button
+              onClick={handleLogout}
+              className="text-xs font-semibold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-2 rounded-xl flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Sign Out</span>
+            </button>
           </div>
         </div>
 

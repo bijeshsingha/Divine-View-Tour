@@ -297,17 +297,6 @@ export default function EnquiryReceiptClient() {
           Back to Home
         </Link>
       </div>
-
-      {/* Admin Quick View Link */}
-      <div className="pt-2 text-center">
-        <Link
-          href="/admin/enquiries"
-          className="text-[11px] text-[#59665E] hover:text-[#D9A441] underline underline-offset-2 transition-colors inline-flex items-center gap-1"
-        >
-          <span>Admin Portal: View all bookings in inbox</span>
-          <ArrowRight className="w-3 h-3" />
-        </Link>
-      </div>
     </div>
   );
 }

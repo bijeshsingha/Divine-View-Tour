@@ -12,7 +12,8 @@ import {
   Car,
   Package,
   ArrowLeft,
-  Inbox
+  Inbox,
+  LogOut
 } from "lucide-react";
 import initialVehicleRates from "@/data/vehicleRates.json";
 import initialPackagesData from "@/data/packagesData.json";
@@ -22,6 +23,13 @@ export default function AdminPricingPage() {
   const [packages, setPackages] = useState(initialPackagesData);
   const [statusMsg, setStatusMsg] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+    } catch {}
+    window.location.href = "/admin/login";
+  };
 
   // Handle vehicle route price change
   const handleRateChange = (routeId, field, value) => {
@@ -123,6 +131,14 @@ export default function AdminPricingPage() {
             >
               <Save className="w-4 h-4" />
               <span>{isSaving ? "Saving..." : "Save All Changes"}</span>
+            </button>
+
+            <button
+              onClick={handleLogout}
+              className="text-xs font-semibold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-2.5 rounded-xl flex items-center gap-1.5 transition-colors shadow-sm cursor-pointer"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Sign Out</span>
             </button>
           </div>
         </div>
