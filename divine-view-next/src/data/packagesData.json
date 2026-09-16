@@ -110,12 +110,13 @@
     "summary": "Ascend from subtropical Assam into the snow-crowned Eastern Himalayas, crossing 13,700-ft Sela Pass to reach Asia's second-oldest Buddhist monastery in Tawang.",
     "featured": true,
     "badge": "Iconic Route",
-    "heroImage": "/images/Tawang/Tawang1.jpg",
+    "heroImage": "/images/Tawang/tawang-gate-sela.jpg",
     "gallery": [
-      "/images/Tawang/Tawang Monastry/Tawang Monastry1.jpg",
-      "/images/Tawang/Sela Pass/Sela Pass1.jpg",
-      "/images/Tawang/Madhuri Lake/Madhuri Lake.jpg",
-      "/images/Tawang/Bumla Pass/Bumla Pass1.jpg"
+      "/images/Tawang/tawang-gate-sela.jpg",
+      "/images/Tawang/monpa-community.jpg",
+      "/images/Tawang/Tawang1.jpg",
+      "/images/Tawang/Tawang2.jpg",
+      "/images/Tawang/Tawang3 (1).jpg"
     ],
     "priceMode": "starting_from",
     "priceAmount": 26800,

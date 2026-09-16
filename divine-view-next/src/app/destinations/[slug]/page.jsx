@@ -167,23 +167,44 @@ export default async function DestinationDetailPage({ params }) {
             {/* Highlights Grid */}
             <div className="space-y-4">
               <h3 className="font-serif text-xl font-bold text-[#103F36]">
-                Must-Visit Places & Experiences
+                Must-Visit Places & Cultural Highlights
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {dest.highlights.map((h, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#FFFDF7] p-5 rounded-2xl border border-[#DEDCCD] shadow-sm"
+                    className={`bg-[#FFFDF7] rounded-2xl border border-[#DEDCCD] shadow-sm overflow-hidden flex flex-col ${
+                      h.image ? "sm:col-span-2 md:col-span-1" : ""
+                    }`}
                   >
-                    <div className="w-7 h-7 rounded-full bg-[#E9F0EA] text-[#103F36] flex items-center justify-center text-xs font-bold mb-2">
-                      0{idx}
+                    {h.image && (
+                      <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-[#082D27]">
+                        <img
+                          src={h.image}
+                          alt={h.title}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                          loading="lazy"
+                        />
+                        {h.caption && (
+                          <div className="absolute bottom-2 left-2 right-2 px-2.5 py-1 rounded bg-black/60 backdrop-blur-sm text-[11px] text-[#F7F3E9] font-medium truncate">
+                            {h.caption}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <div className="p-5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="w-7 h-7 rounded-full bg-[#E9F0EA] text-[#103F36] flex items-center justify-center text-xs font-bold mb-2">
+                          0{idx + 1}
+                        </div>
+                        <h4 className="font-serif text-lg font-bold text-[#103F36]">
+                          {h.title}
+                        </h4>
+                        <p className="text-xs sm:text-sm text-[#59665E] mt-1.5 leading-relaxed">
+                          {h.description}
+                        </p>
+                      </div>
                     </div>
-                    <h4 className="font-serif text-lg font-bold text-[#103F36]">
-                      {h.title}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-[#59665E] mt-1 leading-relaxed">
-                      {h.description}
-                    </p>
                   </div>
                 ))}
               </div>

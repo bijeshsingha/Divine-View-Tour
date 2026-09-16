@@ -192,7 +192,11 @@ export const EXPLORE_DATA = [
     location: "Tawang, Arunachal Pradesh",
     tags: ["Nature", "Spiritual", "Adventure"],
     description: "Journey through the snow-clad Sela Pass at 13,700 ft to reach the ancient Tawang Monastery. Experience pristine high-altitude lakes and Buddhist culture.",
-    gallery: ["/images/Gemini_Generated_Image_cnqi2wcnqi2wcnqi.png"],
+    gallery: [
+      "/images/Tawang/tawang-gate-sela.jpg",
+      "/images/Tawang/monpa-community.jpg",
+      "/images/Tawang/Tawang1.jpg"
+    ],
     videoPlaceholder: "https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=0&controls=1&mute=0"
   },
   {
