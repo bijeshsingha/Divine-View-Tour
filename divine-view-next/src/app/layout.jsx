@@ -1,26 +1,103 @@
-import { Inter, Playfair_Display } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata = {
   title: {
-    template: '%s | Divine View Tours Guwahati',
-    default: 'Premium Northeast India Tour Packages | Divine View Tours Guwahati',
+    template: "%s | Divine View Tours — Guwahati",
+    default: "Divine View Tours — Thoughtfully Planned Northeast India Journeys",
   },
-  description: 'Expertly curated travel packages and DMCs for Meghalaya, Assam, and Arunachal Pradesh. Book your Kaziranga Jeep Safari 2026, Guwahati to Tawang 7 day itinerary, or luxury homestays in Cherrapunji today.',
-  keywords: ['Northeast India Tours', 'Meghalaya packages', 'Kaziranga Jeep Safari booking 2026', 'Guwahati to Tawang 7 day itinerary', 'Luxury homestays in Cherrapunji', 'Divine View Tours Guwahati'],
+  description:
+    "Explore Meghalaya, Assam, Arunachal Pradesh, and Dzukou Valley. Handcrafted private itineraries, verified mountain drivers, and transparent vehicle rates from Guwahati.",
+  keywords: [
+    "Meghalaya tour packages from Guwahati",
+    "Tawang tour package from Guwahati",
+    "Kaziranga tour from Guwahati",
+    "Dzukou Valley trek package",
+    "Guwahati private car hire",
+    "Divine View Tours Guwahati",
+  ],
+  metadataBase: new URL("https://www.divineviewtours.com"),
   alternates: {
-    canonical: 'https://www.divineviewtours.com',
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Divine View Tours — Thoughtfully Planned Northeast India Journeys",
+    description:
+      "Handcrafted private journeys through Assam, Meghalaya, and Arunachal Pradesh with Dzukou Valley trekking.",
+    url: "https://www.divineviewtours.com",
+    siteName: "Divine View Tours",
+    images: [
+      {
+        url: "/images/homescreen.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Scenic Meghalaya landscape with Divine View Tours",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
   },
 };
 
 export default function RootLayout({ children }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    name: "Divine View Tours",
+    image: "https://www.divineviewtours.com/images/homescreen.jpg",
+    telephone: "+91-60265-04087",
+    url: "https://www.divineviewtours.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Guwahati",
+      addressRegion: "Assam",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 26.1445,
+      longitude: 91.7362,
+    },
+    priceRange: "₹₹",
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "08:00",
+      closes: "21:00",
+    },
+  };
+
   return (
-    <html lang="en">
+    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-M96VXLSQ2C"
           strategy="afterInteractive"
@@ -34,8 +111,10 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${inter.variable} ${playfair.variable} font-sans`}>
-        {children}
+      <body className="min-h-screen flex flex-col font-sans bg-[#F7F3E9] text-[#172C26] antialiased">
+        <Header />
+        <div className="flex-1 w-full">{children}</div>
+        <Footer />
       </body>
     </html>
   );

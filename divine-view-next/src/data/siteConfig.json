@@ -1,0 +1,38 @@
+{
+  "brandName": "Divine View Tours",
+  "domain": "divineviewtours.com",
+  "phone": "+91 60265 04087",
+  "phoneRaw": "+916026504087",
+  "whatsappNumber": "916026504087",
+  "whatsappUrl": "https://wa.me/916026504087",
+  "email": "enquiries@divineviewtours.com",
+  "departureBase": "Guwahati, Assam",
+  "operatingExperience": "Local Guwahati-based destination specialists with dedicated private fleet, verified mountain drivers, and 24/7 overland trip assistance.",
+  "heroPill": "PRIVATE JOURNEYS FROM GUWAHATI",
+  "heroHeading": "FIND YOUR OWN NORTHEAST.",
+  "heroSubheading": "Thoughtfully planned journeys through Assam, Meghalaya and Arunachal Pradesh, with Dzukou Valley trekking experiences.",
+  "heroCaption": "Umngot River, Shnongpdeng / Dawki, Meghalaya",
+  "customInvitation": {
+    "heading": "PLAN A JOURNEY THAT’S UNIQUELY YOURS.",
+    "subheading": "Tell us where you want to go, how you like to travel, and what matters most. We craft the itinerary and quote with zero guesswork.",
+    "cta": "Create my trip"
+  },
+  "trustPoints": [
+    {
+      "title": "Local Guwahati Base",
+      "description": "We are headquartered at the gateway to the Northeast, managing our own fleet, drivers, and local hotel networks."
+    },
+    {
+      "title": "Transparent Costing",
+      "description": "Clear distinctions between private vehicle hire and complete holiday packages with zero hidden fees."
+    },
+    {
+      "title": "Experienced Mountain Drivers",
+      "description": "Drivers vetted for mountain safety, fog navigation, and local language fluency across Assam, Meghalaya, and Arunachal."
+    },
+    {
+      "title": "Permit & Logistics Coordination",
+      "description": "Complete paperwork support for Arunachal Pradesh Inner Line Permits (ILP) and remote checkpoint clearances."
+    }
+  ]
+}

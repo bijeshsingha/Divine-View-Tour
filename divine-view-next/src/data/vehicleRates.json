@@ -1,0 +1,124 @@
+{
+  "title": "Approved Public Vehicle Daily Rates",
+  "currency": "INR",
+  "effectiveFrom": "2026-09-01",
+  "effectiveLabel": "Effective from September 2026 (until revised)",
+  "serviceNote": "Vehicle fare only. Excludes hotel accommodation, meals, permits, and entry/safari fees. Complete holiday packages are priced separately.",
+  "inclusions": [
+    "Dedicated commercial vehicle with experienced mountain driver",
+    "Fuel, road tolls, interstate passenger taxes, and parking fees",
+    "Driver daily allowance, lodging, and meals"
+  ],
+  "exclusions": [
+    "Hotel accommodation and traveller meals",
+    "Park entry tickets, boat rides, guide charges, and safari permits",
+    "Arunachal Inner Line Permits (ILP) or special entry permissions",
+    "Personal expenses and porterage"
+  ],
+  "routes": [
+    {
+      "id": "meghalaya-5d",
+      "route": "Meghalaya Circuit (Shillong, Cherrapunji, Dawki)",
+      "minimumDays": 5,
+      "sedan": 5300,
+      "ertiga": 6100,
+      "crysta": 7300,
+      "status": "published",
+      "notes": "Covers Shillong, Sohra waterfalls, living root bridges, and Umngot River."
+    },
+    {
+      "id": "meghalaya-kaziranga-7d",
+      "route": "Meghalaya + Kaziranga National Park",
+      "minimumDays": 7,
+      "sedan": 5300,
+      "ertiga": 6100,
+      "crysta": 7300,
+      "status": "published",
+      "notes": "Includes highland Meghalaya and Assam rhino plains. Jeep safari vehicle in Kaziranga booked separately."
+    },
+    {
+      "id": "tawang-6d",
+      "route": "Tawang Highway (Bhalukpong, Dirang, Sela, Tawang)",
+      "minimumDays": 6,
+      "sedan": 6000,
+      "ertiga": 6700,
+      "crysta": 7900,
+      "status": "published",
+      "notes": "High-altitude mountain circuit. Requires ILP permit clearance before departure."
+    },
+    {
+      "id": "tawang-kaziranga-8d",
+      "route": "Tawang + Kaziranga National Park",
+      "minimumDays": 8,
+      "sedan": 6000,
+      "ertiga": 6700,
+      "crysta": 7900,
+      "status": "published",
+      "notes": "Classic wildlife and Himalayan monastic route from Guwahati."
+    },
+    {
+      "id": "meghalaya-kaziranga-tawang-11d",
+      "route": "Grand Northeast (Meghalaya + Kaziranga + Tawang)",
+      "minimumDays": 11,
+      "sedan": 6000,
+      "ertiga": 6700,
+      "crysta": 7900,
+      "status": "published",
+      "notes": "Comprehensive 3-state overland expedition."
+    },
+    {
+      "id": "meghalaya-offbeat-9d",
+      "route": "Meghalaya Offbeat (Garo Hills, Mawlyngbna, Jaintia)",
+      "minimumDays": 9,
+      "sedan": 6000,
+      "ertiga": 6700,
+      "crysta": 7900,
+      "status": "published",
+      "notes": "Remote Meghalaya routes with rugged terrain and village homestays."
+    },
+    {
+      "id": "east-arunachal-7d",
+      "route": "East Arunachal — Mechuka / Anini / Roing",
+      "minimumDays": 7,
+      "sedan": null,
+      "ertiga": 6900,
+      "crysta": 8100,
+      "status": "published",
+      "notes": "Sedan not offered due to rugged Eastern Himalayan terrain. High-clearance SUV required."
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "sedan",
+      "name": "Compact Sedan",
+      "models": "Swift Dzire / Toyota Etios",
+      "capacity": "Up to 3-4 passengers + standard boot luggage",
+      "image": "/images/cars/sedan.png",
+      "features": ["Air conditioning", "Luggage boot", "Paved & moderate hill roads", "Experienced local driver"]
+    },
+    {
+      "id": "ertiga",
+      "name": "Mid-size MUV",
+      "models": "Maruti Suzuki Ertiga",
+      "capacity": "Up to 5-6 passengers + luggage carrier",
+      "image": "/images/cars/suv.png",
+      "features": ["High ground clearance", "Roof carrier for luggage", "Spacious family seating", "Hill-assist"]
+    },
+    {
+      "id": "crysta",
+      "name": "Premium Mountain SUV",
+      "models": "Toyota Innova Crysta",
+      "capacity": "Up to 6-7 passengers + luggage rack",
+      "image": "/images/cars/suv.png",
+      "features": ["Superior ride comfort", "Heavy hill suspension", "Captain seating available", "Ideal for Tawang & rugged terrain"]
+    },
+    {
+      "id": "traveller",
+      "name": "Force Tempo Traveller",
+      "models": "Force Traveller (12 / 17 / 26 seater)",
+      "capacity": "Small & large groups (8 to 20+ travellers)",
+      "image": "/images/cars/traveller.png",
+      "features": ["Reclining seats", "Dedicated large rear luggage space", "Custom quote upon request", "Perfect for corporate/group tours"]
+    }
+  ]
+}

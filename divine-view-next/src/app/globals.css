@@ -1,21 +1,228 @@
 @import "tailwindcss";
 
-@theme {
-  --color-primary: #1F362E;
-  --color-primary-dark: #12211C;
-  --color-secondary: #9E5B40;
-  --color-secondary-dark: #7A4631;
-  --color-background: #F7F7F5;
-  --color-foreground: #2A2A28;
+:root {
+  --forest: #103F36;
+  --forest-deep: #082D27;
+  --gold: #D9A441;
+  --gold-hover: #C18D2D;
+  --cream: #F7F3E9;
+  --paper: #FFFDF7;
+  --ink: #172C26;
+  --muted: #59665E;
+  --divider: #DEDCCD;
+  --pale-green: #E9F0EA;
+  --pale-gold: #F4E5B9;
+  --error: #9F2F24;
+  --success: #237A50;
+  --radius-card: 14px;
+  --radius-control: 10px;
+  --content-max: 1240px;
+}
 
-  --font-sans: "Inter", var(--font-sans);
-  --font-serif: "Playfair Display", var(--font-serif);
+@theme {
+  --color-forest: #103F36;
+  --color-forest-deep: #082D27;
+  --color-gold: #D9A441;
+  --color-gold-hover: #C18D2D;
+  --color-cream: #F7F3E9;
+  --color-paper: #FFFDF7;
+  --color-ink: #172C26;
+  --color-muted: #59665E;
+  --color-divider: #DEDCCD;
+  --color-pale-green: #E9F0EA;
+  --color-pale-gold: #F4E5B9;
+
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 @layer base {
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--cream);
+    color: var(--ink);
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--forest);
+  }
+}
+
+/* Design B Utility Classes */
+.bg-cream {
+  background-color: #F7F3E9;
+}
+.bg-paper {
+  background-color: #FFFDF7;
+}
+.bg-forest {
+  background-color: #103F36;
+}
+.bg-forest-deep {
+  background-color: #082D27;
+}
+.text-forest {
+  color: #103F36;
+}
+.text-gold {
+  color: #D9A441;
+}
+.text-ink {
+  color: #172C26;
+}
+.text-muted {
+  color: #59665E;
+}
+.border-divider {
+  border-color: #DEDCCD;
+}
+
+/* Primary and Secondary Action Buttons */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #D9A441;
+  color: #172C26;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  min-height: 48px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 8px rgba(217, 164, 65, 0.25);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-gold:hover {
+  background-color: #C18D2D;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(193, 141, 45, 0.35);
+}
+
+.btn-forest {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #103F36;
+  color: #FFFDF7;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  min-height: 48px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-forest:hover {
+  background-color: #082D27;
+  transform: translateY(-1px);
+}
+
+.btn-outline-forest {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #103F36;
+  border: 1.5px solid #103F36;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  min-height: 48px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-outline-forest:hover {
+  background-color: #103F36;
+  color: #FFFDF7;
+}
+
+.btn-outline-cream {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: rgba(247, 243, 233, 0.08);
+  backdrop-filter: blur(8px);
+  color: #F7F3E9;
+  border: 1.5px solid rgba(247, 243, 233, 0.4);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  min-height: 48px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-outline-cream:hover {
+  background-color: rgba(247, 243, 233, 0.2);
+  border-color: #F7F3E9;
+}
+
+/* Gold Pill Tag */
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background-color: #F4E5B9;
+  color: #172C26;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  border: 1px solid rgba(217, 164, 65, 0.4);
+}
+
+.badge-forest {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background-color: #E9F0EA;
+  color: #103F36;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+}
+
+/* Photo Caption Bar */
+.caption-bar {
+  background: rgba(8, 45, 39, 0.85);
+  backdrop-filter: blur(6px);
+  color: #F7F3E9;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F3E9;
+}
+::-webkit-scrollbar-thumb {
+  background: #DEDCCD;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #103F36;
 }

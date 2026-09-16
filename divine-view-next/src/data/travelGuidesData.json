@@ -1,0 +1,86 @@
+[
+  {
+    "id": "guide-meghalaya-seasons",
+    "slug": "meghalaya-seasonal-planning",
+    "title": "Planning Your Meghalaya Journey: Monsoon Roar vs. Winter Crystal Waters",
+    "subtitle": "An honest, season-by-season guide to waterfall volumes, river clarity in Dawki, and hill temperatures.",
+    "destination": "meghalaya",
+    "readTime": "6 min read",
+    "heroImage": "/images/Meghalaya/Cherrapunjee/Nohkalikai Falls/Nohkalikai Falls2.jpg",
+    "publishedDate": "2026-09-10",
+    "updatedDate": "2026-09-15",
+    "author": "Local Operations Desk, Guwahati",
+    "summary": "Deciding when to travel to Meghalaya depends entirely on what you want to experience: torrential cascades crashing into misty gorges, or emerald transparent waters where boats look suspended in the air.",
+    "sections": [
+      {
+        "heading": "The Dry & Crystal Season: October to April",
+        "content": "From November to April, Meghalaya enjoys crisp sunshine, mild daytime temperatures (16°C–22°C), and remarkably dry weather. This is the only period to witness the famous glass-bottom illusion on the Umngot River in Dawki and Shnongpdeng. The water is so transparent that river stones 15 feet below are distinctly visible. It is also the most comfortable time for hiking the 3,500 stone stairs to the Double Decker Living Root Bridge in Nongriat without slippery mud."
+      },
+      {
+        "heading": "The Monsoon Wonder: June to September",
+        "content": "Meghalaya means 'Abode of Clouds'. During the monsoon, Sohra (Cherrapunji) and Mawsynram receive some of the highest precipitation on planet Earth. Waterfalls like Nohkalikai, Dainthlen, and Seven Sisters roar at full volume, generating colossal mist plumes. While boat rides on Umngot turn murky and cliffside views can occasionally be blanketed by thick fog, monsoon travellers are treated to lush greenery, dramatic cloudscapes, and waterfalls at their most breathtaking."
+      },
+      {
+        "heading": "Practical Tips for Travellers",
+        "content": "1. Shillong evenings can be chilly year-round (often 8°C–12°C in winter); bring warm fleece layers.\n2. Good grip shoes are mandatory for root bridge descents.\n3. Always hire an experienced mountain driver familiar with fog-prone stretches along the Shillong-Sohra highway."
+      }
+    ],
+    "relatedPackage": "meghalaya-5-day-tour-from-guwahati"
+  },
+  {
+    "id": "guide-tawang-road-trip",
+    "slug": "tawang-road-trip-guide",
+    "title": "Tawang Overland Guide: Sela Pass, Permits, and Acclimatization",
+    "subtitle": "Everything you need to know about driving from Guwahati to 10,000 ft in Western Arunachal Pradesh.",
+    "destination": "arunachal-pradesh",
+    "readTime": "8 min read",
+    "heroImage": "/images/Tawang/Sela Pass/Sela Pass1.jpg",
+    "publishedDate": "2026-09-08",
+    "updatedDate": "2026-09-14",
+    "author": "Arunachal Route Specialist",
+    "summary": "Driving to Tawang is one of the grandest road trips in Asia. Here is how to plan your permits, vehicle choice, and night halts to avoid altitude sickness.",
+    "sections": [
+      {
+        "heading": "Why You Must Not Rush the Drive",
+        "content": "Guwahati sits at just 180 feet above sea level. Tawang sits at 10,000 feet, and Sela Pass reaches 13,700 feet. Rushing this journey in a single day is both physically dangerous and operationally impractical. The ideal route includes an overnight acclimatization halt in Dirang (5,000 ft) or Bhalukpong. This gives your body time to adapt to lower oxygen levels before crossing Sela Pass."
+      },
+      {
+        "heading": "Inner Line Permit (ILP) Regulations",
+        "content": "All Indian tourists entering Arunachal Pradesh must possess a valid Inner Line Permit (ILP). Our team assists in obtaining e-ILPs online prior to departure. Foreign nationals need a Protected Area Permit (PAP), which requires a minimum of two individuals travelling together through a registered tour operator."
+      },
+      {
+        "heading": "Bum La Pass & Madhuri Lake Protocol",
+        "content": "Bum La Pass lies directly on the Indo-China Line of Actual Control at 15,200 feet. Due to strict military border regulations and district administration mandates, external commercial vehicles are not permitted into Bum La. Travellers must switch to local Tawang union 4x4 SUVs. Special military permissions must also be stamped in Tawang before the excursion."
+      }
+    ],
+    "relatedPackage": "tawang-7-day-tour-from-guwahati"
+  },
+  {
+    "id": "guide-dzukou-trek-prep",
+    "slug": "dzukou-valley-trek-prep",
+    "title": "Preparing for the Dzukou Valley Trek: What to Pack & What to Expect",
+    "subtitle": "A complete trail breakdown for Nagaland’s most iconic highland backpacking journey.",
+    "destination": "dzukou-valley",
+    "readTime": "7 min read",
+    "heroImage": "/images/dzukou-trail.jpg",
+    "publishedDate": "2026-09-05",
+    "updatedDate": "2026-09-12",
+    "author": "Naga Trail Guide",
+    "summary": "Dzukou Valley is a pristine wonderland devoid of luxury hotels and cell networks. Here is how to pack light, respect the environment, and enjoy an unforgettable trek.",
+    "sections": [
+      {
+        "heading": "The Trails: Viswema vs. Jakhama",
+        "content": "There are two primary trailheads. The Viswema trail features a motorable road that a 4x4 vehicle can ascend, leaving a steep 1.5-hour climb up stone steps to the valley rim followed by 2 hours of gentle, flat walking along the ridge. The Jakhama route is steeper and more continuous throughout, making it ideal for the descent."
+      },
+      {
+        "heading": "Facilities Inside the Valley",
+        "content": "Dzukou has no hotels, no private bathrooms, and zero electricity grid. Travellers sleep in the SAYO Community Rest House or in high-altitude tents. Basic fire-cooked meals (rice, dal, seasonal greens) are prepared by caretakers. Bring a personal thermal sleeping bag if you want extra warmth, as nighttime temperatures regularly plunge below 2°C in autumn and winter."
+      },
+      {
+        "heading": "Leave No Trace Policy",
+        "content": "Dzukou is fiercely protected by the Southern Angami Youth Organization (SAYO). Single-use plastic is banned. Any waste you take into the valley must be packed back out in your bag and inspected at the trailhead checkpost."
+      }
+    ],
+    "relatedPackage": "dzukou-valley-trek-nagaland"
+  }
+]

@@ -1,0 +1,454 @@
+[
+  {
+    "id": "pkg-meghalaya-5d",
+    "slug": "meghalaya-5-day-tour-from-guwahati",
+    "title": "Meghalaya Escape: Waterfalls & Living Roots",
+    "destination": "meghalaya",
+    "destinationLabel": "Meghalaya",
+    "durationDays": 5,
+    "durationNights": 4,
+    "pickup": "Guwahati Airport / Railway Station",
+    "dropoff": "Guwahati Airport / Railway Station",
+    "travelStyles": ["Scenic", "Nature", "Culture"],
+    "summary": "Explore misty pine hills in Shillong, deep plunge waterfalls in Cherrapunji, crystalline waters of Umngot River in Dawki, and ancient Living Root Bridges.",
+    "featured": true,
+    "badge": "Bestseller",
+    "heroImage": "/images/Meghalaya/Cherrapunjee/Nohkalikai Falls/Nohkalikai Falls1.jpg",
+    "gallery": [
+      "/images/Meghalaya/Cherrapunjee/Nohkalikai Falls/Nohkalikai Falls1.jpg",
+      "/images/Meghalaya/Dawki/Dawki River.jpg",
+      "/images/Meghalaya/Shillong/Elephant Falls.jpg",
+      "/images/Meghalaya/Cherrapunjee/Double Decker Root Bridge/Double Decker Root Bridge.jpg"
+    ],
+    "priceMode": "starting_from",
+    "priceAmount": 18500,
+    "priceCurrency": "INR",
+    "priceBasis": "per person (twin-sharing basis, min 4 travellers)",
+    "highlights": [
+      "Walk beneath India's highest plunge waterfall — Nohkalikai",
+      "Glide on glass-like emerald waters at Umngot River, Dawki",
+      "Trek to the bio-engineered Double Decker Living Root Bridge in Nongriat",
+      "Stroll through Mawlynnong, celebrated as Asia's cleanest village",
+      "Experience Shillong's colonial cafes and vibrant local music culture"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Guwahati to Shillong via Umiam Lake",
+        "drivingTime": "3 to 4 hours (100 km)",
+        "description": "Warm welcome at Guwahati. Drive uphill towards Shillong with a scenic photo break at the vast Umiam Lake. Evening exploration of Police Bazar and cafes.",
+        "stay": "Shillong boutique hotel or heritage homestay"
+      },
+      {
+        "day": 2,
+        "title": "Shillong to Cherrapunji (Sohra) via Elephant Falls",
+        "drivingTime": "2 to 2.5 hours (55 km)",
+        "description": "Morning visit to Elephant Falls and Shillong Peak. Journey across misty gorge roads into Sohra. Explore Mawsmai limestone caves, Seven Sisters Falls, and dramatic Nohkalikai viewpoint.",
+        "stay": "Cherrapunji cliffside resort"
+      },
+      {
+        "day": 3,
+        "title": "Double Decker Living Root Bridge Trek or Wei Sawdong",
+        "drivingTime": "Local transfers + 4-5 hour hike",
+        "description": "Early descent into Nongriat valley to witness the multi-tier living root architecture, or take an easier guided trail to Wei Sawdong three-tier cascade and Garden of Caves.",
+        "stay": "Cherrapunji resort"
+      },
+      {
+        "day": 4,
+        "title": "Cherrapunji to Dawki & Mawlynnong, Return to Shillong",
+        "drivingTime": "4.5 to 5.5 hours total driving",
+        "description": "Head down to Dawki near the Bangladesh border for country boat rides on the crystal-clear Umngot River. Visit Mawlynnong village and the single living root bridge at Riwai before driving back to Shillong.",
+        "stay": "Shillong hotel"
+      },
+      {
+        "day": 5,
+        "title": "Shillong to Guwahati & Departure",
+        "drivingTime": "3 hours (100 km)",
+        "description": "Optional morning stop at Don Bosco Museum or Kamakhya Temple in Guwahati before on-time airport drop with lifetime memories.",
+        "stay": "Departure"
+      }
+    ],
+    "stayOptions": "Handpicked 3-star boutique hotels and comfortable cliffside homestays with hot water and local breakfast included.",
+    "vehicleOptions": ["Swift Dzire / Etios for couples", "Maruti Ertiga for families (4-5 pax)", "Innova Crysta for premium comfort (6 pax)"],
+    "inclusions": [
+      "All transfers & sightseeing in dedicated private vehicle as per group size",
+      "4 nights accommodation on twin-sharing basis with daily breakfast",
+      "Fuel, road taxes, interstate permits, parking, and driver allowances",
+      "Country boat ride on Umngot River in Dawki",
+      "Guwahati airport pickup and dropoff"
+    ],
+    "exclusions": [
+      "Airfare or train tickets to/from Guwahati",
+      "Lunches, dinners, and personal beverages",
+      "Guide fees and entrance tickets at viewpoints/monuments",
+      "Trekking porter or personal gear hire",
+      "Anything not mentioned under inclusions"
+    ],
+    "practicalNotes": "Carry sturdy walking shoes for root bridge steps, light woollens for chilly Shillong evenings, and rain gear. Meghalaya is plastic-conscious; please avoid single-use plastics.",
+    "faqs": [
+      {
+        "q": "What is the best season for clear water at Dawki?",
+        "a": "Water clarity is highest from November through April. Monsoon brings lush roaring waterfalls but causes river water to turn brownish."
+      },
+      {
+        "q": "Is the Double Decker Root Bridge trek suitable for elders?",
+        "a": "The Nongriat trek involves approx 3,500 stone steps each way and requires moderate fitness. For seniors or guests with knee conditions, we arrange scenic alternative waterfall viewpoints."
+      }
+    ]
+  },
+  {
+    "id": "pkg-tawang-7d",
+    "slug": "tawang-7-day-tour-from-guwahati",
+    "title": "Tawang Discovery: High Passes & Monasteries",
+    "destination": "arunachal-pradesh",
+    "destinationLabel": "Arunachal Pradesh",
+    "durationDays": 7,
+    "durationNights": 6,
+    "pickup": "Guwahati Airport",
+    "dropoff": "Guwahati Airport",
+    "travelStyles": ["Mountain", "Monastic", "Road Trip"],
+    "summary": "Ascend from subtropical Assam into the snow-crowned Eastern Himalayas, crossing 13,700-ft Sela Pass to reach Asia's second-oldest Buddhist monastery in Tawang.",
+    "featured": true,
+    "badge": "Iconic Route",
+    "heroImage": "/images/Tawang/Tawang Monastry/Tawang Monastry1.jpg",
+    "gallery": [
+      "/images/Tawang/Tawang Monastry/Tawang Monastry1.jpg",
+      "/images/Tawang/Sela Pass/Sela Pass1.jpg",
+      "/images/Tawang/Madhuri Lake/Madhuri Lake.jpg",
+      "/images/Tawang/Bumla Pass/Bumla Pass1.jpg"
+    ],
+    "priceMode": "starting_from",
+    "priceAmount": 26800,
+    "priceCurrency": "INR",
+    "priceBasis": "per person (twin-sharing, min 4 travellers)",
+    "highlights": [
+      "Traverse the iconic Sela Pass (13,700 ft) beside frozen Sela Lake",
+      "Visit the 400-year-old Tawang Monastery (Galden Namgyal Lhatse)",
+      "High-altitude excursion to Madhuri Lake (Sangetsar) and Indo-China Bum La Pass",
+      "Pay homage at Jaswant Garh War Memorial on the Himalayan ridge",
+      "Marvel at roaring Nuranang Falls (Jang Falls)"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Guwahati to Bhalukpong / Nameri",
+        "drivingTime": "5 to 6 hours (220 km)",
+        "description": "Drive northeast crossing the Brahmaputra River. Enter Arunachal Pradesh checkpost after permit verification and halt beside the Jia Bhoreli river.",
+        "stay": "Eco-resort in Bhalukpong or Dirang valley"
+      },
+      {
+        "day": 2,
+        "title": "Bhalukpong to Dirang Valley",
+        "drivingTime": "4.5 hours (140 km)",
+        "description": "Scenic climb through Kameng river gorge. Visit Dirang Dzong heritage village, apple orchards, and LDL Buddhist monastery atop the mountain hill.",
+        "stay": "Dirang boutique hotel"
+      },
+      {
+        "day": 3,
+        "title": "Dirang to Tawang via Sela Pass & Jaswant Garh",
+        "drivingTime": "5.5 to 6.5 hours (130 km mountain road)",
+        "description": "Ascend to Sela Pass at 13,700 ft with prayer flags fluttering over Sela Lake. Stop at Jaswant Garh War Memorial and spectacular Nuranang Falls before reaching Tawang.",
+        "stay": "Tawang mountain hotel"
+      },
+      {
+        "day": 4,
+        "title": "Tawang Monastery, Urgelling & War Memorial",
+        "drivingTime": "Local transfers",
+        "description": "Immerse in spiritual peace at Tawang Monastery, birthplace of 6th Dalai Lama at Urgelling Gompa, and attend the evening light & sound show at Tawang War Memorial.",
+        "stay": "Tawang hotel"
+      },
+      {
+        "day": 5,
+        "title": "Bum La Pass & Madhuri Lake Excursion",
+        "drivingTime": "4 to 5 hours round trip (Local 4x4 vehicle)",
+        "description": "Board authorized local Arunachal 4x4 vehicle to reach Bum La (Indo-China border at 15,200 ft) and stunning Sangetsar Lake surrounded by fallen pine trees.",
+        "stay": "Tawang hotel"
+      },
+      {
+        "day": 6,
+        "title": "Tawang to Bomdila",
+        "drivingTime": "6 to 7 hours (170 km)",
+        "description": "Descend via Sela Pass towards Bomdila. Visit Bomdila Monastery with panoramic views of the Kangto and Gorichen snow peaks.",
+        "stay": "Bomdila hotel"
+      },
+      {
+        "day": 7,
+        "title": "Bomdila to Guwahati Departure",
+        "drivingTime": "7 to 8 hours (260 km)",
+        "description": "Early departure descending through Assam tea gardens into Guwahati Airport for evening flights.",
+        "stay": "Departure"
+      }
+    ],
+    "stayOptions": "Clean, heated 3-star category hotel rooms with attached bathrooms and traditional Monpa hospitality.",
+    "vehicleOptions": ["Maruti Ertiga (up to 4-5 pax)", "Toyota Innova Crysta (highly recommended for mountain clearance)"],
+    "inclusions": [
+      "Private commercial vehicle throughout the itinerary from Guwahati",
+      "6 nights hotel accommodation with breakfast and dinner included",
+      "Inner Line Permit (ILP) documentation assistance for Indian citizens",
+      "Driver mountain allowance, night charges, tolls, and fuel",
+      "Guwahati roundtrip transfers"
+    ],
+    "exclusions": [
+      "Bum La Pass & Madhuri Lake local union 4x4 vehicle fee (approx ₹5,500 per cab shared)",
+      "Military permit processing fee for border sector",
+      "Airfare and railway tickets",
+      "Lunches, personal tips, and heating extras where billed separately"
+    ],
+    "practicalNotes": "Indian nationals require an Inner Line Permit (ILP), which we arrange in advance. Foreign nationals require a Protected Area Permit (PAP) for minimum 2 persons. Bring warm down jackets and high-SPF sunscreen.",
+    "faqs": [
+      {
+        "q": "Is Bum La Pass open all year round?",
+        "a": "Bum La is subject to military permissions and snow clearance. It typically remains accessible from April through mid-December, and intermittently in winter."
+      },
+      {
+        "q": "What vehicle is recommended for Tawang?",
+        "a": "Toyota Innova Crysta or high-ground-clearance SUVs are strongly advised for comfort across Sela Pass road conditions."
+      }
+    ]
+  },
+  {
+    "id": "pkg-kaziranga-4d",
+    "slug": "kaziranga-wildlife-tour-from-guwahati",
+    "title": "Assam Wildlife: Kaziranga Rhino & Brahmaputra",
+    "destination": "assam",
+    "destinationLabel": "Assam",
+    "durationDays": 4,
+    "durationNights": 3,
+    "pickup": "Guwahati Airport / Railway Station",
+    "dropoff": "Guwahati Airport / Railway Station",
+    "travelStyles": ["Wildlife", "Safari", "River", "Heritage"],
+    "summary": "Spot the rare Great Indian One-horned Rhinoceros in the floodplains of Kaziranga, cruise the sacred Brahmaputra River, and visit sacred Kamakhya Temple.",
+    "featured": true,
+    "badge": "UNESCO Heritage",
+    "heroImage": "/images/Kaziranga/kaziranga.jpg",
+    "gallery": [
+      "/images/Kaziranga/kaziranga.jpg",
+      "/images/Guwahati/Temples/Kamakhya.jpg",
+      "/images/Guwahati/Temples/Umananda.jpg",
+      "/images/Guwahati/Temples/Balaji Temple.jpg"
+    ],
+    "priceMode": "starting_from",
+    "priceAmount": 16500,
+    "priceCurrency": "INR",
+    "priceBasis": "per person (twin-sharing, min 4 travellers)",
+    "highlights": [
+      "Private 4x4 Jeep Safari across Kaziranga Central and Western Ranges",
+      "Witness one-horned rhinos, wild water buffaloes, and migratory water birds",
+      "Evening traditional Bihu cultural dance performance at orchid park",
+      "Sunset river cruise on the mighty Brahmaputra River in Guwahati",
+      "Darshan at the venerable Kamakhya Devi Shakti Peetha"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Guwahati Arrival & Sunset Brahmaputra Cruise",
+        "drivingTime": "City transfers (30 km)",
+        "description": "Arrive in Guwahati. Check into hotel and relax. In the late afternoon, embark on a serene river cruise on the Brahmaputra with folk music and river sunset views.",
+        "stay": "Guwahati city hotel"
+      },
+      {
+        "day": 2,
+        "title": "Guwahati to Kaziranga National Park",
+        "drivingTime": "4.5 hours (220 km)",
+        "description": "Morning drive through the fertile Brahmaputra valley lined with lush Assam tea estates. Check into your wildlife resort. Afternoon visit to Kaziranga National Orchid and Biodiversity Park.",
+        "stay": "Kaziranga jungle resort"
+      },
+      {
+        "day": 3,
+        "title": "Kaziranga Jeep Safaris & Tea Estate Walk",
+        "drivingTime": "Park safaris (Kohora & Bagori zones)",
+        "description": "Morning open 4x4 Jeep safari into Bagori (Western) range with high rhino density. Afternoon safari into Kohora (Central) range for wetland birding and elephant herds.",
+        "stay": "Kaziranga jungle resort"
+      },
+      {
+        "day": 4,
+        "title": "Kaziranga to Kamakhya Temple & Guwahati Departure",
+        "drivingTime": "4.5 to 5 hours (230 km)",
+        "description": "Return drive to Guwahati. Visit Kamakhya Temple atop Nilachal Hill before timely transfer to Guwahati airport for your onward flight.",
+        "stay": "Departure"
+      }
+    ],
+    "stayOptions": "Handpicked eco-lodges and comfortable wildlife resorts situated right along the Kaziranga forest buffer zone.",
+    "vehicleOptions": ["Swift Dzire / Etios", "Maruti Ertiga", "Toyota Innova Crysta"],
+    "inclusions": [
+      "Guwahati to Kaziranga and return private transport",
+      "3 nights accommodation with daily breakfast",
+      "2 open 4x4 Jeep safaris into Kaziranga National Park with forest guide",
+      "Forest entry permits, camera toll, and vehicle safari fees",
+      "Sunset Brahmaputra river cruise ticket"
+    ],
+    "exclusions": [
+      "Elephant safari booking (optional add-on, subject to forest department lottery)",
+      "VIP Kamakhya special queue pass (purchased directly at temple)",
+      "Meals not specified in inclusions",
+      "Gratuities for safari driver and forest naturalist"
+    ],
+    "practicalNotes": "Kaziranga safari season operates strictly from October 15th to May 15th. Carry binoculars and earth-toned clothing (khaki, olive, brown) for game drives.",
+    "faqs": [
+      {
+        "q": "When is Kaziranga National Park open for safaris?",
+        "a": "The park operates from mid-October to mid-May. Monsoon inundations close the park between June and late September."
+      },
+      {
+        "q": "Can we arrange an elephant safari?",
+        "a": "Yes, elephant safaris are subject to daily forest department slot allocation. We assist guests with slot requests upon booking confirmation."
+      }
+    ]
+  },
+  {
+    "id": "pkg-dzukou-5d",
+    "slug": "dzukou-valley-trek-nagaland",
+    "title": "Dzukou Valley Trek: The Enchanted High Meadow",
+    "destination": "dzukou-valley",
+    "destinationLabel": "Nagaland / Manipur",
+    "durationDays": 5,
+    "durationNights": 4,
+    "pickup": "Dimapur / Kohima (or Guwahati connection)",
+    "dropoff": "Dimapur / Kohima (or Guwahati connection)",
+    "travelStyles": ["Trek", "Adventure", "Camping", "Highland"],
+    "summary": "Trek through bamboo forests and mountain passes into the mystical, rolling emerald ridges of Dzukou Valley, nestled at 8,000 feet on the Nagaland-Manipur frontier.",
+    "featured": true,
+    "badge": "Adventure Favorite",
+    "heroImage": "/images/dzukou-ridge.jpg",
+    "gallery": [
+      "/images/dzukou-ridge.jpg",
+      "/images/dzukou-trail.jpg",
+      "/images/dzukou-stream.jpg",
+      "/images/dzukou-sunrise.jpg"
+    ],
+    "priceMode": "starting_from",
+    "priceAmount": 14900,
+    "priceCurrency": "INR",
+    "priceBasis": "per person (campsite/dorm, min 4 trekkers)",
+    "highlights": [
+      "Hike the Viswema / Jakhama trail through misty highland rhododendron forests",
+      "Camp under pristine star-studded skies inside Dzukou Valley basin",
+      "Witness sunrise over rolling hillocks and serpentine crystal streams",
+      "Explore Kohima War Cemetery and vibrant Naga heritage village Kisama",
+      "Support local Angami Naga mountain guides and community eco-tourism"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "Arrival in Dimapur & Transfer to Kohima / Kigwema",
+        "drivingTime": "3 hours (75 km)",
+        "description": "Meet team at Dimapur Airport / Railway Station. Ascend through Naga hills into Kigwema village near the trailhead. Gear check and briefing.",
+        "stay": "Traditional Naga homestay in Kigwema"
+      },
+      {
+        "day": 2,
+        "title": "Trek to Dzukou Valley via Viswema Trailhead",
+        "drivingTime": "45 min drive + 5-6 hours hike (9 km)",
+        "description": "4x4 vehicle drop to Viswema trailhead. Climb steep stone stairs to the valley rim, then enter the flat, rolling bamboo meadows of Dzukou. Settle at rest house / campsite.",
+        "stay": "Dzukou Rest House dormitory or high-altitude tents"
+      },
+      {
+        "day": 3,
+        "title": "Full Day Exploring the Valley Basin, Caves & Streams",
+        "drivingTime": "Trek exploration (8 km round)",
+        "description": "Descend into the valley floor. Walk beside pristine streams, explore ghost caves, photograph rare flora (Dzukou Lily during bloom season), and witness dramatic sunset.",
+        "stay": "Dzukou campsite / Rest House"
+      },
+      {
+        "day": 4,
+        "title": "Descend to Jakhama & Kisama Heritage Village",
+        "drivingTime": "4-5 hours descent + local transfers",
+        "description": "Morning descent via the scenic Jakhama route. Transfer to Kisama Heritage Village (home of the Hornbill Festival) and relax in Kohima.",
+        "stay": "Kohima boutique hotel"
+      },
+      {
+        "day": 5,
+        "title": "Kohima War Cemetery & Drop to Dimapur",
+        "drivingTime": "3 hours (75 km)",
+        "description": "Visit the historic Kohima War Memorial commemorating the Battle of Kohima 1944. On-time drop to Dimapur Airport / Railway Station for departure.",
+        "stay": "Departure"
+      }
+    ],
+    "stayOptions": "Cozy village homestays in Kigwema/Kohima and rustic mountain resthouse dormitories / alpine tents in the valley basin.",
+    "vehicleOptions": ["Dedicated Sumo / Bolero 4x4 for hill roads and trailhead transfer"],
+    "inclusions": [
+      "Dimapur roundtrip transfers and trailhead drops",
+      "2 nights village homestay/hotel and 2 nights valley camping/resthouse",
+      "Experienced Angami local mountain guide and trek leader",
+      "Dzukou Valley entry fees and indigenous community sanitation levy",
+      "Nutritious camp meals (breakfast and dinner) in the valley"
+    ],
+    "exclusions": [
+      "Personal porter for backpack (available on pre-booking at approx ₹1,500/day)",
+      "Sleeping bag / mat hire (available on request)",
+      "Lunch on transit days and snacks",
+      "Air/train tickets"
+    ],
+    "practicalNotes": "The valley has zero mobile connectivity and basic mountain toilet facilities. Trekkers must carry their own trash back down ('Leave No Trace' policy strictly enforced). Minimum age recommendation is 12 years.",
+    "faqs": [
+      {
+        "q": "When does the Dzukou Lily bloom?",
+        "a": "The endemic Lilium chitrangadae blooms between late June and early August during the monsoon, coating the valley in pink-purple hues."
+      },
+      {
+        "q": "How cold does it get in Dzukou Valley?",
+        "a": "Between November and February, night temperatures routinely dip below freezing (0°C to -3°C). Good thermal base layers and sub-zero rated sleeping bags are essential."
+      }
+    ]
+  },
+  {
+    "id": "pkg-combo-8d",
+    "slug": "meghalaya-kaziranga-combo-tour",
+    "title": "Meghalaya & Kaziranga: Highlands & Safari",
+    "destination": "meghalaya",
+    "destinationLabel": "Meghalaya & Assam",
+    "durationDays": 8,
+    "durationNights": 7,
+    "pickup": "Guwahati Airport",
+    "dropoff": "Guwahati Airport",
+    "travelStyles": ["Scenic", "Wildlife", "Culture", "Family"],
+    "summary": "The ultimate classic Northeast combo — combining the clouds, waterfalls, and living root bridges of Meghalaya with thrilling Kaziranga rhino safaris.",
+    "featured": false,
+    "badge": "Popular Combo",
+    "heroImage": "/images/Meghalaya/Dawki/Dawki River.jpg",
+    "gallery": [
+      "/images/Meghalaya/Dawki/Dawki River.jpg",
+      "/images/Kaziranga/kaziranga.jpg",
+      "/images/Meghalaya/Cherrapunjee/Nohkalikai Falls/Nohkalikai Falls1.jpg",
+      "/images/Guwahati/Temples/Kamakhya.jpg"
+    ],
+    "priceMode": "starting_from",
+    "priceAmount": 29500,
+    "priceCurrency": "INR",
+    "priceBasis": "per person (twin-sharing, min 4 travellers)",
+    "highlights": [
+      "Experience both the highland waterfalls of Meghalaya and wildlife plains of Assam",
+      "Boat ride on crystal Umngot River Dawki and visit Nohkalikai Falls Sohra",
+      "Two private 4x4 Jeep safaris in Kaziranga National Park",
+      "Brahmaputra sunset boat cruise and Kamakhya Temple darshan",
+      "Stay in boutique tea garden lodges and cliffside Meghalaya retreats"
+    ],
+    "itinerary": [
+      { "day": 1, "title": "Guwahati to Shillong", "drivingTime": "3 hours", "description": "Arrival, drive to Shillong with Umiam Lake halt. Evening at leisure in Police Bazar.", "stay": "Shillong" },
+      { "day": 2, "title": "Shillong to Cherrapunji", "drivingTime": "2.5 hours", "description": "Elephant Falls, Mawsmai Cave, Nohkalikai Falls, and Eco Park.", "stay": "Cherrapunji" },
+      { "day": 3, "title": "Root Bridge or Wei Sawdong", "drivingTime": "Local transfers", "description": "Living root bridge trails or scenic waterfall explorations.", "stay": "Cherrapunji" },
+      { "day": 4, "title": "Dawki & Mawlynnong to Shillong", "drivingTime": "5 hours", "description": "Umngot crystal boat ride, clean village walk, return to Shillong.", "stay": "Shillong" },
+      { "day": 5, "title": "Shillong to Kaziranga National Park", "drivingTime": "6 hours (250 km)", "description": "Scenic highway connecting Khasi hills to Assam Brahmaputra plains.", "stay": "Kaziranga" },
+      { "day": 6, "title": "Kaziranga Morning & Afternoon Jeep Safaris", "drivingTime": "Safari hours", "description": "Two open-top game drives exploring Bagori and Kohora zones.", "stay": "Kaziranga" },
+      { "day": 7, "title": "Kaziranga to Guwahati City", "drivingTime": "4.5 hours", "description": "Drive back to Guwahati. Sunset Brahmaputra cruise.", "stay": "Guwahati" },
+      { "day": 8, "title": "Kamakhya Temple & Departure", "drivingTime": "City transfers", "description": "Morning blessing at Kamakhya Temple and transfer to airport.", "stay": "Departure" }
+    ],
+    "stayOptions": "3-star comfortable hotels and resorts with breakfast included.",
+    "vehicleOptions": ["Maruti Ertiga", "Toyota Innova Crysta"],
+    "inclusions": [
+      "All interstate transfers and sightseeing in dedicated private vehicle",
+      "7 nights hotel accommodation with breakfast",
+      "2 Jeep safaris in Kaziranga with permits and naturalist",
+      "Umngot boat ride in Dawki and Guwahati river cruise",
+      "Tolls, fuel, and driver allowances"
+    ],
+    "exclusions": ["Air/train tickets", "Lunches & dinners", "Camera/entry permits", "Gratuities"],
+    "practicalNotes": "Best taken between late October and April when Kaziranga is open and Dawki river is transparent.",
+    "faqs": [
+      {
+        "q": "Can this itinerary be customised for 6 or 7 days?",
+        "a": "Yes! Use our 'Customise this trip' or 'Create my trip' planner to compress or expand days according to your flight schedules."
+      }
+    ]
+  }
+]

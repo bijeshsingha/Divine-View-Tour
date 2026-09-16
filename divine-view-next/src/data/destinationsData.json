@@ -1,0 +1,222 @@
+[
+  {
+    "id": "dest-meghalaya",
+    "slug": "meghalaya",
+    "name": "Meghalaya",
+    "tagline": "Abode of Clouds, Cascading Waterfalls & Living Roots",
+    "regionLabel": "Khasi & Jaintia Highlands",
+    "heroImage": "/images/Meghalaya/Cherrapunjee/Nohkalikai Falls/Nohkalikai Falls1.jpg",
+    "heroCaption": "Nohkalikai Falls plunging 1,115 ft into a turquoise pool, Cherrapunji",
+    "summary": "Misty pine hills in Shillong, deep gorge waterfalls in Cherrapunji, crystalline rivers at Dawki, and century-old Living Root Bridges woven from ancient Ficus elastica trees.",
+    "suggestedDays": "4 to 7 days",
+    "bestSeason": {
+      "months": "October to April (Dry & Clear) / June to September (Monsoon Roar)",
+      "waterClarity": "Peak clarity at Umngot River Dawki from November to April.",
+      "waterfalls": "Most thunderous and lush during monsoon from June to September.",
+      "tradeoffs": "Winter is crisp and clear but water volume at smaller falls reduces. Monsoon offers spectacular waterfalls but swimming in rivers is restricted."
+    },
+    "routeFromGuwahati": {
+      "distance": "100 km to Shillong / 155 km to Cherrapunji",
+      "driveTime": "3 to 4 hours on smooth 4-lane mountain highway (NH6)",
+      "pickupPoint": "Guwahati Airport (GAU) or Guwahati Railway Station (GHY)"
+    },
+    "permitNotes": "No special permits or Inner Line Permits (ILP) required for Indian or foreign nationals visiting Meghalaya.",
+    "highlights": [
+      {
+        "title": "Nohkalikai & Wei Sawdong Falls",
+        "description": "Dramatic cliffside plunges and three-tiered emerald pools in Sohra."
+      },
+      {
+        "title": "Double Decker Living Root Bridge",
+        "description": "Bio-engineered botanical marvels in the deep Nongriat jungle valley."
+      },
+      {
+        "title": "Umngot River Dawki",
+        "description": "Transparent river where wooden country boats appear to float in mid-air."
+      },
+      {
+        "title": "Mawlynnong & Riwai",
+        "description": "Pristine garden village celebrated for indigenous community cleanliness."
+      },
+      {
+        "title": "Krang Suri & Laitlum Canyons",
+        "description": "Electric-blue cascades in Jaintia hills and sweeping gorge panoramas."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How many days are ideal for a complete Meghalaya tour?",
+        "a": "A 5-day itinerary covers Shillong, Cherrapunji, Dawki, and Mawlynnong comfortably. Adding offbeat Jaintia hills or bamboo treks requires 7 days."
+      },
+      {
+        "q": "Can elders and children visit the Living Root Bridges?",
+        "a": "The single living root bridge at Riwai (near Mawlynnong) has an easy 10-minute flat walk accessible to everyone. The Double Decker at Nongriat has 3,500 stairs and is recommended for active travellers."
+      }
+    ]
+  },
+  {
+    "id": "dest-arunachal",
+    "slug": "arunachal-pradesh",
+    "name": "Arunachal Pradesh",
+    "tagline": "Land of the Dawn-Lit Mountains & Monasteries",
+    "regionLabel": "Eastern Himalayas",
+    "heroImage": "/images/Tawang/Tawang Monastry/Tawang Monastry1.jpg",
+    "heroCaption": "Tawang Monastery (Galden Namgyal Lhatse) at 10,000 ft, Western Arunachal",
+    "summary": "Ascend through subtropical river valleys to 13,700-ft snowy mountain passes, 400-year-old Tibetan Buddhist monasteries, and pristine high-altitude glacial lakes.",
+    "suggestedDays": "6 to 10 days",
+    "bestSeason": {
+      "months": "March to May (Spring blooms) & October to December (Clear skies & snow)",
+      "waterClarity": "Glacial streams run crystal clear in autumn and winter.",
+      "waterfalls": "Nuranang (Jang) Falls roars at peak capacity through summer and autumn.",
+      "tradeoffs": "Winter (Dec–Feb) can see temporary road blocks at Sela Pass due to heavy snow; snow chains and experienced mountain drivers are essential."
+    },
+    "routeFromGuwahati": {
+      "distance": "450 km to Tawang via Bhalukpong and Dirang",
+      "driveTime": "Traversed over 2 days with overnight halt at Bhalukpong or Dirang Valley",
+      "pickupPoint": "Guwahati Airport or Tezpur"
+    },
+    "permitNotes": "Mandatory Inner Line Permit (ILP) required for all Indian domestic tourists. Protected Area Permit (PAP) required for foreign nationals. We coordinate all permit clearances on your behalf.",
+    "highlights": [
+      {
+        "title": "Sela Pass & Sela Lake (13,700 ft)",
+        "description": "Breath-taking high-altitude Himalayan mountain gateway adorned with Tibetan prayer flags."
+      },
+      {
+        "title": "Tawang Monastery",
+        "description": "Asia's second-largest monastery, perched like a fortress overlooking the valley."
+      },
+      {
+        "title": "Bum La Pass & Sangetsar Lake",
+        "description": "High-altitude Indo-China border post at 15,200 ft and the famous Madhuri Lake."
+      },
+      {
+        "title": "Dirang Valley & Monpa Villages",
+        "description": "Peaceful river valley with hot springs, apple orchards, and 17th-century Dirang Dzong."
+      },
+      {
+        "title": "Jaswant Garh & Nuranang Falls",
+        "description": "Historic 1962 war memorial and the roaring 100-meter Jang waterfall."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How do we get an Inner Line Permit (ILP) for Arunachal?",
+        "a": "Simply share your government photo ID and passport-size photo with our team during booking. We obtain the verified government ILP before your trip begins."
+      },
+      {
+        "q": "Can we take our Guwahati rental car all the way to Bum La Pass?",
+        "a": "Per local district rules in Tawang, the excursion to Bum La Pass and Madhuri Lake must be operated by authorized local Tawang taxi union 4x4 vehicles. We coordinate this seamlessly for you."
+      }
+    ]
+  },
+  {
+    "id": "dest-assam",
+    "slug": "assam",
+    "name": "Assam",
+    "tagline": "Rhino Sanctuaries, Sacred Shrines & Tea Plains",
+    "regionLabel": "Brahmaputra Valley",
+    "heroImage": "/images/Kaziranga/kaziranga.jpg",
+    "heroCaption": "Wild One-Horned Rhinoceros grazing in Kaziranga National Park grasslands",
+    "summary": "Encounter the rare One-Horned Rhinoceros in UNESCO-listed Kaziranga, cruise along the expansive Brahmaputra River, and experience the sacred aura of Kamakhya Devi.",
+    "suggestedDays": "3 to 5 days",
+    "bestSeason": {
+      "months": "October 15 to May 15 (Wildlife Safari Season)",
+      "waterClarity": "Brahmaputra cruises are tranquil from November through March.",
+      "waterfalls": "Explore tea gardens in blooming harvest season from April through November.",
+      "tradeoffs": "Kaziranga National Park is closed to safaris during the monsoon season (June to late September) due to river flooding."
+    },
+    "routeFromGuwahati": {
+      "distance": "Guwahati city / 220 km to Kaziranga National Park",
+      "driveTime": "4 to 4.5 hours on scenic four-lane Asian Highway 1 (AH1)",
+      "pickupPoint": "Guwahati Airport or Railway Station"
+    },
+    "permitNotes": "No special border permits required for Assam. Safari tickets and wildlife forest entries are booked through authorized park counters.",
+    "highlights": [
+      {
+        "title": "Kaziranga Jeep Safaris",
+        "description": "Open-top game drives in Bagori and Kohora ranges spotting rhinos, elephants, and deer."
+      },
+      {
+        "title": "Maa Kamakhya Shakti Peetha",
+        "description": "One of India's most revered and ancient tantric temples atop Nilachal Hill."
+      },
+      {
+        "title": "Sunset Brahmaputra River Cruise",
+        "description": "Golden-hour dinner and musical river cruise across the majestic Brahmaputra."
+      },
+      {
+        "title": "Heritage Assam Tea Gardens",
+        "description": "Stroll amidst manicured tea estates and sample fresh single-estate Assam orthodox tea."
+      },
+      {
+        "title": "Umananda Island (Peacock Island)",
+        "description": "Smallest inhabited river island in the world housing an ancient Shiva shrine."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which safari zone in Kaziranga is best for seeing rhinos?",
+        "a": "The Western (Bagori) zone has the highest concentration of one-horned rhinos, while the Central (Kohora) zone is renowned for wetlands and birdlife."
+      },
+      {
+        "q": "How do we arrange VIP passes for Kamakhya Temple?",
+        "a": "Special VIP darshan entry passes (approx ₹500 per person) are issued directly by the temple administration on the spot. Your driver guides you directly to the counter."
+      }
+    ]
+  },
+  {
+    "id": "dest-dzukou",
+    "slug": "dzukou-valley",
+    "name": "Dzukou Valley Trek",
+    "tagline": "The Enchanted Emerald Valley & High Trails",
+    "regionLabel": "Nagaland / Manipur",
+    "heroImage": "/images/dzukou-ridge.jpg",
+    "heroCaption": "Serpentine crystal streams and rolling bamboo ridges of Dzukou Valley at 8,000 ft",
+    "summary": "Trek through misty rhododendron forests and mountain passes into the mystical, rolling emerald ridges of Dzukou Valley, nestled on the Nagaland-Manipur frontier.",
+    "suggestedDays": "4 to 6 days",
+    "bestSeason": {
+      "months": "June to August (Dzukou Lily bloom) / October to March (Clear skies & frost)",
+      "waterClarity": "Pristine potable mountain streams run crystal clear inside the valley floor.",
+      "waterfalls": "Misty gorges and lush moss throughout the summer months.",
+      "tradeoffs": "Monsoon trek requires rain ponchos and leech socks. Winter nights are freezing (below 0°C), requiring heavy thermal gear."
+    },
+    "routeFromGuwahati": {
+      "distance": "Guwahati to Dimapur (train/road, 4-5 hrs) then 3 hrs drive to Kigwema trailhead",
+      "driveTime": "Trailhead to valley rim: 4 to 5 hours moderate uphill hike",
+      "pickupPoint": "Dimapur Airport / Railway Station or Guwahati transfer"
+    },
+    "permitNotes": "Domestic tourists require a Nagaland Inner Line Permit (ILP), easily processed online. Trail entry fees and community sanitation levies are paid at the Viswema / Jakhama checkpost.",
+    "highlights": [
+      {
+        "title": "Rolling Emerald Ridges",
+        "description": "Unearthly, undulating dwarf bamboo hillocks resembling giant velvet carpets."
+      },
+      {
+        "title": "Campsite Stargazing",
+        "description": "Zero light pollution gives you the full brilliance of the Milky Way arching over the valley."
+      },
+      {
+        "title": "Crystal Valley Stream & Ghost Caves",
+        "description": "Natural rock overhangs, cold-water plunge pools, and ancient shepherd caves."
+      },
+      {
+        "title": "Indigenous Angami Naga Hospitality",
+        "description": "Authentic meals by woodfire in village homestays and community trail stewardship."
+      },
+      {
+        "title": "Historic Kohima & Kisama",
+        "description": "World War II memorial and the traditional tribal architecture of Kisama Heritage Village."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How physically demanding is the Dzukou Valley trek?",
+        "a": "The first 1.5 to 2 hours from Viswema involve steep stone stairs. Once you crest the ridge, the walk into the valley rest house is gentle and flat. Anyone with basic fitness can complete it."
+      },
+      {
+        "q": "What accommodation is available inside the valley?",
+        "a": "The valley features the SAYO Community Rest House with basic shared dormitories and wooden plank floors. We also provide high-altitude alpine tents and insulated mats for campers."
+      }
+    ]
+  }
+]

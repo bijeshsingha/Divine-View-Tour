@@ -1,67 +1,84 @@
-import staticConfig from '@/data/data.json';
-import PackageDetailView from '@/components/PackageDetailView';
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
+import packagesData from "@/data/packagesData.json";
+import PackageDetailClient from "@/components/PackageDetailClient";
+
+export function generateStaticParams() {
+  return packagesData.map((pkg) => ({
+    packageId: pkg.slug,
+  }));
+}
 
 export async function generateMetadata({ params }) {
-  // Await params since it's a Promise in Next.js 15+ dynamic routes (though mostly synchronous in < 15, it's best practice)
-  const { packageId } = await params; 
-  const pkg = staticConfig.packages.find((p) => p.id === packageId);
-  
+  const { packageId } = await params;
+  const pkg = packagesData.find(
+    (p) => p.slug === packageId || p.id === packageId
+  );
+
   if (!pkg) {
-    return { title: 'Package Not Found' };
+    return { title: "Package Not Found" };
   }
 
   return {
-    title: pkg.title,
-    description: pkg.desc,
+    title: `${pkg.title} (${pkg.durationDays} Days / ${pkg.durationNights} Nights)`,
+    description: pkg.summary,
+    openGraph: {
+      title: pkg.title,
+      description: pkg.summary,
+      images: [
+        {
+          url: pkg.heroImage,
+          width: 1200,
+          height: 630,
+          alt: pkg.title,
+        },
+      ],
+    },
   };
 }
 
-// Client wrapper to handle the interactions for this component
-import ClientPackageDetailWrapper from './ClientPackageDetailWrapper';
-
-export default async function PackagePage({ params }) {
+export default async function PackageDetailPage({ params }) {
   const { packageId } = await params;
-  const pkg = staticConfig.packages.find((p) => p.id === packageId);
+  const pkg = packagesData.find(
+    (p) => p.slug === packageId || p.id === packageId
+  );
 
   if (!pkg) {
     notFound();
   }
 
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'TouristTrip',
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
     name: pkg.title,
-    description: pkg.subtitle,
-    touristType: [
-       "Adventure traveler",
-       "Cultural traveler" 
-    ],
+    description: pkg.summary,
+    touristType: ["Nature explorer", "Cultural traveller", "Scenic holiday"],
     offers: {
-      '@type': 'Offer',
-      price: pkg.price,
-      priceCurrency: 'INR',
-      availability: 'https://schema.org/InStock'
+      "@type": "Offer",
+      price: pkg.priceAmount || "0",
+      priceCurrency: pkg.priceCurrency,
+      availability: "https://schema.org/InStock",
     },
     provider: {
-      '@type': 'TravelAgency',
-      name: 'Divine View Tours',
-      url: 'https://divineviewtours.com'
+      "@type": "TravelAgency",
+      name: "Divine View Tours",
+      url: "https://www.divineviewtours.com",
     },
-    subTrip: pkg.itinerary.map((day, index) => ({
-      '@type': 'TouristTrip',
-      name: `Day ${index + 1}: ${day.route}`,
-      description: day.stops.join('. ')
-    }))
+    itinerary: pkg.itinerary.map((day) => ({
+      "@type": "Day",
+      name: `Day ${day.day}: ${day.title}`,
+      description: day.description,
+    })),
   };
 
   return (
-    <main className="min-h-screen bg-stone-50">
+    <main className="min-h-screen bg-[#F7F3E9]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
-      <ClientPackageDetailWrapper packageId={packageId} />
+      <PackageDetailClient pkg={pkg} />
     </main>
   );
 }
