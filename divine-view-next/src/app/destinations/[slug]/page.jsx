@@ -115,34 +115,47 @@ export default async function DestinationDetailPage({ params }) {
       />
       <main className="min-h-screen bg-[#F7F3E9] text-[#172C26]">
       {/* 1. SCENIC HERO */}
-      <section className="relative min-h-[500px] lg:min-h-[580px] flex items-center pt-28 pb-16 bg-[#082D27] overflow-hidden">
+      <section className="relative min-h-[520px] lg:min-h-[620px] flex items-center pt-28 pb-16 bg-[#082D27] overflow-hidden">
         <img
           src={dest.heroImage}
           alt={dest.name}
-          className="absolute inset-0 w-full h-full object-cover brightness-[0.75]"
+          className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-1000 scale-100 hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#082D27]/95 via-[#082D27]/70 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#082D27] via-transparent to-black/30" />
+        {/* Subtle top & bottom vignettes that protect text readability without crushing the photograph */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent h-32 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
 
         <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-2xl text-[#F7F3E9] space-y-4">
+          <div className="max-w-2xl bg-black/50 backdrop-blur-md border border-white/20 p-6 sm:p-8 rounded-3xl text-[#F7F3E9] space-y-4 shadow-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D9A441]/20 border border-[#D9A441]/40 text-[#D9A441] text-xs font-bold uppercase tracking-widest">
               <Sparkles className="w-3.5 h-3.5" />
               {dest.regionLabel}
             </div>
-            <h1 className="font-serif text-4xl sm:text-6xl font-bold tracking-tight text-[#F7F3E9] leading-tight">
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F7F3E9] leading-tight drop-shadow-sm">
               {dest.name}
             </h1>
-            <p className="text-base sm:text-xl text-[#F7F3E9]/85 font-normal leading-relaxed">
+            <p className="text-base sm:text-lg text-[#F7F3E9]/90 font-normal leading-relaxed">
               {dest.tagline}
             </p>
 
             {dest.heroCaption && (
-              <div className="pt-2">
-                <span className="caption-bar">
-                  <MapPin className="w-3.5 h-3.5 text-[#D9A441]" />
+              <div className="pt-1">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black/40 border border-white/20 text-xs text-[#F7F3E9]/90 backdrop-blur-sm">
+                  <MapPin className="w-3.5 h-3.5 text-[#D9A441] shrink-0" />
                   {dest.heroCaption}
                 </span>
+              </div>
+            )}
+
+            {dest.slug === "dzukou-valley" && (
+              <div className="pt-3 flex flex-wrap gap-3">
+                <Link
+                  href="/dzukoufieldnotes"
+                  className="btn-gold !py-2.5 !px-5 text-xs sm:text-sm inline-flex items-center gap-2 shadow-lg font-semibold"
+                >
+                  <span>Open Dzukou Field Notes & Trail Guide</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </div>
             )}
           </div>
@@ -163,6 +176,34 @@ export default async function DestinationDetailPage({ params }) {
                 {dest.summary}
               </p>
             </div>
+
+            {/* Dzukou Field Notes Dedicated Feature Banner */}
+            {dest.slug === "dzukou-valley" && (
+              <div className="relative overflow-hidden rounded-3xl bg-[#0D241C] text-[#F7F3E9] border border-[#173B2E] p-6 sm:p-8 shadow-xl">
+                <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div className="space-y-2 max-w-xl">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D99A4E]/20 border border-[#D99A4E]/40 text-[#D99A4E] text-xs font-mono font-semibold uppercase tracking-wider">
+                      Official Trail Companion
+                    </div>
+                    <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
+                      Dzukou Field Notes & Trek Planner
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#F7F3E9]/80 leading-relaxed">
+                      Detailed trail checkpoints, elevation profiles (Viswema vs Jakhama routes), seasonal breakdown, gear packing checklist, and SAYO registration rules. Compare 3-day to 5-day itineraries with the built-in trip budget calculator.
+                    </p>
+                  </div>
+                  <div className="shrink-0">
+                    <Link
+                      href="/dzukoufieldnotes"
+                      className="btn-gold !py-3 !px-6 text-xs sm:text-sm inline-flex items-center gap-2 font-semibold shadow-md whitespace-nowrap"
+                    >
+                      <span>Launch Field Notes</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Highlights Grid */}
             <div className="space-y-4">
@@ -279,6 +320,28 @@ export default async function DestinationDetailPage({ params }) {
                 {dest.permitNotes}
               </p>
             </div>
+
+            {/* Dzukou Field Notes Sidebar Card */}
+            {dest.slug === "dzukou-valley" && (
+              <div className="bg-[#0D241C] text-[#F7F3E9] p-6 rounded-2xl border border-[#173B2E] space-y-3 shadow-md">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#D99A4E] font-bold block">
+                  Comprehensive Guide
+                </span>
+                <h4 className="font-serif text-xl font-bold text-white">
+                  Dzukou Field Notes
+                </h4>
+                <p className="text-xs text-[#F7F3E9]/80 leading-relaxed">
+                  Explore trail mileposts, water points, packing checklist, and the trip budget calculator.
+                </p>
+                <Link
+                  href="/dzukoufieldnotes"
+                  className="btn-gold !py-2.5 !px-4 text-xs w-full text-center flex items-center justify-center gap-1.5 font-semibold block"
+                >
+                  <span>Read Field Notes</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            )}
 
             {/* Custom Trip Callout */}
             <div className="bg-[#103F36] text-[#F7F3E9] p-6 rounded-2xl space-y-3 shadow-md">

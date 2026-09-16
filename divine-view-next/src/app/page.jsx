@@ -21,14 +21,14 @@ import packagesData from "@/data/packagesData.json";
 import siteConfig from "@/data/siteConfig.json";
 
 export const metadata = {
-  title: "Divine View Tours — Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
+  title: "Divine View Tours | Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
   description:
     "Curated private road tours and commercial tourist car hire from Guwahati. Explore Meghalaya, Assam, Arunachal Pradesh, and Dzukou Valley with verified mountain drivers and transparent tariffs.",
   alternates: {
     canonical: "https://www.divineviewtours.com",
   },
   openGraph: {
-    title: "Divine View Tours — Thoughtfully Planned Northeast India Journeys",
+    title: "Divine View Tours | Thoughtfully Planned Northeast India Journeys",
     description:
       "Curated journeys through Meghalaya, Assam, and Arunachal Pradesh. Verified mountain drivers, commercial tourist vehicles, and personalized itineraries from Guwahati.",
     url: "https://www.divineviewtours.com",
@@ -301,6 +301,11 @@ export default function HomePage() {
                       <p className="text-[10px] sm:text-[11px] font-semibold tracking-wider text-[#D9A441] uppercase">
                         {displaySub}
                       </p>
+                      {dest.slug === "dzukou-valley" && (
+                        <span className="inline-block mt-1 text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-[#D9A441]/25 border border-[#D9A441]/40 text-[#D9A441]">
+                          Includes Field Notes & Trail Guide →
+                        </span>
+                      )}
                     </div>
 
                     {/* Circular Arrow Button */}

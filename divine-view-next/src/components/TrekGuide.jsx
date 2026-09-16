@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState, useEffect } from "react";
 
 const PHONE_NUMBER = "+916026504087";
@@ -489,21 +490,33 @@ Route: Guwahati → Dimapur → Kohima → Viswema → Dzukou Valley → Jakhama
         {/* Pure Morphing Minimalist Header */}
         <nav className={`nav ${scrolled ? "nav-scrolled" : ""}`}>
           <div className="nav-container">
-            <a
-              className="brand"
-              href="#top"
-              onClick={(e) => scrollToSection(e, "top")}
-              aria-label="Dzukou guide home"
-            >
-              <MountainMark />
-              <span>
-                DZUKOU
-                <br />
-                FIELD NOTES
-              </span>
-            </a>
+            <div className="nav-brand-group">
+              <Link
+                href="/destinations/dzukou-valley"
+                className="nav-site-back"
+                title="Return to Divine View Tours"
+              >
+                ← Divine View
+              </Link>
+              <a
+                className="brand"
+                href="#top"
+                onClick={(e) => scrollToSection(e, "top")}
+                aria-label="Dzukou guide home"
+              >
+                <MountainMark />
+                <span>
+                  DZUKOU
+                  <br />
+                  FIELD NOTES
+                </span>
+              </a>
+            </div>
 
             <div className="nav-links">
+              <Link href="/destinations/dzukou-valley" className="nav-site-link">
+                Tour Overview
+              </Link>
               <a href="#choose" onClick={(e) => scrollToSection(e, "choose")}>
                 Itineraries
               </a>
@@ -558,7 +571,7 @@ Route: Guwahati → Dimapur → Kohima → Viswema → Dzukou Valley → Jakhama
             </h1>
             <div className="hero-bottom">
               <p>
-                A practical, visual trek planner from Guwahati—built for clear choices, lighter packs and slower mornings
+                A practical, visual trek planner from Guwahati, built for clear choices, lighter packs, and unhurried mornings
                 above the clouds.
               </p>
               <a
@@ -969,24 +982,42 @@ Route: Guwahati → Dimapur → Kohima → Viswema → Dzukou Valley → Jakhama
 
         {/* Footer with Tasteful, Minimalist Bottom Nudge */}
         <footer className="footer shell">
-          <div className="brand">
-            <MountainMark />
-            <span>
-              DZUKOU
-              <br />
-              FIELD NOTES
-            </span>
+          <div className="footer-top-row">
+            <div className="brand">
+              <MountainMark />
+              <span>
+                DZUKOU
+                <br />
+                FIELD NOTES
+              </span>
+            </div>
+            <div className="footer-nav-links">
+              <Link href="/destinations/dzukou-valley" className="footer-back-link">
+                ← Back to Dzukou Tour Page
+              </Link>
+              <Link href="/" className="footer-back-link">
+                Divine View Tours Home
+              </Link>
+              <Link href="/destinations" className="footer-back-link">
+                All Destinations
+              </Link>
+            </div>
+            <a href="#top" onClick={(e) => scrollToSection(e, "top")} className="footer-top-link">
+              BACK TO TOP ↑
+            </a>
           </div>
+
           <div className="footer-nudge">
             <p>
               For local driver connects, rest house bookings or custom trek planning:
               <br />
-              <a href={`tel:${PHONE_NUMBER}`}><strong>{PHONE_DISPLAY}</strong></a> · <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              <a href={`tel:${PHONE_NUMBER}`}><strong>{PHONE_DISPLAY}</strong></a> · <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a> · <a href="mailto:info@divineviewtours.com">info@divineviewtours.com</a>
             </p>
           </div>
-          <a href="#top" onClick={(e) => scrollToSection(e, "top")}>
-            BACK TO TOP ↑
-          </a>
+
+          <div className="footer-bottom-row">
+            <small>© 2026 Divine View Tours · Dzukou Valley Trekker's Field Notes · Guwahati Base</small>
+          </div>
         </footer>
 
         {/* ========================================================================= */}

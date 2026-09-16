@@ -54,6 +54,10 @@ export default function Header() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [mobileMenuOpen]);
 
+  if (pathname?.startsWith("/dzukoufieldnotes")) {
+    return null;
+  }
+
   const isTransparent = isHome && !isScrolled && !mobileMenuOpen;
 
   return (

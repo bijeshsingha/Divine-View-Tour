@@ -3,7 +3,7 @@ import { ArrowRight, MapPin, Calendar, Clock, Shield } from "lucide-react";
 import destinationsData from "@/data/destinationsData.json";
 
 export const metadata = {
-  title: "Northeast India Destinations — Assam, Meghalaya, Arunachal & Dzukou",
+  title: "Northeast India Destinations | Assam, Meghalaya, Arunachal & Dzukou",
   description:
     "Discover the four premier travel regions of Northeast India. Explore Meghalaya waterfalls, Arunachal mountain monasteries, Kaziranga wildlife, and Dzukou Valley trekking.",
 };
@@ -19,7 +19,7 @@ export default function DestinationsIndexPage() {
             Destinations of the Northeast
           </h1>
           <p className="text-sm sm:text-base text-[#59665E] mt-3 leading-relaxed">
-            Each state offers an entirely unique landscape, climate, and cultural tapestry. Learn about best travel seasons, permits, and driving distances from our Guwahati base.
+            Each region features distinct terrain, local tribal cultures, and road conditions. Compare travel durations, seasonal windows, and permit regulations for routes starting from our Guwahati base.
           </p>
         </div>
       </section>
@@ -38,13 +38,13 @@ export default function DestinationsIndexPage() {
                 alt={dest.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#082D27]/80 via-transparent to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none" />
               <div className="absolute top-4 left-4">
-                <span className="badge-gold text-xs">{dest.regionLabel}</span>
+                <span className="badge-gold text-xs shadow-sm">{dest.regionLabel}</span>
               </div>
               {dest.heroCaption && (
                 <div className="absolute bottom-4 left-4 right-4">
-                  <span className="caption-bar text-xs">
+                  <span className="caption-bar text-xs bg-black/50 border border-white/20">
                     <MapPin className="w-3.5 h-3.5 text-[#D9A441]" />
                     {dest.heroCaption}
                   </span>
@@ -106,17 +106,26 @@ export default function DestinationsIndexPage() {
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-8 pt-4 border-t border-[#DEDCCD] flex flex-wrap items-center gap-4">
+              <div className="mt-8 pt-4 border-t border-[#DEDCCD] flex flex-wrap items-center gap-3">
                 <Link
                   href={`/destinations/${dest.slug}`}
-                  className="btn-gold !py-2.5 !px-6 text-sm flex items-center gap-2"
+                  className="btn-gold !py-2.5 !px-5 text-xs sm:text-sm flex items-center gap-2"
                 >
                   <span>Explore {dest.name} Guide</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
+                {dest.slug === "dzukou-valley" && (
+                  <Link
+                    href="/dzukoufieldnotes"
+                    className="bg-[#0D241C] hover:bg-[#173B2E] text-[#D9A441] border border-[#D9A441]/40 rounded-xl px-4 py-2.5 text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
+                  >
+                    <span>Trail Field Notes</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                )}
                 <Link
                   href={`/packages?dest=${dest.slug}`}
-                  className="btn-outline-forest !py-2.5 !px-5 text-sm"
+                  className="btn-outline-forest !py-2.5 !px-4 text-xs sm:text-sm"
                 >
                   View Packages
                 </Link>

@@ -1,8 +1,17 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Phone, MessageCircle, Mail, MapPin, Compass, Shield, ArrowRight } from "lucide-react";
 import siteConfig from "@/data/siteConfig.json";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/dzukoufieldnotes")) {
+    return null;
+  }
+
   return (
     <footer className="bg-[#103F36] text-[#F7F3E9] pt-16 pb-12 border-t border-[#082D27]">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
