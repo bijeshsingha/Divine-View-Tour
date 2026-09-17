@@ -9,7 +9,6 @@ import {
   PhoneCall,
   ShieldCheck,
   Clock,
-  Sparkles,
   Car,
   CheckCircle2,
   MessageCircle

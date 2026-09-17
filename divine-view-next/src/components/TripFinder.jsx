@@ -9,7 +9,6 @@ import {
   Users,
   Car,
   Compass,
-  Sparkles,
   Info,
   CheckCircle2
 } from "lucide-react";
@@ -143,7 +142,7 @@ export default function TripFinder() {
                   : "hover:text-[#172C26]"
               }`}
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#D9A441]" />
+              <Compass className="w-3.5 h-3.5 text-[#D9A441]" />
               <span>Custom Trip</span>
             </button>
           </div>

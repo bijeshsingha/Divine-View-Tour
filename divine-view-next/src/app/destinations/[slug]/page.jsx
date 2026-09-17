@@ -9,7 +9,6 @@ import {
   ArrowRight,
   ShieldCheck,
   HelpCircle,
-  Sparkles,
 } from "lucide-react";
 import destinationsData from "@/data/destinationsData.json";
 import packagesData from "@/data/packagesData.json";
@@ -127,9 +126,9 @@ export default async function DestinationDetailPage({ params }) {
 
         <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-2xl bg-black/50 backdrop-blur-md border border-white/20 p-6 sm:p-8 rounded-3xl text-[#F7F3E9] space-y-4 shadow-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D9A441]/20 border border-[#D9A441]/40 text-[#D9A441] text-xs font-bold uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5" />
-              {dest.regionLabel}
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-[#F7F3E9] text-xs font-semibold uppercase tracking-wider">
+              <MapPin className="w-3.5 h-3.5 text-[#D9A441]" />
+              <span>{dest.regionLabel}</span>
             </div>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F7F3E9] leading-tight drop-shadow-sm">
               {dest.name}

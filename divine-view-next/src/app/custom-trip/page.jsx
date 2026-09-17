@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import CustomTripPlanner from "@/components/CustomTripPlanner";
 
 export const metadata = {
-  title: "Create My Trip — Bespoke Northeast India Custom Itinerary Planner",
+  title: "Create My Trip: Bespoke Northeast India Custom Itinerary Planner | Divine View Tours",
   description:
     "Design a custom private journey through Assam, Meghalaya, Arunachal Pradesh, and Dzukou Valley. Choose your travel pace, stay category, and preferred vehicle with our local Guwahati team.",
 };

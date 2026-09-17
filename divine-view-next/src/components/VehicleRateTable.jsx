@@ -144,11 +144,11 @@ export default function VehicleRateTable({ compact = false }) {
       </div>
 
       {/* Tab Switcher */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-[#DEDCCD] pb-3">
+      <div className="flex items-center gap-2 border-b border-[#DEDCCD] pb-3 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap">
         <button
           type="button"
           onClick={() => setActiveTab("direct")}
-          className={`px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all cursor-pointer ${
+          className={`px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "direct"
               ? "bg-[#103F36] text-white shadow-md"
               : "bg-[#FFFDF7] text-[#59665E] hover:bg-[#F7F3E9] border border-[#DEDCCD]"
@@ -160,7 +160,7 @@ export default function VehicleRateTable({ compact = false }) {
         <button
           type="button"
           onClick={() => setActiveTab("multiday")}
-          className={`px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all cursor-pointer ${
+          className={`px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "multiday"
               ? "bg-[#103F36] text-white shadow-md"
               : "bg-[#FFFDF7] text-[#59665E] hover:bg-[#F7F3E9] border border-[#DEDCCD]"
@@ -172,19 +172,19 @@ export default function VehicleRateTable({ compact = false }) {
         <button
           type="button"
           onClick={() => setActiveTab("circuits")}
-          className={`px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all cursor-pointer ${
+          className={`px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "circuits"
               ? "bg-[#103F36] text-white shadow-md"
               : "bg-[#FFFDF7] text-[#59665E] hover:bg-[#F7F3E9] border border-[#DEDCCD]"
           }`}
         >
-          Extended Circuits & Group Fleet (TTAA + Markup)
+          Extended Circuits & Group Fleet
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab("sop")}
-          className={`px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all cursor-pointer ${
+          className={`px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap shrink-0 ${
             activeTab === "sop"
               ? "bg-[#103F36] text-white shadow-md"
               : "bg-[#FFFDF7] text-[#59665E] hover:bg-[#F7F3E9] border border-[#DEDCCD]"
@@ -213,7 +213,63 @@ export default function VehicleRateTable({ compact = false }) {
               </span>
             </div>
 
-            <div className="overflow-x-auto">
+            {/* Mobile View: Cards */}
+            <div className="block md:hidden divide-y divide-[#DEDCCD]">
+              {poster.localAndTransfers.map((item) => (
+                <div key={item.id} className="p-4 sm:p-5 space-y-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h5 className="font-serif font-bold text-base text-[#103F36]">
+                        {item.service}
+                      </h5>
+                      <span className="text-xs text-[#59665E] block mt-0.5">
+                        {item.duration}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-semibold text-[#103F36] bg-[#E9F0EA] px-2 py-0.5 rounded border border-[#103F36]/20 shrink-0">
+                      Fixed
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-[#59665E] leading-relaxed">
+                    {item.coverage}
+                  </p>
+
+                  {item.footnote && (
+                    <div className="text-[11px] text-amber-800 bg-amber-50/80 p-2 rounded-lg border border-amber-200">
+                      * {item.footnote}
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-3 gap-2 pt-1">
+                    <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD] text-center">
+                      <span className="block text-[10px] uppercase font-bold text-[#59665E]">Dzire</span>
+                      <span className="font-serif text-sm font-bold text-[#103F36]">
+                        ₹{item.dzire.toLocaleString("en-IN")}
+                      </span>
+                      <span className="block text-[9px] text-[#59665E]">Sedan 1-4p</span>
+                    </div>
+                    <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD] text-center">
+                      <span className="block text-[10px] uppercase font-bold text-[#59665E]">Ertiga</span>
+                      <span className="font-serif text-sm font-bold text-[#103F36]">
+                        ₹{item.ertiga.toLocaleString("en-IN")}
+                      </span>
+                      <span className="block text-[9px] text-[#59665E]">MUV 4-6p</span>
+                    </div>
+                    <div className="bg-[#E9F0EA] p-2.5 rounded-xl border border-[#103F36]/20 text-center">
+                      <span className="block text-[10px] uppercase font-bold text-[#103F36]">Innova</span>
+                      <span className="font-serif text-sm font-bold text-[#103F36]">
+                        ₹{item.innova.toLocaleString("en-IN")}
+                      </span>
+                      <span className="block text-[9px] text-[#59665E]">SUV 5-7p</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop View: Table */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-[#DEDCCD] bg-[#FFFDF7] text-xs font-bold uppercase tracking-wider text-[#59665E]">
@@ -282,7 +338,57 @@ export default function VehicleRateTable({ compact = false }) {
               </span>
             </div>
 
-            <div className="overflow-x-auto">
+            {/* Mobile View: Cards */}
+            <div className="block md:hidden divide-y divide-[#DEDCCD]">
+              {poster.sameDayReturns.map((item) => (
+                <div key={item.id} className="p-4 sm:p-5 space-y-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h5 className="font-serif font-bold text-base text-[#103F36]">
+                        {item.destination}
+                      </h5>
+                      <span className="text-xs text-[#D9A441] font-semibold block mt-0.5">
+                        {item.distance}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-semibold text-[#103F36] bg-[#E9F0EA] px-2 py-0.5 rounded border border-[#103F36]/20 shrink-0">
+                      Roundtrip
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-[#59665E] leading-relaxed">
+                    {item.coverage}
+                  </p>
+
+                  <div className="grid grid-cols-3 gap-2 pt-1">
+                    <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD] text-center">
+                      <span className="block text-[10px] uppercase font-bold text-[#59665E]">Dzire</span>
+                      <span className="font-serif text-sm font-bold text-[#103F36]">
+                        ₹{item.dzire.toLocaleString("en-IN")}
+                      </span>
+                      <span className="block text-[9px] text-[#59665E]">Sedan</span>
+                    </div>
+                    <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD] text-center">
+                      <span className="block text-[10px] uppercase font-bold text-[#59665E]">Ertiga</span>
+                      <span className="font-serif text-sm font-bold text-[#103F36]">
+                        ₹{item.ertiga.toLocaleString("en-IN")}
+                      </span>
+                      <span className="block text-[9px] text-[#59665E]">MUV</span>
+                    </div>
+                    <div className="bg-[#E9F0EA] p-2.5 rounded-xl border border-[#103F36]/20 text-center">
+                      <span className="block text-[10px] uppercase font-bold text-[#103F36]">Innova</span>
+                      <span className="font-serif text-sm font-bold text-[#103F36]">
+                        ₹{item.innova.toLocaleString("en-IN")}
+                      </span>
+                      <span className="block text-[9px] text-[#59665E]">SUV</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop View: Table */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-[#DEDCCD] bg-[#FFFDF7] text-xs font-bold uppercase tracking-wider text-[#59665E]">
@@ -349,7 +455,59 @@ export default function VehicleRateTable({ compact = false }) {
             </span>
           </div>
 
-          <div className="overflow-x-auto">
+          {/* Mobile View: Cards */}
+          <div className="block md:hidden divide-y divide-[#DEDCCD]">
+            {poster.multiDayPerDay.map((item) => (
+              <div key={item.id} className="p-4 sm:p-5 space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h5 className="font-serif font-bold text-base text-[#103F36]">
+                      {item.region}
+                    </h5>
+                    {item.footnote && (
+                      <span className="text-[11px] text-amber-800 font-medium block mt-0.5">
+                        * {item.footnote}
+                      </span>
+                    )}
+                  </div>
+                  <span className="badge-forest text-xs whitespace-nowrap shrink-0">
+                    {item.minDays} Days+
+                  </span>
+                </div>
+
+                <p className="text-xs text-[#59665E] leading-relaxed">
+                  <strong className="text-[#103F36]">Coverage:</strong> {item.coverage}
+                </p>
+
+                <div className="grid grid-cols-3 gap-2 pt-1">
+                  <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD] text-center">
+                    <span className="block text-[10px] uppercase font-bold text-[#59665E]">Dzire</span>
+                    <span className="font-serif text-sm font-bold text-[#103F36]">
+                      ₹{item.dzire.toLocaleString("en-IN")}
+                    </span>
+                    <span className="block text-[9px] text-[#59665E]">/ day</span>
+                  </div>
+                  <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD] text-center">
+                    <span className="block text-[10px] uppercase font-bold text-[#59665E]">Ertiga</span>
+                    <span className="font-serif text-sm font-bold text-[#103F36]">
+                      ₹{item.ertiga.toLocaleString("en-IN")}
+                    </span>
+                    <span className="block text-[9px] text-[#59665E]">/ day</span>
+                  </div>
+                  <div className="bg-[#E9F0EA] p-2.5 rounded-xl border border-[#103F36]/20 text-center">
+                    <span className="block text-[10px] uppercase font-bold text-[#103F36]">Innova</span>
+                    <span className="font-serif text-sm font-bold text-[#103F36]">
+                      ₹{item.innova.toLocaleString("en-IN")}
+                    </span>
+                    <span className="block text-[9px] text-[#59665E]">/ day</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop View: Table */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-[#DEDCCD] bg-[#FFFDF7] text-xs font-bold uppercase tracking-wider text-[#59665E]">
@@ -423,7 +581,83 @@ export default function VehicleRateTable({ compact = false }) {
             </span>
           </div>
 
-          <div className="overflow-x-auto">
+          {/* Mobile View: Cards */}
+          <div className="block md:hidden divide-y divide-[#DEDCCD]">
+            {circuits.sectors.map((sec) => (
+              <div key={sec.id} className="p-4 sm:p-5 space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h5 className="font-serif font-bold text-base text-[#103F36]">
+                      {sec.sector}
+                    </h5>
+                    <span className="text-xs text-[#59665E] block mt-0.5">
+                      {sec.coverage}
+                    </span>
+                  </div>
+                  <span className="badge-forest text-[11px] whitespace-nowrap shrink-0">
+                    {sec.minDays}D+
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1 text-xs">
+                  <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD]">
+                    <span className="block text-[10px] uppercase font-bold text-[#59665E]">Sedan (Dzire)</span>
+                    {sec.sedan ? (
+                      <div className="font-serif text-sm font-bold text-[#103F36]">
+                        ₹{sec.sedan.toLocaleString("en-IN")}<span className="text-[10px] font-normal text-[#59665E]">/d</span>
+                      </div>
+                    ) : (
+                      <span className="text-[10px] text-amber-800">Not offered</span>
+                    )}
+                  </div>
+
+                  <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD]">
+                    <span className="block text-[10px] uppercase font-bold text-[#59665E]">Ertiga (MUV)</span>
+                    <div className="font-serif text-sm font-bold text-[#103F36]">
+                      ₹{sec.ertiga.toLocaleString("en-IN")}<span className="text-[10px] font-normal text-[#59665E]">/d</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#E9F0EA] p-2.5 rounded-xl border border-[#103F36]/20">
+                    <span className="block text-[10px] uppercase font-bold text-[#103F36]">Innova Crysta</span>
+                    <div className="font-serif text-sm font-bold text-[#103F36]">
+                      ₹{sec.crysta.toLocaleString("en-IN")}<span className="text-[10px] font-normal text-[#59665E]">/d</span>
+                    </div>
+                  </div>
+
+                  {sec.tt13 && (
+                    <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD]">
+                      <span className="block text-[10px] uppercase font-bold text-[#59665E]">TT-13 (13 Str)</span>
+                      <div className="font-serif text-sm font-bold text-[#103F36]">
+                        ₹{sec.tt13.toLocaleString("en-IN")}<span className="text-[10px] font-normal text-[#59665E]">/d</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {sec.tt17 && (
+                    <div className="bg-[#F7F3E9] p-2.5 rounded-xl border border-[#DEDCCD]">
+                      <span className="block text-[10px] uppercase font-bold text-[#59665E]">TT-17 / TT-26</span>
+                      <div className="font-serif text-sm font-bold text-[#103F36]">
+                        ₹{sec.tt17.toLocaleString("en-IN")}<span className="text-[10px] font-normal text-[#59665E]">/d</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {sec.urbania && (
+                    <div className="bg-[#FFFDF7] p-2.5 rounded-xl border border-[#D9A441]/40">
+                      <span className="block text-[10px] uppercase font-bold text-[#D9A441]">Force Urbania</span>
+                      <div className="font-serif text-sm font-bold text-[#D9A441]">
+                        ₹{sec.urbania.toLocaleString("en-IN")}<span className="text-[10px] font-normal text-[#59665E]">/d</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop View: Table */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[900px]">
               <thead>
                 <tr className="border-b border-[#DEDCCD] bg-[#FFFDF7] text-[11px] font-bold uppercase tracking-wider text-[#59665E]">
@@ -496,7 +730,7 @@ export default function VehicleRateTable({ compact = false }) {
                           <span className="text-[10px] text-[#59665E] block">base ₹{sec.baseTT13}</span>
                         </>
                       ) : (
-                        "—"
+                        "-"
                       )}
                     </td>
                     <td className="py-4 px-3 text-right font-medium">
@@ -506,7 +740,7 @@ export default function VehicleRateTable({ compact = false }) {
                           <span className="text-[10px] text-[#59665E] block">26-str: ₹{sec.tt26.toLocaleString("en-IN")}</span>
                         </>
                       ) : (
-                        "—"
+                        "-"
                       )}
                     </td>
                     <td className="py-4 px-4 text-right font-medium">
@@ -516,7 +750,7 @@ export default function VehicleRateTable({ compact = false }) {
                           <span className="text-[10px] text-[#59665E] block">base ₹{sec.baseUrbania}</span>
                         </>
                       ) : (
-                        "—"
+                        "-"
                       )}
                     </td>
                   </tr>
@@ -530,7 +764,7 @@ export default function VehicleRateTable({ compact = false }) {
               * Base rates reflect Tourist Transporter Association of Assam circular ref TTAA/AT/2026-27/190. Retail marked-up rates include trip management, vehicle sanitization, and 24/7 mountain dispatch.
             </span>
             <span className="font-semibold text-[#103F36] shrink-0">
-              Coaches (22–24 str): Available on request
+              Coaches (22-24 str): Available on request
             </span>
           </div>
         </div>
@@ -586,10 +820,10 @@ export default function VehicleRateTable({ compact = false }) {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto shrink-0">
           <a
             href={`tel:${siteConfig.phoneRaw}`}
-            className="bg-[#D9A441] hover:bg-[#C18D2D] text-[#172C26] font-bold text-xs sm:text-sm px-5 py-3 rounded-full flex items-center gap-2 transition-all shadow-md"
+            className="bg-[#D9A441] hover:bg-[#C18D2D] text-[#172C26] font-bold text-xs sm:text-sm px-5 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-md min-h-[44px]"
           >
             <PhoneCall className="w-4 h-4" />
             <span>Call {siteConfig.phone}</span>
@@ -597,7 +831,7 @@ export default function VehicleRateTable({ compact = false }) {
 
           <a
             href={`tel:${siteConfig.phoneSecondaryRaw}`}
-            className="bg-white/15 hover:bg-white/25 text-white font-semibold text-xs sm:text-sm px-5 py-3 rounded-full flex items-center gap-2 transition-all border border-white/30"
+            className="bg-white/15 hover:bg-white/25 text-white font-semibold text-xs sm:text-sm px-5 py-3 rounded-full flex items-center justify-center gap-2 transition-all border border-white/30 min-h-[44px]"
           >
             <PhoneCall className="w-4 h-4 text-[#D9A441]" />
             <span>Call {siteConfig.phoneSecondary}</span>
@@ -609,7 +843,7 @@ export default function VehicleRateTable({ compact = false }) {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm px-5 py-3 rounded-full flex items-center gap-2 transition-all shadow-md"
+            className="bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm px-5 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-md min-h-[44px]"
           >
             <MessageCircle className="w-4 h-4" />
             <span>WhatsApp</span>

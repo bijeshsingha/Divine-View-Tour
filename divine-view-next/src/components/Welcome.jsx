@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Sparkles, Map, Star, ChevronRight } from 'lucide-react';
+import { Compass, Map, Star, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -40,7 +40,7 @@ export default function Welcome() {
           </div>
 
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4 md:mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Sparkles className="w-4 h-4 text-primary" />
+            <Compass className="w-4 h-4 text-primary" />
             <span className="text-xs sm:text-sm font-semibold tracking-wide uppercase text-slate-200">The Ultimate Northeast Experience</span>
           </div>
           

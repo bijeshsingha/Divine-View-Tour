@@ -8,7 +8,7 @@ import {
   RotateCcw,
   Search,
   ArrowRight,
-  Sparkles,
+  Compass,
   MapPin,
   Calendar,
   Users,
@@ -398,7 +398,7 @@ export default function PackagesFilterClient({ initialPackages }) {
         /* Friendly Empty State with Custom Trip Route */
         <div className="bg-[#FFFDF7] rounded-3xl p-10 sm:p-14 text-center border border-[#DEDCCD] shadow-sm max-w-xl mx-auto space-y-4">
           <div className="w-14 h-14 rounded-full bg-[#E9F0EA] text-[#103F36] flex items-center justify-center mx-auto">
-            <Sparkles className="w-7 h-7 text-[#D9A441]" />
+            <Compass className="w-7 h-7 text-[#D9A441]" />
           </div>
           <h3 className="font-serif text-2xl font-bold text-[#103F36]">
             No standard tour matches this combination

@@ -11,12 +11,70 @@ import {
   Users,
   Car,
   BedDouble,
-  Sparkles,
   ShieldCheck,
   Send,
   MapPin
 } from "lucide-react";
 import siteConfig from "@/data/siteConfig.json";
+
+const DESTINATION_INTERESTS = {
+  meghalaya: [
+    { id: "roots_waterfalls", label: "Living Root Bridges & Waterfalls", region: "Cherrapunji & Nongriat" },
+    { id: "clear_rivers", label: "Crystal Clear River Boating", region: "Dawki & Shnongpdeng" },
+    { id: "caves_canyons", label: "Limestone Caves & Canyons", region: "Mawsmai, Arwah & Laitlum" },
+    { id: "clean_villages", label: "Cleanest Villages & Khasi Culture", region: "Mawlynnong & Kongthong" },
+    { id: "shillong_cafes", label: "Cafe Hopping & Shillong Music", region: "Shillong & Umiam" },
+  ],
+  assam: [
+    { id: "rhino_safari", label: "Rhino Safari & Wildlife Jeep Drives", region: "Kaziranga & Pobitora" },
+    { id: "brahmaputra_cruise", label: "Brahmaputra River Cruises & Sunsets", region: "Guwahati & Nimatighat" },
+    { id: "tea_estates", label: "Heritage Tea Gardens & Stays", region: "Upper Assam & Jorhat" },
+    { id: "kamakhya_spiritual", label: "Kamakhya Temple & Sacred Shrines", region: "Nilachal Hills, Guwahati" },
+    { id: "majuli_culture", label: "Majuli River Island & Satra Monasteries", region: "Majuli" },
+  ],
+  "arunachal-pradesh": [
+    { id: "tawang_monasteries", label: "Ancient Monasteries & Tibetan Culture", region: "Tawang & Bomdila" },
+    { id: "high_passes", label: "High-Altitude Passes (Sela Pass 13,700 ft)", region: "West Kameng" },
+    { id: "glacial_lakes", label: "Glacial Alpine Lakes", region: "Madhuri Lake & PT Tso" },
+    { id: "valley_orchards", label: "Apple Orchards & Sub-Himalayan Valleys", region: "Dirang & Sangti Valley" },
+  ],
+  "dzukou-valley": [
+    { id: "dzukou_trek", label: "Dzukou Valley Alpine Trekking", region: "Viswema & Jakhama Trails" },
+    { id: "dwarf_bamboo", label: "Dwarf Bamboo Valley Exploration", region: "Dzukou Sanctuary" },
+    { id: "ridge_stargazing", label: "High-Ridge Wilderness Stargazing", region: "Valley Rest House" },
+    { id: "naga_heritage", label: "Angami Naga Heritage & Village Walks", region: "Khonoma & Kisama" },
+  ],
+};
+
+const COMMON_INTERESTS = [
+  { id: "local_cuisine", label: "Local Food & Tribal Culinary Tasting", region: "Across Northeast" },
+  { id: "nature_photography", label: "Landscape & Nature Photography", region: "Scenic Viewpoints" },
+  { id: "scenic_drives", label: "Unhurried Mountain Drives", region: "Scenic Byways" },
+];
+
+function getInterestsForDestinations(destinations) {
+  const result = [];
+  const seen = new Set();
+
+  (destinations || []).forEach((dest) => {
+    const list = DESTINATION_INTERESTS[dest] || [];
+    list.forEach((item) => {
+      if (!seen.has(item.label)) {
+        seen.add(item.label);
+        result.push(item);
+      }
+    });
+  });
+
+  COMMON_INTERESTS.forEach((item) => {
+    if (!seen.has(item.label)) {
+      seen.add(item.label);
+      result.push(item);
+    }
+  });
+
+  return result;
+}
 
 export default function CustomTripPlanner() {
   const router = useRouter();
@@ -43,13 +101,17 @@ export default function CustomTripPlanner() {
   else if (parsedAdults >= 5 && parsedAdults <= 6) initialVehicle = "Toyota Innova Crysta";
   else if (parsedAdults >= 7) initialVehicle = "Tempo Traveller (Group 8+)";
 
+  const initialDests = prefillDest && prefillDest !== "all" ? [prefillDest] : ["meghalaya"];
+  const initialAvailable = getInterestsForDestinations(initialDests);
+  const initialInterests = [initialAvailable[0]?.label, initialAvailable[1]?.label].filter(Boolean);
+
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
     // Step 1: Where and when
-    destinations: prefillDest && prefillDest !== "all" ? [prefillDest] : ["meghalaya"],
+    destinations: initialDests,
     timingType: "month", // "dates" or "month"
     exactDates: "",
     travelMonth: initialMonth,
@@ -63,7 +125,7 @@ export default function CustomTripPlanner() {
     accessibilityNotes: "",
 
     // Step 3: Travel style
-    interests: ["Waterfalls & Living Roots", "Scenic Viewpoints"],
+    interests: initialInterests.length > 0 ? initialInterests : ["Living Root Bridges & Waterfalls", "Crystal Clear River Boating"],
     pace: "Balanced (Comfortable driving & sightseeing)",
     stayPreference: "Boutique & 3-Star Resorts",
     vehiclePreference: initialVehicle,
@@ -79,20 +141,32 @@ export default function CustomTripPlanner() {
     privacyConsent: true,
   });
 
+  const availableInterests = getInterestsForDestinations(formData.destinations);
+
   const toggleDestination = (slug) => {
+    let nextDests = [];
     if (formData.destinations.includes(slug)) {
       if (formData.destinations.length > 1) {
-        setFormData({
-          ...formData,
-          destinations: formData.destinations.filter((d) => d !== slug),
-        });
+        nextDests = formData.destinations.filter((d) => d !== slug);
+      } else {
+        nextDests = formData.destinations;
       }
     } else {
-      setFormData({
-        ...formData,
-        destinations: [...formData.destinations, slug],
-      });
+      nextDests = [...formData.destinations, slug];
     }
+
+    const available = getInterestsForDestinations(nextDests);
+    const availableLabels = available.map((i) => i.label);
+    let nextInterests = formData.interests.filter((i) => availableLabels.includes(i));
+    if (nextInterests.length === 0 && available.length > 0) {
+      nextInterests = [available[0]?.label, available[1]?.label].filter(Boolean);
+    }
+
+    setFormData({
+      ...formData,
+      destinations: nextDests,
+      interests: nextInterests,
+    });
   };
 
   const toggleInterest = (interest) => {
@@ -165,7 +239,7 @@ export default function CustomTripPlanner() {
       </div>
 
       {/* Wizard Form Body */}
-      <div className="p-6 sm:p-10">
+      <div className="p-4 sm:p-8 lg:p-10">
         {/* STEP 1: WHERE AND WHEN */}
         {currentStep === 1 && (
           <div className="space-y-6 animate-in fade-in duration-200">
@@ -192,7 +266,7 @@ export default function CustomTripPlanner() {
                     type="button"
                     key={dest.id}
                     onClick={() => toggleDestination(dest.id)}
-                    className={`p-4 rounded-xl border text-left transition-all ${
+                    className={`p-4 rounded-xl border text-left transition-all min-h-[44px] ${
                       isSelected
                         ? "bg-[#E9F0EA] border-[#103F36] shadow-sm"
                         : "bg-[#F7F3E9] border-[#DEDCCD] opacity-85 hover:opacity-100"
@@ -290,16 +364,18 @@ export default function CustomTripPlanner() {
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
+                    aria-label="Decrease Adults"
                     onClick={() => setFormData({ ...formData, adults: Math.max(1, formData.adults - 1) })}
-                    className="w-8 h-8 rounded bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-lg"
+                    className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-xl flex items-center justify-center active:scale-95 transition-transform"
                   >
                     -
                   </button>
-                  <span className="font-serif text-2xl font-bold text-[#103F36]">{formData.adults}</span>
+                  <span className="font-serif text-2xl font-bold text-[#103F36] w-8 text-center">{formData.adults}</span>
                   <button
                     type="button"
+                    aria-label="Increase Adults"
                     onClick={() => setFormData({ ...formData, adults: formData.adults + 1 })}
-                    className="w-8 h-8 rounded bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-lg"
+                    className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-xl flex items-center justify-center active:scale-95 transition-transform"
                   >
                     +
                   </button>
@@ -313,16 +389,18 @@ export default function CustomTripPlanner() {
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
+                    aria-label="Decrease Children"
                     onClick={() => setFormData({ ...formData, childrenCount: Math.max(0, formData.childrenCount - 1) })}
-                    className="w-8 h-8 rounded bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-lg"
+                    className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-xl flex items-center justify-center active:scale-95 transition-transform"
                   >
                     -
                   </button>
-                  <span className="font-serif text-2xl font-bold text-[#103F36]">{formData.childrenCount}</span>
+                  <span className="font-serif text-2xl font-bold text-[#103F36] w-8 text-center">{formData.childrenCount}</span>
                   <button
                     type="button"
+                    aria-label="Increase Children"
                     onClick={() => setFormData({ ...formData, childrenCount: formData.childrenCount + 1 })}
-                    className="w-8 h-8 rounded bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-lg"
+                    className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-xl flex items-center justify-center active:scale-95 transition-transform"
                   >
                     +
                   </button>
@@ -336,16 +414,18 @@ export default function CustomTripPlanner() {
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
+                    aria-label="Decrease Seniors"
                     onClick={() => setFormData({ ...formData, seniorCount: Math.max(0, formData.seniorCount - 1) })}
-                    className="w-8 h-8 rounded bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-lg"
+                    className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-xl flex items-center justify-center active:scale-95 transition-transform"
                   >
                     -
                   </button>
-                  <span className="font-serif text-2xl font-bold text-[#103F36]">{formData.seniorCount}</span>
+                  <span className="font-serif text-2xl font-bold text-[#103F36] w-8 text-center">{formData.seniorCount}</span>
                   <button
                     type="button"
+                    aria-label="Increase Seniors"
                     onClick={() => setFormData({ ...formData, seniorCount: formData.seniorCount + 1 })}
-                    className="w-8 h-8 rounded bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-lg"
+                    className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl bg-[#FFFDF7] border border-[#DEDCCD] font-bold text-xl flex items-center justify-center active:scale-95 transition-transform"
                   >
                     +
                   </button>
@@ -376,39 +456,51 @@ export default function CustomTripPlanner() {
                 What kind of experience do you prefer?
               </h2>
               <p className="text-xs sm:text-sm text-[#59665E] mt-1">
-                Choose your desired travel pace, accommodation grade, and interests.
+                Tailored options based on your selected destination{formData.destinations.length > 1 ? "s" : ""}.
               </p>
             </div>
 
             {/* Interests Multi-Select */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-[#59665E] block mb-2">
-                Trip Interests (Select all that apply)
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Waterfalls & Living Roots",
-                  "Scenic Viewpoints",
-                  "Rhino Safari / Wildlife",
-                  "Monasteries & Tibetan Culture",
-                  "Trekking & Backpacking",
-                  "Local Food & Cafes",
-                  "Serene Photography",
-                  "Spiritual Shrines (Kamakhya)",
-                ].map((item) => {
-                  const isChecked = formData.interests.includes(item);
+              <div className="flex items-baseline justify-between mb-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-[#59665E] block">
+                  Trip Interests (Select all that apply)
+                </label>
+                <span className="text-[11px] text-[#237A50] font-medium">
+                  {formData.interests.length} selected
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {availableInterests.map((item) => {
+                  const isChecked = formData.interests.includes(item.label);
                   return (
                     <button
                       type="button"
-                      key={item}
-                      onClick={() => toggleInterest(item)}
-                      className={`text-xs px-3.5 py-2 rounded-lg font-medium border transition-colors ${
+                      key={item.label}
+                      onClick={() => toggleInterest(item.label)}
+                      className={`text-left p-3 rounded-xl border transition-all flex items-start gap-2.5 min-h-[44px] cursor-pointer ${
                         isChecked
-                          ? "bg-[#103F36] text-[#F7F3E9] border-[#103F36]"
-                          : "bg-[#F7F3E9] text-[#172C26] border-[#DEDCCD]"
+                          ? "bg-[#E9F0EA] text-[#103F36] border-[#103F36] shadow-xs"
+                          : "bg-[#F7F3E9] text-[#172C26] border-[#DEDCCD] hover:border-[#103F36]/40"
                       }`}
                     >
-                      {item}
+                      <div className={`w-4 h-4 rounded mt-0.5 shrink-0 flex items-center justify-center border text-[10px] font-bold ${
+                        isChecked ? "bg-[#103F36] text-white border-[#103F36]" : "border-[#DEDCCD] bg-white"
+                      }`}>
+                        {isChecked && "✓"}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <span className="font-semibold text-xs sm:text-sm block leading-snug">
+                          {item.label}
+                        </span>
+                        {item.region && (
+                          <span className={`text-[11px] block mt-0.5 ${
+                            isChecked ? "text-[#237A50] font-medium" : "text-[#59665E]"
+                          }`}>
+                            {item.region}
+                          </span>
+                        )}
+                      </div>
                     </button>
                   );
                 })}
@@ -511,11 +603,11 @@ export default function CustomTripPlanner() {
             </div>
 
             {/* Summary Box */}
-            <div className="bg-[#F7F3E9] p-5 rounded-2xl border border-[#DEDCCD] space-y-3 text-xs sm:text-sm">
+            <div className="bg-[#F7F3E9] p-4 sm:p-5 rounded-2xl border border-[#DEDCCD] space-y-3 text-xs sm:text-sm">
               <div className="font-bold text-[#103F36] uppercase tracking-wider text-xs border-b border-[#DEDCCD] pb-2">
                 Trip Request Summary
               </div>
-              <div className="grid grid-cols-2 gap-2 text-[#59665E]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[#59665E]">
                 <div>
                   <span className="font-semibold text-[#172C26]">Destinations:</span>{" "}
                   {formData.destinations.join(", ")}
@@ -620,25 +712,25 @@ export default function CustomTripPlanner() {
         )}
 
         {/* Wizard Footer Navigation */}
-        <div className="mt-10 pt-6 border-t border-[#DEDCCD] flex items-center justify-between">
+        <div className="mt-8 sm:mt-10 pt-5 sm:pt-6 border-t border-[#DEDCCD] flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3">
           {currentStep > 1 ? (
             <button
               type="button"
               onClick={() => setCurrentStep(currentStep - 1)}
-              className="btn-outline-forest !py-2.5 !px-5 text-xs flex items-center gap-1.5"
+              className="btn-outline-forest !py-3 !px-5 text-xs sm:text-sm flex items-center justify-center gap-2 min-h-[44px]"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back</span>
             </button>
           ) : (
-            <div />
+            <div className="hidden sm:block" />
           )}
 
           {currentStep < 4 ? (
             <button
               type="button"
               onClick={() => setCurrentStep(currentStep + 1)}
-              className="btn-gold !py-2.5 !px-6 text-sm flex items-center gap-1.5 shadow-md"
+              className="btn-gold !py-3 !px-6 text-sm flex items-center justify-center gap-2 shadow-md min-h-[44px]"
             >
               <span>Continue</span>
               <ArrowRight className="w-4 h-4" />
@@ -648,7 +740,7 @@ export default function CustomTripPlanner() {
               type="button"
               disabled={isSubmitting || !formData.customerName || !formData.phone}
               onClick={handleSubmit}
-              className="btn-gold !py-3 !px-8 text-sm font-semibold flex items-center gap-2 shadow-lg disabled:opacity-50"
+              className="btn-gold !py-3.5 !px-8 text-sm font-semibold flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 min-h-[44px]"
             >
               <Send className="w-4 h-4" />
               <span>{isSubmitting ? "Submitting Request..." : "Send Custom Trip Request"}</span>
