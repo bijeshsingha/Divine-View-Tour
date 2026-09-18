@@ -22,6 +22,7 @@ import {
 import vehicleData from "@/data/vehicleRates.json";
 import siteConfig from "@/data/siteConfig.json";
 import VehicleRateTable from "@/components/VehicleRateTable";
+import PhoneInput from "@/components/PhoneInput";
 
 export default function VehicleHireClient() {
   const router = useRouter();
@@ -133,6 +134,7 @@ export default function VehicleHireClient() {
   const [daysCount, setDaysCount] = useState(initialRoute.minDays);
   const [startDate, setStartDate] = useState("");
   const [customerName, setCustomerName] = useState("");
+  const [countryCode, setCountryCode] = useState("+91");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [specialRequests, setSpecialRequests] = useState("");
@@ -161,6 +163,7 @@ export default function VehicleHireClient() {
     setIsSubmitting(true);
 
     try {
+      const fullPhone = phone.startsWith("+") ? phone : `${countryCode} ${phone}`.trim();
       const res = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -171,7 +174,7 @@ export default function VehicleHireClient() {
           days: Math.max(activeRoute.minDays, daysCount),
           startDate,
           customerName,
-          phone,
+          phone: fullPhone,
           email,
           specialRequests,
           estimatedDailyRate: dailyRate,
@@ -473,13 +476,12 @@ export default function VehicleHireClient() {
               <label className="text-xs font-bold uppercase tracking-wider text-[#59665E] block mb-1">
                 WhatsApp / Mobile *
               </label>
-              <input
-                type="tel"
-                required
-                placeholder="+91 98765 43210"
+              <PhoneInput
+                countryCode={countryCode}
+                onCountryCodeChange={setCountryCode}
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full bg-[#F7F3E9] p-3 rounded-lg border border-[#DEDCCD] text-sm text-[#172C26] focus:outline-none"
+                required
               />
             </div>
 

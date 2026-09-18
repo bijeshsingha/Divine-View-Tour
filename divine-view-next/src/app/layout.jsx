@@ -112,7 +112,7 @@ export default function RootLayout({ children }) {
         legalName: "Divine View Tours",
         image: "https://www.divineviewtours.com/images/homescreen.jpg",
         logo: "https://www.divineviewtours.com/logo.png",
-        telephone: "+91-9282-041211",
+        telephone: "+91-6913-541211",
         url: "https://www.divineviewtours.com",
         email: "info@divineviewtours.com",
         address: {
@@ -131,7 +131,7 @@ export default function RootLayout({ children }) {
         contactPoint: [
           {
             "@type": "ContactPoint",
-            telephone: "+91-9282-041211",
+            telephone: "+91-6913-541211",
             email: "bookings@divineviewtours.com",
             contactType: "reservations",
             areaServed: "IN",

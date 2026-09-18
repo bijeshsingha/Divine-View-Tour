@@ -16,6 +16,7 @@ import {
   MapPin
 } from "lucide-react";
 import siteConfig from "@/data/siteConfig.json";
+import PhoneInput from "@/components/PhoneInput";
 
 const DESTINATION_INTERESTS = {
   meghalaya: [
@@ -135,6 +136,7 @@ export default function CustomTripPlanner() {
 
     // Step 4: Contact & Consent
     customerName: "",
+    countryCode: "+91",
     phone: "",
     email: "",
     preferredContact: "whatsapp",
@@ -187,6 +189,11 @@ export default function CustomTripPlanner() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const cleanPhone = (formData.phone || "").trim();
+    const fullPhone = cleanPhone.startsWith("+")
+      ? cleanPhone
+      : `${formData.countryCode || "+91"} ${cleanPhone}`.trim();
+
     try {
       const res = await fetch("/api/enquiries", {
         method: "POST",
@@ -194,6 +201,7 @@ export default function CustomTripPlanner() {
         body: JSON.stringify({
           type: "custom_trip",
           ...formData,
+          phone: fullPhone,
         }),
       });
 
@@ -648,13 +656,12 @@ export default function CustomTripPlanner() {
                   <label className="text-xs font-bold uppercase tracking-wider text-[#59665E] block mb-1">
                     WhatsApp / Phone *
                   </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
+                  <PhoneInput
+                    countryCode={formData.countryCode}
+                    onCountryCodeChange={(code) => setFormData({ ...formData, countryCode: code })}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-[#F7F3E9] p-3 rounded-lg border border-[#DEDCCD] text-sm text-[#172C26]"
+                    required
                   />
                 </div>
 

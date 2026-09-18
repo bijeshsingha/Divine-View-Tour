@@ -4,11 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Phone, MessageCircle, Mail, MapPin, Clock, Send } from "lucide-react";
 import siteConfig from "@/data/siteConfig.json";
+import PhoneInput from "@/components/PhoneInput";
 
 export default function ContactPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
+    countryCode: "+91",
     phone: "",
     email: "",
     subject: "General Inquiry",
@@ -21,12 +23,17 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     try {
+      const fullPhone = formData.phone.startsWith("+")
+        ? formData.phone
+        : `${formData.countryCode} ${formData.phone}`.trim();
+
       const res = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "contact_message",
           ...formData,
+          phone: fullPhone,
         }),
       });
 
@@ -162,13 +169,12 @@ export default function ContactPage() {
                   <label className="text-xs font-bold uppercase tracking-wider text-[#59665E] block mb-1">
                     Phone / WhatsApp *
                   </label>
-                  <input
-                    type="tel"
-                    required
+                  <PhoneInput
+                    countryCode={formData.countryCode}
+                    onCountryCodeChange={(code) => setFormData({ ...formData, countryCode: code })}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-[#F7F3E9] p-3 rounded-lg border border-[#DEDCCD] text-sm text-[#172C26]"
-                    placeholder="+91 98765 43210"
+                    required
                   />
                 </div>
               </div>

@@ -56,7 +56,7 @@ export default function VehicleHirePage() {
         provider: {
           "@type": "TravelAgency",
           name: "Divine View Tours",
-          telephone: "+91-9282-041211",
+          telephone: "+91-6913-541211",
           url: "https://www.divineviewtours.com",
         },
         areaServed: [

@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { User, Users, Calendar, Phone, Mail, FileText, BadgeCheck } from 'lucide-react';
+import PhoneInput from '@/components/PhoneInput';
 
 export default function StepFinalGuestDetails({ data, updateData, displayPrice, config, path }) {
   const isCustom = path === 'custom' || (!path && !!data.region);
@@ -104,12 +105,15 @@ export default function StepFinalGuestDetails({ data, updateData, displayPrice, 
               <label className="flex items-center gap-2 mb-2 font-bold text-sm text-foreground">
                 <Phone className="w-4 h-4 text-primary-dark" /> Phone Number
               </label>
-              <input
-                type="tel"
-                className="w-full p-3.5 rounded-xl border border-stone-200 bg-stone-50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none text-stone-700 text-base font-medium transition-all"
-                placeholder="WhatsApp enabled number preferred"
+              <PhoneInput
+                countryCode={data.countryCode || '+91'}
+                onCountryCodeChange={(code) => updateData('countryCode', code)}
                 value={data.phone || ''}
                 onChange={(e) => updateData('phone', e.target.value)}
+                placeholder="WhatsApp enabled number"
+                className="w-full"
+                inputClassName="!p-3.5 !rounded-xl !bg-stone-50 !border-stone-200 focus:!bg-white focus:!border-primary focus:!ring-4 focus:!ring-primary/10 text-stone-700 text-base font-medium"
+                selectClassName="!py-3.5 !rounded-xl !bg-stone-50 !border-stone-200 text-stone-700 text-sm font-medium"
               />
             </div>
 

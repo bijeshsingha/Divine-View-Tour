@@ -24,6 +24,7 @@ import {
   Mail
 } from "lucide-react";
 import siteConfig from "@/data/siteConfig.json";
+import PhoneInput from "@/components/PhoneInput";
 
 export default function PackageDetailClient({ pkg }) {
   const router = useRouter();
@@ -43,6 +44,7 @@ export default function PackageDetailClient({ pkg }) {
     travellers: queryTravellers,
     pickup: "Guwahati Airport",
     customerName: "",
+    countryCode: "+91",
     phone: "",
     email: "",
     preferredContact: "whatsapp",
@@ -80,6 +82,10 @@ export default function PackageDetailClient({ pkg }) {
     setFormErrors({});
 
     try {
+      const fullPhone = formData.phone.startsWith("+")
+        ? formData.phone
+        : `${formData.countryCode} ${formData.phone}`.trim();
+
       const res = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -88,6 +94,7 @@ export default function PackageDetailClient({ pkg }) {
           packageId: pkg.id,
           packageTitle: pkg.title,
           ...formData,
+          phone: fullPhone,
         }),
       });
 
@@ -572,14 +579,15 @@ export default function PackageDetailClient({ pkg }) {
                   <label htmlFor="avail-phone" className="font-bold text-[#59665E] block mb-1">
                     WhatsApp / Phone *
                   </label>
-                  <input
+                  <PhoneInput
                     id="avail-phone"
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
+                    countryCode={formData.countryCode}
+                    onCountryCodeChange={(code) => setFormData({ ...formData, countryCode: code })}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-[#F7F3E9] p-2.5 rounded-lg border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                    required
+                    inputClassName="!p-2.5"
+                    selectClassName="!py-2.5"
                   />
                   {formErrors.phone && (
                     <p className="text-xs text-red-600 mt-1">{formErrors.phone}</p>

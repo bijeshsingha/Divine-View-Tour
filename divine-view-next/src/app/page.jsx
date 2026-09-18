@@ -538,11 +538,11 @@ export default function HomePage() {
               <span>WhatsApp Booking</span>
             </a>
             <a
-              href="tel:+919282041211"
+              href={`tel:${siteConfig.phoneSecondaryRaw}`}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#F7F3E9] hover:bg-[#E9E4D4] text-[#103F36] font-semibold text-xs sm:text-sm px-5 py-3 rounded-lg transition-colors border border-[#DEDCCD]"
             >
               <PhoneCall className="w-4 h-4 text-[#D9A441]" />
-              <span>+91 9282 041211</span>
+              <span>{siteConfig.phoneSecondary}</span>
             </a>
           </div>
         </div>

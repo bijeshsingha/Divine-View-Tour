@@ -224,6 +224,9 @@ export default function TripBuilder({ initialData, onComplete }) {
 
   const submitToWhatsApp = () => {
     const phone = "+916026504087";
+    const guestPhone = data.phone
+      ? (data.phone.startsWith('+') ? data.phone : `${data.countryCode || '+91'} ${data.phone}`.trim())
+      : 'Not provided';
     
     let message = '';
 
@@ -232,7 +235,7 @@ export default function TripBuilder({ initialData, onComplete }) {
       message = `*New Package Booking Request*\n\n`;
       message += `*Package:* ${pkg?.title}\n`;
       message += `*Guest Name:* ${data.name || 'Not provided'}\n`;
-      message += `*Phone:* ${data.phone || 'Not provided'}\n`;
+      message += `*Phone:* ${guestPhone}\n`;
       if (data.email) message += `*Email:* ${data.email}\n`;
       message += `*Dates:* ${data.checkInDate || 'TBD'}\n`;
       message += `*Headcount:* ${data.travelerCount} Adults, ${data.childrenCount || 0} Children\n`;
@@ -240,7 +243,7 @@ export default function TripBuilder({ initialData, onComplete }) {
       const regionName = config.regions[data.region]?.title || data.region;
       message = `*New Custom Booking Request: ${regionName}*\n\n`;
       message += `*Guest Name:* ${data.name || 'Not provided'}\n`;
-      message += `*Phone:* ${data.phone || 'Not provided'}\n`;
+      message += `*Phone:* ${guestPhone}\n`;
       if (data.email) message += `*Email:* ${data.email}\n`;
       message += `*Dates:* ${data.checkInDate || 'TBD'} for ${data.tripDays} Days\n`;
       message += `*Headcount:* ${data.travelerCount} Adults, ${data.childrenCount || 0} Children\n`;
