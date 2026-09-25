@@ -26,8 +26,8 @@ const caveat = Caveat({
 
 export const metadata = {
   title: {
-    template: "%s | Divine View Tours — Guwahati",
-    default: "Divine View Tours — Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
+    template: "%s | Divine View Tours: Guwahati",
+    default: "Divine View Tours: Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
   },
   description:
     "Explore Meghalaya, Assam, Arunachal Pradesh, and Dzukou Valley. Handcrafted private itineraries, verified mountain drivers, and transparent commercial vehicle hire rates from Guwahati.",
@@ -49,7 +49,7 @@ export const metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Divine View Tours — Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
+    title: "Divine View Tours: Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
     description:
       "Handcrafted private journeys through Assam, Meghalaya, and Arunachal Pradesh with Dzukou Valley trekking and approved vehicle hire rates from Guwahati.",
     url: "https://www.divineviewtours.com",
@@ -67,18 +67,19 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Divine View Tours — Thoughtfully Planned Northeast India Journeys",
+    title: "Divine View Tours: Thoughtfully Planned Northeast India Journeys",
     description:
       "Curated private road tours, certified mountain drivers, and transparent vehicle hire tariffs from Guwahati.",
     images: ["/images/homescreen.jpg"],
   },
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
     ],
     apple: [
-      { url: "/favicon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
 };
