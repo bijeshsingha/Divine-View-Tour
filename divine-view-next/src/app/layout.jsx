@@ -26,7 +26,7 @@ const caveat = Caveat({
 
 export const metadata = {
   title: {
-    template: "%s | Divine View Tours: Guwahati",
+    template: "%s | Divine View Tours",
     default: "Divine View Tours: Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
   },
   description:
@@ -45,9 +45,6 @@ export const metadata = {
     "Divine View Tours Guwahati",
   ],
   metadataBase: new URL("https://www.divineviewtours.com"),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: "Divine View Tours: Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
     description:

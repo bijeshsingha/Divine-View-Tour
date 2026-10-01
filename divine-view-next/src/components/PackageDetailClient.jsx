@@ -25,6 +25,12 @@ import {
 } from "lucide-react";
 import siteConfig from "@/data/siteConfig.json";
 import PhoneInput from "@/components/PhoneInput";
+import {
+  initCampaignTracking,
+  getCampaignData,
+  trackContactIntent,
+  trackEnquirySubmitted,
+} from "@/lib/campaignTracking";
 
 export default function PackageDetailClient({ pkg }) {
   const router = useRouter();
@@ -37,19 +43,29 @@ export default function PackageDetailClient({ pkg }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
-  // Enquiry modal state pre-filled from search
+  // Enquiry modal & inline form state
   const [formData, setFormData] = useState({
     startDate: "",
     flexibleMonth: queryMonth ? queryMonth : "Flexible",
     travellers: queryTravellers,
+    adults: 2,
+    childrenCount: 0,
     pickup: "Guwahati Airport",
     customerName: "",
     countryCode: "+91",
+    countryOfResidence: "India",
     phone: "",
     email: "",
     preferredContact: "whatsapp",
+    budget: "",
     notes: queryMonth ? `Preferred Travel Month: ${queryMonth}` : "",
+    website_hp: "",
   });
+
+  // Initialize campaign tracking
+  useEffect(() => {
+    initCampaignTracking();
+  }, []);
 
   // Sync state if query params change
   useEffect(() => {
@@ -86,6 +102,8 @@ export default function PackageDetailClient({ pkg }) {
         ? formData.phone
         : `${formData.countryCode} ${formData.phone}`.trim();
 
+      const campaignData = getCampaignData();
+
       const res = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -94,12 +112,14 @@ export default function PackageDetailClient({ pkg }) {
           packageId: pkg.id,
           packageTitle: pkg.title,
           ...formData,
+          ...campaignData,
           phone: fullPhone,
         }),
       });
 
       const data = await res.json();
       if (res.ok && data.reference) {
+        trackEnquirySubmitted(data.reference, pkg.slug);
         router.push(`/enquiry/received?ref=${data.reference}&pkg=${pkg.slug}`);
       } else if (data.errors) {
         setFormErrors(data.errors);
@@ -267,6 +287,49 @@ export default function PackageDetailClient({ pkg }) {
               </div>
             </div>
 
+            {/* Safari Details (When present, for Kaziranga and combo tours) */}
+            {pkg.safariSpecs && (
+              <div className="bg-[#FFFDF7] p-6 sm:p-8 rounded-2xl border-2 border-[#D9A441]/40 shadow-sm space-y-5">
+                <div className="flex items-center justify-between border-b border-[#DEDCCD] pb-3">
+                  <div>
+                    <span className="badge-gold text-xs">Flagship Wildlife Experience</span>
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#103F36] mt-1">
+                      Kaziranga National Park Safari Experience
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                  <div className="bg-[#F7F3E9] p-4 rounded-xl space-y-1">
+                    <span className="font-bold text-[#103F36] block">Jeep Safaris Included</span>
+                    <p className="text-[#59665E]">{pkg.safariSpecs.jeepSafaris}</p>
+                    <span className="text-[11px] text-[#237A50] font-semibold block">{pkg.safariSpecs.ranges}</span>
+                  </div>
+
+                  <div className="bg-[#F7F3E9] p-4 rounded-xl space-y-1">
+                    <span className="font-bold text-[#103F36] block">Session Timings & Duration</span>
+                    <p className="text-[#59665E]">{pkg.safariSpecs.sessionTimings}</p>
+                  </div>
+
+                  <div className="bg-[#F7F3E9] p-4 rounded-xl space-y-1">
+                    <span className="font-bold text-[#103F36] block">Vehicle Exclusivity & Capacity</span>
+                    <p className="text-[#59665E]">{pkg.safariSpecs.vehicleCapacity}</p>
+                  </div>
+
+                  <div className="bg-[#F7F3E9] p-4 rounded-xl space-y-1">
+                    <span className="font-bold text-[#103F36] block">Naturalist & Driver Policy</span>
+                    <p className="text-[#59665E]">{pkg.safariSpecs.guiding}</p>
+                  </div>
+                </div>
+
+                <div className="bg-[#FFFDF7] p-3.5 rounded-xl border border-[#DEDCCD] text-xs text-[#59665E] space-y-1">
+                  <strong className="text-[#103F36] block">Season & Sighting Policy:</strong>
+                  <p>Operating season: {pkg.safariSpecs.seasonDates}.</p>
+                  <p className="italic">{pkg.safariSpecs.sightingDisclaimer}</p>
+                </div>
+              </div>
+            )}
+
             {/* Stay & Vehicle Options */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="bg-[#FFFDF7] p-6 rounded-2xl border border-[#DEDCCD] shadow-sm space-y-2">
@@ -359,6 +422,233 @@ export default function PackageDetailClient({ pkg }) {
                 </div>
               </div>
             )}
+
+            {/* Deposit & Cancellation Summary */}
+            <div className="bg-[#FFFDF7] p-6 rounded-2xl border border-[#DEDCCD] shadow-sm space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DEDCCD]/60 pb-3">
+                <h3 className="font-serif text-lg sm:text-xl font-bold text-[#103F36] flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-[#237A50]" />
+                  <span>Booking Deposit and Cancellation Summary</span>
+                </h3>
+                <Link
+                  href="/cancellation-policy"
+                  className="text-xs font-semibold text-[#103F36] hover:text-[#D9A441] underline underline-offset-4"
+                >
+                  View full policy
+                </Link>
+              </div>
+              <p className="text-xs sm:text-sm text-[#59665E] leading-relaxed">
+                Reservations are secured with a 30% advance deposit. Cancellations made 30 or more days before tour start receive an 85% refund of the deposit paid (15% administrative processing fee). Cancellations within 15 to 29 days retain the advance deposit towards committed hotel rooms and transport blocks, with no further liability billed to you. Bookings confirmed within 15 days of arrival require full payment. Government permits (ILP/PAP) and reserved forest safari slots are non-refundable.
+              </p>
+            </div>
+
+            {/* INLINE QUICK ENQUIRY FORM (Section 6 requirement) */}
+            <div id="quick-enquiry" className="bg-[#FFFDF7] p-6 sm:p-8 rounded-3xl border-2 border-[#103F36]/20 shadow-md space-y-6">
+              <div>
+                <span className="badge-forest text-xs">Direct Operations Desk</span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#103F36] mt-1">
+                  Request a Quote for {pkg.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#59665E] mt-1">
+                  Share your planned dates and party size. We provide a transparent quote and confirm driver and room allotments within 2 hours.
+                </p>
+              </div>
+
+              <form onSubmit={handleEnquirySubmit} className="space-y-4 text-xs sm:text-sm">
+                {/* Honeypot field (hidden from real users) */}
+                <input
+                  type="text"
+                  name="website_hp"
+                  value={formData.website_hp}
+                  onChange={(e) => setFormData({ ...formData, website_hp: e.target.value })}
+                  style={{ display: "none" }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="inline-date" className="font-bold text-[#59665E] block mb-1">
+                      Travel Date (or Month) *
+                    </label>
+                    <input
+                      id="inline-date"
+                      type="date"
+                      required
+                      value={formData.startDate}
+                      onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
+                      className="w-full bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="inline-adults" className="font-bold text-[#59665E] block mb-1">
+                      Group Size (Adults and Children)
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      <select
+                        id="inline-adults"
+                        value={formData.adults}
+                        onChange={(e) => setFormData({ ...formData, adults: parseInt(e.target.value, 10), travellers: `${e.target.value} Adults` })}
+                        className="w-full bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                      >
+                        <option value="1">1 Adult</option>
+                        <option value="2">2 Adults</option>
+                        <option value="3">3 Adults</option>
+                        <option value="4">4 Adults</option>
+                        <option value="5">5 Adults</option>
+                        <option value="6">6+ Adults</option>
+                      </select>
+                      <select
+                        id="inline-children"
+                        value={formData.childrenCount}
+                        onChange={(e) => setFormData({ ...formData, childrenCount: parseInt(e.target.value, 10) })}
+                        className="w-full bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                      >
+                        <option value="0">0 Children</option>
+                        <option value="1">1 Child</option>
+                        <option value="2">2 Children</option>
+                        <option value="3">3+ Children</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="inline-name" className="font-bold text-[#59665E] block mb-1">
+                      Full Name *
+                    </label>
+                    <input
+                      id="inline-name"
+                      type="text"
+                      required
+                      placeholder="e.g. Ananya Roy"
+                      value={formData.customerName}
+                      onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
+                      className="w-full bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                    />
+                    {formErrors.name && (
+                      <p className="text-xs text-red-600 mt-1">{formErrors.name}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="inline-country" className="font-bold text-[#59665E] block mb-1">
+                      Country of Residence
+                    </label>
+                    <input
+                      id="inline-country"
+                      type="text"
+                      placeholder="e.g. India, United Kingdom, USA"
+                      value={formData.countryOfResidence}
+                      onChange={(e) => setFormData({ ...formData, countryOfResidence: e.target.value })}
+                      className="w-full bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="inline-phone" className="font-bold text-[#59665E] block mb-1">
+                      WhatsApp / Phone Number *
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={formData.countryCode}
+                        onChange={(e) => setFormData({ ...formData, countryCode: e.target.value })}
+                        className="w-20 bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] text-center focus:ring-2 focus:ring-[#103F36] focus:outline-none font-medium"
+                      />
+                      <input
+                        id="inline-phone"
+                        type="tel"
+                        required
+                        placeholder="e.g. 9876543210"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="flex-1 bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                      />
+                    </div>
+                    {formErrors.phone && (
+                      <p className="text-xs text-red-600 mt-1">{formErrors.phone}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="inline-email" className="font-bold text-[#59665E] block mb-1">
+                      Email Address (Optional)
+                    </label>
+                    <input
+                      id="inline-email"
+                      type="email"
+                      placeholder="e.g. yourname@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="inline-contact-pref" className="font-bold text-[#59665E] block mb-1">
+                      Preferred Way to Reach You
+                    </label>
+                    <select
+                      id="inline-contact-pref"
+                      value={formData.preferredContact}
+                      onChange={(e) => setFormData({ ...formData, preferredContact: e.target.value })}
+                      className="w-full bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                    >
+                      <option value="whatsapp">WhatsApp Message</option>
+                      <option value="phone">Direct Phone Call</option>
+                      <option value="email">Email</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="inline-budget" className="font-bold text-[#59665E] block mb-1">
+                      Budget or Hotel Category (Optional)
+                    </label>
+                    <input
+                      id="inline-budget"
+                      type="text"
+                      placeholder="e.g. Standard 3-Star, Luxury Eco-Lodge"
+                      value={formData.budget}
+                      onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                      className="w-full bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="inline-notes" className="font-bold text-[#59665E] block mb-1">
+                    Special Requests or Pickup Preferences (Optional)
+                  </label>
+                  <textarea
+                    id="inline-notes"
+                    rows={2}
+                    placeholder="e.g. Arriving at Guwahati Airport at 11 AM, traveling with senior parents, interested in wildlife photography"
+                    value={formData.notes}
+                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                    className="w-full bg-[#F7F3E9] p-3 rounded-xl border border-[#DEDCCD] text-[#172C26] focus:ring-2 focus:ring-[#103F36] focus:outline-none resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn-gold w-full text-center justify-center font-bold text-sm sm:text-base py-3.5 shadow-md hover:shadow-lg transition-all"
+                >
+                  {isSubmitting ? "Submitting Request..." : "Request Detailed Quote and Confirm Availability"}
+                </button>
+
+                <p className="text-[11px] text-[#59665E] text-center pt-1">
+                  Guaranteed response within 2 hours · Direct Guwahati operations desk · Never any spam
+                </p>
+              </form>
+            </div>
           </div>
 
           {/* Right Column: Desktop Sticky Summary & Booking Card */}
@@ -451,6 +741,7 @@ export default function PackageDetailClient({ pkg }) {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackContactIntent("whatsapp")}
                   className="text-xs text-[#59665E] hover:text-[#D9A441] inline-flex items-center gap-1.5 font-medium transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 text-[#237A50]" />
@@ -463,7 +754,7 @@ export default function PackageDetailClient({ pkg }) {
       </section>
 
       {/* MOBILE PERSISTENT BOTTOM ACTION BAR */}
-      <div className="lg:hidden fixed bottom-0 inset-x-0 bg-[#FFFDF7] border-t border-[#DEDCCD] p-3 z-40 shadow-2xl flex items-center justify-between gap-3">
+      <div className="lg:hidden fixed bottom-0 inset-x-0 bg-[#FFFDF7] border-t border-[#DEDCCD] p-3 z-40 shadow-2xl flex items-center justify-between gap-2">
         <div>
           <span className="text-[10px] text-[#59665E] uppercase block font-semibold">
             {pkg.priceMode === "starting_from" ? "Starting from" : "Package"}
@@ -477,20 +768,25 @@ export default function PackageDetailClient({ pkg }) {
           )}
         </div>
 
-        <div className="flex items-center gap-2">
-          <Link
-            href={`/custom-trip?package=${pkg.slug}`}
-            className="btn-outline-forest !py-2 !px-3 !text-xs !min-h-[38px]"
+        <div className="flex items-center gap-1.5">
+          <a
+            href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
+              `Hi Divine View Tours, I am interested in booking the ${pkg.title}.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackContactIntent("whatsapp")}
+            className="p-2 rounded-lg bg-[#E9F0EA] text-[#237A50] hover:bg-[#237A50] hover:text-white transition-colors"
+            aria-label="Chat on WhatsApp"
           >
-            Customise
-          </Link>
-          <button
-            type="button"
-            onClick={() => setIsModalOpen(true)}
-            className="btn-gold !py-2 !px-4 !text-xs !min-h-[38px]"
+            <MessageCircle className="w-4 h-4" />
+          </a>
+          <a
+            href="#quick-enquiry"
+            className="btn-gold !py-2 !px-3 !text-xs !min-h-[38px]"
           >
-            Check Availability
-          </button>
+            Get Quote
+          </a>
         </div>
       </div>
 

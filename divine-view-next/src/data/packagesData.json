@@ -25,7 +25,7 @@
     "priceCurrency": "INR",
     "priceBasis": "per person (twin-sharing basis, min 4 travellers)",
     "highlights": [
-      "Walk beneath India's highest plunge waterfall — Nohkalikai",
+      "Walk beneath India's highest plunge waterfall: Nohkalikai",
       "Glide on glass-like emerald waters at Umngot River, Dawki",
       "Trek to the bio-engineered Double Decker Living Root Bridge in Nongriat",
       "Stroll through Mawlynnong, celebrated as Asia's cleanest village",
@@ -210,7 +210,7 @@
   {
     "id": "pkg-kaziranga-4d",
     "slug": "kaziranga-wildlife-tour-from-guwahati",
-    "title": "Assam Wildlife: Kaziranga Rhino & Brahmaputra",
+    "title": "Assam Wildlife: Kaziranga Rhino and Brahmaputra",
     "destination": "assam",
     "destinationLabel": "Assam",
     "durationDays": 4,
@@ -218,23 +218,33 @@
     "pickup": "Guwahati Airport / Railway Station",
     "dropoff": "Guwahati Airport / Railway Station",
     "travelStyles": ["Wildlife", "Safari", "River", "Heritage"],
-    "summary": "Spot the rare Great Indian One-horned Rhinoceros in the floodplains of Kaziranga, cruise the sacred Brahmaputra River, and visit sacred Kamakhya Temple.",
+    "summary": "Spot the rare Great Indian One-horned Rhinoceros across the floodplains of Kaziranga with two exclusive 4x4 jeep safaris, cruise the sunset Brahmaputra River, and visit Kamakhya Temple.",
     "featured": true,
     "badge": "UNESCO Heritage",
-    "heroImage": "/images/homescreen.jpg",
+    "heroImage": "/images/Kaziranga/photo-1589882485484-c073e3742e60.jpg",
     "gallery": [
-      "/images/homescreen.jpg",
-      "/images/Guwahati/Temples/Kamakhya.jpg",
-      "/images/Guwahati/Temples/Umananda.jpg",
-      "/images/Guwahati/Temples/Balaji Temple.jpg"
+      "/images/Kaziranga/photo-1589882485484-c073e3742e60.jpg",
+      "/images/Kaziranga/photo-1605092676920-8ac5ae40c7c8.jpg",
+      "/images/Kaziranga/premium_photo-1661828159832-19d8340f8e09.jpg",
+      "/images/Guwahati/Temples/Kamakhya.jpg"
     ],
     "priceMode": "starting_from",
     "priceAmount": 16500,
     "priceCurrency": "INR",
-    "priceBasis": "per person (twin-sharing, min 4 travellers)",
+    "priceBasis": "per person (twin-sharing, min 4 travellers, taxes included)",
+    "safariSpecs": {
+      "jeepSafaris": "2 Exclusive 4x4 Jeep Safaris included",
+      "ranges": "Central (Kohora) and Western (Bagori) ranges",
+      "sessionTimings": "Morning: 07:00 AM - 09:30 AM | Afternoon: 01:30 PM - 04:00 PM (~2.5 hours per safari)",
+      "vehicleCapacity": "Exclusive private 4x4 Gypsy (up to 5 to 6 passengers per vehicle)",
+      "guiding": "Highway transport driver is separate from the Assam Forest Department licensed wildlife guide inside the park. Dedicated English-speaking naturalists available on request.",
+      "seasonDates": "15 October to 15 May (monsoon closure June to late September)",
+      "sightingDisclaimer": "Sightings of greater one-horned rhinos, wild water buffaloes, and birds are frequent in open grassland; specific sightings of Royal Bengal tigers or elusive species cannot be guaranteed."
+    },
     "highlights": [
-      "Private 4x4 Jeep Safari across Kaziranga Central and Western Ranges",
+      "Two private 4x4 Jeep Safaris across Kaziranga Central and Western Ranges",
       "Witness one-horned rhinos, wild water buffaloes, and migratory water birds",
+      "Separate highway driver from certified local forest guide inside the reserve",
       "Evening traditional Bihu cultural dance performance at orchid park",
       "Sunset river cruise on the mighty Brahmaputra River in Guwahati",
       "Darshan at the venerable Kamakhya Devi Shakti Peetha"
@@ -242,28 +252,28 @@
     "itinerary": [
       {
         "day": 1,
-        "title": "Guwahati Arrival & Sunset Brahmaputra Cruise",
+        "title": "Guwahati Arrival and Sunset Brahmaputra Cruise",
         "drivingTime": "City transfers (30 km)",
         "description": "Arrive in Guwahati. Check into hotel and relax. In the late afternoon, embark on a serene river cruise on the Brahmaputra with folk music and river sunset views.",
-        "stay": "Guwahati city hotel"
+        "stay": "Guwahati city hotel (e.g. Vivanta or Kiranshree Grand)"
       },
       {
         "day": 2,
         "title": "Guwahati to Kaziranga National Park",
         "drivingTime": "4.5 hours (220 km)",
         "description": "Morning drive through the fertile Brahmaputra valley lined with lush Assam tea estates. Check into your wildlife resort. Afternoon visit to Kaziranga National Orchid and Biodiversity Park.",
-        "stay": "Kaziranga jungle resort"
+        "stay": "Kaziranga jungle resort (e.g. Borgos or Diphlu River Lodge buffer)"
       },
       {
         "day": 3,
-        "title": "Kaziranga Jeep Safaris & Tea Estate Walk",
-        "drivingTime": "Park safaris (Kohora & Bagori zones)",
+        "title": "Kaziranga Jeep Safaris (Morning and Afternoon)",
+        "drivingTime": "Park safaris: Morning 07:00-09:30 AM, Afternoon 01:30-04:00 PM",
         "description": "Morning open 4x4 Jeep safari into Bagori (Western) range with high rhino density. Afternoon safari into Kohora (Central) range for wetland birding and elephant herds.",
         "stay": "Kaziranga jungle resort"
       },
       {
         "day": 4,
-        "title": "Kaziranga to Kamakhya Temple & Guwahati Departure",
+        "title": "Kaziranga to Kamakhya Temple and Guwahati Departure",
         "drivingTime": "4.5 to 5 hours (230 km)",
         "description": "Return drive to Guwahati. Visit Kamakhya Temple atop Nilachal Hill before timely transfer to Guwahati airport for your onward flight.",
         "stay": "Departure"
@@ -272,23 +282,30 @@
     "stayOptions": "Handpicked eco-lodges and comfortable wildlife resorts situated right along the Kaziranga forest buffer zone.",
     "vehicleOptions": ["Swift Dzire / Etios", "Maruti Ertiga", "Toyota Innova Crysta"],
     "inclusions": [
-      "Guwahati to Kaziranga and return private transport",
+      "Guwahati to Kaziranga and return private highway transport with dedicated mountain driver",
       "3 nights accommodation with daily breakfast",
-      "2 open 4x4 Jeep safaris into Kaziranga National Park with forest guide",
-      "Forest entry permits, camera toll, and vehicle safari fees",
-      "Sunset Brahmaputra river cruise ticket"
+      "2 exclusive open 4x4 Jeep safaris into Kaziranga National Park (Central and Western ranges)",
+      "Forest entry permits, vehicle toll, and certified forest department guide fees for Indian nationals",
+      "Sunset Brahmaputra river cruise ticket in Guwahati",
+      "All driver allowances, highway tolls, and fuel expenses"
     ],
     "exclusions": [
-      "Elephant safari booking (optional add-on, subject to forest department lottery)",
-      "VIP Kamakhya special queue pass (purchased directly at temple)",
+      "Foreign national park entry surcharge (charged at forest department tariff, approx INR 1,500 to 2,000 per safari slot)",
+      "Elephant safari booking (optional add-on, subject to forest department lottery slot quota)",
+      "VIP Kamakhya special queue pass (purchased directly at temple counter)",
+      "Personal camera/video fees charged by forest department",
       "Meals not specified in inclusions",
       "Gratuities for safari driver and forest naturalist"
     ],
-    "practicalNotes": "Kaziranga safari season operates strictly from October 15th to May 15th. Carry binoculars and earth-toned clothing (khaki, olive, brown) for game drives.",
+    "practicalNotes": "Kaziranga safari season operates strictly from October 15th to May 15th. Carry binoculars and earth-toned clothing (khaki, olive, brown) for game drives. Foreign nationals must carry passport copies for forest counter verification.",
     "faqs": [
       {
         "q": "When is Kaziranga National Park open for safaris?",
         "a": "The park operates from mid-October to mid-May. Monsoon inundations close the park between June and late September."
+      },
+      {
+        "q": "What is the difference between the transfer driver and safari guide?",
+        "a": "Your dedicated AC vehicle and highway driver handle all inter-city transfers between Guwahati and Kaziranga. Inside the national park, forest department regulations require an open 4x4 Gypsy driven by a registered park driver accompanied by a certified forest wildlife guide."
       },
       {
         "q": "Can we arrange an elephant safari?",
@@ -395,7 +412,7 @@
   {
     "id": "pkg-combo-8d",
     "slug": "meghalaya-kaziranga-combo-tour",
-    "title": "Meghalaya & Kaziranga: Highlands & Safari",
+    "title": "Meghalaya and Kaziranga: Highlands and Wildlife Safari",
     "destination": "meghalaya",
     "destinationLabel": "Meghalaya & Assam",
     "durationDays": 8,
@@ -403,24 +420,33 @@
     "pickup": "Guwahati Airport",
     "dropoff": "Guwahati Airport",
     "travelStyles": ["Scenic", "Wildlife", "Culture", "Family"],
-    "summary": "The ultimate classic Northeast combo — combining the clouds, waterfalls, and living root bridges of Meghalaya with thrilling Kaziranga rhino safaris.",
-    "featured": false,
-    "badge": "Popular Combo",
+    "summary": "The classic Northeast journey: combining the clouds, waterfalls, and living root bridges of Meghalaya with thrilling Kaziranga rhino safaris.",
+    "featured": true,
+    "badge": "Flagship Combo",
     "heroImage": "/images/Meghalaya/Dawki/Dawki River.jpg",
     "gallery": [
       "/images/Meghalaya/Dawki/Dawki River.jpg",
-      "/images/Kaziranga/kaziranga.jpg",
+      "/images/Kaziranga/photo-1589882485484-c073e3742e60.jpg",
       "/images/Meghalaya/Cherrapunjee/Nohkalikai Falls/Nohkalikai Falls1.jpg",
       "/images/Guwahati/Temples/Kamakhya.jpg"
     ],
     "priceMode": "starting_from",
     "priceAmount": 29500,
     "priceCurrency": "INR",
-    "priceBasis": "per person (twin-sharing, min 4 travellers)",
+    "priceBasis": "per person (twin-sharing, min 4 travellers, taxes included)",
+    "safariSpecs": {
+      "jeepSafaris": "2 Exclusive 4x4 Jeep Safaris included in Kaziranga",
+      "ranges": "Central (Kohora) and Western (Bagori) ranges",
+      "sessionTimings": "Morning: 07:00 AM - 09:30 AM | Afternoon: 01:30 PM - 04:00 PM",
+      "vehicleCapacity": "Exclusive private 4x4 Gypsy per group",
+      "guiding": "Licensed forest wildlife guide accompanies each safari. Dedicated highway driver handles Shillong and Guwahati road transit.",
+      "seasonDates": "Late October to early May (best water clarity at Dawki and open safari tracks at Kaziranga)",
+      "sightingDisclaimer": "Wildlife sightings are frequent in wild grasslands; sightings of specific individual species cannot be guaranteed."
+    },
     "highlights": [
       "Experience both the highland waterfalls of Meghalaya and wildlife plains of Assam",
       "Boat ride on crystal Umngot River Dawki and visit Nohkalikai Falls Sohra",
-      "Two private 4x4 Jeep safaris in Kaziranga National Park",
+      "Two private 4x4 Jeep safaris in Kaziranga National Park with forest guide",
       "Brahmaputra sunset boat cruise and Kamakhya Temple darshan",
       "Stay in boutique tea garden lodges and cliffside Meghalaya retreats"
     ],

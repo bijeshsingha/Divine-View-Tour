@@ -2,8 +2,11 @@ import Link from "next/link";
 import { ShieldCheck, CheckCircle2, AlertTriangle, FileText } from "lucide-react";
 
 export const metadata = {
-  title: "Booking Terms & Conditions — Divine View Tours",
+  title: "Booking Terms and Conditions",
   description: "Terms of booking, quotations, payment schedule, and operational policies for Northeast India tours.",
+  alternates: {
+    canonical: "https://www.divineviewtours.com/booking-terms",
+  },
 };
 
 export default function BookingTermsPage() {

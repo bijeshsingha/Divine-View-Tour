@@ -3,9 +3,12 @@ import { ArrowRight, MapPin, Calendar, Clock, Shield } from "lucide-react";
 import destinationsData from "@/data/destinationsData.json";
 
 export const metadata = {
-  title: "Northeast India Destinations | Assam, Meghalaya, Arunachal & Dzukou",
+  title: "Northeast India Destinations: Assam, Meghalaya, Arunachal and Dzukou",
   description:
     "Discover the four premier travel regions of Northeast India. Explore Meghalaya waterfalls, Arunachal mountain monasteries, Kaziranga wildlife, and Dzukou Valley trekking.",
+  alternates: {
+    canonical: "https://www.divineviewtours.com/destinations",
+  },
 };
 
 export default function DestinationsIndexPage() {

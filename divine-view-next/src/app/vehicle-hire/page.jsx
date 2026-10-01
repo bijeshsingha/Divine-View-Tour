@@ -2,9 +2,12 @@ import { Suspense } from "react";
 import VehicleHireClient from "@/components/VehicleHireClient";
 
 export const metadata = {
-  title: "Guwahati Private Vehicle Hire & Daily Tariffs: Sedan, Ertiga, Innova Crysta | Divine View Tours",
+  title: "Guwahati Private Vehicle Hire and Daily Tariffs: Sedan, Ertiga, Innova Crysta",
   description:
     "Official fixed car rental tariffs from Guwahati for airport transfers, Shillong same-day returns, Meghalaya, Kaziranga, and Tawang multi-day circuits. 100% commercial tourist fleet with verified mountain drivers.",
+  alternates: {
+    canonical: "https://www.divineviewtours.com/vehicle-hire",
+  },
   keywords: [
     "Guwahati private vehicle hire",
     "car rental Guwahati to Shillong",

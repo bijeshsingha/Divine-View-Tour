@@ -7,7 +7,7 @@ import { appendBookingToGoogleSheet, fetchBookingsFromGoogleSheet } from "@/lib/
 import { verifyAdminRequest } from "@/lib/adminAuth";
 
 // Allowlist of supported enquiry types
-const ALLOWED_TYPES = ["package", "custom_trip", "vehicle_hire", "contact_message"];
+const ALLOWED_TYPES = ["package", "custom_trip", "vehicle_hire", "contact_message", "international"];
 const ALLOWED_CONTACT_METHODS = ["whatsapp", "phone", "email"];
 
 // Helper to sanitize string inputs (strips dangerous HTML/script tags and control characters)
@@ -76,24 +76,40 @@ async function sendBookingNotificationEmail(enquiry) {
             <td style="padding: 6px 0; color: #59665E;"><strong>Preferred Contact:</strong></td>
             <td style="padding: 6px 0; text-transform: capitalize;">${enquiry.preferredContact}</td>
           </tr>
+          ${enquiry.countryOfResidence ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Country:</strong></td><td style="padding: 6px 0;">${enquiry.countryOfResidence}</td></tr>` : ""}
         </table>
+
+        ${
+          enquiry.utm_source || enquiry.landing_page
+            ? `
+          <h3 style="color: #103F36; border-bottom: 1px solid #DEDCCD; padding-bottom: 6px;">Campaign Attribution</h3>
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+            ${enquiry.utm_source ? `<tr><td style="padding: 4px 0; color: #59665E; width: 140px;"><strong>Source / Medium:</strong></td><td style="padding: 4px 0; font-weight: bold; color: #103F36;">${enquiry.utm_source} / ${enquiry.utm_medium || "none"}</td></tr>` : ""}
+            ${enquiry.utm_campaign ? `<tr><td style="padding: 4px 0; color: #59665E; width: 140px;"><strong>Campaign:</strong></td><td style="padding: 4px 0;">${enquiry.utm_campaign}</td></tr>` : ""}
+            ${enquiry.landing_page ? `<tr><td style="padding: 4px 0; color: #59665E; width: 140px;"><strong>Landing Page:</strong></td><td style="padding: 4px 0;">${enquiry.landing_page}</td></tr>` : ""}
+            ${enquiry.gclid ? `<tr><td style="padding: 4px 0; color: #59665E; width: 140px;"><strong>Google Click ID:</strong></td><td style="padding: 4px 0; font-family: monospace;">${enquiry.gclid}</td></tr>` : ""}
+          </table>
+        `
+            : ""
+        }
 
         <h3 style="color: #103F36; border-bottom: 1px solid #DEDCCD; padding-bottom: 6px;">Trip / Itinerary Details</h3>
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
           ${enquiry.packageTitle ? `<tr><td style="padding: 6px 0; color: #59665E; width: 140px;"><strong>Package:</strong></td><td style="padding: 6px 0; font-weight: bold; color: #103F36;">${enquiry.packageTitle}</td></tr>` : ""}
+          ${enquiry.tier ? `<tr><td style="padding: 6px 0; color: #59665E; width: 140px;"><strong>Tier Selected:</strong></td><td style="padding: 6px 0; font-weight: bold; color: #D9A441; background-color: #103F36; padding: 4px 8px; border-radius: 4px; display: inline-block;">${enquiry.tier}</td></tr>` : ""}
           ${enquiry.routeName ? `<tr><td style="padding: 6px 0; color: #59665E; width: 140px;"><strong>Vehicle Route:</strong></td><td style="padding: 6px 0; font-weight: bold; color: #103F36;">${enquiry.routeName}</td></tr>` : ""}
           ${enquiry.vehicleType ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Vehicle Selected:</strong></td><td style="padding: 6px 0; font-weight: bold;">${enquiry.vehicleType}</td></tr>` : ""}
           ${enquiry.startDate ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Start Date:</strong></td><td style="padding: 6px 0; font-weight: bold;">${enquiry.startDate}</td></tr>` : ""}
-          ${enquiry.travelMonth ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Travel Month:</strong></td><td style="padding: 6px 0; font-weight: bold;">${enquiry.travelMonth}</td></tr>` : ""}
+          ${enquiry.travelMonth || enquiry.flexibleMonth ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Travel Month:</strong></td><td style="padding: 6px 0; font-weight: bold;">${enquiry.travelMonth || enquiry.flexibleMonth}</td></tr>` : ""}
           ${enquiry.tripDuration ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Trip Duration:</strong></td><td style="padding: 6px 0;">${enquiry.tripDuration}</td></tr>` : ""}
           ${enquiry.days ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Total Days:</strong></td><td style="padding: 6px 0;">${enquiry.days} Days</td></tr>` : ""}
           ${enquiry.travellers ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Travellers:</strong></td><td style="padding: 6px 0;">${enquiry.travellers}</td></tr>` : ""}
-          ${enquiry.adults ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Group:</strong></td><td style="padding: 6px 0;">${enquiry.adults} Adults, ${enquiry.childrenCount || 0} Children, ${enquiry.seniorCount || 0} Seniors</td></tr>` : ""}
+          ${enquiry.adults ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Group:</strong></td><td style="padding: 6px 0;">${enquiry.adults} Adults${enquiry.childrenCount ? `, ${enquiry.childrenCount} Children` : ""}${enquiry.seniorCount ? `, ${enquiry.seniorCount} Seniors` : ""}</td></tr>` : ""}
           ${enquiry.destinations?.length ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Destinations:</strong></td><td style="padding: 6px 0;">${enquiry.destinations.join(" · ")}</td></tr>` : ""}
           ${enquiry.startingCity ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Starting City:</strong></td><td style="padding: 6px 0;">${enquiry.startingCity}</td></tr>` : ""}
           ${enquiry.pickup ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Pickup Location:</strong></td><td style="padding: 6px 0;">${enquiry.pickup}</td></tr>` : ""}
           ${enquiry.stayPreference ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Stay Category:</strong></td><td style="padding: 6px 0; text-transform: capitalize;">${enquiry.stayPreference}</td></tr>` : ""}
-          ${enquiry.budgetRange ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Budget Range:</strong></td><td style="padding: 6px 0;">${enquiry.budgetRange}</td></tr>` : ""}
+          ${enquiry.budget || enquiry.budgetRange ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Budget Range:</strong></td><td style="padding: 6px 0;">${enquiry.budget || enquiry.budgetRange}</td></tr>` : ""}
           ${enquiry.interests?.length ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Interests:</strong></td><td style="padding: 6px 0;">${enquiry.interests.join(", ")}</td></tr>` : ""}
           ${enquiry.subject ? `<tr><td style="padding: 6px 0; color: #59665E;"><strong>Subject:</strong></td><td style="padding: 6px 0;">${enquiry.subject}</td></tr>` : ""}
         </table>
@@ -253,6 +269,15 @@ export async function POST(request) {
       );
     }
 
+    // 1b. Discreet Spam Honeypot Protection
+    if (body.website_hp && String(body.website_hp).trim() !== "") {
+      return NextResponse.json({
+        success: true,
+        reference: "DVT-2026-0000",
+        message: "Enquiry logged and queued successfully",
+      });
+    }
+
     // 2. Validate enquiry type
     const enquiryType = body.type;
     if (!enquiryType || !ALLOWED_TYPES.includes(enquiryType)) {
@@ -295,20 +320,49 @@ export async function POST(request) {
       );
     }
 
+    // Extract Campaign Attribution and Country
+    const utm_source = sanitizeString(body.utm_source, 100);
+    const utm_medium = sanitizeString(body.utm_medium, 100);
+    const utm_campaign = sanitizeString(body.utm_campaign, 100);
+    const utm_term = sanitizeString(body.utm_term, 100);
+    const utm_content = sanitizeString(body.utm_content, 100);
+    const gclid = sanitizeString(body.gclid, 150);
+    const landing_page = sanitizeString(body.landing_page, 200);
+    const countryOfResidence = sanitizeString(body.countryOfResidence, 80);
+
     // 7. Sanitize and bound optional payload fields based on enquiry type
     const sanitizedData = {
       customerName: name,
       phone,
       email: email || undefined,
       preferredContact,
+      countryOfResidence: countryOfResidence || "India",
+      utm_source: utm_source || undefined,
+      utm_medium: utm_medium || undefined,
+      utm_campaign: utm_campaign || undefined,
+      utm_term: utm_term || undefined,
+      utm_content: utm_content || undefined,
+      gclid: gclid || undefined,
+      landing_page: landing_page || undefined,
+      stage: "Enquiry received",
+      isTest:
+        Boolean(body.isTest) ||
+        /\[test|test\s*lead/i.test(name) ||
+        /test/i.test(utm_campaign || "") ||
+        /@example\.com/i.test(email || ""),
     };
 
-    if (enquiryType === "package") {
+    if (enquiryType === "package" || enquiryType === "international") {
       sanitizedData.packageId = sanitizeString(body.packageId, 100);
       sanitizedData.packageTitle = sanitizeString(body.packageTitle, 150);
+      sanitizedData.tier = sanitizeString(body.tier || body.serviceTier || body.accommodationTier, 50);
       sanitizedData.startDate = sanitizeString(body.startDate, 30);
-      sanitizedData.travellers = sanitizeString(body.travellers, 20);
+      sanitizedData.flexibleMonth = sanitizeString(body.flexibleMonth, 50);
+      sanitizedData.travellers = sanitizeString(body.travellers, 30);
+      sanitizedData.adults = typeof body.adults === "number" ? Math.min(Math.max(1, body.adults), 50) : (parseInt(body.adults, 10) || 2);
+      sanitizedData.childrenCount = typeof body.childrenCount === "number" ? Math.min(Math.max(0, body.childrenCount), 30) : (parseInt(body.childrenCount, 10) || 0);
       sanitizedData.pickup = sanitizeString(body.pickup, 100);
+      sanitizedData.budget = sanitizeString(body.budget, 100);
       sanitizedData.notes = sanitizeString(body.notes, 1000);
     } else if (enquiryType === "custom_trip") {
       sanitizedData.destinations = Array.isArray(body.destinations)
@@ -486,7 +540,25 @@ export async function GET(request) {
           { status: 404 }
         );
       }
-      return NextResponse.json({ success: true, enquiry: found });
+
+      // Merge local details (tier, countryOfResidence, utms, raw phone) if available
+      const localMatch = localList.find(
+        (e) => (e.reference && e.reference.toLowerCase() === cleanRef) || (e.id && e.id.toLowerCase() === cleanRef)
+      );
+      const merged = localMatch
+        ? {
+            ...localMatch,
+            ...found,
+            phone: localMatch.phone && !localMatch.phone.includes("ERROR") ? localMatch.phone : found.phone,
+            tier: localMatch.tier || found.tier,
+            countryOfResidence: localMatch.countryOfResidence || found.countryOfResidence,
+            utm_source: localMatch.utm_source || found.utm_source,
+            utm_campaign: localMatch.utm_campaign || found.utm_campaign,
+            utm_medium: localMatch.utm_medium || found.utm_medium,
+          }
+        : found;
+
+      return NextResponse.json({ success: true, enquiry: merged });
     }
 
     return NextResponse.json({

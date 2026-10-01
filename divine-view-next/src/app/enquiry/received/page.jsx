@@ -2,8 +2,12 @@ import { Suspense } from "react";
 import EnquiryReceiptClient from "@/components/EnquiryReceiptClient";
 
 export const metadata = {
-  title: "Enquiry Received — Divine View Tours",
+  title: "Enquiry Received",
   description: "Your trip enquiry reference code and confirmation details.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function EnquiryReceivedPage() {

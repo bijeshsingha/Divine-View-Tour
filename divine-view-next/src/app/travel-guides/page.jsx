@@ -3,9 +3,12 @@ import { ArrowRight, Clock, Calendar, User, BookOpen } from "lucide-react";
 import travelGuidesData from "@/data/travelGuidesData.json";
 
 export const metadata = {
-  title: "Northeast India Travel Guides — Seasonal Planning, Permits & Routes",
+  title: "Northeast India Travel Guides: Seasonal Planning, Permits and Routes",
   description:
     "Firsthand travel advice from local Guwahati specialists. Learn about Meghalaya monsoon timing, Sela Pass road conditions, and Dzukou Valley trekking tips.",
+  alternates: {
+    canonical: "https://www.divineviewtours.com/travel-guides",
+  },
 };
 
 export default function TravelGuidesIndexPage() {

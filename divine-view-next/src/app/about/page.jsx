@@ -3,9 +3,12 @@ import { Compass, ShieldCheck, MapPin, Users, HeartHandshake, ArrowRight } from 
 import siteConfig from "@/data/siteConfig.json";
 
 export const metadata = {
-  title: "About Us — Divine View Tours Guwahati",
+  title: "About Our Guwahati Operations and Mountain Fleet",
   description:
     "Learn about Divine View Tours, an experienced local travel company headquartered in Guwahati, Assam. Handcrafted private overland journeys and trusted mountain fleet.",
+  alternates: {
+    canonical: "https://www.divineviewtours.com/about",
+  },
 };
 
 export default function AboutPage() {
@@ -49,7 +52,7 @@ export default function AboutPage() {
             <div className="absolute bottom-4 left-4 right-4">
               <span className="caption-bar text-xs">
                 <MapPin className="w-3.5 h-3.5 text-[#D9A441]" />
-                Elephant Falls, Shillong — 3 hours from our Guwahati office
+                Elephant Falls, Shillong: 3 hours from our Guwahati office
               </span>
             </div>
           </div>

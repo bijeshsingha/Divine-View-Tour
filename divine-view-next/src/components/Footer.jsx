@@ -159,6 +159,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/international-travellers" className="hover:text-[#D9A441] transition-colors">
+                  International Travellers Guide
+                </Link>
+              </li>
+              <li>
                 <Link href="/travel-guides" className="hover:text-[#D9A441] transition-colors">
                   Travel Guides & Articles
                 </Link>

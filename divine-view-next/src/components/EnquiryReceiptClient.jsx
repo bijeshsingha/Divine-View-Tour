@@ -209,6 +209,28 @@ export default function EnquiryReceiptClient() {
               </span>
             </div>
 
+            {enquiry.tier && (
+              <div className="space-y-1">
+                <span className="text-[#59665E] block text-[11px] uppercase font-semibold">
+                  Service / Stay Tier
+                </span>
+                <span className="text-[#103F36] font-bold block">
+                  {enquiry.tier}
+                </span>
+              </div>
+            )}
+
+            {enquiry.countryOfResidence && (
+              <div className="space-y-1">
+                <span className="text-[#59665E] block text-[11px] uppercase font-semibold">
+                  Country of Residence
+                </span>
+                <span className="text-[#172C26] block font-medium">
+                  {enquiry.countryOfResidence}
+                </span>
+              </div>
+            )}
+
             {enquiry.pickup && (
               <div className="space-y-1 sm:col-span-2">
                 <span className="text-[#59665E] block text-[11px] uppercase font-semibold">

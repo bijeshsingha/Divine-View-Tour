@@ -159,6 +159,9 @@ export default function Header() {
           <Link href="/custom-trip" className="hover:text-[#D9A441] transition-colors py-2">
             Custom Trips
           </Link>
+          <Link href="/international-travellers" className="hover:text-[#D9A441] transition-colors py-2">
+            International
+          </Link>
           <Link href="/travel-guides" className="hover:text-[#D9A441] transition-colors py-2">
             Travel Guides
           </Link>
@@ -322,6 +325,16 @@ export default function Header() {
               }`}
             >
               Custom Trips
+            </Link>
+
+            <Link
+              href="/international-travellers"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`flex items-center min-h-[44px] py-2 px-3 rounded-xl border-b border-[#103F36]/60 transition-colors ${
+                pathname === "/international-travellers" ? "text-[#D9A441] font-semibold bg-[#103F36]/40" : "hover:text-[#D9A441] hover:bg-[#103F36]/20"
+              }`}
+            >
+              International Travellers
             </Link>
 
             <Link

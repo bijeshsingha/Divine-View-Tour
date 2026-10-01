@@ -20,7 +20,9 @@ import packagesData from "@/data/packagesData.json";
 import siteConfig from "@/data/siteConfig.json";
 
 export const metadata = {
-  title: "Divine View Tours | Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
+  title: {
+    absolute: "Divine View Tours: Thoughtfully Planned Northeast India Journeys & Private Vehicle Hire",
+  },
   description:
     "Curated private road tours and commercial tourist car hire from Guwahati. Explore Meghalaya, Assam, Arunachal Pradesh, and Dzukou Valley with verified mountain drivers and transparent tariffs.",
   alternates: {
@@ -47,9 +49,9 @@ export const metadata = {
 
 export default function HomePage() {
   const featuredPackages = [
-    packagesData.find((p) => p.slug.includes("meghalaya")),
-    packagesData.find((p) => p.slug.includes("tawang")),
-    packagesData.find((p) => p.slug.includes("dzukou"))
+    packagesData.find((p) => p.slug === "meghalaya-backpacking" || p.slug.includes("meghalaya-backpacking")) || packagesData[0],
+    packagesData.find((p) => p.slug === "kaziranga-wildlife-tour-from-guwahati"),
+    packagesData.find((p) => p.slug === "meghalaya-kaziranga-combo-tour"),
   ].filter(Boolean);
 
   const orderedDestinations = [
@@ -113,7 +115,7 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0">
           <img
             src="/images/dawki-hero.jpg"
-            alt="Umngot River at Dawki, Meghalaya — crystal turquoise waters and traditional wooden boat"
+            alt="Umngot River at Dawki, Meghalaya, crystal turquoise waters and traditional wooden boat"
             className="w-full h-full object-cover object-[center_35%] lg:object-center filter brightness-[0.92] scale-100 transition-transform duration-1000"
           />
           {/* Subtle directional vignette: protects WCAG AAA text contrast on left while keeping turquoise water & boat vibrant on right */}
@@ -128,40 +130,51 @@ export default function HomePage() {
             {/* Left Column: Editorial Headline & Actions */}
             <div className="max-w-2xl xl:max-w-3xl text-[#F7F3E9] space-y-5 sm:space-y-6">
               {/* Dignified Editorial Serif Heading */}
-              <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[4.8rem] xl:text-[5.4rem] font-bold tracking-tight text-white leading-[1.04] drop-shadow-md">
-                Find your own<br />Northeast.
+              <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[4.6rem] xl:text-[5.2rem] font-bold tracking-tight text-white leading-[1.04] drop-shadow-md">
+                Private Northeast<br />holidays from Guwahati.
               </h1>
 
               {/* Spaced Uppercase Tagline directly beneath heading */}
               <div className="text-[11px] sm:text-xs md:text-sm tracking-[0.22em] sm:tracking-[0.25em] font-semibold text-[#E5C278] uppercase flex flex-wrap items-center gap-1.5 sm:gap-2 drop-shadow">
-                <span>Rivers</span>
+                <span>Guwahati Departure</span>
                 <span className="text-[#E5C278]/60">·</span>
-                <span>Mountains</span>
+                <span>Kaziranga Safaris</span>
                 <span className="text-[#E5C278]/60">·</span>
-                <span>Cultures</span>
+                <span>Meghalaya Valleys</span>
                 <span className="text-[#E5C278]/60">·</span>
-                <span>Extraordinary People</span>
+                <span>Verified Mountain Fleet</span>
               </div>
 
               {/* Subheading */}
               <p className="text-sm sm:text-base md:text-lg text-white/90 font-normal leading-relaxed max-w-xl drop-shadow">
-                Curated journeys through Assam, Meghalaya, Arunachal Pradesh and Nagaland / Manipur.
+                Handcrafted private overland journeys through Assam, Meghalaya, and Arunachal Pradesh. Direct airport transfers, certified local wildlife naturalists, and transparent commercial tariffs.
               </p>
 
-              {/* Dual Action CTAs */}
+              {/* Main Action CTAs */}
               <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-3 sm:gap-4">
                 <Link
-                  href="/packages"
+                  href="/custom-trip"
                   className="bg-[#D9A441] hover:bg-[#C18D2D] text-[#172C26] font-bold text-sm sm:text-base px-7 sm:px-8 py-3.5 rounded-full flex items-center gap-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
                 >
-                  <span>Explore packages</span>
+                  <span>Get a trip quote</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
-                  href="/custom-trip"
+                  href="/packages"
                   className="border border-white/70 hover:border-white text-white hover:bg-white/10 font-semibold text-sm sm:text-base px-7 sm:px-8 py-3.5 rounded-full transition-all active:scale-[0.98] drop-shadow"
                 >
-                  Create my trip
+                  Explore packages
+                </Link>
+              </div>
+
+              {/* Vehicle Hire Service Direct Link */}
+              <div className="pt-1">
+                <Link
+                  href="/vehicle-hire"
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-white/90 hover:text-[#E5C278] transition-colors underline underline-offset-4"
+                >
+                  <span>Looking for car rental only? View fixed commercial vehicle hire rates from Guwahati</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
@@ -169,7 +182,7 @@ export default function HomePage() {
               <div className="pt-2 lg:hidden">
                 <div className="inline-flex items-center gap-2 text-xs tracking-wider uppercase text-white/90 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20">
                   <MapPin className="w-3.5 h-3.5 text-[#D9A441]" />
-                  <span>Umngot River · Meghalaya</span>
+                  <span>Guwahati Operations Desk · Assam</span>
                 </div>
               </div>
             </div>
@@ -228,7 +241,7 @@ export default function HomePage() {
               <div className="h-[2px] w-16 sm:w-24 bg-[#D9A441]" />
             </div>
             <p className="text-sm sm:text-base text-[#59665E] max-w-lg">
-              Popular journeys to inspire your next adventure.
+              Featuring Kaziranga wildlife safaris and classic Meghalaya road journeys departing from Guwahati.
             </p>
           </div>
           <Link
@@ -644,24 +657,50 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Genuine Reviews & Phone Callout */}
+          {/* Local Team & Guwahati Office Introduction */}
           <div className="mt-12 bg-[#FFFDF7] rounded-2xl border border-[#DEDCCD] p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-1">
-              <h4 className="font-serif text-xl font-bold text-[#103F36]">
+            <div className="space-y-2 max-w-2xl">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#D9A441] block">
+                Local Operating Desk · Guwahati
+              </span>
+              <h4 className="font-serif text-xl sm:text-2xl font-bold text-[#103F36]">
                 Planning a trip with family or friends?
               </h4>
-              <p className="text-sm text-[#59665E]">
-                Talk directly with our route coordinators in Guwahati for honest road advice, timing, and customized quotes.
+              <p className="text-xs sm:text-sm text-[#59665E] leading-relaxed">
+                Talk directly with our local operations team in Guwahati for honest road advice, seasonal timing, and customized quotes. We operate our own mountain fleet and manage hotel allocations directly.
               </p>
+              <div className="flex flex-wrap items-center gap-4 pt-1 text-xs">
+                <Link
+                  href="/about"
+                  className="font-semibold text-[#103F36] hover:text-[#D9A441] inline-flex items-center gap-1 transition-colors underline underline-offset-4"
+                >
+                  <span>Meet our local team & fleet</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+                <span className="text-[#DEDCCD]">·</span>
+                <Link
+                  href="/contact"
+                  className="font-semibold text-[#103F36] hover:text-[#D9A441] inline-flex items-center gap-1 transition-colors underline underline-offset-4"
+                >
+                  <span>Office location & contact desk</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
               <a
                 href={`tel:${siteConfig.phoneRaw}`}
-                className="bg-[#103F36] hover:bg-[#082D27] text-[#F7F3E9] font-semibold text-sm px-6 py-3 rounded-full flex items-center gap-2 transition-all shadow-sm"
+                className="w-full sm:w-auto bg-[#103F36] hover:bg-[#082D27] text-[#F7F3E9] font-semibold text-sm px-6 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-sm"
               >
                 <PhoneCall className="w-4 h-4 text-[#D9A441]" />
                 <span>Call {siteConfig.phone}</span>
               </a>
+              <Link
+                href="/custom-trip"
+                className="w-full sm:w-auto bg-[#D9A441] hover:bg-[#C18D2D] text-[#172C26] font-semibold text-sm px-6 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-sm"
+              >
+                <span>Get a trip quote</span>
+              </Link>
             </div>
           </div>
         </div>

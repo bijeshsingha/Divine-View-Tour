@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
   const url = `https://www.divineviewtours.com/travel-guides/${guide.slug}`;
 
   return {
-    title: `${guide.title} | Travel Guide — Divine View Tours`,
+    title: `${guide.title} (Travel Guide)`,
     description: guide.summary,
     alternates: {
       canonical: url,

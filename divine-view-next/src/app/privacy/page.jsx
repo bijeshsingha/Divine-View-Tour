@@ -2,8 +2,11 @@ import Link from "next/link";
 import { ShieldCheck, Lock, EyeOff } from "lucide-react";
 
 export const metadata = {
-  title: "Privacy Policy — Divine View Tours",
+  title: "Privacy Policy",
   description: "Our minimal data collection practices and strict traveller privacy commitments.",
+  alternates: {
+    canonical: "https://www.divineviewtours.com/privacy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
   const url = `https://www.divineviewtours.com/destinations/${dest.slug}`;
 
   return {
-    title: `${dest.name} Tour Packages & Travel Guide | Divine View Tours`,
+    title: `${dest.name} Tour Packages and Travel Guide`,
     description: `${dest.summary} Find routes from Guwahati, permits, best travel seasons, and private tours.`,
     alternates: {
       canonical: url,

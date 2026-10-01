@@ -3,9 +3,12 @@ import packagesData from "@/data/packagesData.json";
 import PackagesFilterClient from "@/components/PackagesFilterClient";
 
 export const metadata = {
-  title: "Tour Packages from Guwahati — Meghalaya, Tawang, Kaziranga & Dzukou",
+  title: "Tour Packages from Guwahati: Meghalaya, Kaziranga and Tawang",
   description:
     "Browse handcrafted tour packages departing from Guwahati. Transparent per-person pricing, dedicated vehicles, verified local mountain drivers, and complete day-by-day itineraries.",
+  alternates: {
+    canonical: "https://www.divineviewtours.com/packages",
+  },
 };
 
 export default function PackagesPage() {

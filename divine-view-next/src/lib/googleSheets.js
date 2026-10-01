@@ -43,8 +43,17 @@ export async function appendBookingToGoogleSheet(enquiry) {
     duration: enquiry.days ? `${enquiry.days} Days` : (enquiry.tripDuration || "Standard"),
     travellers: enquiry.travellers || `${enquiry.adults || 2} Adults`,
     pickup: enquiry.pickup || enquiry.startingCity || "Guwahati",
+    countryOfResidence: enquiry.countryOfResidence || "India",
+    tier: enquiry.tier || "",
+    isTest: enquiry.isTest ? "YES (TEST LEAD)" : "NO",
+    campaignSource: enquiry.utm_source || "",
+    campaignMedium: enquiry.utm_medium || "",
+    campaignName: enquiry.utm_campaign || "",
+    landingPage: enquiry.landing_page || "",
+    gclid: enquiry.gclid || "",
     notes: enquiry.notes || enquiry.specialRequests || enquiry.specialWishes || enquiry.message || "",
     status: "New",
+    stage: enquiry.stage || "Enquiry received",
   };
 
   try {

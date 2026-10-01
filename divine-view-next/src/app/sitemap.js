@@ -38,6 +38,12 @@ export default function sitemap() {
       priority: 0.85,
     },
     {
+      url: `${baseUrl}/international-travellers`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
       url: `${baseUrl}/travel-guides`,
       lastModified: new Date(),
       changeFrequency: "weekly",

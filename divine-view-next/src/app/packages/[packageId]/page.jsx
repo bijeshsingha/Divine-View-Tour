@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
   const url = `https://www.divineviewtours.com/packages/${pkg.slug}`;
 
   return {
-    title: `${pkg.title} (${pkg.durationDays} Days / ${pkg.durationNights} Nights) | Divine View Tours`,
+    title: `${pkg.title} (${pkg.durationDays} Days / ${pkg.durationNights} Nights)`,
     description: pkg.summary,
     alternates: {
       canonical: url,
