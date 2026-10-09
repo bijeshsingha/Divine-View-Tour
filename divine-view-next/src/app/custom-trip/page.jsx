@@ -2,9 +2,9 @@ import { Suspense } from "react";
 import CustomTripPlanner from "@/components/CustomTripPlanner";
 
 export const metadata = {
-  title: "Custom Northeast India Itinerary Planner",
+  title: "Plan your Northeast journey | Divine View Tours",
   description:
-    "Design a custom private journey through Assam, Meghalaya, Arunachal Pradesh, and Dzukou Valley. Choose your travel pace, stay category, and preferred vehicle with our local Guwahati team.",
+    "Tell us where you’d like to go and how you like to travel. Build your enquiry in four short steps.",
   alternates: {
     canonical: "https://www.divineviewtours.com/custom-trip",
   },
@@ -12,22 +12,22 @@ export const metadata = {
 
 export default function CustomTripPage() {
   return (
-    <main className="min-h-screen bg-[#F7F3E9] pt-24 pb-20">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="badge-forest mb-2">Tailored Discovery</span>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold text-[#103F36]">
-            Plan a Journey That’s Uniquely Yours
+    <main className="min-h-screen bg-[#F5F1E8] pt-[76px] sm:pt-[84px] pb-16 sm:pb-20">
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        {/* Compact Introduction */}
+        <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal text-[#173D35] leading-tight">
+            Plan your Northeast journey
           </h1>
-          <p className="text-sm sm:text-base text-[#59665E] mt-3">
-            Tell us where you want to go, how you like to travel, and what matters most. We craft a transparent itinerary and quote in 4 simple steps.
+          <p className="text-sm sm:text-base text-[#202A25]/85 mt-2.5 leading-relaxed">
+            Tell us where you’d like to go and how you like to travel. Build your enquiry in four short steps.
           </p>
         </div>
 
         <Suspense
           fallback={
-            <div className="text-center py-20 text-[#59665E]">
-              Loading custom trip planner...
+            <div className="text-center py-16 text-[#59665E]">
+              Loading trip planner...
             </div>
           }
         >

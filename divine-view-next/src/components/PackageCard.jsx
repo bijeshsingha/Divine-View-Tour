@@ -1,10 +1,15 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Users, Calendar } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function PackageCard({ pkg, travellers, month }) {
-  // Extract clean short title matching website-b-scenic (e.g. "Meghalaya Escape")
+  const [imgSrc, setImgSrc] = useState(pkg.heroImage || "/images/dawki-hero.jpg");
   const shortTitle = pkg.title.split(":")[0];
-  const durationText = pkg.durationDays ? `${pkg.durationDays} days` : "Custom duration";
+  const durationText = pkg.durationDays
+    ? `${pkg.durationDays} Days · ${pkg.durationNights || pkg.durationDays - 1} Nights`
+    : "Custom duration";
 
   // Build link with search params if provided
   const queryParams = new URLSearchParams();
@@ -13,76 +18,70 @@ export default function PackageCard({ pkg, travellers, month }) {
   const detailUrl = `/packages/${pkg.slug}${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
 
   return (
-    <div className="bg-[#FFFDF7] rounded-2xl overflow-hidden border border-[#DEDCCD] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
-      {/* 1. Destination Image with integrated Title & Duration overlay */}
-      <div className="relative h-60 sm:h-64 w-full overflow-hidden bg-[#082D27]">
+    <article className="bg-[#FFFDF7] rounded-[10px] overflow-hidden border border-[#DDD7CA] hover:border-[#173D35]/40 transition-colors flex flex-col group h-full">
+      {/* 1. Photograph: 3:2 ratio, natural bright lighting, hover scale clipped, intentional error fallback */}
+      <div className="relative aspect-[3/2] w-full overflow-hidden bg-[#173D35]/5">
         <img
-          src={pkg.heroImage}
+          src={imgSrc}
           alt={pkg.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          onError={() => setImgSrc("/images/dawki-hero.jpg")}
+          className="w-full h-full object-cover select-none transition-transform duration-300 group-hover:scale-[1.025]"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 60% to-transparent" />
-
-        {/* Title and Duration on Image matching website-b-scenic.png */}
-        <div className="absolute bottom-4 left-4 right-4 text-white space-y-0.5">
-          <h3 className="font-serif text-2xl font-bold text-white leading-snug drop-shadow">
-            {shortTitle}
-          </h3>
-          <p className="text-sm font-medium text-[#F4E5B9] drop-shadow">
-            {durationText}
-          </p>
-        </div>
       </div>
 
-      {/* 2. Card Body: Editorial description & Request Price CTA */}
-      <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between gap-4">
-        <div className="space-y-2">
-          <p className="text-sm text-[#59665E] leading-relaxed line-clamp-2">
+      {/* 2. Card Body: Title & duration beneath photo -> description -> price & link */}
+      <div className="p-6 flex-1 flex flex-col justify-between">
+        <div>
+          {/* Small sans-serif duration text */}
+          <p className="text-[11px] font-semibold tracking-wider uppercase text-[#C69A45] mb-1.5">
+            {durationText}
+          </p>
+
+          {/* Package Title: Serif 24–28px beneath the photo */}
+          <h3 className="font-serif text-[24px] sm:text-[26px] font-normal text-[#173D35] leading-snug group-hover:text-[#0E2923] transition-colors">
+            <Link href={detailUrl} className="focus-ring-forest rounded-sm">
+              {shortTitle}
+            </Link>
+          </h3>
+
+          {/* Short readable description without abrupt chopping */}
+          <p className="text-sm text-[#202A25]/85 leading-relaxed mt-2.5">
             {pkg.summary}
           </p>
-          {pkg.travelStyles && (
-            <div className="flex flex-wrap gap-1.5 pt-1">
-              {pkg.travelStyles.slice(0, 3).map((style, idx) => (
-                <span
-                  key={idx}
-                  className="text-[10px] font-medium bg-[#E9F0EA] text-[#103F36] px-2 py-0.5 rounded-md"
-                >
-                  {style}
-                </span>
-              ))}
-            </div>
-          )}
         </div>
 
-        <div className="flex items-center justify-between pt-3 border-t border-[#DEDCCD]">
-          {pkg.priceAmount ? (
-            <div>
-              <span className="text-[10px] uppercase font-bold tracking-wider text-[#59665E] block">
-                From
+        {/* 3. Price, basis & aligned "View journey" link */}
+        <div className="pt-5 mt-6 border-t border-[#DDD7CA] flex items-end justify-between gap-4">
+          <div>
+            {pkg.priceAmount ? (
+              <>
+                <span className="text-[10px] uppercase font-semibold tracking-wider text-[#59665E] block leading-none mb-1">
+                  Starting from
+                </span>
+                <span className="font-serif text-xl sm:text-[22px] font-normal text-[#173D35] block leading-none">
+                  ₹{pkg.priceAmount.toLocaleString("en-IN")}
+                </span>
+                <span className="text-[11px] text-[#59665E] block mt-1 leading-tight">
+                  {pkg.priceBasis ? pkg.priceBasis.split(",")[0] : "per person"}
+                </span>
+              </>
+            ) : (
+              <span className="text-sm font-medium text-[#173D35]">
+                Custom Itinerary
               </span>
-              <span className="font-serif text-lg font-bold text-[#103F36]">
-                ₹{pkg.priceAmount.toLocaleString("en-IN")}
-              </span>
-              <span className="text-[10px] text-[#59665E] block max-w-[130px] leading-tight">
-                {pkg.priceBasis ? pkg.priceBasis : "per person"}
-              </span>
-            </div>
-          ) : (
-            <span className="text-xs font-semibold text-[#59665E]">
-              Custom Itinerary
-            </span>
-          )}
+            )}
+          </div>
 
           <Link
             href={detailUrl}
-            className="inline-flex items-center gap-1.5 border border-[#103F36]/30 hover:border-[#D9A441] hover:bg-[#D9A441] text-[#103F36] hover:text-[#172C26] px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all"
+            className="group/link inline-flex items-center text-sm font-medium text-[#173D35] hover:text-[#C69A45] transition-colors pb-0.5 shrink-0 focus-ring-forest rounded-sm"
           >
-            <span>View trip</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <span>View journey</span>
+            <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-200 group-hover/link:translate-x-1" />
           </Link>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

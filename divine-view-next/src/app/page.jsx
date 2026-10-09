@@ -14,6 +14,8 @@ import {
   MessageCircle
 } from "lucide-react";
 import TripFinder from "@/components/TripFinder";
+import HeroFullScreen from "@/components/HeroFullScreen";
+import HeroEditorial from "@/components/HeroEditorial";
 import PackageCard from "@/components/PackageCard";
 import destinationsData from "@/data/destinationsData.json";
 import packagesData from "@/data/packagesData.json";
@@ -107,154 +109,46 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {/* =========================================================================
-          1. SCENIC PANORAMIC HERO SECTION
-          Full horizontal edge-to-edge panoramic photograph of Umngot River, Dawki
+          1. FULLSCREEN PANORAMIC HERO SECTION
+          Full-bleed destination photography with minimal floating typography
           ========================================================================= */}
-      <section className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[780px] xl:min-h-[820px] flex items-center pt-24 sm:pt-28 pb-20 sm:pb-24 overflow-hidden bg-[#07241F]">
-        {/* Full-bleed Panoramic Background Photograph */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/images/dawki-hero.jpg"
-            alt="Umngot River at Dawki, Meghalaya, crystal turquoise waters and traditional wooden boat"
-            className="w-full h-full object-cover object-[center_35%] lg:object-center filter brightness-[0.92] scale-100 transition-transform duration-1000"
-          />
-          {/* Subtle directional vignette: protects WCAG AAA text contrast on left while keeping turquoise water & boat vibrant on right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 45% via-black/15 70% to-transparent" />
-          {/* Top header vignette and subtle bottom fade */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent 35% to-black/35" />
-        </div>
-
-        {/* Hero Content Container - Full horizontal span on wide screens */}
-        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-14 w-full">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10 lg:gap-14 w-full">
-            {/* Left Column: Editorial Headline & Actions */}
-            <div className="max-w-2xl xl:max-w-3xl text-[#F7F3E9] space-y-5 sm:space-y-6">
-              {/* Dignified Editorial Serif Heading */}
-              <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[4.6rem] xl:text-[5.2rem] font-bold tracking-tight text-white leading-[1.04] drop-shadow-md">
-                Private Northeast<br />holidays from Guwahati.
-              </h1>
-
-              {/* Spaced Uppercase Tagline directly beneath heading */}
-              <div className="text-[11px] sm:text-xs md:text-sm tracking-[0.22em] sm:tracking-[0.25em] font-semibold text-[#E5C278] uppercase flex flex-wrap items-center gap-1.5 sm:gap-2 drop-shadow">
-                <span>Guwahati Departure</span>
-                <span className="text-[#E5C278]/60">·</span>
-                <span>Kaziranga Safaris</span>
-                <span className="text-[#E5C278]/60">·</span>
-                <span>Meghalaya Valleys</span>
-                <span className="text-[#E5C278]/60">·</span>
-                <span>Verified Mountain Fleet</span>
-              </div>
-
-              {/* Subheading */}
-              <p className="text-sm sm:text-base md:text-lg text-white/90 font-normal leading-relaxed max-w-xl drop-shadow">
-                Handcrafted private overland journeys through Assam, Meghalaya, and Arunachal Pradesh. Direct airport transfers, certified local wildlife naturalists, and transparent commercial tariffs.
-              </p>
-
-              {/* Main Action CTAs */}
-              <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-3 sm:gap-4">
-                <Link
-                  href="/custom-trip"
-                  className="bg-[#D9A441] hover:bg-[#C18D2D] text-[#172C26] font-bold text-sm sm:text-base px-7 sm:px-8 py-3.5 rounded-full flex items-center gap-2 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all"
-                >
-                  <span>Get a trip quote</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  href="/packages"
-                  className="border border-white/70 hover:border-white text-white hover:bg-white/10 font-semibold text-sm sm:text-base px-7 sm:px-8 py-3.5 rounded-full transition-all active:scale-[0.98] drop-shadow"
-                >
-                  Explore packages
-                </Link>
-              </div>
-
-              {/* Vehicle Hire Service Direct Link */}
-              <div className="pt-1">
-                <Link
-                  href="/vehicle-hire"
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-white/90 hover:text-[#E5C278] transition-colors underline underline-offset-4"
-                >
-                  <span>Looking for car rental only? View fixed commercial vehicle hire rates from Guwahati</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-
-              {/* Mobile Location Caption */}
-              <div className="pt-2 lg:hidden">
-                <div className="inline-flex items-center gap-2 text-xs tracking-wider uppercase text-white/90 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20">
-                  <MapPin className="w-3.5 h-3.5 text-[#D9A441]" />
-                  <span>Guwahati Operations Desk · Assam</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Cursive Script Accent & Location Badge */}
-            <div className="hidden lg:flex flex-col justify-between lg:self-stretch min-h-[300px] xl:min-h-[360px] pointer-events-none select-none">
-              {/* Cursive handwritten accent quote */}
-              <div className="flex flex-col items-end text-right pr-2">
-                <p className="font-script text-3xl xl:text-4xl text-[#FCE38A] drop-shadow-lg leading-tight">
-                  More Than a Destination...
-                </p>
-                <p className="font-script text-4xl xl:text-5xl text-[#D9A441] font-bold drop-shadow-lg -mt-1">
-                  A Deeper Connection
-                </p>
-                <div className="w-44 h-[2px] bg-gradient-to-l from-[#D9A441] via-[#D9A441]/80 to-transparent mt-1" />
-              </div>
-
-              {/* Verified Location Pin at bottom-right corner */}
-              <div className="flex justify-end pb-1">
-                <div className="flex items-center gap-2 text-white/95 drop-shadow-md">
-                  <MapPin className="w-4 h-4 text-[#D9A441] shrink-0" />
-                  <div className="text-left">
-                    <div className="font-bold text-xs tracking-[0.2em] uppercase text-white leading-none">
-                      UMNGOT RIVER
-                    </div>
-                    <div className="text-[10px] tracking-[0.2em] uppercase text-white/80 mt-0.5">
-                      MEGHALAYA
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroFullScreen />
 
       {/* =========================================================================
-          2. TRIP FINDER STRIP
-          Segmented floating card docked across the bottom fold
+          2. JOURNEY FINDER STRIP
+          Flat ivory strip integrated directly below the hero
           ========================================================================= */}
-      <section className="relative z-30 -mt-10 lg:-mt-12 max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-14">
-        <TripFinder />
+      <section id="journey-finder-section" className="relative z-20 w-full bg-[#F5F1E8] border-b border-[#DDD7CA] py-8 lg:py-10">
+        <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
+          <TripFinder />
+        </div>
       </section>
 
       {/* =========================================================================
           3. FEATURED PACKAGES
-          Editorial serif title with gold accent line and 3-column cards
+          Standardized section header aligned with 1320px content grid
           ========================================================================= */}
-      <section className="py-20 sm:py-24 max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-14">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+      <section className="py-12 lg:py-20 max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
-            <div className="flex items-center gap-3 mb-2">
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#103F36]">
-                Featured Packages
-              </h2>
-              <div className="h-[2px] w-16 sm:w-24 bg-[#D9A441]" />
-            </div>
-            <p className="text-sm sm:text-base text-[#59665E] max-w-lg">
+            <h2 className="font-serif text-3xl sm:text-4xl font-normal text-[#173D35]">
+              Featured Packages
+            </h2>
+            <p className="text-sm sm:text-base text-[#202A25]/80 max-w-lg mt-2">
               Featuring Kaziranga wildlife safaris and classic Meghalaya road journeys departing from Guwahati.
             </p>
           </div>
           <Link
             href="/packages"
-            className="text-sm font-semibold text-[#103F36] hover:text-[#D9A441] inline-flex items-center gap-1.5 transition-colors self-start sm:self-auto"
+            className="group text-sm font-medium text-[#173D35] hover:text-[#C69A45] inline-flex items-center gap-1.5 transition-colors self-start sm:self-auto shrink-0 pb-1 focus-ring-forest rounded-sm"
           >
             <span>View all packages</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </div>
 
-        {/* 3 Cards Across matching website-b-scenic */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 3 equal-width cards on desktop, 2 on tablet, 1 on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {featuredPackages.map((pkg) => (
             <PackageCard key={pkg.id} pkg={pkg} />
           ))}
